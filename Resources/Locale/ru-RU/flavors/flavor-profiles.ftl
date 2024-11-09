@@ -275,7 +275,6 @@ flavor-complex-pilk = как сладкое молоко
 
 # Medicine/chemical-specific flavors.
 
-
 ## Generic flavors.
 
 flavor-complex-medicine = как лекарство
