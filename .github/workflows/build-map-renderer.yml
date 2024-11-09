@@ -51,7 +51,7 @@ jobs:
     name: Build & Test Debug
     needs:
       - build
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
       - name: CI succeeded
         run: exit 0
