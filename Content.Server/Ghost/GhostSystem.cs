@@ -560,11 +560,7 @@ namespace Content.Server.Ghost
                 _chatManager.DispatchServerMessage(targetActor, Loc.GetString("ghost-bar-spawn-message"));
             }
         }
-<<<<<<< HEAD
-        // Corvax-Wega-GhostBar
-=======
         // Corvax-Wega-GhostBar-end
->>>>>>> 7113b9b3a983746310dee68671245a8642c10ff9
 
         public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, MindComponent? mind = null)
         {
