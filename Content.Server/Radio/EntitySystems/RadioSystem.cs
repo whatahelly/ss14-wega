@@ -1,15 +1,15 @@
 using Content.Server.Administration.Logs;
+using Content.Shared.Access.Components; // Corvax-Wega
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
+using Content.Shared.PDA; // Corvax-Wega
 using Content.Server.Radio.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
-using Content.Shared.Access.Components; // Corvax-Wega
 using Content.Shared.Inventory; // Corvax-Wega
-using Content.Shared.PDA; // Corvax-Wega
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -87,7 +87,7 @@ public sealed class RadioSystem : EntitySystem
         var name = evt.VoiceName;
         name = FormattedMessage.EscapeText(name);
 
-        var formattedName = GetFormattedName(messageSource); // Corvax-Wega
+        var job = GetJobName(messageSource); // Corvax-Wega
 
         SpeechVerbPrototype speech;
         if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
@@ -105,7 +105,8 @@ public sealed class RadioSystem : EntitySystem
             ("fontSize", speech.FontSize),
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
-            ("name", formattedName), // Corvax-Wega
+            ("job", job), // Corvax-Wega
+            ("name", name),
             ("message", content));
 
         // most radios are relayed to chat, so lets parse the chat message beforehand
@@ -166,9 +167,8 @@ public sealed class RadioSystem : EntitySystem
     }
 
     // Corvax-Wega-start
-    private string GetFormattedName(EntityUid senderUid)
+    private string GetJobName(EntityUid senderUid)
     {
-        var metadata = MetaData(senderUid);
         var idCard = GetIdCard(senderUid);
 
         if (idCard != null)
@@ -177,9 +177,9 @@ public sealed class RadioSystem : EntitySystem
                 ? Loc.GetString("job-name-unknown")
                 : Loc.GetString(idCard.LocalizedJobTitle);
 
-            return $"\\[{jobTitle}\\] {metadata.EntityName}";
+            return $"{jobTitle}";
         }
-        return metadata.EntityName;
+        return Loc.GetString("job-name-unknown");
     }
 
     private IdCardComponent? GetIdCard(EntityUid senderUid)
