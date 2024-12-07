@@ -1,22 +1,29 @@
-MIT License
+Contributor License Agreement (CLA)
 
-Copyright (c) 2017-2024 Space Wizards Federation
-Copyright (c) 2021-2024 Corvax
+1. Copyright and License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The original code of the project Space Wizards Federation is licensed under the MIT License.
+The MIT License allows anyone to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, as well as to permit others to do so, provided that the above copyright notice and permission notice are included in all copies or substantial portions of the software.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. Transfer of Rights to Modifications
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+By contributing modifications to the Corvax Wega (ss14-wega) project, each contributor agrees that:
+
+- All changes and additions to the original code made for the Corvax Wega build belong to the Corvax Wega project and its creators. These modifications may be used and distributed within the Corvax Wega project or any related projects.
+
+- Modifications made to the Corvax Wega build, as well as any borrowed parts of systems from other MIT-licensed builds, will include the respective MIT licenses and must be complied with moving forward.
+
+3. Right to Use
+
+The contributor confirms that they have the right to submit their contribution to the project and that this contribution does not infringe any third-party rights.
+The responsibility for any copyright violations or other third-party claims rests solely with the contributor.
+
+4. Disclaimer
+
+All changes and improvements made to the Corvax Wega project are provided "as-is" without any warranties, express or implied, including but not limited to warranties of merchantability or fitness for a particular purpose.
+In the event of any claims, damages, or other liabilities arising from the use of the code, the Wega project and its creators shall not be held liable.
+
+5. Ownership of the Build
+
+All work related to the Corvax Wega project, including but not limited to the source code, modifications, improvements, and additions, is the property of the Corvax Wega project and its creators.
+Any changes to the code, improvements, fixes, or other additions will transfer the rights to those modifications to the Corvax Wega project.
