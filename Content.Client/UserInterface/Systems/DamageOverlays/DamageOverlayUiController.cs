@@ -113,6 +113,20 @@ public sealed class DamageOverlayUiController : UIController
                 _overlay.DeadLevel = 0;
                 break;
             }
+            // Corvax-Wega-Precritical-start
+            case MobState.PreCritical:
+            {
+                if (!_mobThresholdSystem.TryGetDeadPercentage(entity,
+                        FixedPoint2.Max(0.0, damageable.TotalDamage), out var critLevel))
+                    return;
+                _overlay.CritLevel = critLevel.Value.Float();
+                _overlay.OxygenLevel = FixedPoint2.Min(FixedPoint2.New(1f), FixedPoint2.New(0.8f / (critLevel?.Float() ?? 1f))).Float();
+
+                _overlay.BruteLevel = 0;
+                _overlay.DeadLevel = 0;
+                break;
+            }
+            // Corvax-Wega-Precritical-end
             case MobState.Critical:
             {
                 if (!_mobThresholdSystem.TryGetDeadPercentage(entity,

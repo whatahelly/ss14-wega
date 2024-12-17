@@ -62,12 +62,12 @@
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
     # Corvax-Wega-start
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
     - map: [ "socks" ]
     - map: [ "underwearbottom" ]
     - map: [ "underweartop" ]
     # Corvax-Wega-end
-    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
-    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
     - map: [ "jumpsuit" ] # Corvax-Wega
     - map: [ "enum.HumanoidVisualLayers.LHand" ]
     - map: [ "enum.HumanoidVisualLayers.RHand" ]

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Cuffs.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -44,13 +45,12 @@ namespace Content.Server.Interaction.Panel
         {
             if (target == null) return;
 
+            var userEntity = _entManager.GetEntity(user);
             var interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);
-
             if (_lastInteractionTimes.TryGetValue(target.Value, out var lastInteractionTime))
             {
                 if (DateTime.UtcNow - lastInteractionTime < interactionPrototype.UseDelay)
                 {
-                    var userEntity = _entManager.GetEntity(user);
                     var message = Loc.GetString("interaction-delay-message");
 
                     if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
@@ -60,10 +60,8 @@ namespace Content.Server.Interaction.Panel
             }
 
             _lastInteractionTimes[target.Value] = DateTime.UtcNow;
-
             if (interactionPrototype.RequiredClothingSlots != null)
             {
-                var userEntity = _entManager.GetEntity(user);
                 if (TryComp<InventoryComponent>(userEntity, out var inventory))
                 {
                     foreach (var slot in interactionPrototype.RequiredClothingSlots)
@@ -104,7 +102,6 @@ namespace Content.Server.Interaction.Panel
             bool hasStrapon = true;
             if (interactionPrototype.RequiresStrapon)
             {
-                var userEntity = _entManager.GetEntity(user);
                 if (_entManager.TryGetComponent<InventoryComponent>(userEntity, out var inventory))
                 {
                     if (!_inventorySystem.TryGetSlotEntity(userEntity, "belt", out var beltEntity, inventory) ||
@@ -117,11 +114,21 @@ namespace Content.Server.Interaction.Panel
 
             if (!hasStrapon)
             {
-                var userEntity = _entManager.GetEntity(user);
                 var message = Loc.GetString("interaction-missing-strapon-message");
                 if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
                     _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
+
                 return;
+            }
+
+            if (_entManager.TryGetComponent<CuffableComponent>(userEntity, out var cuffable))
+            {
+                if (!cuffable.CanStillInteract)
+                {
+                    var message = Loc.GetString("interaction-cuffed-message");
+                    _popupSystem.PopupEntity(message, userEntity, userEntity, PopupType.Small);
+                    return;
+                }
             }
 
             if (interactionPrototype.DoAfterDelay > 0f)
@@ -136,7 +143,7 @@ namespace Content.Server.Interaction.Panel
 
         private void TriggerDoAfter(NetEntity user, NetEntity target, string interactionId, float delay)
         {
-
+            // TODO Доделать делей
         }
 
         private void ExecuteInteraction(NetEntity user, NetEntity target, InteractionPrototype interactionPrototype)
@@ -239,9 +246,7 @@ namespace Content.Server.Interaction.Panel
 
             if (_lastInteractionTimes.TryGetValue(user, out var lastInteractionTime) &&
                 DateTime.UtcNow - lastInteractionTime < interactionPrototype.UseDelay)
-            {
                 return;
-            }
 
             _lastInteractionTimes[user] = DateTime.UtcNow;
 

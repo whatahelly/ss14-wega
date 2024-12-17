@@ -98,7 +98,7 @@
   - SlimePerson
   - Vulpkanin
   allowedGenders:
-  - Male
+  - Female
   nearestAllowedGenders:
   - Male
   - Female
@@ -836,7 +836,7 @@
   otherMessages: ["chat-interaction-eat-tail-message-others"]
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseCheckClothing, BaseMaleOnly ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseMaleOnly ]
   id: InteractionHoldsDickTail
   name: interaction-holds-dick-tail
   userMessages: ["chat-interaction-holds-dick-tail-message"]
@@ -844,7 +844,7 @@
   otherMessages: ["chat-interaction-holds-dick-tail-message-others"]
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseCheckClothing, BaseFemaleOnly ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseFemaleOnly ]
   id: InteractionRubbingVaginaTail
   name: interaction-rubbing-vagina-tail
   userMessages: ["chat-interaction-rubbing-vagina-tail-message"]

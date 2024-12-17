@@ -3,6 +3,7 @@ interaction-hasclothing-message = Вам необходимо снять оде�
 interaction-target-hasclothing-message = { $target } нужно раздеться
 interaction-slot-occupied-message = Перед взаимодействием надо снять одежду
 interaction-missing-strapon-message = У вас нету страпона для взаимодействия
+interaction-cuffed-message = Вы закованы!
 interaction-end-message = кончает
 interaction-impossible = Взаимодействие с этим невозможно
 interaction-cant-do-this = Вы не можете использовать это
