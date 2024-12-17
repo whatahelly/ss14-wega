@@ -19,13 +19,11 @@ namespace Content.Client.Interaction.Panel.Ui
     [GenerateTypedNameReferences]
     public sealed partial class InteractionPanelMenu : DefaultWindow
     {
-        // Внедрение зависимостей
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IEntityManager _entManager = default!;
         [Dependency] private readonly IEntityNetworkManager _entityNetworkManager = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
 
-        // Типизированные ссылки на элементы управления из XAML
         public BoxContainer UserModel => this.FindControl<BoxContainer>("UserSpriteView");
         public BoxContainer TargetModel => this.FindControl<BoxContainer>("TargetSpriteView");
         private SpriteView _userSpriteView;
@@ -39,7 +37,6 @@ namespace Content.Client.Interaction.Panel.Ui
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
-            // Инициализация элементов UI
             SearchBar.OnTextChanged += OnSearchTextChanged;
 
             InitializeNamesContainer();
