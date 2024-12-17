@@ -16,5 +16,5 @@ ent-VibratorEggTeal = бирюзовый вибратор
     .desc = { ent-VibratorEggPink.desc }
 ent-VibratorRingPink = кольцевой розовый вибратор
     .desc = { ent-VibratorEggPink.desc }
-ent-VibratorRingTeal = бирюзовый розовый вибратор
+ent-VibratorRingTeal = кольцевой бирюзовый вибратор
     .desc = { ent-VibratorEggPink.desc }
