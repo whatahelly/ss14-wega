@@ -97,36 +97,31 @@ namespace Content.Server.SexToy.System
 
                 var random = new Random();
 
-                var dildoUserMessagesVox = new[]
-                {
+                var dildoUserMessagesVox = new[] {
                     Loc.GetString("interaction-dildo-user-vox-1"),
                     Loc.GetString("interaction-dildo-user-vox-2"),
                     Loc.GetString("interaction-dildo-user-vox-3")
                 };
 
-                var dildoTargetMessagesVox = new[]
-                {
+                var dildoTargetMessagesVox = new[] {
                     Loc.GetString("interaction-dildo-target-vox-1", ("user", userName)),
                     Loc.GetString("interaction-dildo-target-vox-2", ("user", userName)),
                     Loc.GetString("interaction-dildo-target-vox-3", ("user", userName))
                 };
 
-                var dildoUserMessagesMale = new[]
-                {
+                var dildoUserMessagesMale = new[] {
                     Loc.GetString("interaction-dildo-user-anal-1"),
                     Loc.GetString("interaction-dildo-user-anal-2"),
                     Loc.GetString("interaction-dildo-user-anal-3")
                 };
 
-                var dildoTargetMessagesMale = new[]
-                {
+                var dildoTargetMessagesMale = new[] {
                     Loc.GetString("interaction-dildo-target-anal-1", ("user", userName)),
                     Loc.GetString("interaction-dildo-target-anal-2", ("user", userName)),
                     Loc.GetString("interaction-dildo-target-anal-3", ("user", userName))
                 };
 
-                var dildoUserMessagesFemale = new[]
-                {
+                var dildoUserMessagesFemale = new[] {
                     Loc.GetString("interaction-dildo-user-anal-1"),
                     Loc.GetString("interaction-dildo-user-anal-2"),
                     Loc.GetString("interaction-dildo-user-anal-3"),
@@ -134,8 +129,7 @@ namespace Content.Server.SexToy.System
                     Loc.GetString("interaction-dildo-user-vagina-2")
                 };
 
-                var dildoTargetMessagesFemale = new[]
-                {
+                var dildoTargetMessagesFemale = new[] {
                     Loc.GetString("interaction-dildo-target-anal-1", ("user", userName)),
                     Loc.GetString("interaction-dildo-target-anal-2", ("user", userName)),
                     Loc.GetString("interaction-dildo-target-anal-3", ("user", userName)),
@@ -148,18 +142,18 @@ namespace Content.Server.SexToy.System
                     case "dildo":
                         if (targetAppearance.Species == "Vox")
                         {
-                            messageUser = dildoUserMessagesVox[0];
-                            messageTarget = dildoTargetMessagesVox[0];
+                            messageUser = dildoUserMessagesVox[random.Next(dildoUserMessagesVox.Length)];
+                            messageTarget = dildoTargetMessagesVox[random.Next(dildoTargetMessagesVox.Length)];
                         }
                         else if (targetAppearance.Sex == Sex.Male)
                         {
-                            messageUser = dildoUserMessagesMale[0];
-                            messageTarget = dildoTargetMessagesMale[0];
+                            messageUser = dildoUserMessagesMale[random.Next(dildoUserMessagesMale.Length)];
+                            messageTarget = dildoTargetMessagesMale[random.Next(dildoTargetMessagesMale.Length)];
                         }
                         else if (targetAppearance.Sex == Sex.Female)
                         {
-                            messageUser = dildoUserMessagesFemale[0];
-                            messageTarget = dildoTargetMessagesFemale[0];
+                            messageUser = dildoUserMessagesFemale[random.Next(dildoUserMessagesFemale.Length)];
+                            messageTarget = dildoTargetMessagesFemale[random.Next(dildoTargetMessagesFemale.Length)];
                         }
                         else
                             isValid = false;

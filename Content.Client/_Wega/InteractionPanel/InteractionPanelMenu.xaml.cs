@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
@@ -141,11 +142,9 @@ namespace Content.Client.Interaction.Panel.Ui
         private void UpdateTarget()
         {
             var session = IoCManager.Resolve<IPlayerManager>().LocalSession;
-
             if (session?.AttachedEntity.HasValue == true)
             {
                 var target = FindTarget(session.AttachedEntity.Value);
-
                 if (target.HasValue)
                 {
                     var targetEntityUid = _entManager.GetEntity(target.Value);
@@ -411,7 +410,6 @@ namespace Content.Client.Interaction.Panel.Ui
             if (session?.AttachedEntity.HasValue == true)
             {
                 var user = session.AttachedEntity.Value;
-
                 if (_entManager.TryGetNetEntity(user, out var userEntity) && userEntity.HasValue)
                 {
                     var target = FindTarget(user);
@@ -440,11 +438,37 @@ namespace Content.Client.Interaction.Panel.Ui
                     continue;
 
                 var distance = Vector2.Distance(sourceTransform.Coordinates.Position, userTransform.Coordinates.Position);
-
                 if (distance <= 2f && distance < minDistance)
                 {
                     minDistance = distance;
                     target = _entManager.GetNetEntity(userEntity);
+                }
+            }
+
+            if (target is null)
+            {
+                var strapComponents = _entManager.EntityQuery<StrapComponent>().ToList();
+                foreach (var strapComponent in strapComponents)
+                {
+                    var buckledEntity = strapComponent.BuckledEntities.FirstOrDefault(entity => entity != user && entity != default);
+                    if (buckledEntity != default)
+                    {
+                        var sessionForBuckledEntity = playerManager.Sessions
+                            .FirstOrDefault(session => session.AttachedEntity == buckledEntity);
+
+                        if (sessionForBuckledEntity != null)
+                        {
+                            if (_entManager.TryGetComponent<TransformComponent>(buckledEntity, out var strapTransform))
+                            {
+                                var distance = Vector2.Distance(sourceTransform.Coordinates.Position, strapTransform.Coordinates.Position);
+                                if (distance <= 2f && distance < minDistance)
+                                {
+                                    minDistance = distance;
+                                    target = _entManager.GetNetEntity(buckledEntity);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
