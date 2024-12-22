@@ -117,41 +117,35 @@ namespace Content.Server.Vibrator.System
 
             var random = new Random();
 
-            var vibratorUserMessagesVox = new[]
-            {
+            var vibratorUserMessagesVox = new[] {
                 Loc.GetString("interaction-vibrator-user-vox-1"),
                 Loc.GetString("interaction-vibrator-user-vox-2"),
             };
 
-            var vibratorTargetMessagesVox = new[]
-            {
+            var vibratorTargetMessagesVox = new[] {
                 Loc.GetString("interaction-vibrator-target-vox-1", ("user", userName)),
                 Loc.GetString("interaction-vibrator-target-vox-2", ("user", userName)),
             };
 
-            var vibratorUserMessagesMale = new[]
-            {
+            var vibratorUserMessagesMale = new[] {
                 Loc.GetString("interaction-vibrator-user-anal-1"),
                 Loc.GetString("interaction-vibrator-user-anal-2"),
                 Loc.GetString("interaction-vibrator-user-dick-1"),
             };
 
-            var vibratorTargetMessagesMale = new[]
-            {
+            var vibratorTargetMessagesMale = new[] {
                 Loc.GetString("interaction-vibrator-target-anal-1", ("user", userName)),
                 Loc.GetString("interaction-vibrator-target-anal-2", ("user", userName)),
                 Loc.GetString("interaction-vibrator-target-dick-1", ("user", userName)),
             };
 
-            var vibratorUserMessagesFemale = new[]
-            {
+            var vibratorUserMessagesFemale = new[] {
                 Loc.GetString("interaction-vibrator-user-anal-1"),
                 Loc.GetString("interaction-vibrator-user-anal-2"),
                 Loc.GetString("interaction-vibrator-user-vagina-1"),
             };
 
-            var vibratorTargetMessagesFemale = new[]
-            {
+            var vibratorTargetMessagesFemale = new[] {
                 Loc.GetString("interaction-vibrator-target-anal-1", ("user", userName)),
                 Loc.GetString("interaction-vibrator-target-anal-2", ("user", userName)),
                 Loc.GetString("interaction-vibrator-target-vagina-1", ("user", userName)),

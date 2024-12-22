@@ -39,7 +39,7 @@
 - type: interaction
   id: BaseUserHasTail
   abstract: true
-  nearestAllowedSpecies:
+  allowedSpecies:
   - Felinid
   - Reptilian
   - Vulpkanin
@@ -571,6 +571,14 @@
   name: interaction-massage-vagina
   userMessages: ["chat-interaction-massage-vagina-message-1", "chat-interaction-massage-vagina-message-2"]
   targetMessages: ["chat-interaction-massage-vagina-message-target-1", "chat-interaction-massage-vagina-message-target-2"]
+  nearestAllowedSpecies:
+  - Human
+  - Dwarf
+  - Felinid
+  - Moth
+  - Reptilian
+  - SlimePerson
+  - Vulpkanin
   nearestAllowedGenders:
   - Female
 
@@ -862,7 +870,7 @@
   - Vox
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothingAnal, BaseHumanoid ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothingAnal ]
   id: InteractionInsertTailAnal
   name: interaction-insert-tail-anal
   userMessages: ["chat-interaction-insert-tail-anal-message"]
@@ -870,7 +878,7 @@
   otherMessages: ["chat-interaction-insert-tail-anal-message-others"]
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseHumanoid ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing ]
   id: InteractionInsertTailVagina
   name: interaction-insert-tail-vagina
   userMessages: ["chat-interaction-insert-tail-vagina-message"]
@@ -880,7 +888,7 @@
   - Female
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseHumanoid ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing ]
   id: InteractionRunsTailVagina
   name: interaction-runs-tail-vagina
   userMessages: ["chat-interaction-runs-tail-vagina-message"]
@@ -890,7 +898,7 @@
   - Female
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseHumanoid ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing ]
   id: InteractionMassageTailDick
   name: interaction-massage-tail-dick
   userMessages: ["chat-interaction-massage-tail-dick-message"]
@@ -901,7 +909,7 @@
   - Male
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseHumanoid ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing ]
   id: InteractionHugsTailDick
   name: interaction-hugs-tail-dick
   userMessages: ["chat-interaction-hugs-tail-dick-message"]
