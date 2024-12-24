@@ -1,7 +1,7 @@
 [game]
 hostname = "🌟 Corvax — Вега 🌟[18+]"
-desc = "Корвакс — первый русскоязычный проект в Space Station 14.\nЗдесь помогут новичкам!\nНа этом сервере пониженные требования к RP."
-map_pool = "CorvaxDefaultMapPool"
+desc = "Корвакс — первый русскоязычный проект в Space Station 14.\nВега — это первый официальный ЕРП сервер от Корвакс!\nЕРП является лишь допустимой опцией, а не заменяющей частью геймплея."
+map_pool = "WegaDefaultMapPool"
 maxplayers = 180
 soft_max_players = 100
 map_rotation = true
@@ -16,9 +16,9 @@ tickrate = 30
 limit = 25.0
 
 [infolinks]
-#discord = "https://discord.ss14.ru"
+discord = "https://discord.gg/QwBu9KTj"
 wiki = "https://station14.ru"
-#appeal = "https://discord.ss14.ru"
+appeal = "https://discord.gg/QwBu9KTj"
 website = "https://ss14.ru"
 
 [viewport]

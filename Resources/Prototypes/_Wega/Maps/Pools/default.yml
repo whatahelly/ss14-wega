@@ -1,0 +1,17 @@
+- type: gameMapPool
+  id: WegaDefaultMapPool
+  maps:
+  # Highpop
+  - WegaKerberos
+  - CorvaxAvrite
+  - WegaCyberiad
+  #- WegaCereStation
+  # Midpop
+  - CorvaxPaper
+  - Bagel
+  - Marathon
+  # Lowpop
+  - CorvaxSilly
+  - Barratry
+  - Packed
+  - Meta

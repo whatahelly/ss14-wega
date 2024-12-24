@@ -24,7 +24,7 @@ namespace Content.Shared.Chat.Prototypes
         public string Name = default!;
 
         [DataField]
-        public SpriteSpecifier Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/Actions/scream.png"));
+        public SpriteSpecifier Icon = new SpriteSpecifier.Texture(new("/Textures/_Wega/Interface/InteractionPanel/heart.png"));
 
         [DataField("useDelay")]
         public TimeSpan UseDelay { get; set; } = TimeSpan.FromSeconds(2);
