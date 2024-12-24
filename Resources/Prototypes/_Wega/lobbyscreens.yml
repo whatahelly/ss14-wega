@@ -1,3 +1,7 @@
 - type: lobbyBackground
   id: Wega
   background: /Textures/_Wega/LobbyScreens/wega.png
+
+- type: lobbyBackground
+  id: JustJoke
+  background: /Textures/_Wega/LobbyScreens/just_joke.png
