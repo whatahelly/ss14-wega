@@ -360,7 +360,7 @@ namespace Content.Server.Carrying
 
         private TimeSpan GetPickupDuration(EntityUid carrier, EntityUid carried)
         {
-            var length = TimeSpan.FromSeconds(3);
+            var length = TimeSpan.FromSeconds(2);
 
             var mod = MassContest(carrier, carried);
             if (mod != 0)
