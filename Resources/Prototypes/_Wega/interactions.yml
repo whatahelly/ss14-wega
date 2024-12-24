@@ -19,6 +19,7 @@
 - type: interaction
   id: BaseCheckErpStatus
   abstract: true
+  icon: /Textures/_Wega/Interface/InteractionPanel/manyhearts.png
   erp: true
 
 - type: interaction
@@ -498,6 +499,16 @@
   userMessages: ["chat-interaction-lick-anal-message"]
   targetMessages: ["chat-interaction-lick-anal-message-target"]
   otherMessages: ["chat-interaction-lick-anal-message-others"]
+
+- type: interaction
+  parent: [ BaseCheckErpStatus, BaseCheckClothing, BaseMaleOnly ]
+  id: InteractionRubbingDickVagina
+  name: interaction-rubbing-dick-vagina
+  userMessages: ["chat-interaction-rubbing-dick-vagina-message"]
+  targetMessages: ["chat-interaction-rubbing-dick-vagina-message-target"]
+  otherMessages: ["chat-interaction-rubbing-dick-vagina-message-others"]
+  nearestAllowedGenders:
+  - Female
 
 - type: interaction
   parent: [ BaseCheckErpStatus, BaseCheckClothing, BaseFemaleOnly ]
@@ -1049,7 +1060,3 @@
   nearestAllowedSpecies:
   - Vox
 
-- type: interaction
-  id: InteractionCheck
-  name: interaction-check
-  targetEntityId: [ "MobCorgiMouse" ]

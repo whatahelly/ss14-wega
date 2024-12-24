@@ -6,6 +6,8 @@ using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.ERP.Components;
 using Content.Server.Chat.Systems;
@@ -46,6 +48,24 @@ namespace Content.Server.Interaction.Panel
             if (target == null) return;
 
             var userEntity = _entManager.GetEntity(user);
+            if (_entManager.TryGetComponent<MobThresholdsComponent>(userEntity, out var userThresholds))
+            {
+                if (userThresholds.CurrentThresholdState != MobState.Alive)
+                    return;
+            }
+
+            var targetEntity = _entManager.GetEntity(target.Value);
+            if (_entManager.TryGetComponent<MobThresholdsComponent>(targetEntity, out var targetThresholds))
+            {
+                if (targetThresholds.CurrentThresholdState != MobState.Alive)
+                {
+                    var message = Loc.GetString("interaction-target-not-alive-message");
+                    if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
+                        _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
+                    return;
+                }
+            }
+
             var interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);
             if (_lastInteractionTimes.TryGetValue(target.Value, out var lastInteractionTime))
             {
@@ -76,7 +96,6 @@ namespace Content.Server.Interaction.Panel
                     }
                 }
 
-                var targetEntity = _entManager.GetEntity(target.Value);
                 if (TryComp<InventoryComponent>(targetEntity, out var targetInventory))
                 {
                     var requiredSlots = interactionPrototype.RequiredClothingSlots ?? Enumerable.Empty<string>();
