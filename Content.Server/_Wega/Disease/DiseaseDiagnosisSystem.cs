@@ -14,8 +14,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Swab;
 using Content.Shared.Tools.Components;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -154,7 +154,7 @@ namespace Content.Server.Disease
 
             _addQueue.Enqueue(uid);
             UpdateAppearance(uid, true, true);
-            _audio.PlayGlobal("/Audio/Machines/diagnoser_printing.ogg", Filter.Pvs(uid), true);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/diagnoser_printing.ogg"), uid, AudioParams.Default.WithLoop(true));
             EntityManager.DeleteEntity(args.Used);
         }
 
@@ -185,7 +185,7 @@ namespace Content.Server.Disease
 
             _addQueue.Enqueue(uid);
             UpdateAppearance(uid, true, true);
-            _audio.PlayGlobal("/Audio/Machines/vaccinator_running.ogg", Filter.Pvs(uid), true);
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/vaccinator_running.ogg"), uid, AudioParams.Default.WithLoop(true));
             EntityManager.DeleteEntity(args.Used);
         }
 

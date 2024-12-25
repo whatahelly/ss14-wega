@@ -6141,6 +6141,20 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 2628
+    components:
+    - type: Transform
+      pos: -18.5,5.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 2629
+    components:
+    - type: Transform
+      pos: -10.5,4.5
+      parent: 2
+    missingComponents:
+    - Destructible
 - proto: CleanerDispenser
   entities:
   - uid: 2548
@@ -14899,6 +14913,30 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+- proto: KitchenElectricGrill
+  entities:
+  - uid: 2624
+    components:
+    - type: Transform
+      pos: -14.5,4.5
+      parent: 2
+  - uid: 2625
+    components:
+    - type: Transform
+      pos: -20.5,4.5
+      parent: 2
+- proto: KitchenMicrowave
+  entities:
+  - uid: 2626
+    components:
+    - type: Transform
+      pos: -11.5,5.5
+      parent: 2
+  - uid: 2627
+    components:
+    - type: Transform
+      pos: -20.5,5.5
+      parent: 2
 - proto: KitchenReagentGrinder
   entities:
   - uid: 12

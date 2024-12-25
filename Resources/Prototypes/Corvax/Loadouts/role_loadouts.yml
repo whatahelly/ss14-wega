@@ -8,6 +8,11 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  # Corvax-Wega-start
+  - Top
+  - Bottom
+  - Socks
+  # Corvax-Wega-end
 
 - type: roleLoadout
   id: JobPilot
@@ -21,3 +26,8 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  # Corvax-Wega-start
+  - Top
+  - Bottom
+  - Socks
+  # Corvax-Wega-end
