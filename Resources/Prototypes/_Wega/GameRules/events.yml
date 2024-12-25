@@ -8,7 +8,7 @@
       path: /Audio/Announcements/outbreak7.ogg
       params:
         volume: -4
-    weight: 5
+    weight: 3
     duration: 1
-    earliestStart: 15
+    earliestStart: 45
   - type: DiseaseOutbreakRule

@@ -154,7 +154,7 @@ namespace Content.Server.Disease
 
             _addQueue.Enqueue(uid);
             UpdateAppearance(uid, true, true);
-            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/diagnoser_printing.ogg"), uid, AudioParams.Default.WithLoop(true));
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/diagnoser_printing.ogg"), uid, AudioParams.Default.WithLoop(false));
             EntityManager.DeleteEntity(args.Used);
         }
 
@@ -185,7 +185,7 @@ namespace Content.Server.Disease
 
             _addQueue.Enqueue(uid);
             UpdateAppearance(uid, true, true);
-            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/vaccinator_running.ogg"), uid, AudioParams.Default.WithLoop(true));
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/vaccinator_running.ogg"), uid, AudioParams.Default.WithLoop(false));
             EntityManager.DeleteEntity(args.Used);
         }
 
