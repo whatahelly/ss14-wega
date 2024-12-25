@@ -48,22 +48,22 @@ namespace Content.Server.Interaction.Panel
             if (target == null) return;
 
             var userEntity = _entManager.GetEntity(user);
-            if (_entManager.TryGetComponent<MobThresholdsComponent>(userEntity, out var userThresholds))
-            {
-                if (userThresholds.CurrentThresholdState != MobState.Alive)
-                    return;
-            }
+            if (_entManager.TryGetComponent<MobThresholdsComponent>(userEntity, out var userThresholds) &&
+                (userThresholds.CurrentThresholdState != MobState.Alive &&
+                userThresholds.CurrentThresholdState != MobState.Invalid))
+                return;
 
             var targetEntity = _entManager.GetEntity(target.Value);
-            if (_entManager.TryGetComponent<MobThresholdsComponent>(targetEntity, out var targetThresholds))
+            if (_entManager.TryGetComponent<MobThresholdsComponent>(targetEntity, out var targetThresholds) &&
+                (targetThresholds.CurrentThresholdState != MobState.Alive &&
+                targetThresholds.CurrentThresholdState != MobState.Invalid))
             {
-                if (targetThresholds.CurrentThresholdState != MobState.Alive)
+                if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
                 {
                     var message = Loc.GetString("interaction-target-not-alive-message");
-                    if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
-                        _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
-                    return;
+                    _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
                 }
+                return;
             }
 
             var interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);

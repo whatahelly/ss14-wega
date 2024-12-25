@@ -1,16 +1,16 @@
 - type: vendingMachineInventory
   id: IntimatInventory
   startingInventory:
-    RandomDildo: 5
-    DildoAvian: 3
-    DildoCanine: 3
-    DildoDragon: 3
-    DildoEquine: 3
-    DildoHuman: 3
-    DildoTentacle: 3
-    PolyDildoSmall: 3
-    PolyDildoMedium: 3
-    PolyDildoBig: 3
+    RandomDildo: 4
+    DildoAvian: 2
+    DildoCanine: 2
+    DildoDragon: 2
+    DildoEquine: 2
+    DildoHuman: 2
+    DildoTentacle: 2
+    PolyDildoSmall: 2
+    PolyDildoMedium: 2
+    PolyDildoBig: 2
     DildoDouble: 2
     ClothingAnalMetal: 2
     ClothingAnalPink: 2
