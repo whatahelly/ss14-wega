@@ -2,9 +2,11 @@
 hostname = "🌟 Corvax — Вега 🌟[18+]"
 desc = "Корвакс — первый русскоязычный проект в Space Station 14.\nВега — это первый официальный ЕРП сервер от Корвакс!\nЕРП является лишь допустимой опцией, а не заменяющей частью геймплея."
 map_pool = "WegaDefaultMapPool"
+secret_weight_prototype = "WegaSecretDefault"
 maxplayers = 180
 soft_max_players = 100
-map_rotation = true
+lobbyduration = 360
+map_rotation = false
 
 [wega]
 respawn_enabled = true
@@ -45,3 +47,8 @@ rules_file = "WegaRuleset"
 
 [atmos]
 max_explosion_range = 5
+
+[shuttle]
+emergency_early_launch_allowed = true
+arrivals_map = "/Maps/Misc/corvax_terminal.yml"
+auto_call_time = 150
