@@ -1,0 +1,19 @@
+- type: weightedRandom
+  id: VampireObjectiveGroups
+  weights:
+    VampireObjectiveGroupSteal: 1
+
+- type: weightedRandom
+  id: VampireObjectiveGroupSteal
+  weights:
+    VampireCMOHyposprayStealObjective: 1
+    VampireCMOCrewMonitorStealObjective: 1
+    VampireRDHardsuitStealObjective: 1
+    VampireMagbootsStealObjective: 1
+    VampireClipboardStealObjective: 1
+    VampireCorgiMeatStealObjective: 1
+    VampireCaptainIDStealObjective: 1
+    VampireHandTeleporterStealObjective: 0.5
+    VampireEnergyShotgunStealObjective: 0.5
+    VampireCaptainJetpackStealObjective: 0.5
+    VampireCaptainGunStealObjective: 0.5

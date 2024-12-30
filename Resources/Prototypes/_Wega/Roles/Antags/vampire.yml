@@ -1,0 +1,16 @@
+- type: antag
+  id: Vampire
+  name: roles-antag-vampire-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-vampire-objective
+  guides: [ Vampires ]
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 54000 # 15h # Corvax-RoleTime
+
+# Ability gear
+- type: startingGear
+  id: VampireClawsGear
+  inhand:
+    - WeaponVampireClaws

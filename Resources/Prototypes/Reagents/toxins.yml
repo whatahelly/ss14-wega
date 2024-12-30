@@ -498,6 +498,11 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+        # Corvax-Wega-Vampire-start
+          - !type:OrganType
+            type: Vampire
+            shouldHave: false
+        # Corvax-Wega-Vampire-end
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
@@ -508,11 +513,21 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+        # Corvax-Wega-Vampire-start
+          - !type:OrganType
+            type: Vampire
+            shouldHave: false
+        # Corvax-Wega-Vampire-end
       - !type:HealthChange
         conditions:
         - !type:OrganType
           type: Animal
           shouldHave: false
+        # Corvax-Wega-Vampire-start
+        - !type:OrganType
+          type: Vampire
+          shouldHave: false
+        # Corvax-Wega-Vampire-end
         damage:
           types:
             Poison: 1
@@ -521,6 +536,11 @@
         - !type:OrganType
           type: Animal
           shouldHave: true
+        # Corvax-Wega-Vampire-start
+        - !type:OrganType
+          type: Vampire
+          shouldHave: true
+        # Corvax-Wega-Vampire-end
         reagent: Protein
         amount: 0.5
 

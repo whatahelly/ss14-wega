@@ -2,7 +2,7 @@
   id: Fland
   mapName: 'Fland Installation'
   mapPath: Maps/_Wega/wegafland.yml # Corvax-Wega
-  minPlayers: 70
+  minPlayers: 55 # Corvax
   stations:
     Fland:
       stationProto: StandardNanotrasenStation

@@ -2,6 +2,7 @@ using Content.Server.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Organ;
+using Content.Shared.Body.Prototypes; // Corvax-Wega-Vampire
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
@@ -230,6 +231,33 @@ namespace Content.Server.Body.Systems
 
             _solutionContainerSystem.UpdateChemicals(soln.Value);
         }
+
+        // Corvax-Wega-Vampire-start
+        public bool TryAddMetabolizerType(MetabolizerComponent component, string metabolizerType)
+        {
+            if (!_prototypeManager.HasIndex<MetabolizerTypePrototype>(metabolizerType))
+                return false;
+
+            if (component.MetabolizerTypes == null)
+                component.MetabolizerTypes = new();
+
+            return component.MetabolizerTypes.Add(metabolizerType);
+        }
+
+        public bool TryRemoveMetabolizerType(MetabolizerComponent component, string metabolizerType)
+        {
+            if (component.MetabolizerTypes == null)
+                return true;
+
+            return component.MetabolizerTypes.Remove(metabolizerType);
+        }
+
+        public void ClearMetabolizerTypes(MetabolizerComponent component)
+        {
+            if (component.MetabolizerTypes != null)
+                component.MetabolizerTypes.Clear();
+        }
+        // Corvax-Wega-Vampire-end
     }
 
     // TODO REFACTOR THIS

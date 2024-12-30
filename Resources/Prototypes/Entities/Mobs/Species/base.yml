@@ -142,6 +142,7 @@
     - RadiationProtection
     - Drowsiness
     - Adrenaline
+    - Hallucinations # Corvax-Wega-Hallucinations
   - type: Body
     prototype: Human
     requiredLegs: 2

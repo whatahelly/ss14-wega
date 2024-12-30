@@ -12,12 +12,16 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Stunnable; // Corvax-Wega-Vampire
 using Content.Shared.Timing;
+using Content.Shared.Vampire.Components; // Corvax-Wega-Vampire
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers; // Corvax-Wega-Vampire
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using Robust.Shared.Timing; // Corvax-Wega-Vampire
 
 namespace Content.Server.Bible
 {
@@ -33,12 +37,14 @@ namespace Content.Server.Bible
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly UseDelaySystem _delay = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly SharedStunSystem _stun = default!; // Corvax-Wega-Vampire
 
         public override void Initialize()
         {
             base.Initialize();
 
             SubscribeLocalEvent<BibleComponent, AfterInteractEvent>(OnAfterInteract);
+            SubscribeLocalEvent<BibleComponent, EntGotInsertedIntoContainerMessage>(OnInsertedContainer); // Corvax-Wega-Vampire
             SubscribeLocalEvent<SummonableComponent, GetVerbsEvent<AlternativeVerb>>(AddSummonVerb);
             SubscribeLocalEvent<SummonableComponent, GetItemActionsEvent>(GetSummonAction);
             SubscribeLocalEvent<SummonableComponent, SummonActionEvent>(OnSummon);
@@ -91,6 +97,22 @@ namespace Content.Server.Bible
             }
         }
 
+        // Corvax-Wega-Vampire-start
+        private void OnInsertedContainer(EntityUid uid, BibleComponent component, EntGotInsertedIntoContainerMessage args)
+        {
+            //If an unholy creature picks up the bible, knock them down
+            if (HasComp<UnholyComponent>(args.Container.Owner))
+            {
+                Timer.Spawn(500, () =>
+                {
+                    _stun.TryParalyze(args.Container.Owner, TimeSpan.FromSeconds(10), true);
+                    _damageableSystem.TryChangeDamage(args.Container.Owner, component.DamageOnUnholyUse);
+                    _audio.PlayPvs(component.SizzleSoundPath, args.Container.Owner);
+                });
+            }
+        }
+        // Corvax-Wega-Vampire-end
+
         private void OnAfterInteract(EntityUid uid, BibleComponent component, AfterInteractEvent args)
         {
             if (!args.CanReach)
@@ -114,6 +136,22 @@ namespace Content.Server.Bible
 
                 return;
             }
+
+            // Corvax-Wega-Vampire-start
+            //Damage unholy creatures
+            if (HasComp<UnholyComponent>(args.Target))
+            {
+                _damageableSystem.TryChangeDamage(args.Target.Value, component.DamageUnholy, true, origin: uid);
+
+                var othersMessage = Loc.GetString(component.LocPrefix + "-damage-unholy-others", ("user", Identity.Entity(args.User, EntityManager)), ("target", Identity.Entity(args.Target.Value, EntityManager)), ("bible", uid));
+                _popupSystem.PopupEntity(othersMessage, args.User, Filter.PvsExcept(args.User), true, PopupType.MediumCaution);
+
+                var selfMessage = Loc.GetString(component.LocPrefix + "-damage-unholy-self", ("target", Identity.Entity(args.Target.Value, EntityManager)), ("bible", uid));
+                _popupSystem.PopupEntity(selfMessage, args.User, args.User, PopupType.LargeCaution);
+
+                return;
+            }
+            // Corvax-Wega-Vampire-end
 
             // This only has a chance to fail if the target is not wearing anything on their head and is not a familiar.
             if (!_invSystem.TryGetSlotEntity(args.Target.Value, "head", out var _) && !HasComp<FamiliarComponent>(args.Target.Value))

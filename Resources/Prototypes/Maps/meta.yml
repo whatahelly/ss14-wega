@@ -2,7 +2,10 @@
   id: Meta
   mapName: 'Meta Station'
   mapPath: /Maps/_Wega/wegameta.yml #Corvax-Wega
-  minPlayers: 50
+  # Corvax-start
+  minPlayers: 25
+  maxPlayers: 55
+  # Corvax-end
   stations:
     Meta:
       stationProto: StandardNanotrasenStation
