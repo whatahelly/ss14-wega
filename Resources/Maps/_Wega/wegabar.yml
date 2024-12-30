@@ -13,6 +13,7 @@ tilemap:
   62: FloorGrayConcreteSmooth
   70: FloorKitchen
   4: FloorLino
+  5: FloorMiningDark
   88: FloorPlanetDirt
   91: FloorRGlass
   96: FloorShowroom
@@ -98,11 +99,11 @@ entities:
           version: 6
         -3,-1:
           ind: -3,-1
-          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnQAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnQAAAAAAngAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnQAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAACgAAAAAACgAAAAAACgAAAAAACgAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAACgAAAAAACgAAAAAACgAAAAAACgAAAAAAgwAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAngAAAAAAlQAAAAAAPgAAAAAAOgAAAAAAlQAAAAAAngAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAngAAAAAAlQAAAAAAOQAAAAAAPgAAAAAAlQAAAAAAngAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAiAAAAAAAngAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAgwAAAAAAlQAAAAAAOgAAAAAAPQAAAAAAlQAAAAAAngAAAAAAngAAAAAAngAAAAAAlQAAAAAAlQAAAAAAngAAAAAAngAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAlQAAAAAAlQAAAAAAPgAAAAAAOgAAAAAAlQAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAngAAAAAAngAAAAAAiAAAAAAAngAAAAAAPgAAAAAAPgAAAAAAOgAAAAAAPgAAAAAAOQAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAiAAAAAAA
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnQAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnQAAAAAAngAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnQAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAgwAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAACgAAAAAACgAAAAAACgAAAAAACgAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAACgAAAAAACgAAAAAACgAAAAAACgAAAAAAgwAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAngAAAAAAlQAAAAAAPgAAAAAAOgAAAAAAlQAAAAAAngAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAngAAAAAAlQAAAAAAOQAAAAAAPgAAAAAAlQAAAAAAngAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAkAAAAAAAiAAAAAAAngAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAgwAAAAAAlQAAAAAAOgAAAAAAPQAAAAAAlQAAAAAAngAAAAAAngAAAAAAngAAAAAAlQAAAAAAlQAAAAAAngAAAAAAngAAAAAADAAAAAAADAAAAAAADAAAAAAADAAAAAAAlQAAAAAAlQAAAAAAPgAAAAAAOgAAAAAAlQAAAAAABQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAngAAAAAAngAAAAAAiAAAAAAAngAAAAAAPgAAAAAAPgAAAAAAOgAAAAAAPgAAAAAAOQAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAiAAAAAAA
           version: 6
         -3,0:
           ind: -3,0
-          tiles: PgAAAAAAPAAAAAAAOQAAAAAAPgAAAAAAOgAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAPgAAAAAAPgAAAAAAPgAAAAAAPgAAAAAAlQAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          tiles: PgAAAAAAPAAAAAAAOQAAAAAAPgAAAAAAOgAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAPgAAAAAAPgAAAAAAPgAAAAAAPgAAAAAAlQAAAAAAlQAAAAAAngAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAlQAAAAAAngAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAiAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAngAAAAAAngAAAAAAngAAAAAAngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
           version: 6
         -4,0:
           ind: -4,0
@@ -2425,6 +2426,11 @@ entities:
     components:
     - type: Transform
       pos: -11.177192,11.45489
+      parent: 2
+  - uid: 3682
+    components:
+    - type: Transform
+      pos: -42.305786,0.11574173
       parent: 2
 - proto: CableApcExtension
   entities:
@@ -6054,6 +6060,41 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 3689
+    components:
+    - type: Transform
+      pos: -39.5,3.5
+      parent: 2
+  - uid: 3690
+    components:
+    - type: Transform
+      pos: -39.5,4.5
+      parent: 2
+  - uid: 3691
+    components:
+    - type: Transform
+      pos: -39.5,5.5
+      parent: 2
+  - uid: 3692
+    components:
+    - type: Transform
+      pos: -44.5,3.5
+      parent: 2
+  - uid: 3693
+    components:
+    - type: Transform
+      pos: -44.5,5.5
+      parent: 2
+  - uid: 3694
+    components:
+    - type: Transform
+      pos: -44.5,4.5
+      parent: 2
+  - uid: 3695
+    components:
+    - type: Transform
+      pos: -45.5,3.5
+      parent: 2
 - proto: CableHV
   entities:
   - uid: 2515
@@ -9565,6 +9606,52 @@ entities:
     - type: Transform
       pos: -15.510876,4.957426
       parent: 2
+- proto: Coal1
+  entities:
+  - uid: 3684
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -42.368286,-1.4467583
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3685
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -42.743286,-1.8217583
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3686
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -42.13391,-1.8217583
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3687
+    components:
+    - type: Transform
+      pos: -42.72766,-1.3686333
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3688
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -42.16516,-1.3530083
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
 - proto: ComfyChair
   entities:
   - uid: 470
@@ -12463,12 +12550,35 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 3675
+    components:
+    - type: Transform
+      pos: -42.3533,1.5529119
+      parent: 2
+    missingComponents:
+    - Destructible
 - proto: DrinkVodkaGlass
   entities:
   - uid: 1449
     components:
     - type: Transform
       pos: -40.332756,-1.1075628
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 3676
+    components:
+    - type: Transform
+      pos: -42.69705,1.5216619
+      parent: 2
+    missingComponents:
+    - Destructible
+- proto: DrinkVodkaMartiniGlass
+  entities:
+  - uid: 3677
+    components:
+    - type: Transform
+      pos: -42.50955,1.1466619
       parent: 2
     missingComponents:
     - Destructible
@@ -13484,8 +13594,15 @@ entities:
     - type: Transform
       pos: -47.5,-2.5
       parent: 2
-- proto: FloraTreeLarge01
+- proto: FloraTreeLarge
   entities:
+  - uid: 1389
+    components:
+    - type: Transform
+      pos: -31.02975,-3.0166001
+      parent: 2
+    missingComponents:
+    - Destructible
   - uid: 1390
     components:
     - type: Transform
@@ -13493,21 +13610,10 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
-- proto: FloraTreeLarge02
-  entities:
   - uid: 1391
     components:
     - type: Transform
       pos: -35.103218,-2.9931626
-      parent: 2
-    missingComponents:
-    - Destructible
-- proto: FloraTreeLarge06
-  entities:
-  - uid: 1389
-    components:
-    - type: Transform
-      pos: -31.02975,-3.0166001
       parent: 2
     missingComponents:
     - Destructible
@@ -13681,15 +13787,15 @@ entities:
       parent: 2
 - proto: GasMinerWaterVapor
   entities:
-  - uid: 1416
+  - uid: 1523
     components:
     - type: Transform
-      pos: -38.5,4.5
+      pos: -38.5,6.5
       parent: 2
-  - uid: 1520
+  - uid: 1525
     components:
     - type: Transform
-      pos: -44.5,5.5
+      pos: -43.5,6.5
       parent: 2
 - proto: GasMixerFlipped
   entities:
@@ -13727,17 +13833,42 @@ entities:
       color: '#17E8E2FF'
     missingComponents:
     - Destructible
-  - uid: 1419
+  - uid: 1416
     components:
     - type: Transform
-      pos: -39.5,4.5
+      pos: -44.5,6.5
       parent: 2
     missingComponents:
     - Destructible
-  - uid: 1519
+  - uid: 1432
     components:
     - type: Transform
-      pos: -44.5,4.5
+      rot: 1.5707963267948966 rad
+      pos: -38.5,-1.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1437
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -39.5,-1.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1514
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -49.5,-0.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1517
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -43.5,-0.5
       parent: 2
     missingComponents:
     - Destructible
@@ -13748,6 +13879,13 @@ entities:
       parent: 2
     - type: AtmosPipeColor
       color: '#FF0000FF'
+    missingComponents:
+    - Destructible
+  - uid: 3655
+    components:
+    - type: Transform
+      pos: -39.5,6.5
+      parent: 2
     missingComponents:
     - Destructible
 - proto: GasPipeBend
@@ -14322,6 +14460,22 @@ entities:
       color: '#FF0000FF'
     missingComponents:
     - Destructible
+  - uid: 3673
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -40.5,-1.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 3674
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -37.5,-1.5
+      parent: 2
+    missingComponents:
+    - Destructible
 - proto: GasPipeFourway
   entities:
   - uid: 301
@@ -14342,10 +14496,24 @@ entities:
       color: '#FF0000FF'
     missingComponents:
     - Destructible
+  - uid: 1419
+    components:
+    - type: Transform
+      pos: -44.5,5.5
+      parent: 2
+    missingComponents:
+    - Destructible
   - uid: 1430
     components:
     - type: Transform
       pos: -39.5,1.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1521
+    components:
+    - type: Transform
+      pos: -44.5,4.5
       parent: 2
     missingComponents:
     - Destructible
@@ -18518,11 +18686,27 @@ entities:
       color: '#0000FFFF'
     missingComponents:
     - Destructible
+  - uid: 1418
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -39.5,5.5
+      parent: 2
+    missingComponents:
+    - Destructible
   - uid: 1425
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -39.5,0.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1520
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -39.5,4.5
       parent: 2
     missingComponents:
     - Destructible
@@ -19020,66 +19204,83 @@ entities:
       color: '#0000FFFF'
     missingComponents:
     - Destructible
-- proto: GasThermoMachineHellfireHeater
+- proto: GasThermoMachineHeaterEnabled
   entities:
-  - uid: 1431
+  - uid: 1415
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -37.5,1.5
+      pos: -38.5,5.5
       parent: 2
+    - type: GasThermoMachine
+      energyLeakPercentage: 0.15
+      maxTemperature: 1193.15
+      targetTemperature: 318
+      heatCapacity: 40000
     missingComponents:
     - Destructible
-  - uid: 1432
+  - uid: 1522
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -38.5,4.5
+      parent: 2
+    - type: GasThermoMachine
+      energyLeakPercentage: 0.15
+      maxTemperature: 1193.15
+      minTemperature: 318
+      heatCapacity: 40000
+    missingComponents:
+    - Destructible
+  - uid: 1524
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: -40.5,1.5
+      pos: -45.5,4.5
       parent: 2
+    - type: GasThermoMachine
+      energyLeakPercentage: 0.15
+      maxTemperature: 1193.15
+      targetTemperature: 318
+      heatCapacity: 40000
+    missingComponents:
+    - Destructible
+  - uid: 1527
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -45.5,5.5
+      parent: 2
+    - type: GasThermoMachine
+      energyLeakPercentage: 0.15
+      maxTemperature: 1193.15
+      targetTemperature: 318
+      heatCapacity: 40000
+    missingComponents:
+    - Destructible
+  - uid: 1528
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -43.5,5.5
+      parent: 2
+    - type: GasThermoMachine
+      energyLeakPercentage: 0.15
+      maxTemperature: 1193.15
+      targetTemperature: 318
+      heatCapacity: 40000
     missingComponents:
     - Destructible
   - uid: 1541
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: -42.5,1.5
+      pos: -43.5,4.5
       parent: 2
     missingComponents:
     - Destructible
 - proto: GasVentPump
   entities:
-  - uid: 1420
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -37.5,-1.5
-      parent: 2
-    missingComponents:
-    - Destructible
-  - uid: 1421
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -40.5,-1.5
-      parent: 2
-    missingComponents:
-    - Destructible
-  - uid: 1527
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -49.5,-0.5
-      parent: 2
-    missingComponents:
-    - Destructible
-  - uid: 1528
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -43.5,-0.5
-      parent: 2
-    missingComponents:
-    - Destructible
   - uid: 1886
     components:
     - type: Transform
@@ -21270,10 +21471,11 @@ entities:
       parent: 2
     missingComponents:
     - MeleeChemicalInjector
-  - uid: 1565
+  - uid: 3678
     components:
     - type: Transform
-      pos: -42.442387,-1.0589869
+      rot: -1.5707963267948966 rad
+      pos: -50.491116,-1.4302804
       parent: 2
     missingComponents:
     - MeleeChemicalInjector
@@ -23029,6 +23231,12 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 1519
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -42.5,-1.5
+      parent: 2
   - uid: 1863
     components:
     - type: Transform
@@ -23350,6 +23558,42 @@ entities:
     - type: Transform
       pos: -14.689896,4.769926
       parent: 2
+- proto: Salt1
+  entities:
+  - uid: 1518
+    components:
+    - type: Transform
+      pos: -42.60266,-1.7436333
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3679
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -42.587036,-1.3217583
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3681
+    components:
+    - type: Transform
+      pos: -42.29016,-1.2592583
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
+  - uid: 3683
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -42.29016,-1.7436333
+      parent: 2
+    missingComponents:
+    - Item
+    - Pullable
 - proto: Screwdriver
   entities:
   - uid: 689
@@ -23364,18 +23608,6 @@ entities:
       parent: 2
 - proto: SignalButton
   entities:
-  - uid: 701
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -17.5,-10.5
-      parent: 2
-    - type: DeviceLinkSource
-      linkedPorts:
-        2551:
-        - Pressed: DoorBolt
-    missingComponents:
-    - Destructible
   - uid: 1440
     components:
     - type: Transform
@@ -23400,7 +23632,9 @@ entities:
         - Pressed: Toggle
     missingComponents:
     - Destructible
-  - uid: 2326
+- proto: SignalButtonDirectional
+  entities:
+  - uid: 701
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -23410,10 +23644,16 @@ entities:
       linkedPorts:
         2550:
         - Pressed: DoorBolt
-    missingComponents:
-    - Destructible
-- proto: SignalButtonDirectional
-  entities:
+  - uid: 2326
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -17.5,-10.5
+      parent: 2
+    - type: DeviceLinkSource
+      linkedPorts:
+        2551:
+        - Pressed: DoorBolt
   - uid: 2768
     components:
     - type: Transform
@@ -23619,6 +23859,12 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 3680
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -43.5,-2.5
+      parent: 2
 - proto: SodaDispenser
   entities:
   - uid: 214
@@ -23901,6 +24147,20 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 1555
+    components:
+    - type: Transform
+      pos: -37.5,1.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1565
+    components:
+    - type: Transform
+      pos: -40.5,1.5
+      parent: 2
+    missingComponents:
+    - Destructible
 - proto: Stool
   entities:
   - uid: 3616
@@ -24161,6 +24421,14 @@ entities:
       parent: 2
     missingComponents:
     - Destructible
+  - uid: 1431
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -42.5,1.5
+      parent: 2
+    missingComponents:
+    - Destructible
   - uid: 1453
     components:
     - type: Transform
@@ -24186,13 +24454,6 @@ entities:
     components:
     - type: Transform
       pos: -42.5,0.5
-      parent: 2
-    missingComponents:
-    - Destructible
-  - uid: 1555
-    components:
-    - type: Transform
-      pos: -42.5,-1.5
       parent: 2
     missingComponents:
     - Destructible
@@ -27450,20 +27711,10 @@ entities:
     - type: Transform
       pos: -40.5,4.5
       parent: 2
-  - uid: 1415
-    components:
-    - type: Transform
-      pos: -39.5,5.5
-      parent: 2
   - uid: 1417
     components:
     - type: Transform
       pos: -40.5,5.5
-      parent: 2
-  - uid: 1418
-    components:
-    - type: Transform
-      pos: -38.5,5.5
       parent: 2
   - uid: 1422
     components:
@@ -27474,41 +27725,6 @@ entities:
     components:
     - type: Transform
       pos: -37.5,5.5
-      parent: 2
-  - uid: 1517
-    components:
-    - type: Transform
-      pos: -45.5,4.5
-      parent: 2
-  - uid: 1518
-    components:
-    - type: Transform
-      pos: -45.5,6.5
-      parent: 2
-  - uid: 1521
-    components:
-    - type: Transform
-      pos: -44.5,6.5
-      parent: 2
-  - uid: 1522
-    components:
-    - type: Transform
-      pos: -45.5,5.5
-      parent: 2
-  - uid: 1523
-    components:
-    - type: Transform
-      pos: -43.5,6.5
-      parent: 2
-  - uid: 1524
-    components:
-    - type: Transform
-      pos: -43.5,4.5
-      parent: 2
-  - uid: 1525
-    components:
-    - type: Transform
-      pos: -43.5,5.5
       parent: 2
   - uid: 1581
     components:
@@ -28177,6 +28393,91 @@ entities:
     components:
     - type: Transform
       pos: 21.5,-6.5
+      parent: 2
+  - uid: 3656
+    components:
+    - type: Transform
+      pos: -46.5,4.5
+      parent: 2
+  - uid: 3657
+    components:
+    - type: Transform
+      pos: -46.5,5.5
+      parent: 2
+  - uid: 3658
+    components:
+    - type: Transform
+      pos: -46.5,7.5
+      parent: 2
+  - uid: 3659
+    components:
+    - type: Transform
+      pos: -46.5,6.5
+      parent: 2
+  - uid: 3660
+    components:
+    - type: Transform
+      pos: -45.5,7.5
+      parent: 2
+  - uid: 3661
+    components:
+    - type: Transform
+      pos: -44.5,7.5
+      parent: 2
+  - uid: 3662
+    components:
+    - type: Transform
+      pos: -43.5,7.5
+      parent: 2
+  - uid: 3663
+    components:
+    - type: Transform
+      pos: -42.5,7.5
+      parent: 2
+  - uid: 3664
+    components:
+    - type: Transform
+      pos: -42.5,6.5
+      parent: 2
+  - uid: 3665
+    components:
+    - type: Transform
+      pos: -42.5,4.5
+      parent: 2
+  - uid: 3666
+    components:
+    - type: Transform
+      pos: -42.5,5.5
+      parent: 2
+  - uid: 3667
+    components:
+    - type: Transform
+      pos: -40.5,6.5
+      parent: 2
+  - uid: 3668
+    components:
+    - type: Transform
+      pos: -40.5,7.5
+      parent: 2
+  - uid: 3669
+    components:
+    - type: Transform
+      pos: -39.5,7.5
+      parent: 2
+  - uid: 3670
+    components:
+    - type: Transform
+      pos: -38.5,7.5
+      parent: 2
+  - uid: 3671
+    components:
+    - type: Transform
+      pos: -37.5,7.5
+      parent: 2
+  - uid: 3672
+    components:
+    - type: Transform
+      pos: -37.5,6.5
       parent: 2
 - proto: WallWood
   entities:
@@ -28950,11 +29251,17 @@ entities:
     - Destructible
 - proto: WoodenBench
   entities:
-  - uid: 1437
+  - uid: 1420
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -37.5,0.5
+      pos: -40.5,1.5
+      parent: 2
+    missingComponents:
+    - Destructible
+  - uid: 1421
+    components:
+    - type: Transform
+      pos: -37.5,1.5
       parent: 2
     missingComponents:
     - Destructible
@@ -28985,14 +29292,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -37.5,-0.5
-      parent: 2
-    missingComponents:
-    - Destructible
-  - uid: 1514
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -40.5,0.5
       parent: 2
     missingComponents:
     - Destructible

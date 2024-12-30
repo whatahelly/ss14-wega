@@ -19,4 +19,7 @@ public sealed partial class HeadsetComponent : Component
 
     [DataField] // Corvax-Wega-Headset
     public SoundSpecifier Sound; // Corvax-Wega-Headset
+
+    [DataField] // Corvax-Wega-Headset
+    public bool ToggledSound = true; // Corvax-Wega-Headset
 }
