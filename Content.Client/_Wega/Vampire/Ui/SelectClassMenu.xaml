@@ -1,0 +1,41 @@
+<ui:RadialMenu xmlns="https://spacestation14.io"
+               xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+               xmlns:local="clr-namespace:Content.Client.Select.Class.UI;assembly=Content.Client"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               x:Class="Content.Client.Select.Class.UI.SelectClassMenu"
+               BackButtonStyleClass="RadialMenuBackButton"
+               CloseButtonStyleClass="RadialMenuCloseButton"
+               VerticalExpand="True"
+               HorizontalExpand="True"
+               MinSize="450 450">
+
+    <!-- Main Radial Menu Container -->
+    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" Radius="64" ReserveSpaceForHiddenChildren="False">
+        <!-- Button 1: Hemomancer -->
+        <ui:RadialMenuTextureButton Name="HemomancerButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-class-hemomancer'}" TargetLayer="Hemomancer">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/claws.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Button 2: Umbrae -->
+        <ui:RadialMenuTextureButton Name="UmbraeButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-class-umbrae'}" TargetLayer="Umbrae">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/cloak.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Button 3: Gargantua -->
+        <ui:RadialMenuTextureButton Name="GargantuaButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-class-gargantua'}" TargetLayer="Gargantua">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/swell.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Button 4: Dantalion -->
+        <ui:RadialMenuTextureButton Name="DantalionButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-class-dantalion'}" TargetLayer="Dantalion">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/enthrall.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Button 5: Bestia -->
+        <!-- <ui:RadialMenuTextureButton Name="BestiaButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-class-bestia'}" TargetLayer="Bestia">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/rush.png"/>
+        </ui:RadialMenuTextureButton> -->
+
+    </ui:RadialContainer>
+
+</ui:RadialMenu>

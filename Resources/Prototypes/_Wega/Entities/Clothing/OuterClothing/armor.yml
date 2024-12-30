@@ -1,0 +1,17 @@
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingOuterArmorTemplar
+  name: templar armor
+  description: "Straight from the Middle Ages, to eradicate heresy."
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Armor/templar.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/OuterClothing/Armor/templar.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Heat: 0.5

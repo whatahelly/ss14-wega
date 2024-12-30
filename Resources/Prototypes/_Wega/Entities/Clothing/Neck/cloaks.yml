@@ -1,0 +1,17 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakChaplainBlack
+  name: chaplain black cloak
+  description: "Reflects your faith and determination to beat the undead."
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Neck/Cloaks/chapb.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakChaplainWhite
+  name: chaplain white cloak
+  description: "A cloak that emphasizes the purity of your thoughts and righteous faith."
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Neck/Cloaks/chapw.rsi

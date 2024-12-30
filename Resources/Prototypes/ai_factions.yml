@@ -8,6 +8,7 @@
     - Zombie
     - Revolutionary
     - AllHostile
+    - Vampire # Corvax-Wega-Vampire
 
 - type: npcFaction
   id: NanoTrasen
@@ -19,6 +20,7 @@
   - Revolutionary
   - Dragon
   - AllHostile
+  - Vampire # Corvax-Wega-Vampire
 
 - type: npcFaction
   id: Mouse
@@ -48,6 +50,7 @@
   - Zombie
   - Revolutionary
   - AllHostile
+  - Vampire # Corvax-Wega-Vampire
 
 - type: npcFaction
   id: SimpleNeutral
@@ -73,6 +76,7 @@
   - Zombie
   - Revolutionary
   - AllHostile
+  - Vampire # Corvax-Wega-Vampire
 
 - type: npcFaction
   id: Zombie
@@ -85,6 +89,7 @@
   - PetsNT
   - Revolutionary
   - AllHostile
+  - Vampire # Corvax-Wega-Vampire
 
 - type: npcFaction
   id: Revolutionary
@@ -94,6 +99,7 @@
   - SimpleHostile
   - Dragon
   - AllHostile
+  - Vampire # Corvax-Wega-Vampire
 
 - type: npcFaction
   id: AllHostile
@@ -109,3 +115,4 @@
   - Xeno
   - Zombie
   - Revolutionary
+  - Vampire # Corvax-Wega-Vampire

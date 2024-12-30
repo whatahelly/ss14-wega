@@ -10,3 +10,49 @@
         reagents:
         - ReagentId: Cum
           Quantity: 1.5
+
+- type: entity
+  id: PuddleBlood
+  parent: PuddleTemporary
+  suffix: Blood
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      puddle:
+        maxVol: 1000
+        reagents:
+        - ReagentId: Blood
+          Quantity: 20
+
+- type: entity
+  id: MobPuddleBlood
+  parent: PuddleBlood
+  name: ""
+  description: ""
+  components:
+  - type: Transform
+    anchored: false
+    noRot: true
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 120
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: InputMover
+  - type: Input
+    context: "human"
+  - type: MobMover
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: MovementSpeedModifier
+    walkSpeedModifier: 8
+    baseSprintSpeed: 8

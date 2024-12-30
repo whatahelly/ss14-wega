@@ -27,6 +27,17 @@ namespace Content.Server.Bible.Components
         [ViewVariables(VVAccess.ReadWrite)]
         public DamageSpecifier DamageOnUntrainedUse = default!;
 
+        // Corvax-Wega-Vampire-start
+        [DataField("damageOnUnholyUse", required: true)]
+        [ViewVariables(VVAccess.ReadWrite)]
+        public DamageSpecifier DamageOnUnholyUse = default!;
+
+        [DataField("damageUnholy", required: true)]
+        [ViewVariables(VVAccess.ReadWrite)]
+
+        public DamageSpecifier DamageUnholy = default!;
+        // Corvax-Wega-Vampire-end
+
         /// <summary>
         /// Chance the bible will fail to heal someone with no helmet
         /// </summary>

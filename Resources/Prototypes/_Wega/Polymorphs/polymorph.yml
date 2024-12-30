@@ -1,0 +1,7 @@
+#Vampire
+- type: polymorph
+  id: VampireBlood
+  configuration:
+    entity: MobPuddleBlood
+    forced: true
+    duration: 8

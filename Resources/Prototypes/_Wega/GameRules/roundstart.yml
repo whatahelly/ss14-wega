@@ -4,3 +4,46 @@
   components:
   - type: LoadMapRule
     mapPath: /Maps/_Wega/wegabar.yml
+
+- type: entity
+  parent: BaseGameRule
+  id: Vampire
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: VampireRule
+  - type: AntagObjectives
+    objectives:
+      - VampireBloodObjective
+      - EscapeVampirefShuttleObjective
+  - type: AntagRandomObjectives
+    sets:
+    - groups: VampireObjectiveGroups
+      maxPicks: 2
+    maxDifficulty: 5
+  - type: AntagSelection
+    agentName: vampire-round-end-name
+    definitions:
+      - prefRoles: [ Vampire ]
+        max: 4
+        playerRatio: 20
+        multiAntagSetting: NotExclusive
+        blacklist:
+          components:
+          - AntagImmune
+          - BibleUser
+        components:
+        - type: NpcFactionMember
+          factions:
+          - Vampire
+        - type: UserInterface
+          interfaces:
+            enum.StoreUiKey.Key:
+              type: StoreBoundUserInterface
+        - type: Store
+          currencyWhitelist:
+          - BloodEssence
+        mindRoles:
+        - MindRoleVampire
+        briefing:
+          sound: "/Audio/_Wega/Ambience/Antag/vampare_start.ogg"
