@@ -1,6 +1,7 @@
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio.Components;
+using Content.Shared.Verbs; // Corvax-Wega-Headset
 
 namespace Content.Shared.Radio.EntitySystems;
 
@@ -12,6 +13,7 @@ public abstract class SharedHeadsetSystem : EntitySystem
         SubscribeLocalEvent<HeadsetComponent, InventoryRelayedEvent<GetDefaultRadioChannelEvent>>(OnGetDefault);
         SubscribeLocalEvent<HeadsetComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<HeadsetComponent, GotUnequippedEvent>(OnGotUnequipped);
+        SubscribeLocalEvent<HeadsetComponent, GetVerbsEvent<Verb>>(OnGetVerbs); // Corvax-Wega-Headset
     }
 
     private void OnGetDefault(EntityUid uid, HeadsetComponent component, InventoryRelayedEvent<GetDefaultRadioChannelEvent> args)
@@ -23,7 +25,7 @@ public abstract class SharedHeadsetSystem : EntitySystem
         }
 
         if (TryComp(uid, out EncryptionKeyHolderComponent? keyHolder))
-            args.Args.Channel ??= keyHolder.DefaultChannel; 
+            args.Args.Channel ??= keyHolder.DefaultChannel;
     }
 
     protected virtual void OnGotEquipped(EntityUid uid, HeadsetComponent component, GotEquippedEvent args)
@@ -35,4 +37,35 @@ public abstract class SharedHeadsetSystem : EntitySystem
     {
         component.IsEquipped = false;
     }
+
+    // Corvax-Wega-Headset-start
+    private void OnGetVerbs(EntityUid uid, HeadsetComponent component, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanInteract || !args.CanComplexInteract || !args.CanAccess)
+            return;
+
+        var verb = new Verb
+        {
+            Text = component.ToggledSound
+                ? Loc.GetString("verb-common-toggle-headset-disabled")
+                : Loc.GetString("verb-common-toggle-headset-enabled"),
+            Priority = 1,
+            Category = VerbCategory.ToggleHeadsetSound,
+            Act = () => ToggleHeadsetSound(uid, component)
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    /// <summary>
+    /// Toggles the ToggledSound property on the headset.
+    /// </summary>
+    private void ToggleHeadsetSound(EntityUid uid, HeadsetComponent component)
+    {
+        if (component.ToggledSound)
+            component.ToggledSound = false;
+        else
+            component.ToggledSound = true;
+    }
+    // Corvax-Wega-Headset-end
 }
