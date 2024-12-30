@@ -1,0 +1,21 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHunter
+  name: hunter coat
+  description: "It's better to look for the undead in it than usual."
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Coats/hunter.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/OuterClothing/Coats/hunter.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatAshen
+  name: ashen coat
+  description: "Covered with a small layer of ash."
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Coats/lavachap.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/OuterClothing/Coats/lavachap.rsi

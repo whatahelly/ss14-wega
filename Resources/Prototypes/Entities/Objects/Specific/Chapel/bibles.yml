@@ -18,6 +18,14 @@
     damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
       groups:
         Burn: 10
+    # Corvax-Wega-Vampire-start
+    damageOnUnholyUse: ## What an unholy creature takes when picking up the bible
+      groups:
+        Burn: 30
+    damageUnholy: ## What damage is dealt when a chaplain hits an unholy creature
+      groups:
+        Burn: 20
+    # Corvax-Wega-Vampire-end
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -72,6 +80,14 @@
     damageOnUntrainedUse:
       types:
         Caustic: 50
+    # Corvax-Wega-Vampire-start
+    damageOnUnholyUse: ## What an unholy creature takes when picking up the bible
+      types:
+        Caustic: 50
+    damageUnholy: ## What damage is dealt when a chaplain hits an unholy creature
+      types:
+        types: 20
+    # Corvax-Wega-Vampire-end
     failChance: 0
     locPrefix: "necro"
     healSound: "/Audio/Effects/lightburn.ogg"

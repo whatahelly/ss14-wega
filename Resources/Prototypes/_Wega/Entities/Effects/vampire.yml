@@ -1,0 +1,184 @@
+- type: entity
+  id: BloodTentacle
+  name: tentacle
+  components:
+  - type: Transform
+    anchored: True
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _Wega/Effects/bloodtentacle.rsi
+    layers:
+    - state: blood_tendril
+  - type: StunOnContact
+    blacklist:
+      tags:
+      - Goliath
+  - type: Fixtures
+    fixtures:
+      fix:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        mask:
+        - Impassable
+        layer:
+        - Impassable
+        hard: false
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: SpawnOnDespawn
+    prototype: EffectBloodTentacleRetract
+
+- type: entity
+  id: BaseEffectBloodTentacleSpawn
+  categories: [ HideSpawnMenu ]
+  name: tentacle
+  abstract: true
+  components:
+  - type: Transform
+    anchored: True
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _Wega/Effects/bloodtentacle.rsi
+  - type: InteractionOutline
+  - type: TimedDespawn
+    lifetime: 0.7
+
+- type: entity
+  id: EffectBloodTentacleSpawn
+  parent: BaseEffectBloodTentacleSpawn
+  categories: [ HideSpawnMenu ]
+  name: tentacle
+  components:
+  - type: Sprite
+    state: blood_tendril
+  - type: SpawnOnDespawn
+    prototype: BloodTentacle
+
+- type: entity
+  id: EffectBloodTentacleRetract
+  parent: BaseEffectBloodTentacleSpawn
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: blood_tendril
+  - type: EffectVisuals
+  - type: AnimationPlayer
+
+- type: entity
+  id: BloodBarrier
+  name: blood barrier
+  components:
+  - type: TimedDespawn
+    lifetime: 25
+  - type: Tag
+    tags:
+      - Wall
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+          - FullTileMask
+        layer:
+          - WallLayer
+  - type: Airtight
+  - type: Sprite
+    sprite: _Wega/Effects/bloodbarrier.rsi
+    state: blood_barrier
+  - type: Icon
+    sprite: _Wega/Effects/bloodbarrier.rsi
+    state: blood_barrier
+
+- type: entity
+  parent: [ CollideFloorTrap, BaseShadow ]
+  id: ShadowTrap
+  name: shadow trap
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/shadowtrap.rsi
+    state: trap
+  - type: Stealth
+    lastVisibility: 0.1
+  - type: TriggerOnCollide
+    fixtureID: floortrap
+  - type: FlashOnTrigger
+  - type: DamageUserOnTrigger
+    damage:
+      types:
+        Blunt: 20
+
+- type: entity
+  parent: BaseItem
+  id: BeaconSoul
+  name: beacon soul
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/shadowtrap.rsi
+    state: trap
+  - type: BeaconSoul
+
+- type: entity
+  id: VampireMistEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/misteffects.rsi
+    state: mist
+  - type: TimedDespawn
+    lifetime: 1.4
+
+- type: entity
+  id: VampireMistReappearEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/misteffects.rsi
+    state: mist_reappear
+  - type: TimedDespawn
+    lifetime: 0.5
+
+- type: entity
+  parent: BaseShadowMob
+  id: MobFollowerShadow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/shadowboxing.rsi
+    state: shadow
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 20
+    baseSprintSpeed: 20
+  - type: CombatMode
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 20
+  - type: NPCMeleeCombat
+  - type: NpcFactionMember
+    factions:
+    - Vampire
+  - type: HTN
+    rootTask:
+      task: FollowerShadowCompound
+  - type: TimedDespawn
+    lifetime: 0.8
+
+- type: htnCompound
+  id: FollowerShadowCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MeleeCombatCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound

@@ -8,6 +8,8 @@
     ClothingNeckStoleChaplain: 1
     ClothingOuterHoodieChaplain: 1
     ClothingOuterHoodieBlack: 1
+    ClothingOuterCoatHunter: 1 # Corvax-Wega-Vampire
+    ClothingOuterCoatAshen: 1 # Corvax-Wega-Vampire
     ClothingHeadHatHoodNunHood: 1
     ClothingOuterNunRobe: 1
     ClothingHeadHatFez: 1
@@ -17,10 +19,13 @@
     ClothingOuterPlagueSuit: 1
     ClothingMaskPlague: 1
     ClothingHeadsetService: 2
+    ClothingNeckCloakChaplainBlack: 1 # Corvax-Wega-Vampire
+    ClothingNeckCloakChaplainWhite: 1 # Corvax-Wega-Vampire
     BoxCandle: 2
     BoxCandleSmall: 2
     Urn: 5
     Bible: 1
+    WeaponNullRod: 1 # Corvax-Wega-Vampire
   emaggedInventory:
     ClothingOuterArmorCult: 1
     ClothingHeadHelmetCult: 1
@@ -29,3 +34,5 @@
     ClothingShoesCult: 4
     BedsheetCult: 4
     ClothingNeckScarfStripedBlack: 3
+    ClothingHeadHelmetTemplar: 1 # Corvax-Wega-Vampire
+    ClothingOuterArmorTemplar: 1 # Corvax-Wega-Vampire
