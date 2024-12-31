@@ -22,4 +22,10 @@ public sealed class WegaCVars
     /// </summary>
     public static readonly CVarDef<bool> BarksEnabled =
         CVarDef.Create("wega.barks_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Default volume setting of Barks sound
+    /// </summary>
+    public static readonly CVarDef<float> BarksVolume =
+        CVarDef.Create("wega.barks_volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 }
