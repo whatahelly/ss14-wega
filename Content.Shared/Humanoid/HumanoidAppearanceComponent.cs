@@ -50,6 +50,9 @@ public sealed partial class HumanoidAppearanceComponent : Component
     // Corvax-Wega-start
     [DataField, AutoNetworkedField]
     public Status Status = Status.No;
+
+    [DataField("barkvoice")]
+    public ProtoId<TTSVoicePrototype> BarkVoice { get; set; } = SharedHumanoidAppearanceSystem.DefaultBarkVoice;
     // Corvax-Wega-end
 
     // Corvax-TTS-Start

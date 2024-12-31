@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared.CCVar;
+using Content.Shared.Speech.Synthesis; // Corvax-Wega-Barks
 using Content.Shared.Corvax.TTS;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -81,6 +82,9 @@ namespace Content.Shared.Preferences
         [DataField]
         public string Voice { get; set; } = SharedHumanoidAppearanceSystem.DefaultVoice;
 
+        [DataField] // Corvax-Wega-Barks
+        public string BarkVoice { get; set; } = SharedHumanoidAppearanceSystem.DefaultBarkVoice; // Corvax-Wega-Barks
+
         [DataField]
         public int Age { get; set; } = 18;
 
@@ -138,6 +142,7 @@ namespace Content.Shared.Preferences
             string name,
             string flavortext,
             string species,
+            string barkvoice, // Corvax-Wega-Barks
             string voice, // Corvax-TTS
             int age,
             Sex sex,
@@ -154,6 +159,7 @@ namespace Content.Shared.Preferences
             Name = name;
             FlavorText = flavortext;
             Species = species;
+            BarkVoice = barkvoice; // Corvax-Wega-Barks
             Voice = voice; // Corvax-TTS
             Age = age;
             Sex = sex;
@@ -187,6 +193,7 @@ namespace Content.Shared.Preferences
             : this(other.Name,
                 other.FlavorText,
                 other.Species,
+                other.BarkVoice, // Corvax-Wega-Barks
                 other.Voice,
                 other.Age,
                 other.Sex,
@@ -252,6 +259,13 @@ namespace Content.Shared.Preferences
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
             }
 
+            // Corvax-Wega-Barks-start
+            var barkvoiceId = random.Pick(prototypeManager
+                .EnumeratePrototypes<BarkPrototype>()
+                .ToArray()
+            ).ID;
+            // Corvax-Wega-Barks-end
+
             // Corvax-TTS-Start
             var voiceId = random.Pick(prototypeManager
                 .EnumeratePrototypes<TTSVoicePrototype>()
@@ -282,6 +296,7 @@ namespace Content.Shared.Preferences
                 Age = age,
                 Gender = gender,
                 Species = species,
+                BarkVoice = barkvoiceId, // Corvax-Wega-Barks
                 Voice = voiceId, // Corvax-TTS
                 Status = status, // Corvax-Wega
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
@@ -322,6 +337,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithStatus(Status status)
         {
             return new(this) { Status = status };
+        }
+
+        public HumanoidCharacterProfile WithBarkVoice(string barkvoice)
+        {
+            return new(this) { BarkVoice = barkvoice };
         }
         // Corvax-Wega-end
 
@@ -676,6 +696,12 @@ namespace Content.Shared.Preferences
 
             _traitPreferences.Clear();
             _traitPreferences.UnionWith(GetValidTraits(traits, prototypeManager));
+
+            // Corvax-Wega-Barks-start
+            prototypeManager.TryIndex<BarkPrototype>(BarkVoice, out var barkvoice);
+            if (barkvoice is null)
+                BarkVoice = SharedHumanoidAppearanceSystem.DefaultBarkVoice;
+            // Corvax-Wega-Barks-end
 
             // Corvax-TTS-Start
             prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);

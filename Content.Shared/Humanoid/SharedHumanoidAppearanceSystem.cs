@@ -6,6 +6,7 @@ using Content.Shared.Decals;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Speech.Synthesis.Components; // Corvax-Wega-Barks
 using Content.Shared.Corvax.TTS;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Preferences;
@@ -42,6 +43,9 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
     [ValidatePrototypeId<SpeciesPrototype>]
     public const string DefaultSpecies = "Human";
+    // Corvax-Wegs-Barks-Start
+    public const string DefaultBarkVoice = "BarksGoonSpeak1";
+    // Corvax-Wegs-Barks-End
     // Corvax-TTS-Start
     public const string DefaultVoice = "Garithos";
     public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
@@ -410,6 +414,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         EnsureDefaultMarkings(uid, humanoid);
+        SetBarkVoice(uid, profile.BarkVoice, humanoid); // Corvax-Wega-Barks
         SetTTSVoice(uid, profile.Voice, humanoid); // Corvax-TTS
 
         humanoid.Gender = profile.Gender;
@@ -489,6 +494,17 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         if (sync)
             Dirty(uid, humanoid);
     }
+
+    // Corvax-Wega-Barks-start
+    public void SetBarkVoice(EntityUid uid, string barkvoiceId, HumanoidAppearanceComponent humanoid)
+    {
+        if (!TryComp<SpeechSynthesisComponent>(uid, out var comp))
+            return;
+
+        humanoid.BarkVoice = barkvoiceId;
+        comp.VoicePrototypeId = barkvoiceId;
+    }
+    // Corvax-Wega-Barks-end
 
     // Corvax-TTS-Start
     // ReSharper disable once InconsistentNaming
