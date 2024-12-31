@@ -162,28 +162,28 @@
 - type: bark
   id: BarksGoonBottalk1
   name: Bottalk 1 (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/bottalk_1.ogg"
 
 - type: bark
   id: BarksGoonBottalk2
   name: Bottalk 2 (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/bottalk_2.ogg"
 
 - type: bark
   id: BarksGoonBottalk3
   name: Bottalk 3 (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/bottalk_3.ogg"
 
 - type: bark
   id: BarksGoonBottalk4
   name: Bottalk 4 (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/bottalk_4.ogg"
 
@@ -197,7 +197,7 @@
 - type: bark
   id: BarksGoonCow
   name: Cow (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/cow.ogg"
 
@@ -225,21 +225,21 @@
 - type: bark
   id: BarksGoonRadio1
   name: Radio 1 (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/radio.ogg"
 
 - type: bark
   id: BarksGoonRadio2
   name: Radio 2 (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/radio2.ogg"
 
 - type: bark
   id: BarksGoonRadio3
   name: Radio (AI) (Goon Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/radio_ai.ogg"
 
@@ -320,21 +320,21 @@
 - type: bark
   id: BarksBanjoKazooieAhuh
   name: Ahuh (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/ahuh.ogg"
 
 - type: bark
   id: BarksBanjoKazooieBirdwhistle1
   name: Whistle 1 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/birdwhistle.ogg"
 
 - type: bark
   id: BarksBanjoKazooieBirdwhistle2
   name: Whistle 2 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/birdwhistle2.ogg"
 
@@ -446,7 +446,7 @@
 - type: bark
   id: BarksBanjoKazooieHoot
   name: Hoot (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/hoot.ogg"
 
@@ -474,21 +474,21 @@
 - type: bark
   id: BarksBanjoKazooieRaah1
   name: Raah 1 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/raah1.ogg"
 
 - type: bark
   id: BarksBanjoKazooieRaah2
   name: Raah 2 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/raah2.ogg"
 
 - type: bark
   id: BarksBanjoKazooieRibbit
   name: Ribbit (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/ribbit.ogg"
 
@@ -502,7 +502,7 @@
 - type: bark
   id: BarksBanjoKazooieTweet
   name: Tweet (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/tweet.ogg"
 
@@ -560,7 +560,7 @@
 - type: bark
   id: BarksCitadelSqueaky
   name: Squeaky (Citadel Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/toysqueak1.ogg"
 
@@ -574,7 +574,7 @@
 - type: bark
   id: BarksCitadelChittery
   name: Chittery (Citadel Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/chitter.ogg"
 
@@ -616,7 +616,7 @@
 - type: bark
   id: BarksCitadelBark
   name: Bark (Citadel Station)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/bark1.ogg"
 
@@ -639,7 +639,7 @@
 - type: bark
   id: BarksOtherBleat
   name: Bleat (Other)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/bleat_bark.ogg"
 
