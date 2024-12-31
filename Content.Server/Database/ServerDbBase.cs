@@ -204,6 +204,10 @@ namespace Content.Server.Database
             var status = Status.No;
             if (Enum.TryParse<Status>(profile.Status, true, out var statusVal))
                 status = statusVal;
+
+            var barkvoice = profile.BarkVoice;
+            if (barkvoice == String.Empty)
+                barkvoice = SharedHumanoidAppearanceSystem.DefaultBarkVoice;
             // Corvax-Wega-end
 
             // Corvax-TTS-Start
@@ -255,6 +259,7 @@ namespace Content.Server.Database
                 profile.CharacterName,
                 profile.FlavorText,
                 profile.Species,
+                barkvoice, // Corvax-Wega-Barks
                 voice, // Corvax-TTS
                 profile.Age,
                 sex,
@@ -294,6 +299,7 @@ namespace Content.Server.Database
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
             profile.Voice = humanoid.Voice; // Corvax-TTS
+            profile.BarkVoice = humanoid.BarkVoice; // Corvax-Wega-Barks
             profile.Status = humanoid.Status.ToString(); // Corvax-Wega
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();

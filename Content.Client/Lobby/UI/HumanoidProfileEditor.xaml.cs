@@ -214,18 +214,28 @@ namespace Content.Client.Lobby.UI
             // Corvax-Wega-start
             #region Status
 
-            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-no-text"), (int) Status.No);
-            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-semi-text"), (int) Status.Semi);
-            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-full-text"), (int) Status.Full);
-            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-absolute-text"), (int) Status.Absolute);
+            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-no-text"), (int)Status.No);
+            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-semi-text"), (int)Status.Semi);
+            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-full-text"), (int)Status.Full);
+            StatusButton.AddItem(Loc.GetString("humanoid-profile-editor-status-absolute-text"), (int)Status.Absolute);
 
             StatusButton.OnItemSelected += args =>
             {
                 StatusButton.SelectId(args.Id);
-                SetStatus((Status) args.Id);
+                SetStatus((Status)args.Id);
             };
 
             #endregion Status
+
+            #region Barks
+
+            if (configurationManager.GetCVar(WegaCVars.BarksEnabled))
+            {
+                BarksContainer.Visible = true;
+                InitializeBarkVoice();
+            }
+
+            #endregion
             // Corvax-Wega-end
 
             // Corvax-TTS-Start
@@ -783,6 +793,7 @@ namespace Content.Client.Lobby.UI
             UpdateEyePickers();
             UpdateSaveButton();
             UpdateMarkings();
+            UpdateBarkVoicesControls(); // Corvax-Wega-Barks
             UpdateTTSVoicesControls(); // Corvax-TTS
             UpdateHairPickers();
             UpdateCMarkingsHair();
@@ -1238,6 +1249,14 @@ namespace Content.Client.Lobby.UI
             Profile = Profile?.WithGender(newGender);
             ReloadPreview();
         }
+
+        // Corvax-Wega-Barks-start
+        private void SetBarkVoice(string newVoice)
+        {
+            Profile = Profile?.WithBarkVoice(newVoice);
+            IsDirty = true;
+        }
+        // Corvax-Wega-Barks-end
 
         // Corvax-TTS-Start
         private void SetVoice(string newVoice)

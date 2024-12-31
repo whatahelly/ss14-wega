@@ -16,4 +16,10 @@ public sealed class WegaCVars
     /// </summary>
     public static readonly CVarDef<float> GhostRespawnTime =
         CVarDef.Create("wega.respawn_time", 1200.0f, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Responsible for turning on and off the bark system.
+    /// </summary>
+    public static readonly CVarDef<bool> BarksEnabled =
+        CVarDef.Create("wega.barks_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 }
