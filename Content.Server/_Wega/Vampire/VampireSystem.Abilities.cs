@@ -647,7 +647,7 @@ public sealed partial class VampireSystem
                 if (stealthComponent.Enabled)
                 {
                     _stealth.SetEnabled(uid, false, stealthComponent);
-                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed, originalSprintSpeed, speedmodComponent.Acceleration, speedmodComponent);
+                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed / 1.3f, originalSprintSpeed / 1.3f, speedmodComponent.Acceleration, speedmodComponent);
                     _popup.PopupEntity(Loc.GetString("vampire-stealth-disabled"), uid, uid, PopupType.Small);
                 }
                 else
@@ -655,6 +655,7 @@ public sealed partial class VampireSystem
                     _stealth.SetEnabled(uid, true, stealthComponent);
                     _speed.ChangeBaseSpeed(uid, originalWalkSpeed * 1.3f, originalSprintSpeed * 1.3f, speedmodComponent.Acceleration, speedmodComponent);
                     _popup.PopupEntity(Loc.GetString("vampire-stealth-enabled"), uid, uid, PopupType.Small);
+                    SubtractBloodEssence(uid, 10);
                 }
             }
         }
@@ -675,10 +676,10 @@ public sealed partial class VampireSystem
                 }
 
                 _popup.PopupEntity(Loc.GetString("vampire-stealth-enabled"), uid, uid, PopupType.Small);
+                SubtractBloodEssence(uid, 10);
             }
         }
 
-        SubtractBloodEssence(uid, 10);
         args.Handled = true;
     }
 
@@ -783,7 +784,7 @@ public sealed partial class VampireSystem
     private void OnVampireDarkPassage(EntityUid uid, VampireComponent component, VampireDarkPassageActionEvent args)
     {
         var targetCoords = args.Target;
-        if (!_interaction.InRangeUnobstructed(uid, targetCoords, range: 1000F, collisionMask: CollisionGroup.Opaque, popup: false))
+        if (!_interaction.InRangeUnobstructed(uid, targetCoords, range: 1000F, collisionMask: CollisionGroup.Impassable, popup: false))
         {
             _popup.PopupEntity(Loc.GetString("vampire-teleport-failed"), uid, uid, PopupType.Small);
             return;
