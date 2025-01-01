@@ -34,6 +34,9 @@ public sealed class BarkSystem : EntitySystem
     private void OnPlayBark(PlayBarkEvent ev)
     {
         var sourceEntity = _entityManager.GetEntity(ev.SourceUid);
+        if (!_entityManager.EntityExists(sourceEntity) || _entityManager.Deleted(sourceEntity))
+            return;
+
         var userVolume = _cfg.GetCVar(WegaCVars.BarksVolume);
         var baseVolume = SharedAudioSystem.GainToVolume(userVolume * ContentAudioSystem.BarksMultiplier);
 
