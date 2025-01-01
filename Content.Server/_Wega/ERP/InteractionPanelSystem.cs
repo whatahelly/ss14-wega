@@ -2,12 +2,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.ERP.Components;
 using Content.Server.Chat.Systems;
@@ -27,6 +29,7 @@ namespace Content.Server.Interaction.Panel
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly ChatSystem _chatSystem = default!;
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
+        [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
         private readonly Dictionary<NetEntity, DateTime> _lastInteractionTimes = new();
         private readonly Dictionary<NetEntity, int> _userPoints = new();
@@ -48,6 +51,9 @@ namespace Content.Server.Interaction.Panel
             if (target == null) return;
 
             var userEntity = _entManager.GetEntity(user);
+            if (HasComp<GhostComponent>(userEntity) && !HasComp<HumanoidAppearanceComponent>(userEntity))
+                return;
+
             if (_entManager.TryGetComponent<MobThresholdsComponent>(userEntity, out var userThresholds) &&
                 (userThresholds.CurrentThresholdState != MobState.Alive &&
                 userThresholds.CurrentThresholdState != MobState.Invalid))
@@ -64,6 +70,21 @@ namespace Content.Server.Interaction.Panel
                     _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
                 }
                 return;
+            }
+
+            if (_entManager.TryGetComponent<TransformComponent>(userEntity, out var userTransform) &&
+                _entManager.TryGetComponent<TransformComponent>(targetEntity, out var targetTransform))
+            {
+                if (!_interaction.InRangeUnobstructed(userEntity, targetTransform.Coordinates, range: 2f,
+                    collisionMask: CollisionGroup.Impassable, popup: false))
+                {
+                    if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
+                    {
+                        var message = Loc.GetString("interaction-target-unreachable-message");
+                        _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
+                    }
+                    return;
+                }
             }
 
             var interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Logs;
+using Content.Server.Atmos.Components; // Corvax-Wega-GhostBar
 using Content.Server.Chat.Managers;
 using Content.Server.Disease.Components; // Corvax-Wega-Disease
 using Content.Server.GameTicking;
@@ -543,6 +544,8 @@ namespace Content.Server.Ghost
 
                 if (TryComp<DiseaseCarrierComponent>(spawnedMob, out var carrier))
                     _entityManager.RemoveComponent<DiseaseCarrierComponent>(spawnedMob);
+                if (TryComp<FlammableComponent>(spawnedMob, out var flame))
+                    _entityManager.RemoveComponent<FlammableComponent>(spawnedMob);
 
                 if (targetMind != null)
                 {

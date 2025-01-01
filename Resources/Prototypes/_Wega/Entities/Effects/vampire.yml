@@ -123,9 +123,11 @@
   name: beacon soul
   components:
   - type: Sprite
-    sprite: _Wega/Effects/shadowtrap.rsi
-    state: trap
+    sprite: _Wega/Effects/soulbeacon.rsi
+    state: beacon
   - type: BeaconSoul
+  - type: TimedDespawn
+    lifetime: 350.0
 
 - type: entity
   id: VampireMistEffect

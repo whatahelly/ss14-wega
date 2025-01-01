@@ -44,6 +44,12 @@ public partial class MobStateSystem : EntitySystem
     }
 
     // Corvax-Wega-PreCritical-start
+    /// <summary>
+    ///  Check if a Mob is PreCritical
+    /// </summary>
+    /// <param name="target">Target Entity</param>
+    /// <param name="component">The MobState component owned by the target</param>
+    /// <returns>If the entity is alive</returns>
     public bool IsPreCritical(EntityUid target, MobStateComponent? component = null)
     {
         if (!_mobStateQuery.Resolve(target, ref component, false))
