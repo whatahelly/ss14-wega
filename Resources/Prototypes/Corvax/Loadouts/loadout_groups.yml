@@ -19,18 +19,17 @@
   name: loadout-group-pilot-head
   minLimit: 0
   loadouts:
-  - BrigmedicSecurityBeret
-  - BrigmedicBeret
+  - SecurityPilotBeret
 
 - type: loadoutGroup
   id: PilotJumpsuit
   name: loadout-group-pilot-jumpsuit
   loadouts:
-  - BrigmedicJumpsuit
-  - BrigmedicJumpskirt
+  - JumpsuitPilot
+  - JumpskirtPilot
 
 - type: loadoutGroup
   id: PilotOuterClothing
   name: loadout-group-pilot-outerclothing
   loadouts:
-  - BrigmedicOuterClothingArmor
+  - OuterWinterPilot

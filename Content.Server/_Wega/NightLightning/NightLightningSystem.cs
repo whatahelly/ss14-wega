@@ -58,7 +58,7 @@ public sealed class NightLightningSystem : EntitySystem
 
                 if (_light.TryGetLight(light, out var pointLight))
                 {
-                    var newEnergy = pointLight.Energy * 0.2f;
+                    var newEnergy = pointLight.Energy * 0.8f;
                     var newColor = new Color(173, 216, 230, 255);
                     _light.SetEnergy(light, newEnergy, pointLight);
                     _light.SetColor(light, newColor, pointLight);
@@ -104,7 +104,7 @@ public sealed class NightLightningSystem : EntitySystem
             {
                 Timer.Spawn(500, () =>
                 {
-                    var newEnergy = pointLight.Energy * 0.2f;
+                    var newEnergy = pointLight.Energy * 0.8f;
                     var newColor = new Color(173, 216, 230, 255);
                     _light.SetEnergy(uid, newEnergy, pointLight);
                     _light.SetColor(uid, newColor, pointLight);
