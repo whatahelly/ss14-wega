@@ -1,0 +1,9 @@
+- type: entity
+  parent: PosterBase
+  id: PosterLegitYesERP
+  name: "Yes ERP"
+  description: "This poster reminds the film crew that erotica and pornography are allowed on Nanotrasen stations."
+  components:
+  - type: Sprite
+    sprite: _Wega/Structures/Wallmounts/posters.rsi
+    state: poster1_legit
