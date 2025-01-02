@@ -8655,6 +8655,7 @@ entities:
     - type: RadiationGridResistance
     - type: SpreaderGrid
     - type: GridPathfinding
+    - type: NightLightning
   - uid: 26973
     components:
     - type: MetaData

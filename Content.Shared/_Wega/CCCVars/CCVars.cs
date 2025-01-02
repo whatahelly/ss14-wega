@@ -5,6 +5,9 @@ namespace Content.Shared.CCVar;
 [CVarDefs]
 public sealed class WegaCVars
 {
+    /*
+        Ghost Respawn CVars
+    */
     /// <summary>
     /// Whether or not respawning is enabled.
     /// </summary>
@@ -17,6 +20,9 @@ public sealed class WegaCVars
     public static readonly CVarDef<float> GhostRespawnTime =
         CVarDef.Create("wega.respawn_time", 1200.0f, CVar.SERVER | CVar.REPLICATED);
 
+    /*
+        Barks CVars
+    */
     /// <summary>
     /// Responsible for turning on and off the bark system.
     /// </summary>
@@ -24,8 +30,23 @@ public sealed class WegaCVars
         CVarDef.Create("wega.barks_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
-    /// Default volume setting of Barks sound
+    /// Default volume setting of Barks sound.
     /// </summary>
     public static readonly CVarDef<float> BarksVolume =
         CVarDef.Create("wega.barks_volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /*
+        Night Light System CVars
+    */
+    /// <summary>
+    /// Responsible for switching the night light system.
+    /// </summary>
+    public static readonly CVarDef<bool> NightLightEnabled =
+        CVarDef.Create("wega.night_light_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Switching adjusts all the lamps to the holiday mode according to the logic of updating the night lighting.
+    /// </summary>
+    public static readonly CVarDef<bool> PartyEnabled =
+        CVarDef.Create("wega.party_enabled", false, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 }

@@ -300,6 +300,7 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+    - type: NightLightning
     - type: GridAtmosphere
       version: 2
       data:
