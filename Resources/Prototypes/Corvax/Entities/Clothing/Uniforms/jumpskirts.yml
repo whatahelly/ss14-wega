@@ -97,3 +97,14 @@
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/rd_classical.rsi
     - type: Clothing
       sprite: Corvax/Clothing/Uniforms/Jumpskirt/rd_classical.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtPilot
+  name: pilot skirt
+  description: Security pilot skirt.
+  components:
+    - type: Sprite
+      sprite: Corvax/Clothing/Uniforms/Jumpskirt/pilot.rsi
+    - type: Clothing
+      sprite: Corvax/Clothing/Uniforms/Jumpskirt/pilot.rsi
