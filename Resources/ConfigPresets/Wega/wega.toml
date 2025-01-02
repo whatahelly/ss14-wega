@@ -11,6 +11,7 @@ map_rotation = false
 [wega]
 respawn_enabled = true
 barks_enabled = true
+night_light_enabled = true
 
 [net]
 tickrate = 30

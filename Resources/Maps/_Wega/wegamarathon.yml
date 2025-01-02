@@ -7608,6 +7608,7 @@ entities:
     - type: GasTileOverlay
     - type: SpreaderGrid
     - type: GridPathfinding
+    - type: NightLightning
   - uid: 5350
     components:
     - type: MetaData
