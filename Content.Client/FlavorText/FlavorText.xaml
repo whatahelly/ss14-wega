@@ -1,5 +1,37 @@
-﻿<Control Name="CFlavorText" xmlns="https://spacestation14.io">
-    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-        <TextEdit Name="CFlavorTextInput" Access="Public" MinSize="220 100" Margin="10" HorizontalExpand="True" VerticalExpand="True" />
+﻿<!-- Corvax-Wega-OOCFlavor-Edit-->
+<Control Name="CFlavorText" xmlns="https://spacestation14.io" xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer MinSize="5 0" HorizontalExpand="False" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#30D5C855" />
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <Label Text="{Loc 'humanoid-profile-editor-flavor-label'}" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                <PanelContainer StyleClasses="Inset" Margin="5" HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#80808008" />
+                    </PanelContainer.PanelOverride>
+                    <TextEdit Name="CFlavorTextInput" Access="Public" MinSize="110 100" Margin="10" HorizontalExpand="True" VerticalExpand="True" />
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer MinSize="5 0" HorizontalExpand="False" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#80008055" />
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <Label Text="{Loc 'humanoid-profile-editor-flavor-ooc-label'}" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                <PanelContainer StyleClasses="Inset" Margin="5" HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#80808008" />
+                    </PanelContainer.PanelOverride>
+                    <TextEdit Name="CFlavorOOCTextInput" Access="Public" MinSize="110 100" Margin="10" HorizontalExpand="True" VerticalExpand="True" />
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
     </BoxContainer>
 </Control>

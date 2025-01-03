@@ -5,6 +5,7 @@ using System.Text.Json;
 using Content.Server.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using NpgsqlTypes;
@@ -14,9 +15,11 @@ using NpgsqlTypes;
 namespace Content.Server.Database.Migrations.Postgres
 {
     [DbContext(typeof(PostgresServerDbContext))]
-    partial class PostgresServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250103102918_OOCFlavorText")]
+    partial class OOCFlavorText
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -791,12 +794,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
-                    // Corvax-Wega-Barks-start
                     b.Property<string>("BarkVoice")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("bark_voice");
-                    // Corvax-Wega-Barks-end
 
                     b.Property<string>("CharacterName")
                         .IsRequired()
@@ -842,12 +843,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
-                    // Corvax-Wega-OOCFlavor-start
                     b.Property<string>("OOCFlavorText")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("oocflavor_text");
-                    // Corvax-Wega-OOCFlavor-end
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
@@ -880,19 +879,15 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("species");
 
-                    // Corvax-Wega-start
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("status");
-                    // Corvax-Wega-end
 
-                    // Corvax-TTS-Start
                     b.Property<string>("Voice")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("voice");
-                    // Corvax-TTS-End
 
                     b.HasKey("Id")
                         .HasName("PK_profile");

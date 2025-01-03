@@ -258,6 +258,7 @@ namespace Content.Server.Database
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
+                profile.OOCFlavorText, // Corvax-Wega-OOCFlavor
                 profile.Species,
                 barkvoice, // Corvax-Wega-Barks
                 voice, // Corvax-TTS
@@ -297,6 +298,7 @@ namespace Content.Server.Database
 
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
+            profile.OOCFlavorText = humanoid.OOCFlavorText; // Corvax-Wega-OOCFlavor
             profile.Species = humanoid.Species;
             profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.BarkVoice = humanoid.BarkVoice; // Corvax-Wega-Barks
