@@ -9,6 +9,7 @@ namespace Content.Client.FlavorText
     public sealed partial class FlavorText : Control
     {
         public Action<string>? OnFlavorTextChanged;
+        public Action<string>? OnFlavorOOCTextChanged; // Corvax-Wega-OOCFlavor
 
         public FlavorText()
         {
@@ -17,12 +18,21 @@ namespace Content.Client.FlavorText
 
             var loc = IoCManager.Resolve<ILocalizationManager>();
             CFlavorTextInput.Placeholder = new Rope.Leaf(loc.GetString("flavor-text-placeholder"));
-            CFlavorTextInput.OnTextChanged  += _ => FlavorTextChanged();
+            CFlavorTextInput.OnTextChanged += _ => FlavorTextChanged();
+            CFlavorOOCTextInput.Placeholder = new Rope.Leaf(loc.GetString("ooc-flavor-text-placeholder")); // Corvax-Wega-OOCFlavor
+            CFlavorOOCTextInput.OnTextChanged += _ => FlavorOOCTextChanged(); // Corvax-Wega-OOCFlavor
         }
 
         public void FlavorTextChanged()
         {
             OnFlavorTextChanged?.Invoke(Rope.Collapse(CFlavorTextInput.TextRope).Trim());
         }
+
+        // Corvax-Wega-OOCFlavor-start
+        public void FlavorOOCTextChanged()
+        {
+            OnFlavorOOCTextChanged?.Invoke(Rope.Collapse(CFlavorOOCTextInput.TextRope).Trim());
+        }
+        // Corvax-Wega-OOCFlavor-end
     }
 }

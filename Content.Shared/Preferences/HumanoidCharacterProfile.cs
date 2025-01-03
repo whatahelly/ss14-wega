@@ -32,6 +32,7 @@ namespace Content.Shared.Preferences
 
         public const int MaxNameLength = 32;
         public const int MaxDescLength = 1024; // Corvax-Wega
+        public const int MaxOOCDescLength = 512; // Corvax-Wega-OOCFlavor
 
         /// <summary>
         /// Job preferences for initial spawn.
@@ -72,6 +73,9 @@ namespace Content.Shared.Preferences
         /// </summary>
         [DataField]
         public string FlavorText { get; set; } = string.Empty;
+
+        [DataField] // Corvax-Wega-OOCFlavor
+        public string OOCFlavorText { get; set; } = string.Empty; // Corvax-Wega-OOCFlavor
 
         /// <summary>
         /// Associated <see cref="SpeciesPrototype"/> for this profile.
@@ -141,6 +145,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
+            string oocflavortext, // Corvax-Wega-OOCFlavor
             string species,
             string barkvoice, // Corvax-Wega-Barks
             string voice, // Corvax-TTS
@@ -158,6 +163,7 @@ namespace Content.Shared.Preferences
         {
             Name = name;
             FlavorText = flavortext;
+            OOCFlavorText = oocflavortext; // Corvax-Wega-OOCFlavor
             Species = species;
             BarkVoice = barkvoice; // Corvax-Wega-Barks
             Voice = voice; // Corvax-TTS
@@ -192,6 +198,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile(HumanoidCharacterProfile other)
             : this(other.Name,
                 other.FlavorText,
+                other.OOCFlavorText, // Corvax-Wega-OOCFlavor
                 other.Species,
                 other.BarkVoice, // Corvax-Wega-Barks
                 other.Voice,
@@ -312,6 +319,13 @@ namespace Content.Shared.Preferences
         {
             return new(this) { FlavorText = flavorText };
         }
+
+        // Corvax-Wega-OOCFlavor-start
+        public HumanoidCharacterProfile WithOOCFlavorText(string oocFlavorText)
+        {
+            return new(this) { OOCFlavorText = oocFlavorText };
+        }
+        // Corvax-Wega-OOCFlavor-end
 
         public HumanoidCharacterProfile WithAge(int age)
         {
@@ -529,6 +543,7 @@ namespace Content.Shared.Preferences
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (FlavorText != other.FlavorText) return false;
+            if (OOCFlavorText != other.OOCFlavorText) return false; // Corvax-Wega-OOCFlavor
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -627,6 +642,18 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText);
             }
 
+            // Corvax-Wega-OOCFlavor-start
+            string oocflavortext;
+            if (OOCFlavorText.Length > MaxDescLength)
+            {
+                oocflavortext = FormattedMessage.RemoveMarkupOrThrow(OOCFlavorText)[..MaxOOCDescLength];
+            }
+            else
+            {
+                oocflavortext = FormattedMessage.RemoveMarkupOrThrow(OOCFlavorText);
+            }
+            // Corvax-Wega-OOCFlavor-end
+
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes);
 
             var prefsUnavailableMode = PreferenceUnavailable switch
@@ -675,6 +702,7 @@ namespace Content.Shared.Preferences
 
             Name = name;
             FlavorText = flavortext;
+            OOCFlavorText = oocflavortext; // Corvax-Wega-OOCFlavor
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -805,6 +833,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(_loadouts);
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
+            hashCode.Add(OOCFlavorText); // Corvax-Wega-OOCFlavor
             hashCode.Add(Species);
             hashCode.Add(Age);
             hashCode.Add((int)Sex);

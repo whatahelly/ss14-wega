@@ -53,6 +53,7 @@ namespace Content.Client.Lobby.UI
 
         private FlavorText.FlavorText? _flavorText;
         private TextEdit? _flavorTextEdit;
+        private TextEdit? _flavorTextOOCEdit; // Corvax-Wega-OOCFlavor
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
@@ -497,8 +498,10 @@ namespace Content.Client.Lobby.UI
                 TabContainer.AddChild(_flavorText);
                 TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
                 _flavorTextEdit = _flavorText.CFlavorTextInput;
+                _flavorTextOOCEdit = _flavorText.CFlavorOOCTextInput; // Corvax-Wega-OOCFlavor
 
                 _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
+                _flavorText.OnFlavorOOCTextChanged += OnFlavorOOCTextChange; // Corvax-Wega-OOCFlavor
             }
             else
             {
@@ -507,9 +510,12 @@ namespace Content.Client.Lobby.UI
 
                 TabContainer.RemoveChild(_flavorText);
                 _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
+                _flavorText.OnFlavorOOCTextChanged -= OnFlavorOOCTextChange; // Corvax-Wega-OOCFlavor
                 _flavorText.Dispose();
                 _flavorTextEdit?.Dispose();
+                _flavorTextOOCEdit?.Dispose(); // Corvax-Wega-OOCFlavor
                 _flavorTextEdit = null;
+                _flavorTextOOCEdit = null; // Corvax-Wega-OOCFlavor
                 _flavorText = null;
             }
         }
@@ -1098,6 +1104,17 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        // Corvax-Wega-OOCFlavor-start
+        private void OnFlavorOOCTextChange(string content)
+        {
+            if (Profile is null)
+                return;
+
+            Profile = Profile.WithOOCFlavorText(content);
+            SetDirty();
+        }
+        // Corvax-Wega-OOCFlavor-end
+
         private void OnMarkingChange(MarkingSet markings)
         {
             if (Profile is null)
@@ -1321,6 +1338,13 @@ namespace Content.Client.Lobby.UI
             {
                 _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
             }
+
+            // Corvax-Wega-OOCFlavor-start
+            if (_flavorTextOOCEdit != null)
+            {
+                _flavorTextOOCEdit.TextRope = new Rope.Leaf(Profile?.OOCFlavorText ?? "");
+            }
+            // Corvax-Wega-OOCFlavor-end
         }
 
         private void UpdateAgeEdit()

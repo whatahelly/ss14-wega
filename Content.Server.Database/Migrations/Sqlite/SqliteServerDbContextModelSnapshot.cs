@@ -742,6 +742,13 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("age");
 
+                    // Corvax-Wega-Barks-start
+                    b.Property<string>("BarkVoice")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("bark_voice");
+                    // Corvax-Wega-Barks-end
+
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -786,6 +793,13 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
+                    // Corvax-Wega-OOCFlavor-start
+                    b.Property<string>("OOCFlavorText")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("oocflavor_text");
+                    // Corvax-Wega-OOCFlavor-end
+
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("preference_id");
@@ -822,11 +836,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("status");
-
-                    b.Property<string>("BarkVoice")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("bark_voice");
                     // Corvax-Wega-end
 
                     // Corvax-TTS-Start
