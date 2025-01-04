@@ -74,7 +74,7 @@
   - extended
   - shittersafari
   name: extended-title
-  showInVote: false #2boring2vote
+  showInVote: true # Corvax-Wega-Edit
   description: extended-description
   rules:
   - BasicStationEventScheduler
@@ -88,7 +88,7 @@
   - greenshift
   - shittersafarideluxeedition
   name: greenshift-title
-  showInVote: false #4boring4vote
+  showInVote: true # Corvax-Wega-Edit
   description: greenshift-description
   rules:
   - SpaceTrafficControlFriendlyEventScheduler
@@ -164,7 +164,7 @@
   name: death-match-title
   description: death-match-description
   maxPlayers: 15
-  showInVote: true
+  showInVote: false # Corvax-Wega-Edit
   supportedMaps: DeathMatchMapPool
   rules:
     - DeathMatch31

@@ -314,6 +314,8 @@
   id: RampingStationEventScheduler
   parent: BaseGameRule
   components:
+  - type: GameRule # Corvax-Wega-Edit
+    minPlayers: 30 # Corvax-Wega-Edit
   - type: RampingStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicGameRulesTable

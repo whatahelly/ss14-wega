@@ -162,7 +162,7 @@
   id: DragonSpawn
   components:
   - type: StationEvent
-    weight: 6.5
+    weight: 3 # Corvax-Wega-Edit
     earliestStart: 40
     reoccurrenceDelay: 20
     minimumPlayers: 20
@@ -191,7 +191,7 @@
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 6
+    weight: 4 # Corvax-Wega-Edit
     duration: null
     earliestStart: 30
     reoccurrenceDelay: 20
@@ -240,7 +240,7 @@
   id: RevenantSpawn
   components:
   - type: StationEvent
-    weight: 7.5
+    weight: 4 # Corvax-Wega-Edit
     duration: 1
     earliestStart: 45
     minimumPlayers: 20
@@ -468,7 +468,7 @@
   components:
   - type: StationEvent
     earliestStart: 35
-    weight: 5.5
+    weight: 3 # Corvax-Wega-Edit
     minimumPlayers: 20
     duration: 1
   - type: RuleGrids

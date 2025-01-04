@@ -2,8 +2,7 @@
   id: WegaDefaultMapPool
   maps:
   # Highpop
-  #- WegaKerberos Remove for Rework
-  - CorvaxDelta
+  - WegaKerberos
   - CorvaxAvrite
   - WegaCyberiad
   #- WegaCereStation

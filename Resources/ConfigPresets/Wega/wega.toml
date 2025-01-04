@@ -54,3 +54,7 @@ max_explosion_range = 5
 emergency_early_launch_allowed = true
 arrivals_map = "/Maps/Misc/corvax_terminal.yml"
 auto_call_time = 150
+
+[vote]
+preset_enabled = true
+map_enabled = true
