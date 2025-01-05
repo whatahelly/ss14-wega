@@ -14,7 +14,7 @@
         # Corvax-Wega-Vampire-start
         conditions:
         - !type:OrganType
-          type: Animal
+          type: Vampire
           shouldHave: false
         # Corvax-Wega-Vampire-end
   plantMetabolism:
