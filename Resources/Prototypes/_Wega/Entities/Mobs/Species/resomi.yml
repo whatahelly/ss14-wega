@@ -176,6 +176,28 @@
           32:
             sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
             state: belt
+    # Corvax-Wega-start
+      underweartop:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: top
+      underwearbottom:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: bottom
+      socks:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: socks
+      anal:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: anal
+    # Corvax-Wega-end
 - type: entity
   parent: BaseSpeciesDummy
   id: MobResomiDummy
@@ -247,3 +269,25 @@
           32:
             sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
             state: belt
+    # Corvax-Wega-start
+      underweartop:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: top
+      underwearbottom:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: bottom
+      socks:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: socks
+      anal:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Resomi/displacement.rsi
+            state: anal
+    # Corvax-Wega-end
