@@ -316,6 +316,8 @@ namespace Content.Client.Interaction.Panel.Ui
                 bool isSpeciesAllowed = prototype.AllowedSpecies?.Contains("all") == true ||
                     (appearanceComponent != null && prototype.AllowedSpecies?.Contains(appearanceComponent.Species) == true);
 
+                bool isSpeciesBlacklisted = prototype.BlackListSpecies?.Contains(appearanceComponent?.Species) == true;
+
                 bool isGenderAllowed = prototype.AllowedGenders?.Contains("all") == true ||
                     (appearanceComponent != null && prototype.AllowedGenders?.Contains(appearanceComponent.Sex.ToString()) == true);
 
@@ -332,12 +334,9 @@ namespace Content.Client.Interaction.Panel.Ui
                     _entManager.TryGetComponent(user, out HumanoidAppearanceComponent? userAppearanceComponent) &&
                     userAppearanceComponent?.Status != Status.No;
 
-                if (!isSpeciesAllowed
-                    || !isGenderAllowed
-                    || !isNearestSpeciesAllowed
-                    || !isNearestGenderAllowed
-                    || !isTargetEntityAllowed
-                    || (prototype.ERP && !isErpAllowed))
+                if (!isSpeciesAllowed || isSpeciesBlacklisted || !isGenderAllowed
+                    || !isNearestSpeciesAllowed || !isNearestGenderAllowed
+                    || !isTargetEntityAllowed || (prototype.ERP && !isErpAllowed))
                     continue;
 
                 var buttonContainer = new BoxContainer

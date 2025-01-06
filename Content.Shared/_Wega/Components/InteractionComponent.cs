@@ -78,6 +78,9 @@ namespace Content.Shared.Chat.Prototypes
         public List<string>? NearestAllowedGenders = new() { "all" };
 
         [DataField]
+        public List<string>? BlackListSpecies;
+
+        [DataField]
         public List<string>? TargetEntityId;
     }
 }
