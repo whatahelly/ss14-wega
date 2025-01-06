@@ -5,6 +5,10 @@
   id: BaseMobResomi
   abstract: true
   components:
+# Corvax-Wega-Start
+  - type: Carriable # Corvax-Wega-Carrying
+  - type: DiseaseCarrier # Corvax-Wega-Disease
+# Corvax-Wega-End
   - type: WeaponsUseInability
   - type: AgillitySkill
   - type: ListenUpSkill

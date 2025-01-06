@@ -316,7 +316,9 @@ namespace Content.Client.Interaction.Panel.Ui
                 bool isSpeciesAllowed = prototype.AllowedSpecies?.Contains("all") == true ||
                     (appearanceComponent != null && prototype.AllowedSpecies?.Contains(appearanceComponent.Species) == true);
 
-                bool isSpeciesBlacklisted = prototype.BlackListSpecies?.Contains(appearanceComponent?.Species) == true;
+                bool isSpeciesBlacklisted =
+                    (appearanceComponent != null && prototype.BlackListSpecies != null && prototype.BlackListSpecies.Contains(appearanceComponent.Species)) ||
+                    (nearestAppearance != null && prototype.BlackListSpecies != null && prototype.BlackListSpecies.Contains(nearestAppearance.Species));  // Oh... sorry for mess i do there... by Pofitlo ^_^
 
                 bool isGenderAllowed = prototype.AllowedGenders?.Contains("all") == true ||
                     (appearanceComponent != null && prototype.AllowedGenders?.Contains(appearanceComponent.Sex.ToString()) == true);
