@@ -14,6 +14,7 @@
     - type: MothAccent
     - type: ReplacementAccent
       accent: dwarf
+    - type: ResomiAccent # Corvax-Wega-Resomi
 
 # 1 Cost
 
