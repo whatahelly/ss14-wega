@@ -1,0 +1,63 @@
+- type: marking
+  id: HumanBreastSmall
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Human, Dwarf]
+  sexRestriction: [Female]
+  followSkinColor: true
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SkinColoring
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: small
+
+- type: marking
+  id: HumanBreastDefault
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Human, Dwarf]
+  sexRestriction: [Female]
+  followSkinColor: true
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SkinColoring
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: default
+
+- type: marking
+  id: HumanBreastMedium
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Human, Dwarf]
+  sexRestriction: [Female]
+  followSkinColor: true
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SkinColoring
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: medium
+
+- type: marking
+  id: HumanBreastBig
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Human, Dwarf]
+  sexRestriction: [Female]
+  followSkinColor: true
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SkinColoring
+  sprites:
+  - sprite: _Wega/Mobs/Customization/human_breasts.rsi
+    state: big

@@ -1,7 +1,7 @@
 - type: gameMap
   id: WegaKerberos
   mapName: 'Kerberos Station'
-  mapPath: /Maps/_Wega/wegakerberos.yml 
+  mapPath: /Maps/_Wega/wegakerberos.yml
   minPlayers: 40
   stations:
     Kerberos:
@@ -13,7 +13,7 @@
             !type:NanotrasenNameGenerator
             prefixCreator: 'TZ'
         - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency_corvaxdelta.yml 
+          emergencyShuttlePath: /Maps/_Wega/Shuttles/kerberosemergency.yml
         - type: StationJobs
           overflowJobs:
             - Passenger

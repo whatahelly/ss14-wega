@@ -13,6 +13,7 @@ using Content.Shared.Hands;
 using Content.Shared.Stunnable;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
+using Content.Shared.Cuffs.Components;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Carrying;
 using Content.Shared.Movement.Events;
@@ -384,6 +385,16 @@ namespace Content.Server.Carrying
                 {
                     DropCarried(carrier, carried);
                     continue;
+                }
+
+                // Checking for handcuffing
+                if (TryComp<CuffableComponent>(carried, out var cuffable))
+                {
+                    if (!cuffable.CanStillInteract)
+                    {
+                        DropCarried(carrier, carried);
+                        continue;
+                    }
                 }
 
                 // Make sure the carried entity is always centered relative to the carrier, as gravity pulls can offset it otherwise

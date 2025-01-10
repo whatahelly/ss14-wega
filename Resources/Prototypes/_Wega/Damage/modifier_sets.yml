@@ -29,3 +29,9 @@
     Slash: 1.3
     Piercing: 1.3
     Shock: 1.3
+
+- type: damageModifierSet
+  id: Skrell
+  coefficients:
+    Heat: 1.5
+    Poison: 0.75

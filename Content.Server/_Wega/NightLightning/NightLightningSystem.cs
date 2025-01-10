@@ -53,7 +53,7 @@ public sealed class NightLightningSystem : EntitySystem
             foreach (var lightEntity in lightEntities)
             {
                 var light = lightEntity.Owner;
-                if (!TryComp<AmbientSoundComponent>(light, out var sound))
+                if (!TryComp<AmbientSoundComponent>(light, out var sound) || HasComp<NightLightBlockedComponent>(light))
                     continue;
 
                 if (_light.TryGetLight(light, out var pointLight))

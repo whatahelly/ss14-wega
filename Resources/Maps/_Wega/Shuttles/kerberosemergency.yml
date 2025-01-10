@@ -966,8 +966,6 @@ entities:
       pos: -0.5,-5.5
       parent: 2
     - type: DeviceList
-      configurators:
-      - invalid
       devices:
       - 663
       - 664
@@ -1095,31 +1093,31 @@ entities:
     - type: Transform
       pos: 2.5,-12.5
       parent: 2
-- proto: AirlockExternalGlassShuttleEmergencyLocked
+- proto: AirlockExternalGlassShuttleLocked
   entities:
   - uid: 607
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 9.5,-3.5
+      pos: 9.5,-9.5
       parent: 2
   - uid: 608
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 9.5,-11.5
+      pos: 9.5,-3.5
       parent: 2
   - uid: 609
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 9.5,-9.5
+      pos: 9.5,-1.5
       parent: 2
-  - uid: 720
+  - uid: 625
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
-      pos: 9.5,-1.5
+      pos: 9.5,-11.5
       parent: 2
 - proto: AirlockMedicalGlassLocked
   entities:
@@ -2526,6 +2524,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.9483926,-16.73272
       parent: 2
+- proto: DefibrillatorCabinetFilled
+  entities:
+  - uid: 720
+    components:
+    - type: Transform
+      pos: -1.5,1.5
+      parent: 2
 - proto: DrinkAbsintheGlass
   entities:
   - uid: 603
@@ -2678,8 +2683,6 @@ entities:
       pos: 2.5,-12.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 647
       - 712
@@ -2692,8 +2695,6 @@ entities:
       pos: 6.5,-12.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 647
       - 712
@@ -2726,8 +2727,6 @@ entities:
       pos: -4.5,-9.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 709
       - 669
@@ -2741,8 +2740,6 @@ entities:
       pos: -2.5,-9.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 709
       - 669
@@ -2768,8 +2765,6 @@ entities:
       pos: -2.5,-5.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 712
       - 647
@@ -2783,8 +2778,6 @@ entities:
       pos: -4.5,-5.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 712
       - 647
@@ -2798,8 +2791,6 @@ entities:
       pos: -0.5,-3.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 712
       - 671
@@ -2813,8 +2804,6 @@ entities:
       pos: 0.5,-1.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 647
       - 712
@@ -3960,13 +3949,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -1.5,0.5
-      parent: 2
-- proto: LockerScientist
-  entities:
-  - uid: 625
-    components:
-    - type: Transform
-      pos: -6.5,-7.5
       parent: 2
 - proto: LockerWallMedicalFilled
   entities:

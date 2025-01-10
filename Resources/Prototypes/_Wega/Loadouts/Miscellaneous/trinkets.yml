@@ -1,0 +1,30 @@
+# Braslets
+- type: loadout
+  id: BrasletHarmless
+  storage:
+    back:
+    - ClothingHandsBrasletHarmless
+
+- type: loadout
+  id: BrasletSearch
+  storage:
+    back:
+    - ClothingHandsBrasletSearch
+
+- type: loadout
+  id: BrasletBite
+  storage:
+    back:
+    - ClothingHandsBrasletBite
+
+- type: loadout
+  id: BrasletSex
+  storage:
+    back:
+    - ClothingHandsBrasletSex
+
+- type: loadout
+  id: BrasletRape
+  storage:
+    back:
+    - ClothingHandsBrasletRape

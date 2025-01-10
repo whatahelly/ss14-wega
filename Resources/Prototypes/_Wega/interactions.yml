@@ -33,6 +33,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin
+  - Skrell
   - Resomi
   nearestAllowedGenders:
   - Male
@@ -77,6 +78,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin
+  - Skrell
   - Resomi
   allowedGenders:
   - Male
@@ -91,6 +93,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin #/~UwU~\
+  - Skrell
   - Resomi
 
 - type: interaction
@@ -104,6 +107,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin
+  - Skrell
   - Resomi
   allowedGenders:
   - Female
@@ -118,6 +122,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin #/~UwU~\
+  - Skrell
   - Resomi
 
 # Interactions
@@ -245,6 +250,7 @@
   - Felinid
   - SlimePerson
   - Vulpkanin
+  - Skrell
 
 - type: interaction
   id: InteractionKissCheek
@@ -387,7 +393,7 @@
   userMessages: ["chat-interaction-anal-enter-message"]
   targetMessages: ["chat-interaction-anal-enter-message-target"]
   otherMessages: ["chat-interaction-anal-enter-message-others"]
-  points: 2
+  points: 4
   blackListSpecies:
   - Resomi
 
@@ -398,7 +404,7 @@
   userMessages: ["chat-interaction-anal-enter-faster-message"]
   targetMessages: ["chat-interaction-anal-enter-faster-message-target"]
   otherMessages: ["chat-interaction-anal-enter-faster-message-others"]
-  points: 2
+  points: 4
   blackListSpecies:
   - Resomi
 
@@ -409,7 +415,7 @@
   userMessages: ["chat-interaction-vagina-enter-message"]
   targetMessages: ["chat-interaction-vagina-enter-message-target"]
   otherMessages: ["chat-interaction-vagina-enter-message-others"]
-  points: 2
+  points: 4
   nearestAllowedGenders:
   - Female
   blackListSpecies:
@@ -422,7 +428,7 @@
   userMessages: ["chat-interaction-vagina-enter-faster-message"]
   targetMessages: ["chat-interaction-vagina-enter-faster-message-target"]
   otherMessages: ["chat-interaction-vagina-enter-faster-message-others"]
-  points: 2
+  points: 4
   nearestAllowedGenders:
   - Female
   blackListSpecies:
@@ -435,7 +441,6 @@
   userMessages: ["chat-interaction-touch-dick-message-1", "chat-interaction-touch-dick-message-2"]
   targetMessages: ["chat-interaction-touch-dick-message-target-1", "chat-interaction-touch-dick-message-target-2"]
   otherMessages: ["chat-interaction-touch-dick-message-others-1", "chat-interaction-touch-dick-message-others-2"]
-  points: 1
   nearestAllowedGenders:
   - Male
   blackListSpecies:
@@ -448,7 +453,6 @@
   userMessages: ["chat-interaction-lick-dick-message"]
   targetMessages: ["chat-interaction-lick-dick-message-target"]
   otherMessages: ["chat-interaction-lick-dick-message-others"]
-  points: 2
   nearestAllowedGenders:
   - Male
   blackListSpecies:
@@ -461,7 +465,6 @@
   userMessages: ["chat-interaction-kiss-dick-message-1", "chat-interaction-kiss-dick-message-2"]
   targetMessages: ["chat-interaction-kiss-dick-message-target-1", "chat-interaction-kiss-dick-message-target-2"]
   otherMessages: ["chat-interaction-kiss-dick-message-others-1", "chat-interaction-kiss-dick-message-others-2"]
-  points: 2
   interactSound:
     collection: Kisses
   nearestAllowedGenders:
@@ -476,7 +479,6 @@
   userMessages: ["chat-interaction-masturbate-dick-message"]
   targetMessages: ["chat-interaction-masturbate-dick-message-target"]
   otherMessages: ["chat-interaction-masturbate-dick-message-others"]
-  points: 3
   nearestAllowedGenders:
   - Male
   blackListSpecies:
@@ -489,7 +491,6 @@
   userMessages: ["chat-interaction-suck-dick-message-1", "chat-interaction-suck-dick-message-2", "chat-interaction-suck-dick-message-3"]
   targetMessages: ["chat-interaction-suck-dick-message-target-1", "chat-interaction-suck-dick-message-target-2", "chat-interaction-suck-dick-message-target-3"]
   otherMessages: ["chat-interaction-suck-dick-message-others-1", "chat-interaction-suck-dick-message-others-2", "chat-interaction-suck-dick-message-others-3"]
-  points: 4
   nearestAllowedGenders:
   - Male
   blackListSpecies:
@@ -502,7 +503,7 @@
   userMessages: ["chat-interaction-slow-thrust-message"]
   targetMessages: ["chat-interaction-slow-thrust-message-target"]
   interactSound: /Audio/_Wega/Interacrtions/slaps.ogg
-  points: 2
+  points: 4
   blackListSpecies:
   - Resomi
 
@@ -513,7 +514,7 @@
   userMessages: ["chat-interaction-fast-thrust-message"]
   targetMessages: ["chat-interaction-fast-thrust-message-target"]
   interactSound: /Audio/_Wega/Interacrtions/slaps.ogg
-  points: 2
+  points: 4
   blackListSpecies:
   - Resomi
 
@@ -524,7 +525,7 @@
   userMessages: ["chat-interaction-deep-thrust-message"]
   targetMessages: ["chat-interaction-deep-thrust-message-target"]
   interactSound: /Audio/_Wega/Interacrtions/slaps.ogg
-  points: 2
+  points: 4
   blackListSpecies:
   - Resomi
 
@@ -644,6 +645,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin
+  - Skrell
   nearestAllowedGenders:
   - Female
   blackListSpecies:
@@ -783,7 +785,7 @@
   userMessages: ["chat-interaction-vox-enter-slowly-message"]
   targetMessages: ["chat-interaction-vox-enter-slowly-message-target"]
   otherMessages: ["chat-interaction-vox-enter-slowly-message-others"]
-  points: 2
+  points: 4
   nearestAllowedSpecies:
   - Vox
 
@@ -794,7 +796,7 @@
   userMessages: ["chat-interaction-vox-enter-faster-message"]
   targetMessages: ["chat-interaction-vox-enter-faster-message-target"]
   otherMessages: ["chat-interaction-vox-enter-faster-message-others"]
-  points: 2
+  points: 4
   nearestAllowedSpecies:
   - Vox
 
@@ -827,7 +829,7 @@
   userMessages: ["chat-interaction-enter-slowly-filament-message"]
   targetMessages: ["chat-interaction-enter-slowly-filament-message-target"]
   otherMessages: ["chat-interaction-enter-slowly-filament-message-others"]
-  points: 2
+  points: 4
   nearestAllowedSpecies:
   - Arachnid
 
@@ -838,7 +840,7 @@
   userMessages: ["chat-interaction-enter-faster-filament-message"]
   targetMessages: ["chat-interaction-enter-faster-filament-message-target"]
   otherMessages: ["chat-interaction-enter-faster-filament-message-others"]
-  points: 2
+  points: 4
   nearestAllowedSpecies:
   - Arachnid
 
@@ -895,7 +897,7 @@
   otherMessages: ["chat-interaction-massage-tail-message-others"]
 
 - type: interaction
-  parent: BaseTargetHasTail
+  parent: BaseUserHasTail
   id: InteractionWavingTail
   name: interaction-waving-tail
   userMessages: ["chat-interaction-waving-tail-message"]
@@ -919,22 +921,26 @@
   otherMessages: ["chat-interaction-eat-tail-message-others"]
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseMaleOnly ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing ]
   id: InteractionHoldsDickTail
   name: interaction-holds-dick-tail
   userMessages: ["chat-interaction-holds-dick-tail-message"]
   targetMessages: ["chat-interaction-holds-dick-tail-message-target"]
   otherMessages: ["chat-interaction-holds-dick-tail-message-others"]
+  nearestAllowedGenders:
+  - Male
   blackListSpecies:
   - Resomi
 
 - type: interaction
-  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing, BaseFemaleOnly ]
+  parent: [ BaseCheckErpStatus, BaseUserHasTail, BaseCheckClothing ]
   id: InteractionRubbingVaginaTail
   name: interaction-rubbing-vagina-tail
   userMessages: ["chat-interaction-rubbing-vagina-tail-message"]
   targetMessages: ["chat-interaction-rubbing-vagina-tail-message-target"]
   otherMessages: ["chat-interaction-rubbing-vagina-tail-message-others"]
+  nearestAllowedGenders:
+  - Female
   blackListSpecies:
   - Resomi
 
@@ -989,7 +995,6 @@
   userMessages: ["chat-interaction-massage-tail-dick-message"]
   targetMessages: ["chat-interaction-massage-tail-dick-message-target"]
   otherMessages: ["chat-interaction-massage-tail-dick-message-others"]
-  points: 2
   nearestAllowedGenders:
   - Male
   blackListSpecies:
@@ -1060,6 +1065,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin #/~UwU~\
+  - Skrell
   blackListSpecies:
   - Resomi
 
@@ -1079,6 +1085,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin #/~UwU~\
+  - Skrell
   blackListSpecies:
   - Resomi
 
@@ -1100,6 +1107,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin #/~UwU~\
+  - Skrell
   blackListSpecies:
   - Resomi
 
@@ -1121,6 +1129,7 @@
   - Reptilian
   - SlimePerson
   - Vulpkanin #/~UwU~\
+  - Skrell
   blackListSpecies:
   - Resomi
 

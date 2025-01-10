@@ -8,6 +8,7 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
+using Content.Shared.Roles; // Corvax-Wega
 using Content.Shared.Speech;
 using Content.Shared.Inventory; // Corvax-Wega
 using Robust.Shared.Map;
@@ -88,6 +89,7 @@ public sealed class RadioSystem : EntitySystem
         name = FormattedMessage.EscapeText(name);
 
         var job = GetJobName(messageSource); // Corvax-Wega
+        var depColor = GetDepartmentColor(messageSource); // Corvax-Wega
 
         SpeechVerbPrototype speech;
         if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
@@ -106,6 +108,7 @@ public sealed class RadioSystem : EntitySystem
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("job", job), // Corvax-Wega
+            ("depColor", depColor.HasValue ? depColor.Value.ToHex() : "#2cdb2c"), // Corvax-Wega
             ("name", name),
             ("message", content));
 
@@ -180,6 +183,21 @@ public sealed class RadioSystem : EntitySystem
             return $"{jobTitle}";
         }
         return Loc.GetString("job-name-unknown");
+    }
+
+    private Color? GetDepartmentColor(EntityUid senderUid)
+    {
+        var idCard = GetIdCard(senderUid);
+
+        if (idCard is null)
+            return null;
+
+        foreach (var departmentProtoId in idCard.JobDepartments)
+        {
+            if (_prototype.TryIndex(departmentProtoId, out DepartmentPrototype? department))
+                return department.Color;
+        }
+        return null;
     }
 
     private IdCardComponent? GetIdCard(EntityUid senderUid)
