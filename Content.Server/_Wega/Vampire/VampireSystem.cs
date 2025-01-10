@@ -170,7 +170,7 @@ public sealed partial class VampireSystem : SharedVampireSystem
             return;
         }
 
-        var volumeToConsume = (FixedPoint2)Math.Min((float)victimBloodRemaining.Value, args.Volume);
+        var volumeToConsume = (FixedPoint2)Math.Min((float)victimBloodRemaining.Value, args.Volume * 2);
 
         _audio.PlayPvs(component.BloodDrainSound, uid, AudioParams.Default.WithVolume(-3f));
         _blood.TryModifyBloodLevel(args.Target.Value, -(byte)(volumeToConsume * 0.5f));

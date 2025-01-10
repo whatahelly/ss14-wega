@@ -37,9 +37,9 @@
         scaleByQuantity: true
         damage:
           types:
-            Heat: 1
-            Blunt: 1
-            Poison: 0.75
+            Heat: -1
+            Blunt: -1
+            Poison: -0.75
     - reagents: [ Holywater ]
       methods: [ Touch ]
       effects:
@@ -47,8 +47,8 @@
         scaleByQuantity: true
         damage:
           types:
-            Heat: 0.25
-            Blunt: 0.25
+            Heat: -0.25
+            Blunt: -0.25
   - type: Butcherable
     butcheringType: Spike
     spawned:
