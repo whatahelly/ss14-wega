@@ -31,6 +31,10 @@
       - VendingMachineSoda
       - VendingMachineStarkist
       - VendingMachineSpaceUp
-      - VendingMachineIntimat # Corvax-Wega
-      - VendingMachineCosinessmat # Corvax-Wega
-    chance: 1
+    # Corvax-Wega-start
+      - VendingMachineCosinessmat
+    chance: 0.98 # Corvax-Wega-Edit
+    rarePrototypes:
+      - VendingMachineIntimat
+    rareChance: 0.02
+    # Corvax-Wega-end

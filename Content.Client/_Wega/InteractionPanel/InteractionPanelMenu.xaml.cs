@@ -150,7 +150,9 @@ namespace Content.Client.Interaction.Panel.Ui
             var session = IoCManager.Resolve<IPlayerManager>().LocalSession;
             if (session?.AttachedEntity.HasValue == true)
             {
-                var target = FindTarget(session.AttachedEntity.Value);
+                var user = session.AttachedEntity.Value;
+                var userStatusComponent = _entManager.TryGetComponent<HumanoidAppearanceComponent>(user, out var userAppearance);
+                var target = FindTarget(user);
                 if (target.HasValue)
                 {
                     var targetEntityUid = _entManager.GetEntity(target.Value);
@@ -160,7 +162,14 @@ namespace Content.Client.Interaction.Panel.Ui
                         _targetLabel.Text = Identity.Name(targetEntityUid, _entManager, session.AttachedEntity);
 
                     var appearanceComponent = _entManager.TryGetComponent<HumanoidAppearanceComponent>(targetEntityUid, out var appearance) ? appearance : null;
-                    UpdateGender(appearanceComponent, _targetGenderLabel);
+                    if (userAppearance?.Status is Status.No)
+                    {
+                        _targetGenderLabel.Text = "";
+                    }
+                    else
+                    {
+                        UpdateGender(appearanceComponent, _targetGenderLabel);
+                    }
                 }
                 else
                 {
@@ -214,14 +223,10 @@ namespace Content.Client.Interaction.Panel.Ui
                 }
                 var targetGenderIcon = CreateGenderIconButton(appearanceComponent.Sex);
                 if (targetGenderIcon != null)
-                {
                     Names.AddChild(targetGenderIcon);
-                }
             }
             else
-            {
                 genderLabel.Text = Loc.GetString("unknown-nearestplayer");
-            }
         }
 
         private void OnUserStatusChanged(object? sender, SessionStatusEventArgs e)
@@ -238,6 +243,12 @@ namespace Content.Client.Interaction.Panel.Ui
             _userSpriteView.SetEntity(user);
 
             var appearanceComponent = _entManager.TryGetComponent<HumanoidAppearanceComponent>(user, out var appearance) ? appearance : null;
+            if (appearance?.Status is Status.No)
+            {
+                _userGenderLabel.Text = "";
+                return;
+            }
+
             if (appearanceComponent != null)
             {
                 var species = appearanceComponent.Species;

@@ -2867,6 +2867,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cat
+  - type: Carriable # Corvax-Wega-Carrying
   - type: Physics
   - type: Fixtures
     fixtures:

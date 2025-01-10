@@ -1,0 +1,134 @@
+- type: marking
+  id: HairSkrellExcited
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_excited
+
+- type: marking
+  id: HairSkrellInsulate
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_insulate
+
+- type: marking
+  id: HairSkrellLong
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_long
+
+- type: marking
+  id: HairSkrellLongbun
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_longbun
+
+- type: marking
+  id: HairSkrellLongtuux
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_longtuux
+
+- type: marking
+  id: HairSkrellLoose
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_loose
+
+- type: marking
+  id: HairSkrellLowbun
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_lowbun
+
+- type: marking
+  id: HairSkrellMidbun
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_midbun
+
+- type: marking
+  id: HairSkrellMullet
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_mullet
+
+- type: marking
+  id: HairSkrellReserve
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_reserve
+
+- type: marking
+  id: HairSkrellShort
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_short
+
+- type: marking
+  id: HairSkrellShortbun
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_shortbun
+
+- type: marking
+  id: HairSkrellTuux
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_tuux
+
+- type: marking
+  id: HairSkrellVeryLong
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_verylong
+
+- type: marking
+  id: HairSkrellVeryShort
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _Wega/Mobs/Customization/skrell_hair.rsi
+      state: skrell_hair_veryshort

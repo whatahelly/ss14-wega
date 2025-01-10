@@ -1,0 +1,67 @@
+- type: entity
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobSkrell
+  name: Urist McSkrell
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: Skrell
+  - type: Carriable
+  - type: DiseaseCarrier
+  - type: Thirst
+    baseDecayRate: 0.4
+  - type: Hunger
+  - type: Body
+    prototype: Skrell
+    requiredLegs: 2
+  - type: Icon
+    sprite: _Wega/Mobs/Species/Skrell/parts.rsi
+    state: full
+  - type: SolutionScanner
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Skrell
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:WashCreamPieReaction
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 1
+            Blunt: 1
+            Poison: 0.75
+    - reagents: [ Holywater ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 0.25
+            Blunt: 0.25
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatSkrell
+      amount: 5
+
+- type: entity
+  parent: MobHumanDummy
+  id: MobSkrellDummy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: Skrell
+  - type: Body
+    prototype: Skrell
+    requiredLegs: 2

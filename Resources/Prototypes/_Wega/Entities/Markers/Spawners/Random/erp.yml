@@ -1,0 +1,58 @@
+- type: entity
+  id: RandomSexToy
+  name: random sex toy spawner
+  suffix: Random
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: _Wega/Objects/ERP/dildo.rsi
+        state: dildo_human
+  - type: RandomSpawner
+    prototypes:
+      - RandomDildo
+      - DildoAvian
+      - DildoCanine
+      - DildoDragon
+      - DildoEquine
+      - DildoHuman
+      - DildoTentacle
+      - PolyDildoSmall
+      - PolyDildoMedium
+      - PolyDildoBig
+      - DildoDouble
+      - ClothingAnalMetal
+      - ClothingAnalPink
+      - ClothingAnalTeal
+      - ClothingAnalYellow
+      - ClothingAnalGreen
+      - ClothingAnalTail
+      - FleshlightGreen
+      - FleshlightPink
+      - FleshlightRed
+      - FleshlightTeal
+      - FleshlightYellow
+      - VibratorMagicwand
+      - VibratorGreen
+      - VibratorTeal
+      - VibratorPink
+      - VibratorRed
+      - VibratorYellow
+      - VibratorEggPink
+      - VibratorEggTeal
+      - VibratorRingPink
+      - VibratorRingTeal
+      - HoloprojectorSex
+    chance: 0.8
+    offset: 0.0
+    #rare
+    rarePrototypes:
+      - ClothingBeltStraponAvian
+      - ClothingBeltStraponCanine
+      - ClothingBeltStraponDragon
+      - ClothingBeltStraponEquine
+      - ClothingBeltStraponHuman
+    rareChance: 0.01

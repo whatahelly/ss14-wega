@@ -12,6 +12,7 @@
       - id: ClothingHandsGlovesCaptain
       - id: ClothingOuterWinterCap
       - id: ClothingNeckCloakCap
+      - id: ClothingUnderBottomMCaptain # Corvax-Wega
 
 - type: entity
   id: DresserChiefEngineerFilled
@@ -25,6 +26,7 @@
       - id: ClothingHeadHatBeretEngineering
       - id: ClothingOuterWinterCE
       - id: ClothingNeckCloakCe
+      - id: ClothingUnderBottomMCe # Corvax-Wega
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
@@ -41,6 +43,7 @@
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
       - id: ClothingCloakCmo
+      - id: ClothingUnderBottomMCmo # Corvax-Wega
 
 - type: entity
   id: DresserHeadOfPersonnelFilled
@@ -53,6 +56,7 @@
       - id: ClothingOuterWinterHoP
       - id: ClothingEyesGlasses
       - id: ClothingNeckCloakHop
+      - id: ClothingUnderBottomMHop # Corvax-Wega
 
 - type: entity
   id: DresserHeadOfSecurityFilled
@@ -69,6 +73,7 @@
       - id: ClothingUniformJumpsuitHosFormal
       - id: ClothingOuterWinterHoS
       - id: ClothingNeckCloakHos
+      - id: ClothingUnderBottomMHos # Corvax-Wega
 
 - type: entity
   id: DresserQuarterMasterFilled
@@ -84,6 +89,7 @@
       - id: ClothingHandsGlovesColorBrown
       - id: ClothingOuterWinterQM
       - id: ClothingNeckCloakQm
+      - id: ClothingUnderBottomMQm # Corvax-Wega
 
 - type: entity
   id: DresserResearchDirectorFilled
@@ -98,6 +104,7 @@
       - id: ClothingOuterWinterRD
       - id: ClothingOuterCoatRD
       - id: ClothingNeckCloakRd
+      - id: ClothingUnderBottomMRd # Corvax-Wega
 
 - type: entity
   id: DresserWardenFilled

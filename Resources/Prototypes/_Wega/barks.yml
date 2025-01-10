@@ -453,21 +453,21 @@
 - type: bark
   id: BarksBanjoKazooieMoan1
   name: Moan 1 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/moan1.ogg"
 
 - type: bark
   id: BarksBanjoKazooieMoan2
   name: Moan 2 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/moan2.ogg"
 
 - type: bark
   id: BarksBanjoKazooieMoan3
   name: Moan 3 (Banjo-Kazooie)
-  roundStart: true
+  roundStart: false
   soundFiles:
     - "/Audio/_Wega/Voice/Barks/moan3.ogg"
 

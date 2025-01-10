@@ -1,7 +1,9 @@
+using System.Linq; // Corvax-Wega
 using Content.Server.Objectives.Components;
 using Content.Server.Revolutionary.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.CCVar;
+using Content.Shared.Ghost; // Corvax-Wega
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Robust.Shared.Configuration;
@@ -53,7 +55,10 @@ public sealed class KillPersonConditionSystem : EntitySystem
             return;
 
         // no other humans to kill
-        var allHumans = _mind.GetAliveHumans(args.MindId);
+        // Corvax-Wega-Edit
+        var allHumans = _mind.GetAliveHumans(args.MindId)
+            .Where(human => !HasComp<GhostComponent>(human))
+            .ToList();
         if (allHumans.Count == 0)
         {
             args.Cancelled = true;

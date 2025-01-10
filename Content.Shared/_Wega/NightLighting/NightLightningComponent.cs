@@ -19,3 +19,8 @@ public sealed partial class NightLightningComponent : Component
 public sealed partial class NightLightComponent : Component
 {
 }
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class NightLightBlockedComponent : Component
+{
+}

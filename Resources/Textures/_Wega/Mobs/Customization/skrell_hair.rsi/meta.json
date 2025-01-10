@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites taken from https://github.com/Bubberstation/Bubberstation",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "skrell_hair_excited",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_insulate",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_long",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_longbun",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_longtuux",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_loose",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_lowbun",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_midbun",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_mullet",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_reserve",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_short",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_shortbun",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_tuux",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_verylong",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_veryshort",
+      "directions": 4
+    }
+  ]
+}
