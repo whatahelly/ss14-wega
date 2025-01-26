@@ -36,6 +36,9 @@ public sealed partial class AdminVerbSystem
     [ValidatePrototypeId<EntityPrototype>] // Corvax-Wega-Vampire
     private const string DefaultVampireRule = "Vampire"; // Corvax-Wega-Vampire
 
+    [ValidatePrototypeId<EntityPrototype>] // Corvax-Wega-Blood-Cult
+    private const string DefaultBloodCultRule = "BloodCult"; // Corvax-Wega-Blood-Cult
+
     [ValidatePrototypeId<StartingGearPrototype>]
     private const string PirateGearId = "PirateGear";
 
@@ -170,5 +173,20 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(vampire);
         // Corvax-Wega-Vampire-end
+        // Corvax-Wega-Blood-Cult-start
+        Verb bloodcultist = new()
+        {
+            Text = Loc.GetString("admin-verb-text-make-blood-culsist"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("_Wega/Objects/Weapons/Melee/blood_dagger.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<BloodCultRuleComponent>(targetPlayer, DefaultBloodCultRule);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-blood-culsist"),
+        };
+        args.Verbs.Add(bloodcultist);
+        // Corvax-Wega-Blood-Cult-end
     }
 }

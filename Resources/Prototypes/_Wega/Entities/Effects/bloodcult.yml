@@ -1,0 +1,50 @@
+- type: entity
+  id: BloodCultFloorGlowEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/floorglow.rsi
+    state: floorglow
+  - type: TimedDespawn
+    lifetime: 0.5
+
+- type: entity
+  id: BloodCultOrb
+  parent: BaseItem
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/bloodorb.rsi
+    state: blood_orb
+  - type: BloodOrb
+
+- type: entity
+  id: BloodCultOutEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/bloodcultteleport.rsi
+    state: cultout
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
+  id: BloodCultInEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Effects/bloodcultteleport.rsi
+    state: cultin
+  - type: TimedDespawn
+    lifetime: 1.2
+
+- type: entity
+  id: BloodCultDistortedEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Structures/Specific/bloodcult_structures_large.rsi
+    state: rune_large_distorted
+    color: "#800000"
+  - type: TimedDespawn
+    lifetime: 1.0

@@ -81,6 +81,20 @@ public sealed class EmpSystem : SharedEmpSystem
         }
     }
 
+    // Corvax-Wega-BloocCult-start
+    public void EmpPulseExclusions(MapCoordinates coordinates, float range, float energyConsumption, float duration, IEnumerable<EntityUid> exclusions)
+    {
+        var exclusionsSet = new HashSet<EntityUid>(exclusions);
+        foreach (var uid in _lookup.GetEntitiesInRange(coordinates, range))
+        {
+            if (exclusionsSet.Contains(uid))
+                continue;
+            TryEmpEffects(uid, energyConsumption, duration);
+        }
+        Spawn(EmpPulseEffectPrototype, coordinates);
+    }
+    // Corvax-Wega-BloocCult-end
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

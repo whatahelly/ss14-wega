@@ -2,3 +2,8 @@
   id: Vampires
   name: guide-entry-vampires
   text: "/ServerInfo/_Wega/Guidebook/Antagonist/Vampires.xml"
+
+- type: guideEntry
+  id: BloodCult
+  name: guide-entry-blood-cult
+  text: "/ServerInfo/_Wega/Guidebook/Antagonist/BloodCult.xml"

@@ -1,0 +1,23 @@
+- type: entity
+  parent: FlaskBase
+  id: DrinkUnholyFlask
+  name: old flask
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/unholyflask.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkUnholyFlask
+  id: DrinkUnholyFlaskFull
+  name: old flask
+  description: ""
+  suffix: full
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Unholywater
+          Quantity: 50

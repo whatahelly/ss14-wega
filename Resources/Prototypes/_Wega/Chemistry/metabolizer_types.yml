@@ -1,3 +1,7 @@
 - type: metabolizerType
   id: Vampire
   name: metabolizer-type-vampire
+
+- type: metabolizerType
+  id: Cultist
+  name: metabolizer-type-cultist

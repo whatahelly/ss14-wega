@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseBullet
+  id: ProjectileBloodBolt
+  name: ""
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: blood_bolt
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 15

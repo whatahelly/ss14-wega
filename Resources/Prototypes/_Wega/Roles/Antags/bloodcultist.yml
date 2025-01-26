@@ -1,0 +1,102 @@
+- type: antag
+  id: BloodCultist
+  name: roles-antag-blood-cultist-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-blood-cultist-objective
+  guides: [ BloodCult ]
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 54000 # 15h # Corvax-RoleTime
+
+# Ability gears
+- type: startingGear
+  id: BloodCultWeaponBloodGear
+  inhand:
+    - WeaponBloodBlade
+    - CultBola
+
+- type: startingGear
+  id: BloodCultWeaponDeathGear
+  inhand:
+    - WeaponDeathBlade
+    - CultBola
+
+- type: startingGear
+  id: BloodCultWeaponHellGear
+  inhand:
+    - WeaponHellBlade
+    - CultBola
+
+- type: startingGear
+  id: BloodCultJumpsuitGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+
+- type: startingGear
+  id: BloodCultShoesGear
+  equipment:
+    shoes: ClothingShoesCult
+
+- type: startingGear
+  id: BloodCultOuterGear
+  equipment:
+    outerClothing: ClothingOuterCultRobesAlt
+
+- type: startingGear
+  id: BloodCultBackpackGear
+  equipment:
+    back: ClothingBackpackBloodCult
+  storage:
+    back:
+    - HandheldHealthAnalyzer
+
+- type: startingGear
+  id: BloodDaggerGear
+  inhand:
+    - WeaponBloodDagger
+
+- type: startingGear
+  id: DeathDaggerGear
+  inhand:
+    - WeaponDeathDagger
+
+- type: startingGear
+  id: HellDaggerGear
+  inhand:
+    - WeaponHellDagger
+
+- type: startingGear
+  id: BloodCultSpellStunGear
+  inhand:
+    - BloodCultSpellStun
+
+- type: startingGear
+  id: BloodCultSpellTeleportGear
+  inhand:
+    - BloodCultSpellTeleport
+
+- type: startingGear
+  id: BloodCultSpellShadowShacklesGear
+  inhand:
+    - BloodCultSpellShadowShackles
+
+- type: startingGear
+  id: BloodCultSpellTwistedConstructionGear
+  inhand:
+    - BloodCultSpellTwistedConstruction
+
+- type: startingGear
+  id: BloodCultSpellSummonEquipmentGear
+  inhand:
+    - BloodCultSpellSummonEquipment
+
+- type: startingGear
+  id: BloodCultSpellBloodRitesGear
+  inhand:
+    - BloodCultSpellBloodRites
+
+- type: startingGear
+  id: BloodCultSpellBloodBarrageGear
+  inhand:
+    - BloodCultSpellBloodBarrage

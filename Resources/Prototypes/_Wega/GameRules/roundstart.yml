@@ -27,11 +27,11 @@
       - prefRoles: [ Vampire ]
         max: 4
         playerRatio: 15
-        multiAntagSetting: NotExclusive
         blacklist:
           components:
           - AntagImmune
           - BibleUser
+        lateJoinAdditional: true
         components:
         - type: NpcFactionMember
           factions:
@@ -51,3 +51,30 @@
         - MindRoleVampire
         briefing:
           sound: "/Audio/_Wega/Ambience/Antag/vampare_start.ogg"
+
+- type: entity
+  parent: BaseGameRule
+  id: BloodCult
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: BloodCultRule
+  - type: AntagSelection
+    definitions:
+      - prefRoles: [ BloodCultist ]
+        max: 4
+        playerRatio: 10
+        blacklist:
+          components:
+          - AntagImmune
+          - BibleUser
+        lateJoinAdditional: true
+        components:
+        - type: BloodCultist
+        - type: NpcFactionMember
+          factions:
+          - BloodCult
+        mindRoles:
+        - MindRoleBloodCultist
+        briefing:
+          sound: "/Audio/_Wega/Ambience/Antag/bloodcult_start.ogg"
