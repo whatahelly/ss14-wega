@@ -21,6 +21,7 @@ using Content.Shared.Mobs;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Zombies;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.GameTicking.Rules
@@ -28,15 +29,15 @@ namespace Content.Server.GameTicking.Rules
     public sealed class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleComponent>
     {
         [Dependency] private readonly ActionsSystem _action = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
         [Dependency] private readonly AntagSelectionSystem _antag = default!;
         [Dependency] private readonly BodySystem _body = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
         [Dependency] private readonly MetabolizerSystem _metabolism = default!;
         [Dependency] private readonly MindSystem _mind = default!;
         [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-        [Dependency] private readonly SharedHandsSystem _hands = default!;
         [Dependency] private readonly RoleSystem _role = default!;
+        [Dependency] private readonly SharedHandsSystem _hands = default!;
         [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
 
         public readonly ProtoId<NpcFactionPrototype> BloodCultNpcFaction = "BloodCult";
@@ -117,7 +118,7 @@ namespace Content.Server.GameTicking.Rules
             if (mindId == default || !_role.MindHasRole<BloodCultistComponent>(mindId))
                 _role.MindAddRole(mindId, "MindRoleBloodCultist");
             if (mind?.Session != null)
-                _antag.SendBriefing(mind.Session, MakeBriefing(uid), Color.Red, null);
+                _antag.SendBriefing(mind.Session, MakeBriefing(uid), Color.Red, new SoundPathSpecifier("/Audio/_Wega/Ambience/Antag/bloodcult_start.ogg"));
             RemComp<AutoCultistComponent>(uid);
 
             var possibleDaggerTypes = new[] { "WeaponBloodDagger", "WeaponDeathDagger", "WeaponHellDagger" };

@@ -1,5 +1,4 @@
 using Content.Shared.Actions;
-using Content.Shared.Blood.Cult.Components;
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
