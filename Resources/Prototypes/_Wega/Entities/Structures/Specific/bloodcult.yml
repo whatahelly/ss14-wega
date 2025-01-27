@@ -11,6 +11,8 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Static
+  - type: UseDelay
+    delay: 5
 
 - type: entity
   id: BloodRuneOffering

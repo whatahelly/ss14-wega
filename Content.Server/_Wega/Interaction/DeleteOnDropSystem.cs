@@ -20,7 +20,7 @@ public sealed class DeleteOnDropSystem : EntitySystem
 
     private void OnUnequip(EntityUid uid, DeleteOnDropComponent item, GotUnequippedEvent args)
     {
-        if (!item.DeleteOnDrop)
+        if (!item.DeleteOnDrop || !_entityManager.EntityExists(uid))
             return;
 
         _entityManager.DeleteEntity(uid);
@@ -28,7 +28,7 @@ public sealed class DeleteOnDropSystem : EntitySystem
 
     private void OnUnequipHand(EntityUid uid, DeleteOnDropComponent item, GotUnequippedHandEvent args)
     {
-        if (!item.DeleteOnDrop)
+        if (!item.DeleteOnDrop || !_entityManager.EntityExists(uid))
             return;
 
         _entityManager.DeleteEntity(uid);
@@ -36,7 +36,7 @@ public sealed class DeleteOnDropSystem : EntitySystem
 
     private void OnDropped(EntityUid uid, DeleteOnDropComponent item, DroppedEvent args)
     {
-        if (!item.DeleteOnDrop)
+        if (!item.DeleteOnDrop || !_entityManager.EntityExists(uid))
             return;
 
         _entityManager.DeleteEntity(uid);

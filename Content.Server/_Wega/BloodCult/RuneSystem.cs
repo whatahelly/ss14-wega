@@ -33,6 +33,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Standing;
+using Content.Shared.Timing;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Console;
@@ -59,6 +60,7 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -69,7 +71,7 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     private bool _isRitualRuneUnlocked = false;
@@ -255,6 +257,12 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
     private void OnRuneAfterInteract(EntityUid rune, BloodRuneComponent runeComp, EntityUid cultist)
     {
         var coords = _transform.GetMapCoordinates(rune);
+        if (!TryComp<UseDelayComponent>(rune, out var useDelay) || _useDelay.IsDelayed((rune, useDelay)))
+        {
+            _popup.PopupEntity(Loc.GetString("rune-activate-failed"), cultist, cultist, PopupType.MediumCaution);
+            return;
+        }
+
         switch (runeComp.Prototype)
         {
             case "offering":
@@ -658,6 +666,9 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
                 _popup.PopupEntity(Loc.GetString("rune-activate-failed"), cultist, cultist, PopupType.MediumCaution);
                 break;
         }
+
+        if (_entityManager.EntityExists(rune))
+            _useDelay.TryResetDelay((rune, useDelay));
     }
 
     private void OnRitualAfterInteract(EntityUid rune, BloodRitualDimensionalRendingComponent runeComp)

@@ -35,6 +35,7 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -42,7 +43,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
-using Robust.Shared.Physics.Systems;
+using Content.Shared.Timing;
 
 namespace Content.Server.Blood.Cult;
 
@@ -66,6 +67,7 @@ public sealed partial class BloodCultSystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly FlashSystem _flash = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
@@ -221,8 +223,8 @@ public sealed partial class BloodCultSystem
         List<ProtoId<StartingGearPrototype>> gear = new() { spellGear };
         _loadout.Equip(cultist, gear, null);
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnTeleport(EntityUid cultist, BloodCultistComponent component, BloodCultTeleportActionEvent args)
@@ -233,8 +235,8 @@ public sealed partial class BloodCultSystem
         List<ProtoId<StartingGearPrototype>> gear = new() { spellGear };
         _loadout.Equip(cultist, gear, null);
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnElectromagneticPulse(EntityUid cultist, BloodCultistComponent component, BloodCultElectromagneticPulseActionEvent args)
@@ -248,8 +250,9 @@ public sealed partial class BloodCultSystem
                 exclusions.Add(uid);
         }
         _emp.EmpPulseExclusions(coords, 5f, 100000f, 60f, exclusions);
-        EmpoweringCheck(args.Action, component);
+
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnShadowShackles(EntityUid cultist, BloodCultistComponent component, BloodCultShadowShacklesActionEvent args)
@@ -260,8 +263,8 @@ public sealed partial class BloodCultSystem
         List<ProtoId<StartingGearPrototype>> gear = new() { spellGear };
         _loadout.Equip(cultist, gear, null);
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnTwistedConstruction(EntityUid cultist, BloodCultistComponent component, BloodCultTwistedConstructionActionEvent args)
@@ -272,8 +275,8 @@ public sealed partial class BloodCultSystem
         List<ProtoId<StartingGearPrototype>> gear = new() { spellGear };
         _loadout.Equip(cultist, gear, null);
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnSummonEquipment(EntityUid cultist, BloodCultistComponent component, BloodCultSummonEquipmentActionEvent args)
@@ -284,8 +287,8 @@ public sealed partial class BloodCultSystem
         List<ProtoId<StartingGearPrototype>> gear = new() { spellGear };
         _loadout.Equip(cultist, gear, null);
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnSummonDagger(EntityUid cultist, BloodCultistComponent component, BloodCultSummonDaggerActionEvent args)
@@ -303,8 +306,9 @@ public sealed partial class BloodCultSystem
         var dagger = _entityManager.SpawnEntity(possibleDaggerTypes[randomIndex], cultistCoords);
         component.RecallDaggerActionEntity = dagger;
         _hands.TryPickupAnyHand(cultist, dagger);
-        EmpoweringCheck(args.Action, component);
+
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnHallucinations(EntityUid cultist, BloodCultistComponent component, BloodCultHallucinationsActionEvent args)
@@ -315,8 +319,8 @@ public sealed partial class BloodCultSystem
         if (!TryComp<BloodCultistComponent>(args.Entity, out _))
             _hallucinations.StartHallucinations(args.Entity.Value, "Hallucinations", TimeSpan.FromSeconds(30f), true, "MindBreaker");
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void OnConcealPresence(EntityUid cultist, BloodCultistComponent component, BloodCultConcealPresenceActionEvent args)
@@ -391,8 +395,8 @@ public sealed partial class BloodCultSystem
                 }
             }
         }
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
     #region Blood Rites
     private void OnBloodRites(EntityUid cultist, BloodCultistComponent component, BloodCultBloodRitesActionEvent args)
@@ -403,8 +407,8 @@ public sealed partial class BloodCultSystem
         List<ProtoId<StartingGearPrototype>> gear = new() { spellGear };
         _loadout.Equip(cultist, gear, null);
 
-        EmpoweringCheck(args.Action, component);
         args.Handled = true;
+        EmpoweringCheck(args.Action, component);
     }
 
     private void BloodRites(Entity<BloodSpellComponent> ent, ref UseInHandEvent args)
@@ -412,10 +416,10 @@ public sealed partial class BloodCultSystem
         if (!TryComp<BloodSpellComponent>(ent, out var comp) || comp.Prototype.FirstOrDefault() != "bloodrites")
             return;
 
+        args.Handled = true;
         _entityManager.DeleteEntity(ent);
         var netEntity = _entityManager.GetNetEntity(args.User);
         RaiseNetworkEvent(new BloodRitesPressedEvent(netEntity));
-        args.Handled = true;
     }
 
     private void BloodRitesSelect(BloodRitesMenuClosedEvent args, EntitySessionEventArgs eventArgs)
@@ -581,8 +585,12 @@ public sealed partial class BloodCultSystem
                 if (!TryComp<BloodCultistComponent>(target, out _))
                 {
                     ExtractBlood(user, -10, 6);
-                    EnsureComp<MutedComponent>(target);
-                    Timer.Spawn(10000, () => { RemComp<MutedComponent>(target); });
+                    if (!HasComp<MutedComponent>(target))
+                    {
+                        EnsureComp<MutedComponent>(target);
+                        Timer.Spawn(10000, () => { RemComp<MutedComponent>(target); });
+                    }
+
                     _stun.TryParalyze(target, TimeSpan.FromSeconds(4f), true);
                     if (!TryComp<FlashImmunityComponent>(target, out var flash))
                         _flash.Flash(target, user, entity, 2f, 1f);
@@ -612,7 +620,7 @@ public sealed partial class BloodCultSystem
                 if (!TryComp<BloodCultistComponent>(target, out _))
                 {
                     if (TryComp<MobStateComponent>(target, out var mobstate) && mobstate.CurrentState != MobState.Alive && mobstate.CurrentState != MobState.Invalid
-                        || HasComp<SleepingComponent>(target) || TryComp<StaminaComponent>(target, out var stamina) && stamina.StaminaDamage >= 90)
+                        || HasComp<SleepingComponent>(target) || TryComp<StaminaComponent>(target, out var stamina) && stamina.StaminaDamage >= stamina.CritThreshold * 0.9f)
                     {
                         if (TryComp<CuffableComponent>(target, out var cuffable) && cuffable.CanStillInteract)
                         {
@@ -749,6 +757,9 @@ public sealed partial class BloodCultSystem
                     return;
                 }
 
+                if (!TryComp<UseDelayComponent>(entity, out var useDelay) || _useDelay.IsDelayed((entity, useDelay)))
+                    return;
+
                 if (TryComp<BloodCultistComponent>(target, out _))
                 {
                     if (!TryComp<DamageableComponent>(target, out var damage))
@@ -832,8 +843,9 @@ public sealed partial class BloodCultSystem
                 else
                 {
                     _popup.PopupEntity(Loc.GetString("blood-cult-blood-rites-failed"), user, user, PopupType.SmallCaution);
+                    args.Handled = true;
                 }
-                args.Handled = true;
+                _useDelay.TryResetDelay((entity, useDelay));
                 break;
             default:
                 _popup.PopupEntity(Loc.GetString("blood-cult-spell-failed"), user, user, PopupType.SmallCaution);

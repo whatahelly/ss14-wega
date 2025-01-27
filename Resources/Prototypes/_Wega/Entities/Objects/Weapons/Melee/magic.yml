@@ -176,7 +176,7 @@
     quickEquip: false
     slots:
     - back
-    - suitStorag
+    - suitStorage
   - type: Item
     size: Normal
   - type: MeleeWeapon
@@ -408,7 +408,7 @@
     prototype:
     - bloodrites
   - type: UseDelay
-    delay: 0.5
+    delay: 5
   - type: Item
     inhandVisuals:
       left:

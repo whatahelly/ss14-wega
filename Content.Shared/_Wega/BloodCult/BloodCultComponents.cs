@@ -56,8 +56,6 @@ public sealed partial class ShowCultistIconsComponent : Component
 [RegisterComponent]
 public sealed partial class AutoCultistComponent : Component
 {
-    [DataField]
-    public EntProtoId Profile = "BloodCult";
 }
 
 [RegisterComponent]

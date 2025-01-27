@@ -226,7 +226,7 @@
 - type: entity
   id: TeleportConstructSpell
   name: Disembodied
-ption: "An ability that allows you to  descri pass through the visible and invisible."
+  description: "An ability that allows you to  descri pass through the visible and invisible."
   categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
