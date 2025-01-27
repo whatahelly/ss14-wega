@@ -19,6 +19,35 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
+  - type: Damageable
+    damageContainer: ManifestedSpirit
+    damageModifierSet: ManifestedSpirit
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/demon_dies.ogg
+  - type: NoSlip
+  - type: ContentEye
+    maxZoom: 1.2, 1.2
+  - type: CombatMode
+  - type: MeleeWeapon
+    altDisarm: false
+    hidden: true
+    animation: WeaponArcSlash
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    attackRate: 0.90
+    damage:
+      types:
+        Blunt: 5
+        Slash: 10
   - type: Input
     context: "ghost"
   - type: ShowCultistIcons

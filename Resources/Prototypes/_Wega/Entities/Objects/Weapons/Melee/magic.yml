@@ -222,8 +222,6 @@
   name: blood spear
   description: The spear formed from blood clots looks quite fragile.
   components:
-  - type: EmbeddableProjectile
-    offset: -0.15,0.0
   - type: ThrowingAngle
     angle: 225
   - type: LandAtCursor
@@ -252,6 +250,7 @@
     - suitStorage
   - type: Item
     size: Ginormous
+  - type: Wieldable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Glass

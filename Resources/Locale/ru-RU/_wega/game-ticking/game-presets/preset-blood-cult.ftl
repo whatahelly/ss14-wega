@@ -11,10 +11,10 @@ blood-cult-role-greeting-animal =
 	Вы — Существо Нар’Си!
 	Вы — часть тени, служите Геометрии Крови. Помогите своим братьям в призыве Нар’Си и принесении жертв.
 
-blood-cult-godcalled = [color=crimson]Победа Культ Крови: Богиня призвана![/color]
-blood-cult-ritualconducted = [color=green]Победа Культ Крови: Ритуал завершён успешно![/color]
-blood-cult-neutral = [color=yellow]Ничейный исход: Ни победы, ни поражения![/color]
-blood-cult-cultlose = [color=grey]Поражение Культ Крови: Нар’Си отвергла своих последователей![/color]
+blood-cult-godcalled = [color=crimson]Победа Культ Крови[/color]
+blood-cult-ritualconducted = [color=blue]Малая победа Культа Крови[/color]
+blood-cult-neutral = [color=yellow]Ничейный исход[/color]
+blood-cult-cultlose = [color=grey]Поражение Культа Крови[/color]
 
 blood-cult-cond-godcalled = Нар’Си была призвана, её тёмная сила охватила станцию!
 blood-cult-cond-ritualconducted = Ритуал не был завершён, Культ Крови только собрал силу, чтобы призвать Нар’Си!

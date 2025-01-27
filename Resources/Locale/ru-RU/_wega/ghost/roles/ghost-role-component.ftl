@@ -7,6 +7,8 @@ ghost-role-information-construct-rules =
     Вы обязаны слушать все что вам говорят члены культа крови.
     Вы НЕ можете вредить членам культа крови.
 
+ghost-role-information-narsie = Нар’Си
+ghost-role-information-narsie-desc = Конец...
 ghost-role-information-cultist = Культист крови
 ghost-role-information-cultist-desc = Уснувшая оболочка культиста нуждается в новой душе.
 ghost-role-information-soul-stone-name = Камень души

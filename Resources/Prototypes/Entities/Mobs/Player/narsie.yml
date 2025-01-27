@@ -116,8 +116,8 @@
     allowMovement: true
     allowSpeech: true
     makeSentient: true
-    name: ""
-    description: ""
+    name: ghost-role-information-narsie
+    description: ghost-role-information-narsie-desc
     rules: ""
     raffle:
       settings: short
