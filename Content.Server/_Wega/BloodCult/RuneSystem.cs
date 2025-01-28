@@ -295,8 +295,10 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
                             // Gib
                             if (HasComp<BloodCultObjectComponent>(target))
                                 _bloodCult.CheckTargetsConducted(target);
+
                             var damage = new DamageSpecifier { DamageDict = { { "Blunt", 1000 } } };
                             _damage.TryChangeDamage(target, damage, true);
+                            IncrementOfferingsCount();
                         }
                         else
                         {
@@ -340,6 +342,7 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
                             // Gib
                             var damage = new DamageSpecifier { DamageDict = { { "Blunt", 1000 } } };
                             _damage.TryChangeDamage(target, damage, true);
+                            IncrementOfferingsCount();
                         }
                         else
                         {
