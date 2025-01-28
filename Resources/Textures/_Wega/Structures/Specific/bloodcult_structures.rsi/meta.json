@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/ss220-space/Paradise",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "altar"
+    },
+    {
+      "name": "archive"
+    },
+    {
+      "name": "barrier"
+    },
+    {
+      "name": "bloodboil"
+    },
+    {
+      "name": "construct-cult",
+      "delays": [ [ 0.5, 0.5, 0.5, 0.5 ] ]
+    },
+    {
+      "name": "empowering"
+    },
+    {
+      "name": "forge"
+    },
+    {
+      "name": "offering"
+    },
+    {
+      "name": "pylon",
+      "delays": [ [ 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 ] ]
+    },
+    {
+      "name": "revive"
+    },
+    {
+      "name": "spiritrealm"
+    },
+    {
+      "name": "summoning"
+    },
+    {
+      "name": "teleport"
+    }
+  ]
+}

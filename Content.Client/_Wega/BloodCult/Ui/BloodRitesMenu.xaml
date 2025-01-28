@@ -1,0 +1,34 @@
+<ui:RadialMenu xmlns="https://spacestation14.io"
+               xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+               xmlns:local="clr-namespace:Content.Client.Select.Class.UI;assembly=Content.Client"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               x:Class="Content.Client.Blood.Rites.UI.BloodRitesMenu"
+               CloseButtonStyleClass="RadialMenuCloseButton"
+               VerticalExpand="True"
+               HorizontalExpand="True"
+               MinSize="450 450">
+
+    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" Radius="64" ReserveSpaceForHiddenChildren="False">
+        <!-- Blood Orb -->
+        <ui:RadialMenuTextureButton Name="BloodOrbButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-blood-orb'}" TargetLayer="BloodOrb">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/orb.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Blood Recharge -->
+        <ui:RadialMenuTextureButton Name="BloodRechargeButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-blood-recharge'}" TargetLayer="BloodRecharge">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/recharge.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Blood Spear -->
+        <ui:RadialMenuTextureButton Name="BloodSpearButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-blood-spear'}" TargetLayer="BloodSpear">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/spear.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Blood Bolt Barrage -->
+        <ui:RadialMenuTextureButton Name="BloodBoltBarrageButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-blood-bolt-barrage'}" TargetLayer="BloodBoltBarrage">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/barrage.png"/>
+        </ui:RadialMenuTextureButton>
+
+    </ui:RadialContainer>
+
+</ui:RadialMenu>

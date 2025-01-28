@@ -1,0 +1,9 @@
+- type: entity
+  name: bola
+  parent: Bola
+  id: CultBola
+  description: There are some runes depicted on it.
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Throwable/cult_bola.rsi
+    state: icon

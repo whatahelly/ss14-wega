@@ -1,0 +1,12 @@
+ent-MobBanshee = банши
+    .desc = Жуткий призрак.
+ent-MobConstructJuggernaut = джаггернаут
+    .desc = Ужасное, нечестивое создание, порождение самого дьявола!
+ent-MobConstructWraith = Фантом
+    .desc = { ent-MobConstructJuggernaut.desc }
+ent-MobConstructArtificer = Созидатель
+    .desc = { ent-MobConstructJuggernaut.desc }
+ent-MobConstructHarvester = Жнец
+    .desc = { ent-MobConstructJuggernaut.desc }
+ent-MobConstructProteon = Протеон
+    .desc = { ent-MobConstructJuggernaut.desc }

@@ -1,0 +1,7 @@
+- type: stack
+  id: RuneMetal
+  name: runemetal
+  icon: { sprite: _Wega/Objects/Materials/Sheets/metal.rsi, state: runemetal }
+  spawn: SheetRuneMetal1
+  maxCount: 30
+  itemSize: 1

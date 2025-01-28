@@ -1,0 +1,39 @@
+<ui:RadialMenu xmlns="https://spacestation14.io"
+               xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+               xmlns:local="clr-namespace:Content.Client.Select.Class.UI;assembly=Content.Client"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               x:Class="Content.Client.Select.Construct.UI.BloodConstructMenu"
+               CloseButtonStyleClass="RadialMenuCloseButton"
+               VerticalExpand="True"
+               HorizontalExpand="True"
+               MinSize="450 450">
+
+    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" Radius="64" ReserveSpaceForHiddenChildren="False">
+        <!-- Juggernaut -->
+        <ui:RadialMenuTextureButton Name="BloodJuggernautButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-juggernaut'}" TargetLayer="BloodJuggernaut">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/juggernaut.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Wraith -->
+        <ui:RadialMenuTextureButton Name="BloodWraithButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-wraith'}" TargetLayer="BloodWraith">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/wraith.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Artificer -->
+        <ui:RadialMenuTextureButton Name="BloodArtificerButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-artificer'}" TargetLayer="BloodArtificer">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/artificer.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Harvester -->
+        <ui:RadialMenuTextureButton Name="BloodHarvesterButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-harvester'}" TargetLayer="BloodHarvester">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/harvester.png"/>
+        </ui:RadialMenuTextureButton>
+
+        <!-- Proteon -->
+        <ui:RadialMenuTextureButton Name="BloodProteonButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-proteon'}" TargetLayer="BloodProteon">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/proteon.png"/>
+        </ui:RadialMenuTextureButton>
+
+    </ui:RadialContainer>
+
+</ui:RadialMenu>

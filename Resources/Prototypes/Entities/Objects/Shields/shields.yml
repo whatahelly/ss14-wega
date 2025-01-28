@@ -329,7 +329,7 @@
     - type: Item
       heldPrefix: mirror
     - type: Reflect
-      reflectProb: 0.95
+      reflectProb: 0.7 # Corvax-Wega-Blood-Cult
       reflects:
         - Energy
     - type: Blocking #Mirror shield reflects heat/laser, but is relatively weak to everything else.
@@ -484,7 +484,7 @@
         jobRequired:
           - SalvageSpecialist
 # Corvax-HiddenDesc-End
-        
+
 - type: entity
   name: broken energy shield
   parent: BaseItem

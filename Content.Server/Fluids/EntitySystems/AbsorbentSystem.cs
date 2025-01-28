@@ -1,7 +1,10 @@
 using System.Numerics;
 using Content.Server.Popups;
+using Content.Shared.Blood.Cult; // Corvax-Wega-Blood-Cult
+using Content.Shared.Blood.Cult.Components; // Corvax-Wega-Blood-Cult
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.DoAfter; // Corvax-Wega-Blood-Cult
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
@@ -28,6 +31,7 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!; // Corvax-Wega-Blood-Cult
 
     public override void Initialize()
     {
@@ -97,6 +101,20 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
     {
         if (!args.CanReach || args.Handled || args.Target == null)
             return;
+
+        // Corvax-Wega-Blood-Cult-start
+        if (TryComp<BloodRuneComponent>(args.Target, out _))
+        {
+            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(4f), new BloodRuneCleaningDoAfterEvent(), args.User, args.Target)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                MovementThreshold = 0.01f,
+                NeedHand = false
+            });
+            return;
+        }
+        // Corvax-Wega-Blood-Cult-end
 
         Mop(args.User, args.Target.Value, args.Used, component);
         args.Handled = true;

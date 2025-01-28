@@ -14,3 +14,40 @@
         damage:
           types:
             Cellular: 0.5
+
+- type: reagent
+  id: Unholywater
+  name: reagent-name-unholywater
+  group: Medicine
+  desc: reagent-desc-unholywater
+  physicalDesc: reagent-physical-desc-unholy
+  flavor: unholy
+  color: "#0A0A4A"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+    Medicine:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Cultist
+        damage:
+          types:
+            Blunt: -0.4
+            Poison: -0.4
+            Heat: -0.4
+            Shock: -0.4
+            Cold: -0.4
+  reactiveEffects:
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:ExtinguishReaction
+  plantMetabolism:
+  - !type:PlantAdjustWater
+    amount: 1
+  tileReactions:
+  - !type:ExtinguishTileReaction { }

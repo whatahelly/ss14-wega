@@ -23,3 +23,16 @@
   icon:
     sprite: /Textures/_Wega/Interface/Misc/vampire_icons.rsi
     state: Thrall
+
+- type: factionIcon
+  id: BloodCultistFaction
+  isShaded: true
+  priority: 11
+  showTo:
+    components:
+      - BloodCultist
+      - ShowCultistIcon
+  locationPreference: Right
+  icon:
+    sprite: /Textures/_Wega/Interface/Misc/bloodcult_icons.rsi
+    state: Cultist
