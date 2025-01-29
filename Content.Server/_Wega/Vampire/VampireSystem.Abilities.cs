@@ -274,19 +274,17 @@ public sealed partial class VampireSystem
         args.Handled = true;
     }
 
-    private void OnVampireGlare(EntityUid uid, VampireComponent component, VampireGlareActionEvent ev)
+    private void OnVampireGlare(EntityUid vampire, VampireComponent component, VampireGlareActionEvent ev)
     {
-        var vampire = new Entity<VampireComponent>(uid, component);
         var target = ev.Target;
-
         if (HasComp<VampireComponent>(target) || HasComp<FlashImmunityComponent>(target))
             return;
 
         if (HasComp<BibleUserComponent>(target))
         {
             _stun.TryParalyze(vampire, TimeSpan.FromSeconds(5f), true);
-            _chat.TryEmoteWithoutChat(vampire.Owner, _prototypeManager.Index<EmotePrototype>("Scream"), true);
-            _damage.TryChangeDamage(vampire.Owner, VampireComponent.HolyDamage);
+            _chat.TryEmoteWithoutChat(vampire, _prototypeManager.Index<EmotePrototype>("Scream"), true);
+            _damage.TryChangeDamage(vampire, VampireComponent.HolyDamage);
             return;
         }
 
@@ -647,13 +645,13 @@ public sealed partial class VampireSystem
                 if (stealthComponent.Enabled)
                 {
                     _stealth.SetEnabled(uid, false, stealthComponent);
-                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed / 1.3f, originalSprintSpeed / 1.3f, speedmodComponent.Acceleration, speedmodComponent);
+                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed - 0.78f, originalSprintSpeed - 1.32f, speedmodComponent.Acceleration, speedmodComponent);
                     _popup.PopupEntity(Loc.GetString("vampire-stealth-disabled"), uid, uid, PopupType.Small);
                 }
                 else
                 {
                     _stealth.SetEnabled(uid, true, stealthComponent);
-                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed * 1.3f, originalSprintSpeed * 1.3f, speedmodComponent.Acceleration, speedmodComponent);
+                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed + 0.78f, originalSprintSpeed + 1.32f, speedmodComponent.Acceleration, speedmodComponent);
                     _popup.PopupEntity(Loc.GetString("vampire-stealth-enabled"), uid, uid, PopupType.Small);
                     SubtractBloodEssence(uid, 10);
                 }
@@ -672,7 +670,7 @@ public sealed partial class VampireSystem
                     var originalWalkSpeed = speedmodComponent.CurrentWalkSpeed;
                     var originalSprintSpeed = speedmodComponent.CurrentSprintSpeed;
 
-                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed * 1.3f, originalSprintSpeed * 1.3f, speedmodComponent.Acceleration, speedmodComponent);
+                    _speed.ChangeBaseSpeed(uid, originalWalkSpeed + 0.78f, originalSprintSpeed + 1.32f, speedmodComponent.Acceleration, speedmodComponent);
                 }
 
                 _popup.PopupEntity(Loc.GetString("vampire-stealth-enabled"), uid, uid, PopupType.Small);

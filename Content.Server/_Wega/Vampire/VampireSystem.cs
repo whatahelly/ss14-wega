@@ -21,7 +21,9 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.NullRod.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
@@ -79,6 +81,9 @@ public sealed partial class VampireSystem : SharedVampireSystem
         // Distribute Damage
         SubscribeLocalEvent<VampireComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<ThrallComponent, DamageChangedEvent>(OnDamageChanged);
+
+        // Thralls
+        SubscribeLocalEvent<MindShieldComponent, ComponentStartup>(MindShieldImplanted);
 
         InitializePowers();
     }
@@ -426,6 +431,26 @@ public sealed partial class VampireSystem : SharedVampireSystem
     {
         var totalDamage = damage.DamageDict.Values.Aggregate(FixedPoint2.Zero, (sum, value) => sum + value);
         return totalDamage < FixedPoint2.Zero;
+    }
+    #endregion
+
+    #region Thralls
+    private void MindShieldImplanted(EntityUid uid, MindShieldComponent comp, ComponentStartup init)
+    {
+        if (TryComp<ThrallComponent>(uid, out var thrall))
+        {
+            var stunTime = TimeSpan.FromSeconds(4);
+            var name = Identity.Entity(uid, EntityManager);
+            if (TryComp<VampireComponent>(thrall.VampireOwner, out var vampire))
+            {
+                vampire.ThrallOwned.Remove(uid);
+                vampire.ThrallCount--;
+            }
+
+            RemComp<ThrallComponent>(uid);
+            _stun.TryParalyze(uid, stunTime, true);
+            _popup.PopupEntity(Loc.GetString("thrall-break-control", ("name", name)), uid);
+        }
     }
     #endregion
 }

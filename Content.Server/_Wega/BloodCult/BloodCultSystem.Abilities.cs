@@ -313,11 +313,8 @@ public sealed partial class BloodCultSystem
 
     private void OnHallucinations(EntityUid cultist, BloodCultistComponent component, BloodCultHallucinationsActionEvent args)
     {
-        if (!args.Entity.HasValue)
-            return;
-
-        if (!TryComp<BloodCultistComponent>(args.Entity, out _))
-            _hallucinations.StartHallucinations(args.Entity.Value, "Hallucinations", TimeSpan.FromSeconds(30f), true, "MindBreaker");
+        if (!TryComp<BloodCultistComponent>(args.Target, out _))
+            _hallucinations.StartHallucinations(args.Target, "Hallucinations", TimeSpan.FromSeconds(30f), true, "MindBreaker");
 
         args.Handled = true;
         EmpoweringCheck(args.Action, component);

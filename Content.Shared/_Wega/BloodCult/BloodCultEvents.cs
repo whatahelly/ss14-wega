@@ -289,7 +289,7 @@ public sealed partial class RecallBloodDaggerEvent : InstantActionEvent
 }
 
 
-public sealed partial class BloodCultHallucinationsActionEvent : EntityWorldTargetActionEvent
+public sealed partial class BloodCultHallucinationsActionEvent : EntityTargetActionEvent
 {
 }
 

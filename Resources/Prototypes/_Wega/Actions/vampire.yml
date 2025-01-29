@@ -54,6 +54,7 @@
   components:
   - type: EntityTargetAction
     icon: { sprite: _Wega/Interface/Actions/actions_vampire.rsi, state: "glare" }
+    itemIconStyle: BigAction
     sound: !type:SoundPathSpecifier
       path: /Audio/_Wega/Effects/Vampire/glare.ogg
     event: !type:VampireGlareActionEvent

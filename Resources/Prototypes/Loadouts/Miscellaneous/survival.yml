@@ -20,7 +20,8 @@
     - Reptilian
     - Vulpkanin # Corvax-MRP
     - Felinid # Corvax-Wega-UwU
-    - Resomi #Corvax-Wega-Resomi
+    - Resomi # Corvax-Wega-Resomi
+    - Skrell # Corvax-Wega-Skrell
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox

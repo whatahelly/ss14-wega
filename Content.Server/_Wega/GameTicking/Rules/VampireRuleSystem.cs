@@ -18,6 +18,7 @@ using Content.Shared.Damage;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Vampire.Components;
 using Robust.Shared.Timing;
 
@@ -110,6 +111,7 @@ namespace Content.Server.GameTicking.Rules
                 typeof(PacifiedComponent),
                 typeof(PerishableComponent),
                 typeof(BarotraumaComponent),
+                typeof(TemperatureSpeedComponent),
                 typeof(ThirstComponent),
                 typeof(ClumsyComponent)
             };
