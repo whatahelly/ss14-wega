@@ -44,7 +44,7 @@
   showTo:
     components:
       - BloodCultist
-      - ShowCultistIcon
+      - ShowCultistIcons
   locationPreference: Right
   icon:
     sprite: /Textures/_Wega/Interface/Misc/bloodcult_icons.rsi
