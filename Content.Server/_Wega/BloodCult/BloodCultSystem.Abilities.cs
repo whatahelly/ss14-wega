@@ -439,13 +439,13 @@ public sealed partial class BloodCultSystem
             {
                 if (!int.TryParse(input, out var inputValue) || inputValue <= 0)
                 {
-                    _popup.PopupEntity(Loc.GetString("blood-orb-invalid-input"), cultist, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("blood-orb-invalid-input"), cultist, cultist, PopupType.Medium);
                     return;
                 }
 
                 if (inputValue > component.BloodCount)
                 {
-                    _popup.PopupEntity(Loc.GetString("blood-orb-not-enough-blood"), cultist, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("blood-orb-not-enough-blood"), cultist, cultist, PopupType.Medium);
                 }
                 else
                 {
@@ -456,7 +456,7 @@ public sealed partial class BloodCultSystem
                     orb.Blood = inputValue;
 
                     _action.RemoveAction(cultist, args.Action);
-                    _popup.PopupEntity(Loc.GetString("blood-orb-success", ("amount", inputValue)), cultist, PopupType.Medium);
+                    _popup.PopupEntity(Loc.GetString("blood-orb-success", ("amount", inputValue)), cultist, cultist, PopupType.Medium);
                 }
             });
 

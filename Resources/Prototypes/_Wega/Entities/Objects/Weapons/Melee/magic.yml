@@ -28,7 +28,7 @@
     sprite: _Wega/Objects/Weapons/Melee/vampireclaws.rsi
     state: icon
   - type: MultiHandedItem
-  - type: Unremoveable
+  - type: DeleteOnDrop
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible

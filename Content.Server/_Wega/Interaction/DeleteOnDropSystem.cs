@@ -23,7 +23,7 @@ public sealed class DeleteOnDropSystem : EntitySystem
         if (!item.DeleteOnDrop || !_entityManager.EntityExists(uid))
             return;
 
-        _entityManager.DeleteEntity(uid);
+        QueueDel(uid);
     }
 
     private void OnUnequipHand(EntityUid uid, DeleteOnDropComponent item, GotUnequippedHandEvent args)
@@ -31,7 +31,7 @@ public sealed class DeleteOnDropSystem : EntitySystem
         if (!item.DeleteOnDrop || !_entityManager.EntityExists(uid))
             return;
 
-        _entityManager.DeleteEntity(uid);
+        QueueDel(uid);
     }
 
     private void OnDropped(EntityUid uid, DeleteOnDropComponent item, DroppedEvent args)
@@ -39,7 +39,7 @@ public sealed class DeleteOnDropSystem : EntitySystem
         if (!item.DeleteOnDrop || !_entityManager.EntityExists(uid))
             return;
 
-        _entityManager.DeleteEntity(uid);
+        QueueDel(uid);
     }
 }
 

@@ -1,6 +1,6 @@
 <ui:RadialMenu xmlns="https://spacestation14.io"
                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
-               xmlns:local="clr-namespace:Content.Client.Select.Class.UI;assembly=Content.Client"
+               xmlns:local="clr-namespace:Content.Client.Runes.Panel.Ui;assembly=Content.Client"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                x:Class="Content.Client.Runes.Panel.Ui.EmpoweringRuneMenu"
                CloseButtonStyleClass="RadialMenuCloseButton"

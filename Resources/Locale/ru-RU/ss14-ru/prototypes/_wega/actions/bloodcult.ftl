@@ -4,7 +4,7 @@ ent-ActionBloodCultObjective = [color=red]Цель[/color]
 ent-ActionBloodCultComms = [color=red]Общение[/color]
     .desc = Позволяет разговаривать со своими собратьями.
 ent-ActionBloodMagic = [color=red]Магия крови[/color]
-    .desc = Summon abilities with your blood.
+    .desc = Вызывайте способности своей кровью.
 ent-ActionRecallBloodDagger = [color=red]Вернуть кинжал[/color]
     .desc = Если он существует, он обязательно вернется к вам.
 

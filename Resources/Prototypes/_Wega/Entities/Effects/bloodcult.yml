@@ -11,6 +11,8 @@
 - type: entity
   id: BloodCultOrb
   parent: BaseItem
+  name: blood orb
+  description: ""
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
