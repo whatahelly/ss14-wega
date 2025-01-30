@@ -59,8 +59,7 @@ namespace Content.Server.GameTicking.Rules
 
         private void OnCultistSelected(Entity<BloodCultRuleComponent> mindId, ref AfterAntagEntitySelectedEvent args)
         {
-            var ent = args.EntityUid;
-            MakeCultist(ent);
+            MakeCultist(args.EntityUid);
             _antag.SendBriefing(ent, MakeBriefing(ent), Color.Red, null);
         }
 
@@ -121,6 +120,7 @@ namespace Content.Server.GameTicking.Rules
                 _antag.SendBriefing(mind.Session, MakeBriefing(uid), Color.Red, new SoundPathSpecifier("/Audio/_Wega/Ambience/Antag/bloodcult_start.ogg"));
             RemComp<AutoCultistComponent>(uid);
 
+            MakeCultist(uid);
             var possibleDaggerTypes = new[] { "WeaponBloodDagger", "WeaponDeathDagger", "WeaponHellDagger" };
             var randomIndex = new Random().Next(possibleDaggerTypes.Length);
             var dagger = _entityManager.SpawnEntity(possibleDaggerTypes[randomIndex], Transform(uid).Coordinates);
