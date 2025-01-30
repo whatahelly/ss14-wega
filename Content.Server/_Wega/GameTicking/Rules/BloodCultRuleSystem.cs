@@ -59,7 +59,9 @@ namespace Content.Server.GameTicking.Rules
 
         private void OnCultistSelected(Entity<BloodCultRuleComponent> mindId, ref AfterAntagEntitySelectedEvent args)
         {
-            MakeCultist(args.EntityUid);
+            var ent = args.EntityUid;
+
+            MakeCultist(ent);
             _antag.SendBriefing(ent, MakeBriefing(ent), Color.Red, null);
         }
 
