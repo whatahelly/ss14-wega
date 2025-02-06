@@ -20,6 +20,12 @@
         amount: 2
       - id: BungoSeeds
         amount: 2
+      # Corvax-Wega-start
+      - id: RoseSeeds
+        amount: 2
+      - id: SunflowerSeeds
+        amount: 2
+      # Corvax-Wega-end
 
 - type: entity
   id: CrateHydroponicsSeedsMedicinal

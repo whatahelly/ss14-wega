@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseItem
+  id: BarberRazor
+  name: razor
+  description: "Bzzzzzzzzzzz."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Misc/razor.rsi
+    state: icon
+  - type: MagicMirror
+    changeHairSound: "/Audio/_Wega/Items/hair-clippers.ogg"
+    addSlotTime: 4
+    removeSlotTime: 4
+    selectSlotTime: 4
+    changeSlotTime: 4
+  - type: ActivatableUI
+    key: enum.MagicMirrorUiKey.Key
+    inHandsOnly: true
+    requireActiveHand: true
+  - type: UserInterface
+    interfaces:
+      enum.MagicMirrorUiKey.Key:
+        type: MagicMirrorBoundUserInterface
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 5

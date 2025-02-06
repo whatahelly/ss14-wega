@@ -1,0 +1,195 @@
+- type: constructionGraph
+  id: FlowerRoseBouquetCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rosebouquet
+          steps:
+            - tag: Rose
+              name: rose
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+                state: produce
+            - tag: Rose
+              name: rose
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+                state: produce
+            - tag: Rose
+              name: rose
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+                state: produce
+            - tag: Rose
+              name: rose
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+                state: produce
+            - tag: Rose
+              name: rose
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+                state: produce
+              doAfter: 10
+    - node: rosebouquet
+      entity: FlowerBouquetRose
+      edges:
+        - to: start
+          steps:
+            - tool: Cutting
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: FlowerRose
+              amount: 5
+            - !type:EmptyAllContainers
+            - !type:DeleteEntity
+
+- type: constructionGraph
+  id: FlowerSunflowerBouquetCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: sunflowerbouquet
+          steps:
+            - tag: Sunflower
+              name: sunflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+                state: produce
+            - tag: Sunflower
+              name: sunflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+                state: produce
+            - tag: Sunflower
+              name: sunflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+                state: produce
+            - tag: Sunflower
+              name: sunflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+                state: produce
+            - tag: Sunflower
+              name: sunflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+                state: produce
+              doAfter: 10
+    - node: sunflowerbouquet
+      entity: FlowerBouquetSunflower
+      edges:
+        - to: start
+          steps:
+            - tool: Cutting
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: FlowerSunflower
+              amount: 5
+            - !type:EmptyAllContainers
+            - !type:DeleteEntity
+
+- type: constructionGraph
+  id: PoppyFlowerBouquetCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: poppybouquet
+          steps:
+            - tag: FoodPoppy
+              name: poppy
+              icon:
+                sprite: Objects/Specific/Hydroponics/poppy.rsi
+                state: produce
+            - tag: FoodPoppy
+              name: poppy
+              icon:
+                sprite: Objects/Specific/Hydroponics/poppy.rsi
+                state: produce
+            - tag: FoodPoppy
+              name: poppy
+              icon:
+                sprite: Objects/Specific/Hydroponics/poppy.rsi
+                state: produce
+            - tag: FoodPoppy
+              name: poppy
+              icon:
+                sprite: Objects/Specific/Hydroponics/poppy.rsi
+                state: produce
+            - tag: FoodPoppy
+              name: poppy
+              icon:
+                sprite: Objects/Specific/Hydroponics/poppy.rsi
+                state: produce
+              doAfter: 10
+    - node: poppybouquet
+      entity: FlowerBouquetPoppy
+      edges:
+        - to: start
+          steps:
+            - tool: Cutting
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: FoodPoppy
+              amount: 5
+            - !type:EmptyAllContainers
+            - !type:DeleteEntity
+
+- type: constructionGraph
+  id: MixedFlowerBouquetCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: bouquetmixed
+          steps:
+            - tag: Flower
+              name: poppy
+              icon:
+                sprite: Objects/Specific/Hydroponics/poppy.rsi
+                state: produce
+            - tag: Sunflower
+              name: sunflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+                state: produce
+            - tag: Peaceflower
+              name: peaceflower
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/peaceflower.rsi
+                state: produce
+            - tag: Rose
+              name: rose
+              icon:
+                sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+                state: produce
+              doAfter: 10
+    - node: bouquetmixed
+      entity: FlowerBouquetMixed
+      edges:
+        - to: start
+          steps:
+            - tool: Cutting
+              doAfter: 10
+          completed:
+            - !type:SpawnPrototype
+              prototype: FoodPoppy
+              amount: 1
+            - !type:SpawnPrototype
+              prototype: FlowerRose
+              amount: 1
+            - !type:SpawnPrototype
+              prototype: FlowerSunflower
+              amount: 1
+            - !type:SpawnPrototype
+              prototype: FlowerPeaceFlower
+              amount: 1
+            - !type:EmptyAllContainers
+            - !type:DeleteEntity

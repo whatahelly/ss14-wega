@@ -1,0 +1,19 @@
+- type: entity
+  name: onigiri
+  parent: FoodBakedBase
+  id: Onigiri
+  description: "Best fried geometric shape in the galaxy."
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Food
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/japanfood.rsi
+    state: onigiri
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 20

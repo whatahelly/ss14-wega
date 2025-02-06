@@ -53,7 +53,7 @@ namespace Content.IntegrationTests.Tests.Preferences
                 Age = 21,
                 Appearance = new(
                     "Afro",
-                    Color.Aqua,
+                    new List<Color> { Color.Aqua }, // Corvax-Wega-Hair-Extended
                     "Shaved",
                     Color.Aquamarine,
                     Color.Azure,

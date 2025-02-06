@@ -1,2 +1,14 @@
 - type: Tag
   id: SoulStone
+
+- type: Tag
+  id: SoilBag
+
+- type: Tag
+  id: Rose
+
+- type: Tag
+  id: Sunflower
+
+- type: Tag
+  id: Peaceflower

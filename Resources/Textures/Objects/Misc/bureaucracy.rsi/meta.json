@@ -236,6 +236,12 @@
     },
     {
       "name": "paper_stamp-psychologist"
+    },
+    {
+      "name": "paper_ticket"
+    },
+    {
+      "name": "paper_ticket_words"
     }
   ]
 }

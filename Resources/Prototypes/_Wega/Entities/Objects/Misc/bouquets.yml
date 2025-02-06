@@ -1,0 +1,71 @@
+- type: entity
+  name: bouquet roses
+  parent: BaseItem
+  id: FlowerBouquetRose
+  description: "It looks beautiful and smells good."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Misc/rosebouquet.rsi
+    state: icon
+    scale: 1.3,1.3
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: FlowerRoseBouquetCraft
+    node: rosebouquet
+    containers:
+    - entity_storage
+
+- type: entity
+  name: bouquet sunflowers
+  parent: BaseItem
+  id: FlowerBouquetSunflower
+  description: "It looks beautiful and smells good."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Misc/sunbouquet.rsi
+    state: icon
+    scale: 1.15,1.15
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: FlowerSunflowerBouquetCraft
+    node: sunflowerbouquet
+    containers:
+    - entity_storage
+
+- type: entity
+  name: bouquet poppies
+  parent: BaseItem
+  id: FlowerBouquetPoppy
+  description: "It looks beautiful and smells good."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Misc/poppybouquet.rsi
+    state: icon
+    scale: 1.15,1.15
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: PoppyFlowerBouquetCraft
+    node: poppybouquet
+    containers:
+    - entity_storage
+
+- type: entity
+  name: mixed bouquet
+  parent: BaseItem
+  id: FlowerBouquetMixed
+  description: "It looks beautiful and smells good."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Misc/mixedbouquet.rsi
+    state: icon
+    scale: 1.15,1.15
+  - type: Item
+    size: Normal
+  - type: Construction
+    graph: MixedFlowerBouquetCraft
+    node: bouquetmixed
+    containers:
+    - entity_storage

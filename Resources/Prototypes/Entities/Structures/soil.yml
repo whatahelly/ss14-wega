@@ -55,3 +55,8 @@
         solution: soil
   - type: Appearance
   - type: PlantHolderVisuals
+  # Corvax-Wega-start
+  - type: Construction
+    graph: SoilGraph
+    node: soil
+  # Corvax-Wega-end

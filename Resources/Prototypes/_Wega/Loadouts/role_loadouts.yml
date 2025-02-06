@@ -1,0 +1,27 @@
+- type: roleLoadout
+  id: JobBarber
+  groups:
+  - Inventory # Corvax-Loadouts
+  - GroupTankHarness
+  - BartenderJumpsuit
+  - BarberOuterClothing
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks
+
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - Inventory # Corvax-Loadouts
+  - BrigmedicHead
+  - BrigmedicJumpsuit
+  - BrigmedicBackpack
+  - BrigmedicOuterClothing
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool

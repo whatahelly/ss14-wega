@@ -1,0 +1,25 @@
+- type: job
+  id: Barber
+  name: job-name-barber
+  description: job-description-barber
+  playTimeTracker: JobBarber
+  requirements:
+  - !type:OverallPlaytimeRequirement
+      time: 7200 #2 hrs # Corvax-RoleTime
+  startingGear: BarberGear
+  icon: "JobIconBarber"
+  supervisors: job-supervisors-hop
+  access:
+  - Service
+  - Maintenance
+
+- type: startingGear
+  id: BarberGear
+  equipment:
+    shoes: ClothingShoesColorBlack
+    id: BarberPDA
+    ears: ClothingHeadsetService
+  storage:
+    back:
+    - BarberScissors
+    - BarberRazor

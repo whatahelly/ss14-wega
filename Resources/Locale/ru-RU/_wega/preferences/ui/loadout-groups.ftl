@@ -12,6 +12,8 @@ loadout-group-captain-socks = Капитан, носки
 loadout-group-hop-top = Глава персонала, верхнее белье
 loadout-group-hop-bottom = Глава персонала, нижнее белье
 loadout-group-hop-socks = Глава персонала, носки
+# Medical
+loadout-group-barber-outerclothing = Барбер, верхняя одежда
 # Cargo
 loadout-group-quartermaster-top = Квартирмейстер, верхнее белье
 loadout-group-quartermaster-bottom = Квартирмейстер, нижнее белье
@@ -28,6 +30,10 @@ loadout-group-research-director-socks = Научный руководитель,
 loadout-group-head-of-security-top = Глава службы безопасности, верхнее белье
 loadout-group-head-of-security-bottom = Глава службы безопасности, нижнее белье
 loadout-group-head-of-security-socks = Глава службы безопасности, носки
+loadout-group-brigmedic-head = Бригмедик, голова
+loadout-group-brigmedic-jumpsuit = Бригмедик, комбинезон
+loadout-group-brigmedic-backpack = Бригмедик, рюкзак
+loadout-group-brigmedic-outerclothing = Бригмедик, верхняя одежда
 # Medical
 loadout-group-chief-medical-officer-top = Главный врач, верхнее белье
 loadout-group-chief-medical-officer-bottom = Главный врач, нижнее белье

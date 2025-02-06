@@ -1,0 +1,11 @@
+- type: entity
+  id: SpawnPointBarber
+  parent: SpawnPointJobBase
+  name: barber
+  components:
+  - type: SpawnPoint
+    job_id: Barber
+  - type: Sprite
+    layers:
+      - state: green
+      - state: serviceworker

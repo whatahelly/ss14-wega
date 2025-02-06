@@ -1,9 +1,278 @@
+# Base
+- type: reagent
+  id: Aperol
+  name: reagent-name-aperol
+  parent: BaseAlcohol
+  desc: reagent-desc-aperol
+  physicalDesc: reagent-physical-desc-tangy
+  flavor: aperol
+  color: "#ff4500"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/aperolglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.1
+
+- type: reagent
+  id: Jagermeister
+  name: reagent-name-jagermeister
+  parent: BaseAlcohol
+  desc: reagent-desc-jagermeister
+  physicalDesc: reagent-physical-desc-herbal
+  flavor: jagermeister
+  color: "#3b5323"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/jagermeisterglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: Schnaps
+  name: reagent-name-schnaps
+  parent: BaseAlcohol
+  desc: reagent-desc-schnaps
+  physicalDesc: reagent-physical-desc-spicy
+  flavor: schnaps
+  color: "#f8e8e8"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/schnapsglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: Sambuka
+  name: reagent-name-sambuka
+  parent: BaseAlcohol
+  desc: reagent-desc-sambuka
+  physicalDesc: reagent-physical-desc-anise
+  flavor: sambuka
+  color: "#f8f8ff"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/sambukaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.225
+
+- type: reagent
+  id: Bitter
+  name: reagent-name-bitter
+  parent: BaseAlcohol
+  desc: reagent-desc-bitter
+  physicalDesc: reagent-physical-desc-bitter
+  flavor: bitter
+  color: "#8b0000"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/bitterglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.225
+
+- type: reagent
+  id: Sheridan
+  name: reagent-name-sheridan
+  parent: BaseAlcohol
+  desc: reagent-desc-sheridan
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: sheridan
+  color: "#d2b48c"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/sheridanglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.175
+
+# Drinks
+- type: reagent
+  id: Eggnog
+  name: reagent-name-eggnog
+  parent: BaseAlcohol
+  desc: reagent-desc-eggnog
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: eggnog
+  color: "#f3e5ab"
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
+
+- type: reagent
+  id: FlamingMoe
+  name: reagent-name-flaming-moe
+  parent: BaseAlcohol
+  desc: reagent-desc-flaming-moe
+  physicalDesc: reagent-physical-desc-blazing
+  flavor: flaming-moe
+  color: "#ff4500"
+  metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: GinSonic
+  name: reagent-name-gin-sonic
+  parent: BaseAlcohol
+  desc: reagent-desc-gin-sonic
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: ginsonic
+  color: "#c0e8d5"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/ginsoniceglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Poison: 2
+            Asphyxiation: 2
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 1.35
+        sprintSpeedModifier: 1.35
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+      - !type:Jitter
+      - !type:GenericStatusEffect
+        key: Stun
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Haloperidol
+          max: 0.01
+        key: Drowsiness
+        time: 10
+        type: Remove
+    Medicine:
+      effects:
+      - !type:ResetNarcolepsy
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+
+- type: reagent
+  id: RainbowSky
+  name: reagent-name-rainbow-sky
+  parent: BaseAlcohol
+  desc: reagent-desc-rainbow-sky
+  physicalDesc: reagent-physical-desc-vibrant
+  flavor: rainbow-sky
+  color: "#ff69b4"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/rainbowskyglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.75
+
+- type: reagent
+  id: ThreeMileIslandIcedTea
+  name: reagent-name-three-mile-island-iced-tea
+  parent: BaseAlcohol
+  desc: reagent-desc-three-mile-island-iced-tea
+  physicalDesc: reagent-physical-desc-ionizing
+  flavor: three-mile-island-iced-tea
+  color: "#8b4513"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/threemileislandicedteaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.1
+
 - type: reagent
   id: BacchusBlessing
   name: reagent-name-bacchus-blessing
   parent: BaseAlcohol
   desc: reagent-desc-bacchus-blessing
-  physicalDesc: reagent-physical-desc-strong-smelling
+  physicalDesc: reagent-physical-desc-overpowering
   flavor: bacchus
   color: "#f6e9a6"
   recognizable: true
@@ -19,3 +288,872 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 4.5
+
+- type: reagent
+  id: BlackBlood
+  name: reagent-name-black-blood
+  parent: BaseAlcohol
+  desc: reagent-desc-black-blood
+  physicalDesc: reagent-physical-desc-dark-red
+  flavor: blackblood
+  color: "#330000"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/blackbloodglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.225
+
+- type: reagent
+  id: LightStorm
+  name: reagent-name-light-storm
+  parent: BaseAlcohol
+  desc: reagent-desc-light-storm
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: lightstorm
+  color: "#faebd7"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/lightstormglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.3
+
+- type: reagent
+  id: CreamHeaven
+  name: reagent-name-cream-heaven
+  parent: BaseAlcohol
+  desc: reagent-desc-cream-heaven
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: creamheaven
+  color: "#faebd7"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/creamheavenglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.125
+
+- type: reagent
+  id: Hirosima
+  name: reagent-name-hirosima
+  parent: BaseAlcohol
+  desc: reagent-desc-hirosima
+  physicalDesc: reagent-physical-desc-exotic-smelling
+  flavor: hirosima
+  color: "#f5deb3"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/hirosimaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
+
+- type: reagent
+  id: Nagasaki
+  name: reagent-name-nagasaki
+  parent: BaseAlcohol
+  desc: reagent-desc-nagasaki
+  physicalDesc: reagent-physical-desc-ionizing
+  flavor: nagasaki
+  color: "#a52a2a"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/nagasakiglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.35
+
+- type: reagent
+  id: ChocolateSheridan
+  name: reagent-name-chocolate-sheridan
+  parent: BaseAlcohol
+  desc: reagent-desc-chocolate-sheridan
+  physicalDesc: reagent-physical-desc-chocolatey
+  flavor: chocolatesheridan
+  color: "#4b3621"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/chocolatesheridanglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.35
+
+- type: reagent
+  id: Panama
+  name: reagent-name-panama
+  parent: BaseAlcohol
+  desc: reagent-desc-panama
+  physicalDesc: reagent-physical-desc-tropical
+  flavor: panama
+  color: "#ffe4c4"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/panamaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.35
+
+- type: reagent
+  id: PeguClub
+  name: reagent-name-pegu-club
+  parent: BaseAlcohol
+  desc: reagent-desc-pegu-club
+  physicalDesc: reagent-physical-desc-citric
+  flavor: peguclub
+  color: "#f5a623"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/peguclubglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: StarAmnesia
+  name: reagent-name-star-amnesia
+  parent: BaseAlcohol
+  desc: reagent-desc-star-amnesia
+  physicalDesc: reagent-physical-desc-enigmatic
+  flavor: staramnesia
+  color: "#191970"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/staramnesiaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.6
+
+- type: reagent
+  id: Silverhand
+  name: reagent-name-silverhand
+  parent: BaseAlcohol
+  desc: reagent-desc-silverhand
+  physicalDesc: reagent-physical-desc-metallic
+  flavor: silverhand
+  color: "#c0c0c0"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/silverhandglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.3
+
+- type: reagent
+  id: French75
+  name: reagent-name-french-75
+  parent: BaseAlcohol
+  desc: reagent-desc-french-75
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: french75
+  color: "#f8e8a8"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/french75glass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: MilkPlus
+  name: reagent-name-milk-plus
+  parent: BaseAlcohol
+  desc: reagent-desc-milk-plus
+  physicalDesc: reagent-physical-desc-milky
+  flavor: milkplus
+  color: "#ffffff"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/milkplusglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+
+- type: reagent
+  id: Light
+  name: reagent-name-light
+  parent: BaseAlcohol
+  desc: reagent-desc-light
+  physicalDesc: reagent-physical-desc-refreshing
+  flavor: light
+  color: "#ffffe0"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/lightglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+
+- type: reagent
+  id: Aviation
+  name: reagent-name-aviation
+  parent: BaseAlcohol
+  desc: reagent-desc-aviation
+  physicalDesc: reagent-physical-desc-citric
+  flavor: aviation
+  color: "#b0c4de"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/aviationglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: Fizz
+  name: reagent-name-fizz
+  parent: BaseAlcohol
+  desc: reagent-desc-fizz
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: fizz
+  color: "#d8e4bc"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/fizzglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
+
+- type: reagent
+  id: BrandyCrusta
+  name: reagent-name-brandy-crusta
+  parent: BaseAlcohol
+  desc: reagent-desc-brandy-crusta
+  physicalDesc: reagent-physical-desc-tart
+  flavor: brandycrusta
+  color: "#d2691e"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/brandycrustaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
+
+- type: reagent
+  id: AperolSpritz
+  name: reagent-name-aperol-spritz
+  parent: BaseAlcohol
+  desc: reagent-desc-aperol-spritz
+  physicalDesc: reagent-physical-desc-tangy
+  flavor: aperolspritz
+  color: "#ff6347"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/aperolspritzglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: Tuxedo
+  name: reagent-name-tuxedo
+  parent: BaseAlcohol
+  desc: reagent-desc-tuxedo
+  physicalDesc: reagent-physical-desc-sophisticated
+  flavor: tuxedo
+  color: "#ff6347"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/tuxedoglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: HorseNeck
+  name: reagent-name-horse-neck
+  parent: BaseAlcohol
+  desc: reagent-desc-horse-neck
+  physicalDesc: reagent-physical-desc-robust
+  flavor: horseneck
+  color: "#deb887"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/horseneckglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: CubanSunset
+  name: reagent-name-cuban-sunset
+  parent: BaseAlcohol
+  desc: reagent-desc-cuban-sunset
+  physicalDesc: reagent-physical-desc-tropical
+  flavor: cubansunset
+  color: "#ff4500"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/cubansunsetglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.3
+
+- type: reagent
+  id: SakeBomb
+  name: reagent-name-sake-bomb
+  parent: BaseAlcohol
+  desc: reagent-desc-sake-bomb
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: sakebomb
+  color: "#fff5ee"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/sakebombglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
+
+- type: reagent
+  id: WooWoo
+  name: reagent-name-woo-woo
+  parent: BaseAlcohol
+  desc: reagent-desc-woo-woo
+  physicalDesc: reagent-physical-desc-fruity
+  flavor: woowoo
+  color: "#dc143c"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/woowooglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: MulledWine
+  name: reagent-name-mulled-wine
+  parent: BaseAlcohol
+  desc: reagent-desc-mulled-wine
+  physicalDesc: reagent-physical-desc-warm
+  flavor: mulledwine
+  color: "#800020"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/mulledwineglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.1
+
+- type: reagent
+  id: WhiteBear
+  name: reagent-name-white-bear
+  parent: BaseAlcohol
+  desc: reagent-desc-white-bear
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: whitebear
+  color: "#FFFFFF"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/whitebearglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: Vampiro
+  name: reagent-name-vampiro
+  parent: BaseAlcohol
+  desc: reagent-desc-vampiro
+  physicalDesc: reagent-physical-desc-spicy
+  flavor: vampiro
+  color: "#a52a2a"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/vampiroglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.225
+
+- type: reagent
+  id: QueenMary
+  name: reagent-name-queen-mary
+  parent: BaseAlcohol
+  desc: reagent-desc-queen-mary
+  physicalDesc: reagent-physical-desc-fruity
+  flavor: queenmary
+  color: "#b22222"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/queenmaryglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.175
+
+- type: reagent
+  id: Box
+  name: reagent-name-box
+  parent: BaseAlcohol
+  desc: reagent-desc-box
+  physicalDesc: reagent-physical-desc-earthy
+  flavor: box
+  color: "#8b0000"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/boxglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: BeerBerryRoyal
+  name: reagent-name-beer-berry-royal
+  parent: BaseAlcohol
+  desc: reagent-desc-beer-berry-royal
+  physicalDesc: reagent-physical-desc-fruity
+  flavor: beerberryroyal
+  color: "#800080"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/beerberryroyalglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.125
+
+- type: reagent
+  id: Sazerac
+  name: reagent-name-sazerac
+  parent: BaseAlcohol
+  desc: reagent-desc-sazerac
+  physicalDesc: reagent-physical-desc-robust
+  flavor: sazerac
+  color: "#b8860b"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/sazeracglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: Monako
+  name: reagent-name-monako
+  parent: BaseAlcohol
+  desc: reagent-desc-monako
+  physicalDesc: reagent-physical-desc-citric
+  flavor: monako
+  color: "#d40000"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/monakoglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: SlimeDrink
+  name: reagent-name-slime-drink
+  parent: BaseAlcohol
+  desc: reagent-desc-slime-drink
+  physicalDesc: reagent-physical-desc-slimy
+  flavor: slimedrink
+  color: "#32cd32"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/slimedrinkglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.1
+
+- type: reagent
+  id: InnocentERP
+  name: reagent-name-innocent-erp
+  parent: BaseAlcohol
+  desc: reagent-desc-innocent-erp
+  physicalDesc: reagent-physical-desc-citric
+  flavor: innocenterp
+  color: "#ffdaB9"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/innocenterpglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: BlueLagoon
+  name: reagent-name-blue-lagoon
+  parent: BaseAlcohol
+  desc: reagent-desc-blue-lagoon
+  physicalDesc: reagent-physical-desc-refreshing
+  flavor: bluelagoon
+  color: "#00bfff"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/bluelagoonglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: GreenFairy
+  name: reagent-name-green-fairy
+  parent: BaseAlcohol
+  desc: reagent-desc-green-fairy
+  physicalDesc: reagent-physical-desc-enigmatic
+  flavor: greenfairy
+  color: "#7fff00"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/greenfairyglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.3
+    Narcotic:
+      effects:
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 5
+        refresh: false
+
+- type: reagent
+  id: HomeLebowski
+  name: reagent-name-home-lebowski
+  parent: BaseAlcohol
+  desc: reagent-desc-home-lebowski
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: homelebowski
+  color: "#d2b48c"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/homelebowskiglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.175
+
+- type: reagent
+  id: TopBilling
+  name: reagent-name-top-billing
+  parent: BaseAlcohol
+  desc: reagent-desc-top-billing
+  physicalDesc: reagent-physical-desc-citric
+  flavor: topbilling
+  color: "#daa520"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/topbillingglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: TransSiberianExpress
+  name: reagent-name-trans-siberia-express
+  parent: BaseAlcohol
+  desc: reagent-desc-trans-siberia-express
+  physicalDesc: reagent-physical-desc-robust
+  flavor: transsiberiaexpress
+  color: "#5d3a1a"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/siberiaexpressglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.25
+
+- type: reagent
+  id: Sun
+  name: reagent-name-sun
+  parent: BaseAlcohol
+  desc: reagent-desc-sun
+  physicalDesc: reagent-physical-desc-tropical
+  flavor: sun
+  color: "#ffd700"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/sunglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
+
+- type: reagent
+  id: TickTock
+  name: reagent-name-tick-tock
+  parent: BaseAlcohol
+  desc: reagent-desc-tick-tock
+  physicalDesc: reagent-physical-desc-fruity
+  flavor: ticktock
+  color: "#ff69B4"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/ticktockglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
+
+- type: reagent
+  id: UraganShot
+  name: reagent-name-uragan-shot
+  parent: BaseAlcohol
+  desc: reagent-desc-uragan-shot
+  physicalDesc: reagent-physical-desc-spicy
+  flavor: uraganshot
+  color: "#ff4500"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/uraganshotglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.175
+
+- type: reagent
+  id: NewYorker
+  name: reagent-name-new-yorker
+  parent: BaseAlcohol
+  desc: reagent-desc-new-yorker
+  physicalDesc: reagent-physical-desc-robust
+  flavor: newyorker
+  color: "#dc143c"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/newyorkerglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2

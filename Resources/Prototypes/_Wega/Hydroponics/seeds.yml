@@ -1,0 +1,69 @@
+- type: seed
+  id: rose
+  name: seeds-rose-name
+  noun: seeds-noun-seeds
+  displayName: seeds-rose-display-name
+  plantRsi: _Wega/Objects/Specific/Hydroponics/rose.rsi
+  packetPrototype: RoseSeeds
+  productPrototypes:
+    - FlowerRose
+  mutationPrototypes:
+    - clownflower
+  lifespan: 25
+  maturation: 10
+  production: 3
+  yield: 3
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+
+- type: seed
+  id: sunflower
+  name: seeds-sunflower-name
+  noun: seeds-noun-seeds
+  displayName: seeds-sunflower-display-name
+  plantRsi: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+  packetPrototype: SunflowerSeeds
+  productPrototypes:
+    - FlowerSunflower
+  mutationPrototypes:
+    - clownflower
+  lifespan: 25
+  maturation: 10
+  production: 1
+  yield: 1
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+
+- type: seed
+  id: clownflower
+  name: seeds-clownflower-name
+  noun: seeds-noun-seeds
+  displayName: seeds-clownflower-display-name
+  plantRsi: _Wega/Objects/Specific/Hydroponics/clownflower.rsi
+  packetPrototype: ClownflowerSeeds
+  productPrototypes:
+    - FlowerClown
+  lifespan: 25
+  maturation: 10
+  production: 1
+  yield: 1
+  potency: 10
+  growthStages: 3
+  waterConsumption: 0.60
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10

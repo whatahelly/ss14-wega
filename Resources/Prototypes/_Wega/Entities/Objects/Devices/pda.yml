@@ -1,0 +1,18 @@
+- type: entity
+  parent: BasePDA
+  id: BarberPDA
+  name: barber PDA
+  description: "Why isn't it green?"
+  components:
+  - type: Pda
+    id: BarberIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-barber
+  - type: PdaBorderColor
+    borderColor: "#44843c"
+    accentHColor: "#00cc35"
+  - type: Icon
+    state: pda-barber

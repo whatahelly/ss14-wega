@@ -1,0 +1,151 @@
+- type: reagent
+  id: CafeMocha
+  parent: BaseJuice
+  name: reagent-name-cafe-mocha
+  group: Drinks
+  desc: reagent-desc-cafe-mocha
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: cafe-mocha
+  color: "#6f4e37"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/cafemochaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+
+- type: reagent
+  id: ChocolateMilk
+  parent: BaseJuice
+  name: reagent-name-chocolate-milk
+  group: Drinks
+  desc: reagent-desc-chocolate-milk
+  physicalDesc: reagent-physical-desc-milky
+  flavor: chocolate
+  color: "#8b4513"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/chocolatemilkglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+
+- type: reagent
+  id: ChocolatePudding
+  parent: BaseJuice
+  name: reagent-name-chocolate-pudding
+  group: Drinks
+  desc: reagent-desc-chocolate-pudding
+  physicalDesc: reagent-physical-desc-thick
+  flavor: chocolate
+  color: "#5c4033"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/chocolatepuddingglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 4
+
+- type: reagent
+  id: GibbFloats
+  parent: BaseJuice
+  name: reagent-name-gibb-floats
+  group: Drinks
+  desc: reagent-desc-gibb-floats
+  physicalDesc: reagent-physical-desc-fizzy
+  flavor: gibb-floats
+  color: "#9400d3"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/gibbfloatsglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 3
+
+- type: reagent
+  id: Milkshake
+  parent: BaseJuice
+  name: reagent-name-milkshake
+  group: Drinks
+  desc: reagent-desc-milkshake
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: milkshake
+  color: "#ffddc1"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/milkshakeglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+
+- type: reagent
+  id: TripleCitrus
+  parent: BaseJuice
+  name: reagent-name-triple-citrus
+  group: Drinks
+  desc: reagent-desc-triple-citrus
+  physicalDesc: reagent-physical-desc-citric
+  flavor: triple-citrus
+  color: "#ffd700"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/triplecitrusglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+
+- type: reagent
+  id: MateDeCoca
+  parent: BaseJuice
+  name: reagent-name-mate-de-coca
+  group: Drinks
+  desc: reagent-desc-mate-de-coca
+  physicalDesc: reagent-physical-desc-herbal
+  flavor: mate-de-coca
+  color: "#6b8e23"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/matedecocaglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+
+- type: reagent
+  id: TrueMilkshake
+  parent: BaseJuice
+  name: reagent-name-true-milkshake
+  group: Drinks
+  desc: reagent-desc-true-milkshake
+  physicalDesc: reagent-physical-desc-slimy
+  flavor: true-milkshake
+  color: "#fff0f5"
+  metamorphicSprite:
+    sprite: _Wega/Objects/Consumable/Drinks/milkshakeglass.rsi
+    state: icon
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2

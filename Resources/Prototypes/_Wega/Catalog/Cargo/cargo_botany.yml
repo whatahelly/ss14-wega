@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: HydroponicsSoil
+  icon:
+    sprite: _Wega/Objects/Misc/soilbag.rsi
+    state: icon
+  product: CrateHydroponicsSoil
+  cost: 5000
+  category: cargoproduct-category-name-hydroponics
+  group: market

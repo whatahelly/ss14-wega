@@ -1,0 +1,5 @@
+# Outer clothing
+- type: loadout
+  id: BarberOuterApronBar
+  equipment:
+    outerClothing: ClothingOuterApronBar

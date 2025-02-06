@@ -87,3 +87,21 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  name: soil
+  id: Soil
+  graph: SoilGraph
+  startNode: start
+  targetNode: soil
+  category: construction-category-structures
+  description: Mud.
+  icon:
+    sprite: Structures/Hydroponics/misc.rsi
+    state: soil
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

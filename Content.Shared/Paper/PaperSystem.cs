@@ -6,6 +6,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Verbs; // Corvax-Wega-Bureaucracy-end
 using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
@@ -35,6 +36,7 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
 
         SubscribeLocalEvent<ActivateOnPaperOpenedComponent, PaperWriteEvent>(OnPaperWrite);
+        SubscribeLocalEvent<PenComponent, GetVerbsEvent<AlternativeVerb>>(AddSignVerb); // Corvax-Wega-Bureaucracy
     }
 
     private void OnMapInit(Entity<PaperComponent> entity, ref MapInitEvent args)
@@ -103,7 +105,14 @@ public sealed class PaperSystem : EntitySystem
         var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps");
         if (_tagSystem.HasTag(args.Used, "Write"))
         {
-            if (editable)
+            // Corvax-Wega-Bureaucracy-edit
+            if (TryComp<PenComponent>(args.Used, out var pen) && pen.Signature)
+            {
+                TrySign(entity, args.User, entity.Comp);
+                args.Handled = true;
+                return;
+            }
+            else if (editable)
             {
                 if (entity.Comp.EditingDisabled)
                 {
@@ -181,6 +190,50 @@ public sealed class PaperSystem : EntitySystem
     {
         _interaction.UseInHandInteraction(args.User, entity);
     }
+
+    // Corvax-Wega-Bureaucracy-start
+    private void AddSignVerb(EntityUid uid, PenComponent pen, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue
+            || !_tagSystem.HasTag(args.Using.Value, "Write"))
+            return;
+
+        AlternativeVerb verb = new()
+        {
+            Text = pen.Signature
+                ? Loc.GetString("paper-component-verb-sign-write")
+                : Loc.GetString("paper-component-verb-sign-signature"),
+            Act = () =>
+            {
+                pen.Signature = !pen.Signature;
+            },
+        };
+        args.Verbs.Add(verb);
+    }
+
+    public bool TrySign(Entity<PaperComponent> entity, EntityUid signer, PaperComponent paperComp)
+    {
+        StampDisplayInfo info = new StampDisplayInfo
+        {
+            StampedName = Name(signer),
+            StampedColor = Color.FromHex("#333333"),
+        };
+
+        if (TryStamp(entity, info, "paper_stamp-generic"))
+        {
+            var stampPaperOtherMessage = Loc.GetString("paper-component-action-signed-other", ("user", signer), ("target", entity));
+            _popupSystem.PopupEntity(stampPaperOtherMessage, signer, Filter.PvsExcept(signer, entityManager: EntityManager), true);
+            var stampPaperSelfMessage = Loc.GetString("paper-component-action-signed-self", ("target", entity));
+            _popupSystem.PopupClient(stampPaperSelfMessage, signer, signer);
+
+            _audio.PlayPredicted(paperComp.Sound, entity, signer);
+            _adminLogger.Add(LogType.Verb, LogImpact.Low, $"{ToPrettyString(signer):player} has signed {ToPrettyString(entity):paper}.");
+
+            UpdateUserInterface(entity);
+        }
+        return true;
+    }
+    // Corvax-Wega-Bureaucracy-end
 
     /// <summary>
     ///     Accepts the name and state to be stamped onto the paper, returns true if successful.

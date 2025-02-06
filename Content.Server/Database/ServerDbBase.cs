@@ -255,6 +255,19 @@ namespace Content.Server.Database
                 loadouts[role.RoleName] = loadout;
             }
 
+            // Corvax-Wega-Hair-Extended-start
+            List<Color> hairColors;
+            try
+            {
+                var hairColorHexCodes = JsonSerializer.Deserialize<List<string>>(profile.HairColor);
+                hairColors = hairColorHexCodes?.Select(color => Color.FromHex(color.Trim())).ToList() ?? new List<Color> { Color.White };
+            }
+            catch (JsonException)
+            {
+                hairColors = new List<Color> { Color.White };
+            }
+            // Corvax-Wega-Hair-Extended-end
+
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
@@ -269,7 +282,7 @@ namespace Content.Server.Database
                 new HumanoidCharacterAppearance
                 (
                     profile.HairName,
-                    Color.FromHex(profile.HairColor),
+                    hairColors, // Corvax-Wega-Hair-Extended
                     profile.FacialHairName,
                     Color.FromHex(profile.FacialHairColor),
                     Color.FromHex(profile.EyeColor),
@@ -307,7 +320,7 @@ namespace Content.Server.Database
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
             profile.HairName = appearance.HairStyleId;
-            profile.HairColor = appearance.HairColor.ToHex();
+            profile.HairColor = JsonSerializer.Serialize(appearance.HairColor.Select(c => c.ToHex()).ToList()); // Corvax-Wega-Hair-Extended
             profile.FacialHairName = appearance.FacialHairStyleId;
             profile.FacialHairColor = appearance.FacialHairColor.ToHex();
             profile.EyeColor = appearance.EyeColor.ToHex();

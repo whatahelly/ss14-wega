@@ -284,6 +284,14 @@ public sealed class MagicMirrorSystem : SharedMagicMirrorSystem
 
         _humanoid.RemoveMarking(component.Target.Value, category, args.Slot);
 
+        // Corvax-Wega-Skrell-start
+        if (category == MarkingCategories.Hair)
+        {
+            var netEntity = GetNetEntity(component.Target.Value);
+            RaiseLocalEvent(new HairMarkingRemovedEvent(netEntity));
+        }
+        // Corvax-Wega-Skrell-end
+
         UpdateInterface(uid, component.Target.Value, component);
     }
 

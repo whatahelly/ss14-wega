@@ -291,8 +291,9 @@ namespace Content.Client.Lobby.UI
             {
                 if (Profile is null)
                     return;
+                var hairColorList = new List<Robust.Shared.Maths.Color>(newColor.marking.MarkingColors); // Corvax-Wega-Hair-Extended
                 Profile = Profile.WithCharacterAppearance(
-                    Profile.Appearance.WithHairColor(newColor.marking.MarkingColors[0]));
+                    Profile.Appearance.WithHairColor(hairColorList));// Corvax-Wega-Hair-Extended
                 UpdateCMarkingsHair();
                 ReloadPreview();
             };
@@ -1531,7 +1532,7 @@ namespace Content.Client.Lobby.UI
             var hairMarking = Profile.Appearance.HairStyleId switch
             {
                 HairStyles.DefaultHairStyle => new List<Marking>(),
-                _ => new() { new(Profile.Appearance.HairStyleId, new List<Color>() { Profile.Appearance.HairColor }) },
+                _ => new List<Marking> { new Marking(Profile.Appearance.HairStyleId, Profile.Appearance.HairColor) }, // Corvax-Wega-Hair-Extended
             };
 
             var facialHairMarking = Profile.Appearance.FacialHairStyleId switch
@@ -1571,7 +1572,7 @@ namespace Content.Client.Lobby.UI
                     }
                     else
                     {
-                        hairColor = Profile.Appearance.HairColor;
+                        hairColor = Profile.Appearance.HairColor.First(); // Corvax-Wega-Hair-Extended
                     }
                 }
             }

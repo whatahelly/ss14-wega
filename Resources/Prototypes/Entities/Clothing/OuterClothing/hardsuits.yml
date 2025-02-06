@@ -241,8 +241,8 @@
   - type: DiseaseProtection # Corvax-Wega-Disease
     protection: 0.2 # Corvax-Wega-Disease
   - type: ClothingSpeedModifier
-    walkModifier: 0.65
-    sprintModifier: 0.65
+    walkModifier: 0.9 # Corvax-Wega-Brigmedic
+    sprintModifier: 0.9 # Corvax-Wega-Brigmedic
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBrigmedic
