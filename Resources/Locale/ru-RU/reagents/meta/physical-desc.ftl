@@ -97,3 +97,4 @@ reagent-physical-desc-slimy = склизкое
 reagent-physical-desc-neural = нейронное
 # Corvax-Wega
 reagent-physical-desc-cum = солоноватое
+reagent-physical-desc-bitter = горькое

@@ -1,3 +1,9 @@
+# Outerclothing
+- type: loadout
+  id: HoPCoat
+  equipment:
+    outerClothing: ClothingOuterCoatHOP
+
 #Top
 - type: loadout
   id: ClothingUnderTopBraHop

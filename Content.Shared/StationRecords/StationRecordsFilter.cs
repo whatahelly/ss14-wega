@@ -42,3 +42,19 @@ public enum StationRecordFilterType : byte
     Prints,
     DNA,
 }
+
+// Corvax-Wega-Record-start
+[Serializable, NetSerializable]
+public sealed class AdjustStationJobMsg : BoundUserInterfaceMessage
+{
+    public NetEntity User { get; }
+    public string JobProto { get; }
+    public int Amount { get; }
+    public AdjustStationJobMsg(NetEntity user, string jobProto, int amount)
+    {
+        User = user;
+        JobProto = jobProto;
+        Amount = amount;
+    }
+}
+// Corvax-Wega-Record-end

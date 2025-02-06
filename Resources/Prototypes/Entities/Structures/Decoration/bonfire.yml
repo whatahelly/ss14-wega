@@ -14,6 +14,7 @@
     radius: 5
     energy: 3
     color: "#FFC90C"
+  - type: NightLightBlocked # Corvax-Wega-NightLight
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood

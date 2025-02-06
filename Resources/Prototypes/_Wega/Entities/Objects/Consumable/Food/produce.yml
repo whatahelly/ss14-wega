@@ -1,0 +1,76 @@
+- type: entity
+  parent: BaseItem
+  id: FlowerRose
+  name: rose
+  description: "Something beautiful."
+  components:
+  - type: Clothing
+    slots:
+    - HEAD
+    quickEquip: false
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Hydroponics/rose.rsi
+    state: produce
+  - type: Produce
+    seedId: rose
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Rose
+
+- type: entity
+  parent: BaseItem
+  id: FlowerSunflower
+  name: sunflower
+  description: "Yellow is bright, like stars in space."
+  components:
+  - type: Clothing
+    slots:
+    - HEAD
+    quickEquip: false
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Hydroponics/sunflower.rsi
+    state: produce
+  - type: Produce
+    seedId: sunflower
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Sunflower
+
+- type: entity
+  parent: BaseItem
+  id: FlowerPeaceFlower
+  name: peaceflower
+  description: "Something beautiful."
+  components:
+  - type: Clothing
+    slots:
+    - HEAD
+    quickEquip: false
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Hydroponics/peaceflower.rsi
+    state: produce
+  - type: Tag
+    tags:
+    - Peaceflower
+
+- type: entity
+  parent: BaseItem
+  id: FlowerClown
+  name: clown flower
+  description: "Something terrible."
+  components:
+  - type: Clothing
+    slots:
+    - HEAD
+    quickEquip: false
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Hydroponics/clownflower.rsi
+    state: produce
+  - type: Produce
+    seedId: clownflower
+  - type: PotencyVisuals
+  - type: Appearance

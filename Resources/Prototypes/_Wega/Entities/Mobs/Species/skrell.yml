@@ -8,6 +8,7 @@
     species: Skrell
   - type: Carriable
   - type: DiseaseCarrier
+  - type: Skrell
   - type: Thirst
     baseDecayRate: 0.4
   - type: Hunger
@@ -49,6 +50,8 @@
           types:
             Heat: -0.25
             Blunt: -0.25
+  - type: Inventory
+    templateId: skrell
   - type: Butcherable
     butcheringType: Spike
     spawned:

@@ -1,0 +1,33 @@
+- type: loadoutEffectGroup
+  id: JanitorMaid
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobJanitor
+      time: 216000 #60 hours, UwU
+
+# Jumpsuit
+- type: loadout
+  id: JanitorJanimaid
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorMaid
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJanimaid
+
+- type: loadout
+  id: JanitorJanimaidmini
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorMaid
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJanimaidmini
+
+- type: loadout
+  id: JanitorElegantMaid
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorMaid
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtElegantMaid

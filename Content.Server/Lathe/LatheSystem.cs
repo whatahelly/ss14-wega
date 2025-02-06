@@ -230,6 +230,9 @@ namespace Content.Server.Lathe
                 {
                     var result = Spawn(resultProto, Transform(uid).Coordinates);
                     _stack.TryMergeToContacts(result);
+
+                    var ev = new LatheResultSpawnEvent(uid); // Corvax-Wega
+                    RaiseLocalEvent(result, ref ev); // Corvax-Wega
                 }
 
                 if (comp.CurrentRecipe.ResultReagents is { } resultReagents &&

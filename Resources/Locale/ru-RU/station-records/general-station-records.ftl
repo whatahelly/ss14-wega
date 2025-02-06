@@ -15,3 +15,6 @@ general-station-record-dna-filter = ДНК
 general-station-record-console-search-records = Поиск
 general-station-record-console-reset-filters = Сброс
 general-station-record-console-delete = Удалить
+general-station-record-console-access-denied = В доступе отказано
+general-station-record-console-job-slot-limit = Нельзя превышать лимит должностей.
+general-station-record-console-error = Ошибка: консоль не отвечает. Возможны неполадки в системе связи.

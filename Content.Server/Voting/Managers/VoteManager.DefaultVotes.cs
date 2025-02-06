@@ -30,6 +30,7 @@ namespace Content.Server.Voting.Managers
         [Dependency] private readonly IServerDbManager _dbManager = default!;
         [Dependency] private readonly VoteWebhooks _voteWebhooks = default!;
 
+        private List<string> _lastPickedMaps = new(); // Corvax-Wega-Vote
         private VotingSystem? _votingSystem;
         private RoleSystem? _roleSystem;
         private GameTicker? _gameTicker;
@@ -263,7 +264,13 @@ namespace Content.Server.Voting.Managers
 
         private void CreateMapVote(ICommonSession? initiator)
         {
-            var maps = _gameMapManager.CurrentlyEligibleMaps().ToDictionary(map => map, map => map.MapName);
+            // Corvax-Wega-Vote-start
+            var allMaps = _gameMapManager.CurrentlyEligibleMaps();
+
+            var maps = allMaps
+                .Where(map => !_lastPickedMaps.Contains(map.ID))
+                .ToDictionary(map => map, map => map.MapName);
+            // Corvax-Wega-Vote-end
 
             var alone = _playerManager.PlayerCount == 1 && initiator != null;
             var options = new VoteOptions
@@ -301,6 +308,14 @@ namespace Content.Server.Voting.Managers
                     _chatManager.DispatchServerAnnouncement(
                         Loc.GetString("ui-vote-map-win", ("winner", maps[picked])));
                 }
+
+                // Corvax-Wega-Vote-start
+                _lastPickedMaps.Add(picked.ID);
+                if (_lastPickedMaps.Count > 2)
+                {
+                    _lastPickedMaps.RemoveAt(0);
+                }
+                // Corvax-Wega-Vote-end
 
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Map vote finished: {picked.MapName}");
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();

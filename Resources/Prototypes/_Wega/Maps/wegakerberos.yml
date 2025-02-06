@@ -2,7 +2,7 @@
   id: WegaKerberos
   mapName: 'Kerberos Station'
   mapPath: /Maps/_Wega/wegakerberos.yml
-  minPlayers: 40
+  minPlayers: 60
   stations:
     Kerberos:
       stationProto: StandardNanotrasenStation
@@ -52,6 +52,7 @@
             Detective: [ 1, 1 ]
             SecurityCadet: [ 3, 3 ]
             Pilot: [ 1, 1 ]
+            Brigmedic: [ 1, 1 ]
             #supply
             Quartermaster: [ 1, 1 ]
             SalvageSpecialist: [ 3, 3 ]
@@ -64,6 +65,7 @@
             Musician: [ 2, 2 ]
             Boxer: [ 2, 2]
             Zookeeper: [ 1, 1 ]
+            Barber: [ 1, 1 ]
             # silicon
             StationAi: [ 1, 1 ]
             Borg: [ 2, 3 ]

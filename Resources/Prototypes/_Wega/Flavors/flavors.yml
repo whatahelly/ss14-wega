@@ -7,3 +7,233 @@
   id: unholy
   flavorType: Complex
   description: flavor-complex-unholy
+
+- type: flavor
+  id: aperol
+  flavorType: Complex
+  description: flavor-complex-aperol
+
+- type: flavor
+  id: jagermeister
+  flavorType: Complex
+  description: flavor-complex-jagermeister
+
+- type: flavor
+  id: schnaps
+  flavorType: Complex
+  description: flavor-complex-schnaps
+
+- type: flavor
+  id: sambuka
+  flavorType: Complex
+  description: flavor-complex-sambuka
+
+- type: flavor
+  id: sheridan
+  flavorType: Complex
+  description: flavor-complex-sheridan
+
+- type: flavor
+  id: eggnog
+  flavorType: Complex
+  description: flavor-complex-eggnog
+
+- type: flavor
+  id: blackblood
+  flavorType: Complex
+  description: flavor-complex-black-blood
+
+- type: flavor
+  id: lightstorm
+  flavorType: Complex
+  description: flavor-complex-light-storm
+
+- type: flavor
+  id: creamheaven
+  flavorType: Complex
+  description: flavor-complex-cream-heaven
+
+- type: flavor
+  id: hirosima
+  flavorType: Complex
+  description: flavor-complex-hirosima
+
+- type: flavor
+  id: nagasaki
+  flavorType: Complex
+  description: flavor-complex-nagasaki
+
+- type: flavor
+  id: chocolatesheridan
+  flavorType: Complex
+  description: flavor-complex-chocolate-sheridan
+
+- type: flavor
+  id: panama
+  flavorType: Complex
+  description: flavor-complex-panama
+
+- type: flavor
+  id: peguclub
+  flavorType: Complex
+  description: flavor-complex-pegu-club
+
+- type: flavor
+  id: staramnesia
+  flavorType: Complex
+  description: flavor-complex-star-amnesia
+
+- type: flavor
+  id: silverhand
+  flavorType: Complex
+  description: flavor-complex-silverhand
+
+- type: flavor
+  id: french75
+  flavorType: Complex
+  description: flavor-complex-french-75
+
+- type: flavor
+  id: milkplus
+  flavorType: Complex
+  description: flavor-complex-milk-plus
+
+- type: flavor
+  id: aviation
+  flavorType: Complex
+  description: flavor-complex-aviation
+
+- type: flavor
+  id: fizz
+  flavorType: Complex
+  description: flavor-complex-fizz
+
+- type: flavor
+  id: brandycrusta
+  flavorType: Complex
+  description: flavor-complex-brandy-crusta
+
+- type: flavor
+  id: aperolspritz
+  flavorType: Complex
+  description: flavor-complex-aperolspritz
+
+- type: flavor
+  id: tuxedo
+  flavorType: Complex
+  description: flavor-complex-tuxedo
+
+- type: flavor
+  id: horseneck
+  flavorType: Complex
+  description: flavor-complex-horse-neck
+
+- type: flavor
+  id: cubansunset
+  flavorType: Complex
+  description: flavor-complex-cuban-sunset
+
+- type: flavor
+  id: sakebomb
+  flavorType: Complex
+  description: flavor-complex-sake-bomb
+
+- type: flavor
+  id: woowoo
+  flavorType: Complex
+  description: flavor-complex-woo-woo
+
+- type: flavor
+  id: mulledwine
+  flavorType: Complex
+  description: flavor-complex-mulled-wine
+
+- type: flavor
+  id: whitebear
+  flavorType: Complex
+  description: flavor-complex-white-bear
+
+- type: flavor
+  id: vampiro
+  flavorType: Complex
+  description: flavor-complex-vampiro
+
+- type: flavor
+  id: queenmary
+  flavorType: Complex
+  description: flavor-complex-queen-mary
+
+- type: flavor
+  id: box
+  flavorType: Complex
+  description: flavor-complex-inabox
+
+- type: flavor
+  id: beerberryroyal
+  flavorType: Complex
+  description: flavor-complex-beer-berry-royal
+
+- type: flavor
+  id: sazerac
+  flavorType: Complex
+  description: flavor-complex-sazerac
+
+- type: flavor
+  id: monako
+  flavorType: Complex
+  description: flavor-complex-monako
+
+- type: flavor
+  id: slimedrink
+  flavorType: Complex
+  description: flavor-complex-slime-drink
+
+- type: flavor
+  id: innocenterp
+  flavorType: Complex
+  description: flavor-complex-innocent-erp
+
+- type: flavor
+  id: bluelagoon
+  flavorType: Complex
+  description: flavor-complex-blue-lagoon
+
+- type: flavor
+  id: greenfairy
+  flavorType: Complex
+  description: flavor-complex-green-fairy
+
+- type: flavor
+  id: homelebowski
+  flavorType: Complex
+  description: flavor-complex-home-lebovsky
+
+- type: flavor
+  id: topbilling
+  flavorType: Complex
+  description: flavor-complex-top-billing
+
+- type: flavor
+  id: transsiberiaexpress
+  flavorType: Complex
+  description: flavor-complex-trans-siberian-express
+
+- type: flavor
+  id: sun
+  flavorType: Complex
+  description: flavor-complex-sun
+
+- type: flavor
+  id: ticktock
+  flavorType: Complex
+  description: flavor-complex-tick-tack
+
+- type: flavor
+  id: uraganshot
+  flavorType: Complex
+  description: flavor-complex-uragan-shot
+
+- type: flavor
+  id: newyorker
+  flavorType: Complex
+  description: flavor-complex-new-yorker

@@ -1,3 +1,5 @@
+using Robust.Shared.Prototypes; // Corvax-Wega-Record
+using Content.Shared.Roles; // Corvax-Wega-Record
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.StationRecords;
@@ -36,12 +38,14 @@ public sealed class GeneralStationRecordConsoleState : BoundUserInterfaceState
     public readonly uint? SelectedKey;
     public readonly GeneralStationRecord? Record;
     public readonly Dictionary<uint, string>? RecordListing;
+    public IReadOnlyDictionary<ProtoId<JobPrototype>, int?>? JobList { get; } // Corvax-Wega-Record
     public readonly StationRecordsFilter? Filter;
     public readonly bool CanDeleteEntries;
 
     public GeneralStationRecordConsoleState(uint? key,
         GeneralStationRecord? record,
         Dictionary<uint, string>? recordListing,
+        IReadOnlyDictionary<ProtoId<JobPrototype>, int?>? jobList, // Corvax-Wega-Record
         StationRecordsFilter? newFilter,
         bool canDeleteEntries)
     {
@@ -49,10 +53,11 @@ public sealed class GeneralStationRecordConsoleState : BoundUserInterfaceState
         Record = record;
         RecordListing = recordListing;
         Filter = newFilter;
+        JobList = jobList; // Corvax-Wega-Record
         CanDeleteEntries = canDeleteEntries;
     }
 
-    public GeneralStationRecordConsoleState() : this(null, null, null, null, false)
+    public GeneralStationRecordConsoleState() : this(null, null, null, null, null, false) // Corvax-Wega-Record
     {
     }
 

@@ -1,0 +1,47 @@
+- type: entity
+  name: aperol bottle
+  parent: DrinkBottleBaseEmpty
+  id: DrinkAperolBottle
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/aperolbottle.rsi
+
+- type: entity
+  name: aperol bottle
+  parent: DrinkBottleBaseEmpty
+  id: DrinkJagermeisterBottle
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/jagermeisterbottle.rsi
+
+- type: entity
+  name: aperol bottle
+  parent: DrinkBottleBaseEmpty
+  id: DrinkSchnapsBottle
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/schnapsbottle.rsi
+
+- type: entity
+  name: aperol bottle
+  parent: DrinkBottleBaseEmpty
+  id: DrinkSambukaBottle
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/sambukabottle.rsi
+
+- type: entity
+  name: aperol bottle
+  parent: DrinkBottleBaseEmpty
+  id: DrinkBitterBottle
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/bitterbottle.rsi
+
+- type: entity
+  name: aperol bottle
+  parent: DrinkBottleBaseEmpty
+  id: DrinkSheridanBottle
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Drinks/sheridanbottle.rsi

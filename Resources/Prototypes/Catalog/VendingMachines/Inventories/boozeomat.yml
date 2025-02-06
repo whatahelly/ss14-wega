@@ -45,6 +45,12 @@
     DrinkWineBottleFull: 5
     DrinkChampagneBottleFull: 2 #because the premium drink
     DrinkSakeBottleFull: 3
+    DrinkAperolBottleFull: 5 # Corvax-Wega
+    DrinkJagermeisterBottleFull: 5 # Corvax-Wega
+    DrinkSchnapsBottleFull: 5 # Corvax-Wega
+    DrinkSambukaBottleFull: 5 # Corvax-Wega
+    DrinkBitterBottleFull: 5 # Corvax-Wega
+    DrinkSheridanBottleFull: 5 # Corvax-Wega
     DrinkBeerCan: 5
     DrinkWineCan: 5
   emaggedInventory:

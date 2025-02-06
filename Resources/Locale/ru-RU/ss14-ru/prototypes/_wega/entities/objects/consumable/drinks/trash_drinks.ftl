@@ -1,0 +1,12 @@
+ent-DrinkAperolBottle = бутылка от апероля
+    .desc = { ent-DrinkBottleBaseEmpty.desc }
+ent-DrinkJagermeisterBottle = бутылка от джагермейстера
+    .desc = { ent-DrinkBottleBaseEmpty.desc }
+ent-DrinkSchnapsBottle = бутылка от шнапса
+    .desc = { ent-DrinkBottleBaseEmpty.desc }
+ent-DrinkSambukaBottle = бутылка от самбуки
+    .desc = { ent-DrinkBottleBaseEmpty.desc }
+ent-DrinkBitterBottle = бутылка от горького
+    .desc = { ent-DrinkBottleBaseEmpty.desc }
+ent-DrinkSheridanBottle = бутылка от шеридана
+    .desc = { ent-DrinkBottleBaseEmpty.desc }

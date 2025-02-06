@@ -32,6 +32,7 @@
   - Visitor
   - Zookeeper
   - ServiceWorker
+  - Barber # Corvax-Wega-Barber
 
 - type: department
   id: CentralCommand
@@ -111,6 +112,7 @@
   - HeadOfSecurity
   - SecurityCadet
   - SecurityOfficer
+  - Brigmedic # Corvax-Wega-Brigmedic
   - Pilot # Corvax-Pilot
   - Detective
   - Warden
@@ -146,4 +148,5 @@
   - Zookeeper
   - Psychologist
   - Pilot # Corvax-Pilot
+  - Barber # Corvax-Wega-Barber
   primary: false

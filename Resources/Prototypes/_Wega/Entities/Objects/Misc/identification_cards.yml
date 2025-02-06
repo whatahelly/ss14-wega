@@ -1,0 +1,11 @@
+- type: entity
+  parent: IDCardStandard
+  id: BarberIDCard
+  name: barber ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: idbarber
+    - type: PresetIdCard
+      job: Barber

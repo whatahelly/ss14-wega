@@ -1,0 +1,17 @@
+reagent-name-cafe-mocha = моккачино
+reagent-name-chocolate-milk = шоколадное молоко
+reagent-name-chocolate-pudding = шоколадный пудинг
+reagent-name-gibb-floats = всплывший гибб
+reagent-name-milkshake = милкшейк
+reagent-name-triple-citrus = тройной цитрус
+reagent-name-mate-de-coca = мате де кока
+reagent-name-true-milkshake = милкшейк
+
+reagent-desc-cafe-mocha = Изысканный кофейный напиток с шоколадом и молоком, идеальный для любителей сладкого.
+reagent-desc-chocolate-milk = Прохладное молоко с насыщенным шоколадным вкусом, любимый напиток детей и взрослых.
+reagent-desc-chocolate-pudding = Густой и нежный шоколадный десерт, который тает во рту.
+reagent-desc-gibb-floats = Газированный напиток с шариком мороженого, создающий ощущение праздника.
+reagent-desc-milkshake = Взбитый молочный коктейль, идеальный для освежения.
+reagent-desc-triple-citrus = Освежающий микс из лимона, лайма и апельсина, который бодрит и утоляет жажду.
+reagent-desc-mate-de-coca = Тонизирующий напиток на основе листьев коки.
+reagent-desc-true-milkshake = Настоящий милкшейк с насыщенным вкусом, который не оставит вас равнодушным.

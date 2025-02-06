@@ -8,63 +8,123 @@
   },
   "states": [
     {
-      "name": "skrell_hair_excited",
+      "name": "excited",
       "directions": 4
     },
     {
-      "name": "skrell_hair_insulate",
+      "name": "insulate",
       "directions": 4
     },
     {
-      "name": "skrell_hair_long",
+      "name": "long",
       "directions": 4
     },
     {
-      "name": "skrell_hair_longbun",
+      "name": "longbun",
       "directions": 4
     },
     {
-      "name": "skrell_hair_longtuux",
+      "name": "longtuux",
       "directions": 4
     },
     {
-      "name": "skrell_hair_loose",
+      "name": "loose",
       "directions": 4
     },
     {
-      "name": "skrell_hair_lowbun",
+      "name": "lowbun",
       "directions": 4
     },
     {
-      "name": "skrell_hair_midbun",
+      "name": "midbun",
       "directions": 4
     },
     {
-      "name": "skrell_hair_mullet",
+      "name": "mullet",
       "directions": 4
     },
     {
-      "name": "skrell_hair_reserve",
+      "name": "reserve",
       "directions": 4
     },
     {
-      "name": "skrell_hair_short",
+      "name": "short",
       "directions": 4
     },
     {
-      "name": "skrell_hair_shortbun",
+      "name": "shortbun",
       "directions": 4
     },
     {
-      "name": "skrell_hair_tuux",
+      "name": "tuux",
       "directions": 4
     },
     {
-      "name": "skrell_hair_verylong",
+      "name": "verylong",
       "directions": 4
     },
     {
-      "name": "skrell_hair_veryshort",
+      "name": "veryshort",
+      "directions": 4
+    },
+    {
+      "name": "excited_secondary",
+      "directions": 4
+    },
+    {
+      "name": "insulate_secondary",
+      "directions": 4
+    },
+    {
+      "name": "long_secondary",
+      "directions": 4
+    },
+    {
+      "name": "longbun_secondary",
+      "directions": 4
+    },
+    {
+      "name": "longtuux_secondary",
+      "directions": 4
+    },
+    {
+      "name": "loose_secondary",
+      "directions": 4
+    },
+    {
+      "name": "lowbun_secondary",
+      "directions": 4
+    },
+    {
+      "name": "midbun_secondary",
+      "directions": 4
+    },
+    {
+      "name": "mullet_secondary",
+      "directions": 4
+    },
+    {
+      "name": "reserve_secondary",
+      "directions": 4
+    },
+    {
+      "name": "short_secondary",
+      "directions": 4
+    },
+    {
+      "name": "shortbun_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tuux_secondary",
+      "directions": 4
+    },
+    {
+      "name": "verylong_secondary",
+      "directions": 4
+    },
+    {
+      "name": "veryshort_secondary",
       "directions": 4
     }
   ]

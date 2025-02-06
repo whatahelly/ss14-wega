@@ -26,6 +26,7 @@
         maxDistance: 2
   - type: UseDelay
     delay: 1.5
+  - type: Pen # Corvax-Wega-Bureaucracy
 
 - type: entity
   parent: Pen

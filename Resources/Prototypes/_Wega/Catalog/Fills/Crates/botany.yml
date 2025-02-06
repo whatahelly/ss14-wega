@@ -1,0 +1,10 @@
+- type: entity
+  id: CrateHydroponicsSoil
+  parent: CrateHydroponics
+  name: soil crate
+  description: "A crate with plain soil."
+  components:
+  - type: StorageFill
+    contents:
+      - id: SoilBag
+        amount: 2

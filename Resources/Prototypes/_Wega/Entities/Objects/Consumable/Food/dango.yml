@@ -1,0 +1,52 @@
+- type: entity
+  name: dango ball
+  parent: FoodBakingBase
+  id: DoughDangoBall
+  description: "It looks like a ball of dough."
+  components:
+  - type: FlavorProfile
+    flavors:
+      - dough
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/ingredients.rsi
+    state: doughdangoball
+
+- type: entity
+  name: tricolor dango
+  parent: FoodBakedBase
+  id: HanamiDango
+  description: You like that colors, don't you?
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Food
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/japanfood.rsi
+    state: hanamidango
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 15
+
+- type: entity
+  name: mitarashi dango
+  parent: FoodBakedBase
+  id: MitarashiDango
+  description: "Rice sweetness that beckons."
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Food
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/japanfood.rsi
+    state: mitarashidango
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 15

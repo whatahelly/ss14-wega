@@ -196,6 +196,7 @@
   name: loadout-group-hop-outerclothing
   minLimit: 0
   loadouts:
+  - HoPCoat # Corvax-Wega
   - HoPWintercoat
 
 # Civilian
@@ -394,6 +395,9 @@
   loadouts:
   - JanitorJumpsuit
   - JanitorJumpskirt
+  - JanitorJanimaid # Corvax-Wega
+  - JanitorJanimaidmini # Corvax-Wega
+  - JanitorElegantMaid # Corvax-Wega
 
 - type: loadoutGroup
   id: JanitorGloves

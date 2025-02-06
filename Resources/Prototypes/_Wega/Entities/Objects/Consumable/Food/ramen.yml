@@ -1,0 +1,70 @@
+- type: entity
+  name: dry ramen noodles
+  parent: FoodBakingBase
+  id: RawNoodles
+  description: "Dry noodles."
+  components:
+  - type: FlavorProfile
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/ingredients.rsi
+    state: rawnoodles
+
+- type: entity
+  name: pork ramen
+  parent: FoodBowlBase
+  id: PorkRamenNoodles
+  description: "Ah, I See You're a Man of Culture As Well..."
+  components:
+  - type: Item
+  - type: Food
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/japanfood.rsi
+    state: porkramen
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 10
+          - ReagentId: Protein
+            Quantity: 3
+          - ReagentId: Flavorol
+            Quantity: 5
+          - ReagentId: Soysauce
+            Quantity: 2
+  - type: Tag
+    tags:
+    - Meat
+    - Soup
+
+- type: entity
+  name: spicy ramen
+  parent: FoodBowlBase
+  id: SpicyPorkRamenNoodles
+  description: So hot and so cute!
+  components:
+  - type: Item
+  - type: Food
+  - type: Sprite
+    sprite: _Wega/Objects/Consumable/Food/japanfood.rsi
+    state: spicyporkramen
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 10
+          - ReagentId: Protein
+            Quantity: 3
+          - ReagentId: Flavorol
+            Quantity: 5
+          - ReagentId: CapsaicinOil
+            Quantity: 2
+          - ReagentId: Soysauce
+            Quantity: 2
+  - type: Tag
+    tags:
+    - Meat
+    - Soup

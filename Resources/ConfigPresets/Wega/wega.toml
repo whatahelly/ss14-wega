@@ -57,5 +57,5 @@ arrivals_map = "/Maps/Corvax/Misc/corvax_terminal.yml"
 auto_call_time = 150
 
 [vote]
-preset_enabled = true
+preset_enabled = false
 map_enabled = true
