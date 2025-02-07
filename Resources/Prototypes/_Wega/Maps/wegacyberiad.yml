@@ -2,7 +2,7 @@
   id: WegaCyberiad
   mapName: 'Cyberiad Station'
   mapPath: /Maps/_Wega/wegacyberiad.yml
-  minPlayers: 40
+  minPlayers: 50
   stations:
     Cyberiad:
       stationProto: StandardNanotrasenStation
@@ -48,11 +48,10 @@
             #security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
-            SecurityOfficer: [ 5, 5 ]
+            SecurityOfficer: [ 4, 4 ]
             Detective: [ 1, 1 ]
             SecurityCadet: [ 4, 4 ]
             Pilot: [ 1, 1 ]
-            Brigmedic: [ 1, 1 ]
             #Lawyer: [ 2, 2 ] # Corvax-IAA
             #supply
             Quartermaster: [ 1, 1 ]
@@ -60,6 +59,7 @@
             CargoTechnician: [ 3, 3 ]
             #civilian
             Passenger: [ -1, -1 ]
+            Reporter: [ 1, 1 ]
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Musician: [ 1, 1 ]
