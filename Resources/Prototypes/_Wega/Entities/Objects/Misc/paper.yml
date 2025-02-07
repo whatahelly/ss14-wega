@@ -20,3 +20,8 @@
     backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
     contentMargin: 32.0, 16.0, 32.0, 0.0
     maxWritableArea: 400.0, 200.0
+
+- type: entity
+  parent: Paper
+  id: TapeRecorderTranscript
+  name: record transcript

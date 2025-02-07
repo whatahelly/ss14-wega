@@ -20,6 +20,18 @@
     damage:
       types:
         Piercing: 6
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
   - type: SlowOnDamage
     speedModifierThresholds:
       30: 0.7

@@ -16,6 +16,11 @@
     shoes: ClothingShoesColorWhite
     id: ReporterPDA
     ears: ClothingHeadsetService
-  #storage:
-    #back:
+  # Corvax-Wega-Recorder-start
+  storage:
+    back:
+    - TapeRecorder
+    - CassetteTape
+    - CassetteTape
+  # Corvax-Wega-Recorder-end
     #- Stuff
