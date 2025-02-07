@@ -37,3 +37,10 @@
     pocket2: BookSpaceLaw
   inhand:
     - BriefcaseIAAFilled
+  # Corvax-Wega-Recorder-start
+  storage:
+    back:
+    - TapeRecorder
+    - CassetteTape
+    - CassetteTape
+  # Corvax-Wega-Recorder-end

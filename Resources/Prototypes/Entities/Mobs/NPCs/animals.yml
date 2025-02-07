@@ -2393,6 +2393,10 @@
       groups:
         Brute: -0.07
         Burn: -0.07
+  # Corvax-Wega-start
+  - type: Puller
+    needsHands: false
+  # Corvax-Wega-end
 
 - type: entity
   parent: MobSpiderBase

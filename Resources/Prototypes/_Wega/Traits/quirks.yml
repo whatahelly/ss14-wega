@@ -10,3 +10,25 @@
     - type: UncontrollableSnough
       emote: Sneeze
       timeBetweenIncidents: 0.3, 300
+
+- type: trait
+  id: Tall
+  name: trait-tall-name
+  description: trait-tall-desc
+  category: Quirks
+  blacklist:
+    components:
+      - SmallHeight
+  components:
+  - type: BigHeight
+
+- type: trait
+  id: Short
+  name: trait-short-name
+  description: trait-short-desc
+  category: Quirks
+  blacklist:
+    components:
+      - BigHeight
+  components:
+  - type: SmallHeight
