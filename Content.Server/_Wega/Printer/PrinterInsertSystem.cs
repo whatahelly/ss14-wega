@@ -58,7 +58,7 @@ public sealed class PrinterInsertSystem : EntitySystem
         var station = _stationSystem.GetOwningStation(entity);
         if (station != null)
         {
-            var data = DateTime.Today.ToShortDateString().Replace(Loc.GetString("printer-paper-year"), Loc.GetString("printer-paper-replace-year"));
+            var data = DateTime.Today.ToShortDateString().Replace(Loc.GetString("printer-paper-replace-year"), Loc.GetString("printer-paper-year"));
             var time = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan).ToString("hh\\:mm\\:ss");
             _paperSystem.SetContent(entity, entity.Comp.Content.Replace(Loc.GetString("printer-paper-replace-station"), Name(station.Value)));
             _paperSystem.SetContent(entity, entity.Comp.Content.Replace(Loc.GetString("printer-paper-replace-date"),
