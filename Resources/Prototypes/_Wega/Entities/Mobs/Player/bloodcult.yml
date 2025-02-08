@@ -85,6 +85,12 @@
   - type: ZombieImmune
   - type: Puller
     needsHands: false
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
   - type: CombatMode
   - type: Hands
     showInHands: false
@@ -455,6 +461,9 @@
   - type: GhostRole
     name: ghost-role-information-proteon-name
     description: ghost-role-information-proteon-description
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
   - type: Destructible
     thresholds:
     - trigger:
@@ -483,3 +492,16 @@
       types:
         Blunt: 5
         Slash: 10
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 0.5
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileBloodBolt
+    capacity: 1
+    count: 1
+  - type: Gun
+    fireRate: 0.5
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/Magic/staff_animation.ogg
