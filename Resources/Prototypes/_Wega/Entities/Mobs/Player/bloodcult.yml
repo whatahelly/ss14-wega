@@ -114,6 +114,7 @@
     allowSpeech: true
     makeSentient: true
     rules: ghost-role-information-construct-rules
+  - type: Speech
   - type: Bloodstream
     bloodMaxVolume: 75
     bloodReagent: Blood
@@ -129,6 +130,7 @@
     factions:
     - BloodCult
   - type: ShowCultistIcons
+  - type: BloodCultConstruct
   - type: Barotrauma
     damage:
       types:

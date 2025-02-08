@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Blood.Cult
 {
-    public sealed class BloodCultSystem : SharedBloodCultSystem
+    public sealed class BloodCultSystem : EntitySystem
     {
         [Dependency] private readonly AppearanceSystem _appearance = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -19,21 +19,23 @@ namespace Content.Client.Blood.Cult
         {
             base.Initialize();
 
-            SubscribeNetworkEvent<RuneColoringEvent>(OnRuneColoringEvent);
+            SubscribeLocalEvent<BloodRuneComponent, AppearanceChangeEvent>(OnRuneAppearanceChanged);
             SubscribeLocalEvent<BloodCultistComponent, GetStatusIconsEvent>(GetCultistIcons);
             SubscribeLocalEvent<PentagramDisplayComponent, ComponentStartup>(GetHalo);
             SubscribeLocalEvent<PentagramDisplayComponent, ComponentShutdown>(RemoveHalo);
             SubscribeLocalEvent<StoneSoulComponent, AppearanceChangeEvent>(OnSoulStoneAppearanceChanged);
         }
 
-        private void OnRuneColoringEvent(RuneColoringEvent args)
+        private void OnRuneAppearanceChanged(Entity<BloodRuneComponent> entity, ref AppearanceChangeEvent args)
         {
-            var rune = _entityManager.GetEntity(args.Uid);
-            if (TryComp<SpriteComponent>(rune, out var sprite))
-            {
-                sprite.Color = args.BloodColor;
-                Dirty(rune, sprite);
-            }
+            if (args.Sprite == null)
+                return;
+
+            var sprite = args.Sprite;
+            if (!_appearance.TryGetData(entity, RuneColorVisuals.Color, out Color color))
+                return;
+
+            sprite.Color = color;
         }
 
         private void GetCultistIcons(Entity<BloodCultistComponent> ent, ref GetStatusIconsEvent args)
@@ -53,7 +55,7 @@ namespace Content.Client.Blood.Cult
             var haloVariant = new Random().Next(1, 6);
             var haloState = $"halo{haloVariant}";
 
-            var adj = sprite.Bounds.Height / 2 + ((1.0f/32) * 6.0f);
+            var adj = sprite.Bounds.Height / 2 + 1.0f / 32 * 6.0f;
             var layer = sprite.AddLayer(new SpriteSpecifier.Rsi(new ResPath("_Wega/Interface/Misc/bloodcult_halo.rsi"), haloState));
             sprite.LayerMapSet(PentagramKey.Halo, layer);
 

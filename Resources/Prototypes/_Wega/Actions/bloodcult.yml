@@ -297,7 +297,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
-    useDelay: 600
+    startDelay: true
+    useDelay: 60
     range: 9
     itemIconStyle: BigAction
     icon: { sprite: _Wega/Interface/Actions/actions_bloodcult.rsi, state: "harvester_clone" }

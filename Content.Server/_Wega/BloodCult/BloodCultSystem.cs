@@ -35,7 +35,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Blood.Cult;
 
-public sealed partial class BloodCultSystem : SharedBloodCultSystem
+public sealed partial class BloodCultSystem : EntitySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly BodySystem _body = default!;
@@ -58,12 +58,11 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
 
     public override void Initialize()
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<BloodCultRuleComponent, ComponentStartup>(OnRuleStartup);
         SubscribeLocalEvent<BloodCultRuleComponent, ComponentShutdown>(OnRuleShutdown);
         SubscribeLocalEvent<BloodCultistComponent, BloodCultObjectiveActionEvent>(OnCheckObjective);
         SubscribeLocalEvent<BloodCultistComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<BloodCultConstructComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<BloodCultObjectComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<BloodDaggerComponent, AfterInteractEvent>(OnInteract);
         SubscribeLocalEvent<AttackAttemptEvent>(OnAttackAttempt);
 
@@ -77,12 +76,13 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
 
         SubscribeLocalEvent<VeilShifterComponent, UseInHandEvent>(OnVeilShifter);
 
-        SubscribeLocalEvent<BloodCultConstructComponent, InteractHandEvent>(OnConstructInteract);
+        SubscribeLocalEvent<ConstructComponent, InteractHandEvent>(OnConstructInteract);
         SubscribeNetworkEvent<BloodConstructMenuClosedEvent>(OnConstructSelect);
 
         SubscribeLocalEvent<BloodStructureComponent, InteractHandEvent>(OnStructureInteract);
         SubscribeNetworkEvent<BloodStructureMenuClosedEvent>(OnStructureItemSelect);
 
+        InitializeRunes();
         InitializeBloodAbilities();
     }
 
@@ -112,14 +112,24 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
             }
             pylonQueryComponent.NextTimeTick -= frameTime;
         }
+
+        var ritualQuery = EntityQueryEnumerator<BloodRitualDimensionalRendingComponent>();
+        while (ritualQuery.MoveNext(out var rune, out var ritualQueryComponent))
+        {
+            if (ritualQueryComponent.Activate)
+            {
+                if (ritualQueryComponent.NextTimeTick <= 0)
+                {
+                    ritualQueryComponent.NextTimeTick = 1;
+                    if (!CheckRitual(_transform.GetMapCoordinates(rune), 9))
+                        ritualQueryComponent.Activate = false;
+                }
+                ritualQueryComponent.NextTimeTick -= frameTime;
+            }
+        }
     }
 
     #region Stages Update
-    private void OnRuleStartup(EntityUid uid, BloodCultRuleComponent component, ComponentStartup args)
-    {
-        Timer.Spawn(TimeSpan.FromMinutes(1), SelectRandomTargets);
-    }
-
     private void OnRuleShutdown(EntityUid uid, BloodCultRuleComponent component, ComponentShutdown args)
     {
         _selectedTargets.Clear();
@@ -127,9 +137,12 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         _secondTriggered = false;
         _conductedComplete = false;
         _curses = 2;
+
+        _offerings = 3;
+        _isRitualRuneUnlocked = false;
     }
 
-    private void SelectRandomTargets()
+    public void SelectRandomTargets()
     {
         _selectedTargets.Clear();
 
@@ -185,7 +198,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         }
     }
 
-    public void CheckTargetsConducted(EntityUid eliminatedTarget)
+    private void CheckTargetsConducted(EntityUid eliminatedTarget)
     {
         if (_selectedTargets.Contains(eliminatedTarget))
             _selectedTargets.Remove(eliminatedTarget);
@@ -199,7 +212,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
 
     private bool IsTargetValid(EntityUid target)
     {
-        return EntityManager.EntityExists(target);
+        return _entityManager.EntityExists(target);
     }
 
     private void OnCheckObjective(EntityUid uid, BloodCultistComponent component, BloodCultObjectiveActionEvent args)
@@ -265,11 +278,28 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         return false;
     }
 
-    private void OnComponentStartup(EntityUid uid, BloodCultistComponent component, ComponentStartup args)
+    private void OnComponentStartup(Entity<BloodCultistComponent> entity, ref ComponentStartup args)
     {
-        var cultistPercentage = GetCultists();
+        CheckStage();
+    }
+
+    private void OnComponentStartup(Entity<BloodCultConstructComponent> entity, ref ComponentStartup args)
+    {
+        CheckStage();
+    }
+
+    private void OnComponentShutdown(Entity<BloodCultObjectComponent> entity, ref ComponentShutdown args)
+    {
+        CheckStage();
+    }
+
+    private void CheckStage()
+    {
+        var totalCultEntities = GetCultEntities();
+        var playerCount = GetPlayerCount();
+
         // Second
-        if (GetPlayerCount() >= 100 && cultistPercentage >= 0.1f || GetPlayerCount() < 100 && cultistPercentage >= 0.2f)
+        if (playerCount >= 100 && totalCultEntities >= playerCount * 0.1f || playerCount < 100 && totalCultEntities >= playerCount * 0.2f)
         {
             foreach (var cultist in GetAllCultists())
             {
@@ -288,6 +318,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
                     if (actor.Owner != EntityUid.Invalid && HasComp<BloodCultistComponent>(actor.Owner))
                     {
                         actorFilter.AddPlayer(actor.PlayerSession);
+                        _popup.PopupEntity(Loc.GetString("blood-cult-first-warning"), actor.Owner, actor.Owner, PopupType.SmallCaution);
                     }
                 }
                 _audio.PlayGlobal("/Audio/_Wega/Ambience/Antag/bloodcult_eyes.ogg", actorFilter, true);
@@ -296,7 +327,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         }
 
         // Third
-        if (GetPlayerCount() >= 100 && cultistPercentage >= 0.2f || GetPlayerCount() < 100 && cultistPercentage >= 0.3f)
+        if (playerCount >= 100 && totalCultEntities >= playerCount * 0.2f || playerCount < 100 && totalCultEntities >= playerCount * 0.3f)
         {
             foreach (var cultist in GetAllCultists())
             {
@@ -314,6 +345,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
                     if (actor.Owner != EntityUid.Invalid && HasComp<BloodCultistComponent>(actor.Owner))
                     {
                         actorFilter.AddPlayer(actor.PlayerSession);
+                        _popup.PopupEntity(Loc.GetString("blood-cult-second-warning"), actor.Owner, actor.Owner, PopupType.SmallCaution);
                     }
                 }
                 _audio.PlayGlobal("/Audio/_Wega/Ambience/Antag/bloodcult_halos.ogg", actorFilter, true);
@@ -331,12 +363,11 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         }
     }
 
-    private float GetCultists()
+    private int GetCultEntities()
     {
-        var totalPlayers = GetPlayerCount();
         var totalCultists = GetAllCultists().Count;
-
-        return totalPlayers > 0 ? (float)totalCultists / totalPlayers : 0;
+        var totalConstructs = EntityQuery<BloodCultConstructComponent>().Count();
+        return totalCultists + totalConstructs;
     }
 
     private int GetPlayerCount()
@@ -347,7 +378,6 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         {
             count++;
         }
-
         return count;
     }
 
@@ -359,7 +389,6 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         {
             cultists.Add(uid);
         }
-
         return cultists;
     }
     #endregion
@@ -570,19 +599,19 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         _popup.PopupEntity(Loc.GetString("stone-soul-retracted"), user);
     }
 
-    private void OnSoulStoneMindAdded(EntityUid uid, StoneSoulComponent component, MindAddedMessage args)
+    private void OnSoulStoneMindAdded(Entity<StoneSoulComponent> entity, ref MindAddedMessage args)
     {
-        _appearance.SetData(uid, StoneSoulVisuals.HasSoul, true);
+        _appearance.SetData(entity, StoneSoulVisuals.HasSoul, true);
     }
 
-    private void OnSoulStoneMindRemoved(EntityUid uid, StoneSoulComponent component, MindRemovedMessage args)
+    private void OnSoulStoneMindRemoved(Entity<StoneSoulComponent> entity, ref MindRemovedMessage args)
     {
-        _appearance.SetData(uid, StoneSoulVisuals.HasSoul, false);
+        _appearance.SetData(entity, StoneSoulVisuals.HasSoul, false);
     }
     #endregion
 
     #region ShuttleCurse
-    private void OnShuttleCurse(EntityUid uid, BloodShuttleCurseComponent component, UseInHandEvent args)
+    private void OnShuttleCurse(Entity<BloodShuttleCurseComponent> entity, ref UseInHandEvent args)
     {
         var user = args.User;
         if (args.Handled || !TryComp<BloodCultistComponent>(user, out _))
@@ -591,7 +620,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         if (_curses > 0)
         {
             _roundEndSystem.CancelRoundEndCountdown(user);
-            _entityManager.DeleteEntity(uid);
+            _entityManager.DeleteEntity(entity);
             _curses--;
         }
         else
@@ -645,16 +674,13 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
     #endregion
 
     #region Construct
-    private void OnConstructInteract(EntityUid cosntruct, BloodCultConstructComponent component, InteractHandEvent args)
+    private void OnConstructInteract(Entity<ConstructComponent> cosntruct, ref InteractHandEvent args)
     {
         var user = args.User;
         if (args.Handled || !TryComp<BloodCultistComponent>(user, out _))
             return;
 
-        if (cosntruct is not { Valid: true } target)
-            return;
-
-        if (TryComp<ItemSlotsComponent>(target, out var itemSlotsComponent))
+        if (TryComp<ItemSlotsComponent>(cosntruct, out var itemSlotsComponent))
         {
             foreach (var slot in itemSlotsComponent.Slots.Values)
             {
@@ -756,6 +782,22 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
         var distance = (structurePosition - cultistPosition).Length();
         if (distance < 3f)
             _hands.TryPickupAnyHand(user, item);
+    }
+    #endregion
+
+    #region God Check
+    private string GetCurrentGod()
+    {
+        var query = EntityQueryEnumerator<BloodCultRuleComponent>();
+        while (query.MoveNext(out var cult))
+        {
+            if (cult.SelectedGod == null)
+            {
+                return "Narsie";
+            }
+            return cult.SelectedGod;
+        }
+        return "Narsie";
     }
     #endregion
 }

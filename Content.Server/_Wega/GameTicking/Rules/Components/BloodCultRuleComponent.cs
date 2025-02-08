@@ -1,5 +1,3 @@
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-
 namespace Content.Server.GameTicking.Rules.Components;
 
 /// <summary>
@@ -8,6 +6,9 @@ namespace Content.Server.GameTicking.Rules.Components;
 [RegisterComponent, Access(typeof(BloodCultRuleSystem))]
 public sealed partial class BloodCultRuleComponent : Component
 {
+    [DataField]
+    public string? SelectedGod;
+
     [DataField]
     public BloodCultWinType WinType = BloodCultWinType.Neutral;
 

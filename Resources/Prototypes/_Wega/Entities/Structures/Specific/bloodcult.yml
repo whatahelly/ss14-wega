@@ -9,6 +9,9 @@
     sprite: _Wega/Structures/Specific/bloodcult_structures.rsi
   - type: Clickable
   - type: InteractionOutline
+  - type: Appearance
+    appearanceDataInit:
+      enum.RuneColorVisuals.Color: Red
   - type: Physics
     bodyType: Static
   - type: UseDelay
@@ -152,7 +155,7 @@
     state: construct-cult
   - type: Physics
     bodyType: Dynamic
-  - type: BloodCultConstruct
+  - type: Construct
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic

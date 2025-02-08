@@ -1,0 +1,128 @@
+- type: entity
+  abstract: true
+  id: MobReaperBase
+  name: Reaper
+  description: Your mind begins to bubble and ooze as it tries to comprehend what it sees.
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Demons/reaper.rsi
+    drawdepth: Ghosts
+    scale: 2.0,2.0
+    layers:
+    - state: reaper
+      shader: unshaded
+
+- type: entity
+  parent: MobReaperBase
+  id: MobReaperSpawn
+  suffix: Spawn
+  components:
+  - type: Sprite
+    layers:
+    - state: spawn
+      shader: unshaded
+  - type: TimedDespawn
+    lifetime: 1.8
+  - type: SpawnOnDespawn
+    prototype: MobReaper
+
+- type: entity
+  parent: [MobReaperBase, BaseMob]
+  id: MobReaper
+  components:
+  - type: AnnounceOnSpawn
+    message: reaper-has-risen
+    sender: reaper-has-risen-sender
+    sound:
+      path: /Audio/_Wega/Effects/ghost.ogg
+    color: red
+  - type: CargoSellBlacklist
+  - type: ContentEye
+    maxZoom: 2.0,2.0
+  - type: Fixtures
+    fixtures:
+      EventHorizonCollider:
+        shape:
+          !type:PhysShapeCircle
+            radius: 5
+        hard: false
+        restitution: 0.8
+        density: 99999
+        mask:
+        - SingularityLayer
+        layer:
+        - SingularityLayer
+      EventHorizonConsumer:
+        shape:
+          !type:PhysShapeCircle
+            radius: 5
+        hard: false
+        mask:
+        - SingularityLayer
+        layer:
+        - SingularityLayer
+  - type: Input
+    context: "ghost"
+  - type: MovementIgnoreGravity
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+    - Command
+    - CentCom
+    - Engineering
+    - Medical
+    - Science
+    - Security
+    - Service
+    - Supply
+    - Syndicate
+    globalReceive: true
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+  - type: CanMoveInAir
+  - type: WarpPoint
+    follow: true
+    location: Reaper
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - MobConstructHarvester
+    intervalSeconds: 8
+  - type: Godmode
+  - type: Eye
+    drawFov: false
+  - type: Puller
+    needsHands: false
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 10
+    baseSprintSpeed: 4
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-reaper
+    description: ghost-role-information-reaper-desc
+    rules: ""
+    raffle:
+      settings: short
+  - type: CombatMode
+  - type: MeleeWeapon
+    resistanceBypass: True
+    altDisarm: false
+    hidden: true
+    angle: 180
+    range: 8
+    animation: WeaponArcClaw
+    soundHit:
+      path: /Audio/Weapons/block_metal1.ogg
+    attackRate: 2
+    damage:
+      types:
+        Blunt: 250
+        Slash: 250
+        Piercing: 50
+        Structural: 2500

@@ -193,6 +193,17 @@ public sealed partial class BloodCultSystem
                     _prayerSystem.SendSubtleMessage(cultistActor.PlayerSession, cultistActor.PlayerSession, string.Empty, popupMessage);
                 }
 
+                var constructQuery = EntityQuery<ActorComponent, BloodCultConstructComponent>(true);
+                foreach (var (actorComp, constructComp) in constructQuery)
+                {
+                    if (actorComp == playerActor) continue;
+
+                    if (!TryComp<ActorComponent>(actorComp.Owner, out var constructActor))
+                        continue;
+
+                    _prayerSystem.SendSubtleMessage(constructActor.PlayerSession, constructActor.PlayerSession, string.Empty, popupMessage);
+                }
+
                 _admin.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(uid):user} saying the: {finalMessage} in cult commune");
                 _chat.TrySendInGameICMessage(uid, finalMessage, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: false);
             });
@@ -301,9 +312,15 @@ public sealed partial class BloodCultSystem
         }
 
         var cultistCoords = Transform(cultist).Coordinates;
-        var possibleDaggerTypes = new[] { "WeaponBloodDagger", "WeaponDeathDagger", "WeaponHellDagger" };
-        var randomIndex = new Random().Next(possibleDaggerTypes.Length);
-        var dagger = _entityManager.SpawnEntity(possibleDaggerTypes[randomIndex], cultistCoords);
+        string selectedDagger = GetCurrentGod() switch
+        {
+            "Narsie" => "WeaponBloodDagger",
+            "Reaper" => "WeaponDeathDagger",
+            "Kharin" => "WeaponHellDagger",
+            _ => "WeaponBloodDagger"
+        };
+
+        var dagger = _entityManager.SpawnEntity(selectedDagger, cultistCoords);
         component.RecallDaggerActionEntity = dagger;
         _hands.TryPickupAnyHand(cultist, dagger);
 
@@ -700,15 +717,15 @@ public sealed partial class BloodCultSystem
             case "summonequipment":
                 _entityManager.DeleteEntity(entity);
                 RaiseLocalEvent(target, new DropHandItemsEvent());
-                var randomGearOptions = new[]
+                ProtoId<StartingGearPrototype> selectedGear = GetCurrentGod() switch
                 {
-                    new ProtoId<StartingGearPrototype>("BloodCultWeaponDeathGear"),
-                    new ProtoId<StartingGearPrototype>("BloodCultWeaponBloodGear"),
-                    new ProtoId<StartingGearPrototype>("BloodCultWeaponHellGear")
+                    "Narsie" => new ProtoId<StartingGearPrototype>("BloodCultWeaponBloodGear"),
+                    "Reaper" => new ProtoId<StartingGearPrototype>("BloodCultWeaponDeathGear"),
+                    "Kharin" => new ProtoId<StartingGearPrototype>("BloodCultWeaponHellGear"),
+                    _ => new ProtoId<StartingGearPrototype>("BloodCultWeaponBloodGear")
                 };
 
-                var cultWeaponGear = randomGearOptions[new Random().Next(randomGearOptions.Length)];
-                List<ProtoId<StartingGearPrototype>> gear = new() { cultWeaponGear };
+                List<ProtoId<StartingGearPrototype>> gear = new() { selectedGear };
                 _loadout.Equip(target, gear, null);
                 if (TryComp<InventoryComponent>(target, out var targetInventory))
                 {

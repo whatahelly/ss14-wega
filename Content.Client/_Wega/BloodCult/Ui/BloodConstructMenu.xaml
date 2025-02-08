@@ -24,11 +24,6 @@
             <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/artificer.png"/>
         </ui:RadialMenuTextureButton>
 
-        <!-- Harvester -->
-        <ui:RadialMenuTextureButton Name="BloodHarvesterButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-harvester'}" TargetLayer="BloodHarvester">
-            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/harvester.png"/>
-        </ui:RadialMenuTextureButton>
-
         <!-- Proteon -->
         <ui:RadialMenuTextureButton Name="BloodProteonButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-constuct-proteon'}" TargetLayer="BloodProteon">
             <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/proteon.png"/>
