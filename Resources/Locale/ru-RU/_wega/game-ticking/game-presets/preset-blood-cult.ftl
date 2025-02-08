@@ -19,10 +19,10 @@ blood-cult-ritualconducted = [color=blue]Малая победа Культа К
 blood-cult-neutral = [color=yellow]Ничейный исход[/color]
 blood-cult-cultlose = [color=grey]Поражение Культа Крови[/color]
 
-blood-cult-cond-godcalled = Нар’Си была призвана, её тёмная сила охватила станцию!
-blood-cult-cond-ritualconducted = Ритуал не был завершён, Культ Крови только собрал силу, чтобы призвать Нар’Си!
+blood-cult-cond-godcalled = Божество Крови было призвано, его тёмная сила охватила станцию!
+blood-cult-cond-ritualconducted = Ритуал не был завершён, Культ Крови только собрал силу, чтобы призвать Божество Крови!
 blood-cult-cond-neutral = Цели не выполнены, Культ Крови ничего не достиг.
-blood-cult-cond-cultlose = Культ Крови потерпел поражение, жертвы не были принесены, и Нар’Си не явилась.
+blood-cult-cond-cultlose = Культ Крови потерпел поражение, жертвы не были принесены, и Божество Крови не явилось.
 
 blood-cultist-list-start = Культистами были:
 blood-cultist-list-name-user = - [color=White]{ $name }[/color] ([color=gray]{ $user }[/color])
