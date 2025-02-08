@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
+using Content.Server.Blood.Cult;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.GameTicking.Rules.Components;
@@ -23,6 +24,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server.GameTicking.Rules
 {
@@ -31,6 +33,7 @@ namespace Content.Server.GameTicking.Rules
         [Dependency] private readonly ActionsSystem _action = default!;
         [Dependency] private readonly AntagSelectionSystem _antag = default!;
         [Dependency] private readonly BodySystem _body = default!;
+        [Dependency] private readonly BloodCultSystem _cult = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
         [Dependency] private readonly MetabolizerSystem _metabolism = default!;
@@ -46,6 +49,7 @@ namespace Content.Server.GameTicking.Rules
         {
             base.Initialize();
 
+            SubscribeLocalEvent<BloodCultRuleComponent, ComponentStartup>(OnRuleStartup);
             SubscribeLocalEvent<BloodCultRuleComponent, AfterAntagEntitySelectedEvent>(OnCultistSelected);
 
             SubscribeLocalEvent<GodCalledEvent>(OnGodCalled);
@@ -55,6 +59,13 @@ namespace Content.Server.GameTicking.Rules
             SubscribeLocalEvent<BloodCultistComponent, ComponentRemove>(OnComponentRemove);
             SubscribeLocalEvent<BloodCultistComponent, MobStateChangedEvent>(OnMobStateChanged);
             SubscribeLocalEvent<BloodCultistComponent, EntityZombifiedEvent>(OnOperativeZombified);
+        }
+
+        private void OnRuleStartup(EntityUid uid, BloodCultRuleComponent component, ComponentStartup args)
+        {
+            List<string> gods = new List<string> { "Narsie", "Reaper", "Kharin" };
+            component.SelectedGod = gods[new Random().Next(gods.Count)];
+            Timer.Spawn(TimeSpan.FromMinutes(1), _cult.SelectRandomTargets);
         }
 
         private void OnCultistSelected(Entity<BloodCultRuleComponent> mindId, ref AfterAntagEntitySelectedEvent args)
@@ -97,10 +108,24 @@ namespace Content.Server.GameTicking.Rules
 
         private string MakeBriefing(EntityUid ent)
         {
+            string selectedGod = Loc.GetString("current-god-narsie");
+            var query = QueryActiveRules();
+            while (query.MoveNext(out _, out _, out var cult, out _))
+            {
+                selectedGod = cult.SelectedGod switch
+                {
+                    "Narsie" => Loc.GetString("current-god-narsie"),
+                    "Reaper" => Loc.GetString("current-god-reaper"),
+                    "Kharin" => Loc.GetString("current-god-kharin"),
+                    _ => Loc.GetString("current-god-narsie")
+                };
+                break;
+            }
+
             var isHuman = HasComp<HumanoidAppearanceComponent>(ent);
             var briefing = isHuman
-                ? Loc.GetString("blood-cult-role-greeting-human")
-                : Loc.GetString("blood-cult-role-greeting-animal");
+                ? Loc.GetString("blood-cult-role-greeting-human", ("god", selectedGod))
+                : Loc.GetString("blood-cult-role-greeting-animal", ("god", selectedGod));
 
             return briefing;
         }
@@ -123,11 +148,22 @@ namespace Content.Server.GameTicking.Rules
             RemComp<AutoCultistComponent>(uid);
 
             MakeCultist(uid);
-            var possibleDaggerTypes = new[] { "WeaponBloodDagger", "WeaponDeathDagger", "WeaponHellDagger" };
-            var randomIndex = new Random().Next(possibleDaggerTypes.Length);
-            var dagger = _entityManager.SpawnEntity(possibleDaggerTypes[randomIndex], Transform(uid).Coordinates);
-            culsistComp.RecallDaggerActionEntity = dagger;
-            _hands.TryPickupAnyHand(uid, dagger);
+            var query = QueryActiveRules();
+            while (query.MoveNext(out _, out _, out var cult, out _))
+            {
+                string selectedDagger = cult.SelectedGod switch
+                {
+                    "Narsie" => "WeaponBloodDagger",
+                    "Reaper" => "WeaponDeathDagger",
+                    "Kharin" => "WeaponHellDagger",
+                    _ => "WeaponBloodDagger"
+                };
+
+                var dagger = _entityManager.SpawnEntity(selectedDagger, Transform(uid).Coordinates);
+                culsistComp.RecallDaggerActionEntity = dagger;
+                _hands.TryPickupAnyHand(uid, dagger);
+                break;
+            }
         }
 
         private void HandleMetabolism(EntityUid cultist)

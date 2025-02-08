@@ -29,13 +29,11 @@ public sealed class BloodConstructMenu : RadialMenu
         var juggernautButton = FindControl<RadialMenuTextureButton>("BloodJuggernautButton");
         var wraithButton = FindControl<RadialMenuTextureButton>("BloodWraithButton");
         var artificerButton = FindControl<RadialMenuTextureButton>("BloodArtificerButton");
-        var harvesterButton = FindControl<RadialMenuTextureButton>("BloodHarvesterButton");
         var proteonButton = FindControl<RadialMenuTextureButton>("BloodProteonButton");
 
         juggernautButton.OnButtonUp += _ => HandleRitesSelection("MobConstructJuggernaut");
         wraithButton.OnButtonUp += _ => HandleRitesSelection("MobConstructWraith");
         artificerButton.OnButtonUp += _ => HandleRitesSelection("MobConstructArtificer");
-        harvesterButton.OnButtonUp += _ => HandleRitesSelection("MobConstructHarvester");
         proteonButton.OnButtonUp += _ => HandleRitesSelection("MobConstructProteon");
     }
 

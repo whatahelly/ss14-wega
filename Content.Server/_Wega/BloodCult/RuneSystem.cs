@@ -1,18 +1,15 @@
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
-using Content.Server.Actions;
 using Content.Server.Administration.Systems;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Bible.Components;
-using Content.Server.Blood.Cult;
 using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Pinpointer;
+using Content.Server.Station.Components;
 using Content.Shared.Blood.Cult;
 using Content.Shared.Blood.Cult.Components;
 using Content.Shared.Body.Components;
@@ -29,54 +26,36 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
-using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Server.Blood.Runes;
+namespace Content.Server.Blood.Cult;
 
-public sealed partial class BloodRuneSystem : SharedBloodCultSystem
+public sealed partial class BloodCultSystem
 {
-    [Dependency] private readonly ActionsSystem _action = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
     [Dependency] private readonly BloodCultSystem _bloodCult = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IConsoleHost _consoleHost = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly FixtureSystem _fixtures = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ITileDefinitionManager _tileDefManager = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
+    private static int _offerings = 3;
     private bool _isRitualRuneUnlocked = false;
 
-    public override void Initialize()
+    private void InitializeRunes()
     {
         base.Initialize();
 
@@ -95,26 +74,6 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
 
         SubscribeLocalEvent<BloodRuneCleaningDoAfterEvent>(DoAfterInteractRune);
         SubscribeLocalEvent<BloodCultistComponent, BloodRuneCleaningDoAfterEvent>(DoAfterInteractRune);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var ritualQuery = EntityQueryEnumerator<BloodRitualDimensionalRendingComponent>();
-        while (ritualQuery.MoveNext(out var rune, out var ritualQueryComponent))
-        {
-            if (ritualQueryComponent.Activate)
-            {
-                if (ritualQueryComponent.NextTimeTick <= 0)
-                {
-                    ritualQueryComponent.NextTimeTick = 1;
-                    if (!CheckRitual(_transform.GetMapCoordinates(rune), 9))
-                        ritualQueryComponent.Activate = false;
-                }
-                ritualQueryComponent.NextTimeTick -= frameTime;
-            }
-        }
     }
 
     #region Runes
@@ -142,7 +101,25 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
         }
         else if (selectedRune == "BloodRuneRitualDimensionalRending" && _isRitualRuneUnlocked)
         {
-            if (_interaction.InRangeUnobstructed(uid, Transform(uid).Coordinates, range: 3f, collisionMask: CollisionGroup.Impassable, popup: false))
+            var xform = Transform(uid);
+            if (!TryComp<MapGridComponent>(xform.GridUid, out var grid) || !HasComp<BecomesStationComponent>(grid.Owner))
+            {
+                _popup.PopupEntity(Loc.GetString("rune-ritual-failed"), uid, uid, PopupType.MediumCaution);
+                return;
+            }
+
+            bool isValidSurface = true;
+            var worldPos = _transform.GetWorldPosition(xform);
+            foreach (var tile in _map.GetTilesIntersecting(xform.GridUid.Value, grid, new Circle(worldPos, 6f), false))
+            {
+                if (tile.IsSpace(_tileDefManager))
+                {
+                    isValidSurface = false;
+                    break;
+                }
+            }
+
+            if (isValidSurface)
             {
                 _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(10f), new BloodRuneDoAfterEvent(selectedRune), uid)
                 {
@@ -191,11 +168,17 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
         }
 
         var rune = _entityManager.SpawnEntity(args.SelectedRune, Transform(cultist).Coordinates);
-        var runeNetEntity = _entityManager.GetNetEntity(rune);
-        RaiseNetworkEvent(new RuneColoringEvent(runeNetEntity, bloodColor));
+        _appearance.SetData(rune, RuneColorVisuals.Color, bloodColor);
 
         if (args.SelectedRune == "BloodRuneRitualDimensionalRending")
+        {
+            var xform = _entityManager.GetComponent<TransformComponent>(rune);
+            var msg = Loc.GetString("blood-ritual-warning",
+                ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((rune, xform)))));
+            _chat.DispatchGlobalAnnouncement(msg, colorOverride: Color.Red);
+
             _isRitualRuneUnlocked = false;
+        }
 
         if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist, blood) > 0)
             _blood.TryModifyBloodLevel(cultist, -5, blood);
@@ -270,7 +253,7 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
                 foreach (var targetEntity in targets)
                 {
                     var target = targetEntity.Owner;
-                    if (TryComp<BloodCultistComponent>(target, out _))
+                    if (TryComp<BloodCultistComponent>(target, out _) || TryComp<BloodCultConstructComponent>(target, out _))
                         continue;
 
                     if (!_entityManager.TryGetComponent<MobThresholdsComponent>(target, out var targetThresholds))
@@ -294,7 +277,10 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
 
                             // Gib
                             if (HasComp<BloodCultObjectComponent>(target))
+                            {
                                 _bloodCult.CheckTargetsConducted(target);
+                                RemComp<BloodCultObjectComponent>(target);
+                            }
 
                             var damage = new DamageSpecifier { DamageDict = { { "Blunt", 1000 } } };
                             _damage.TryChangeDamage(target, damage, true);
@@ -677,7 +663,7 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
     private void OnRitualAfterInteract(EntityUid rune, BloodRitualDimensionalRendingComponent runeComp)
     {
         var xform = _entityManager.GetComponent<TransformComponent>(rune);
-        var msg = Loc.GetString("blood-ritual-warning",
+        var msg = Loc.GetString("blood-ritual-activate-warning",
             ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((rune, xform)))));
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
         _audio.PlayGlobal("/Audio/_Wega/Ambience/Antag/bloodcult_scribe.ogg", Filter.Broadcast(), true);
@@ -688,7 +674,14 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
                 var coords = Transform(rune).Coordinates;
                 _entityManager.DeleteEntity(rune);
                 _entityManager.SpawnEntity("BloodCultDistortedEffect", coords);
-                _entityManager.SpawnEntity("MobNarsieSpawn", coords);
+                string currentGod = GetCurrentGod() switch
+                {
+                    "Narsie" => "MobNarsieSpawn",
+                    "Reaper" => "MobReaperSpawn",
+                    "Kharin" => "MobKharinSpawn",
+                    _ => "MobNarsieSpawn"
+                };
+                _entityManager.SpawnEntity(currentGod, coords);
                 RaiseLocalEvent(new GodCalledEvent());
 
                 var nearbyCultists = _entityLookup.GetEntitiesInRange<BloodCultistComponent>(coords, 6f)
@@ -760,10 +753,11 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
 
     private bool CheckRuneActivate(MapCoordinates coords, int needCount)
     {
+        var constructsCount = _entityLookup.GetEntitiesInRange<BloodCultConstructComponent>(coords, 2f).Count();
         var aliveCultistsCount = _entityLookup.GetEntitiesInRange<BloodCultistComponent>(coords, 2f)
             .Count(cultist => !_entityManager.TryGetComponent<MobThresholdsComponent>(cultist.Owner, out var thresholds)
                             || thresholds.CurrentThresholdState != MobState.Dead);
-        return aliveCultistsCount >= needCount;
+        return aliveCultistsCount + constructsCount >= needCount;
     }
 
     private bool CheckRitual(MapCoordinates coords, int needCount)
@@ -818,7 +812,7 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
             || !_map.TryGetTileRef(cultist, grid, cultistTransform.Coordinates, out var tileRef))
             return true;
 
-        return tileRef.Tile.IsEmpty || tileRef.IsSpace();
+        return tileRef.Tile.IsEmpty || tileRef.IsSpace(_tileDefManager);
     }
 
     private void DoAfterInteractRune(BloodRuneCleaningDoAfterEvent args)
@@ -833,6 +827,21 @@ public sealed partial class BloodRuneSystem : SharedBloodCultSystem
         if (args.Cancelled) return;
 
         _entityManager.DeleteEntity(args.Target);
+    }
+
+    private static void IncrementOfferingsCount()
+    {
+        _offerings++;
+    }
+
+    private static void SubtractOfferingsCount()
+    {
+        _offerings -= 3;
+    }
+
+    private static int GetOfferingsCount()
+    {
+        return _offerings;
     }
     #endregion
 }

@@ -148,19 +148,6 @@ public sealed partial class BloodRuneCleaningDoAfterEvent : SimpleDoAfterEvent
 }
 
 [Serializable, NetSerializable]
-public sealed partial class RuneColoringEvent : EntityEventArgs
-{
-    public NetEntity Uid { get; }
-    public Color BloodColor { get; }
-
-    public RuneColoringEvent(NetEntity uid, Color bloodColor)
-    {
-        Uid = uid;
-        BloodColor = bloodColor;
-    }
-}
-
-[Serializable, NetSerializable]
 public sealed class SummoningRuneMenuOpenedEvent : EntityEventArgs
 {
     public NetEntity Uid { get; }

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "size": {
+    "x": 252,
+    "y": 266
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/ss220-space/Paradise",
+  "metaAtlas": false,
+  "states": [
+    {
+      "name": "reaper",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "spawn",
+      "delays": [
+        [
+          1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    }
+  ]
+}

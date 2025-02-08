@@ -49,19 +49,13 @@ public sealed partial class BloodCultistComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class ShowCultistIconsComponent : Component
-{
-}
+public sealed partial class ShowCultistIconsComponent : Component;
 
 [RegisterComponent]
-public sealed partial class AutoCultistComponent : Component
-{
-}
+public sealed partial class AutoCultistComponent : Component;
 
 [RegisterComponent]
-public sealed partial class BloodCultObjectComponent : Component
-{
-}
+public sealed partial class BloodCultObjectComponent : Component;
 
 [RegisterComponent]
 public sealed partial class BloodDaggerComponent : Component
@@ -147,14 +141,13 @@ public sealed partial class StoneSoulComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BloodCultConstructComponent : Component
-{
-}
+public sealed partial class ConstructComponent : Component;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BloodShuttleCurseComponent : Component
-{
-}
+public sealed partial class BloodCultConstructComponent : Component;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class BloodShuttleCurseComponent : Component;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class VeilShifterComponent : Component
@@ -164,21 +157,21 @@ public sealed partial class VeilShifterComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BloodSharpenerComponent : Component
-{
-}
+public sealed partial class BloodSharpenerComponent : Component;
 
 /// <summary>
 /// Заглушка для логики
 /// </summary>
 [RegisterComponent]
-public sealed partial class CultistEyesComponent : Component
-{
-}
+public sealed partial class CultistEyesComponent : Component;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class PentagramDisplayComponent : Component
+public sealed partial class PentagramDisplayComponent : Component;
+
+[Serializable, NetSerializable]
+public enum RuneColorVisuals
 {
+    Color
 }
 
 [Serializable, NetSerializable]
