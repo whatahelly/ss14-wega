@@ -1,13 +1,5 @@
 # Basic
 - type: entity
-  id: GuidebookVampireShop
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _Wega/Interface/Actions/actions_vampire.rsi
-    state: store
-
-- type: entity
   id: GuidebookVampireSelectClass
   categories: [ HideSpawnMenu ]
   components:
