@@ -15,6 +15,11 @@ using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using System.Numerics; //Corvax-Wega-DragonPushSkill
+using Robust.Shared.Random; //Corvax-Wega-DragonPushSkill
+using Content.Shared.Body.Components; //Corvax-Wega-DragonPushSkill
+using Robust.Shared.Physics.Components; //Corvax-Wega-DragonPushSkill
+using Robust.Shared.Physics.Systems; //Corvax-Wega-DragonPushSkill
 
 namespace Content.Server.Dragon;
 
@@ -30,6 +35,11 @@ public sealed partial class DragonSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; //Corvax-Wega-DragonPushSkill
+    [Dependency] private readonly TileSystem _tile = default!; //Corvax-Wega-DragonPushSkill
+    [Dependency] private readonly IEntityManager _entityManager = default!; //Corvax-Wega-DragonPushSkill
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!; //Corvax-Wega-DragonPushSkill
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!; //Corvax-Wega-DragonPushSkill
 
     private EntityQuery<CarpRiftsConditionComponent> _objQuery;
 
@@ -55,6 +65,7 @@ public sealed partial class DragonSystem : EntitySystem
         SubscribeLocalEvent<DragonComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<DragonComponent, DragonSpawnRiftActionEvent>(OnSpawnRift);
         SubscribeLocalEvent<DragonComponent, RefreshMovementSpeedModifiersEvent>(OnDragonMove);
+        SubscribeLocalEvent<DragonComponent, DragonPushActionEvent>(OnPush); //Corvax-Wega-DragonPushSkill
         SubscribeLocalEvent<DragonComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<DragonComponent, EntityZombifiedEvent>(OnZombified);
     }
@@ -110,6 +121,7 @@ public sealed partial class DragonSystem : EntitySystem
     {
         Roar(uid, component);
         _actions.AddAction(uid, ref component.SpawnRiftActionEntity, component.SpawnRiftAction);
+        _actions.AddAction(uid, component.PushAction); //Corvax-Wega-DragonPushSkill
     }
 
     private void OnShutdown(EntityUid uid, DragonComponent component, ComponentShutdown args)
@@ -170,6 +182,49 @@ public sealed partial class DragonSystem : EntitySystem
         component.Rifts.Add(carpUid);
         Comp<DragonRiftComponent>(carpUid).Dragon = uid;
     }
+
+    //Corvax-Wega-DragonPushSkill-start
+    private void OnPush(EntityUid uid, DragonComponent component, DragonPushActionEvent args)
+    {
+        var dragonPosition = _transform.GetWorldPosition(uid);
+        var gridUid = _transform.GetGrid(uid);
+        if (gridUid != null && TryComp<MapGridComponent>(gridUid.Value, out var grid))
+        {
+            var tiles = _map.GetTilesIntersecting(gridUid.Value, grid,
+                Box2.CenteredAround(dragonPosition, new Vector2(6, 6)), ignoreEmpty: true);
+
+            foreach (var tile in tiles)
+            {
+                if (!_random.Prob(0.5f))
+                    continue;
+
+                _tile.PryTile(tile);
+            }
+        }
+        var transform = Transform(uid);
+        var nearbyHumanoids = _entityLookup.GetEntitiesInRange<BodyComponent>(transform.Coordinates, 3f);
+        foreach (var humanoid in nearbyHumanoids)
+        {
+            var humanoidUid = humanoid.Owner;
+            if (humanoidUid == uid) continue;
+
+            if (!_entityManager.TryGetComponent(humanoid, out PhysicsComponent? physics)
+                || !_entityManager.TryGetComponent(humanoid, out TransformComponent? humanoidTransform))
+                continue;
+
+            var humanoidPosition = _transform.GetWorldPosition(humanoid);
+            var direction = (humanoidPosition - dragonPosition).Normalized();
+            var force = 2500f;
+            if (physics.Mass < 80f)
+            {
+                force *= 2;
+            }
+            _physics.ApplyLinearImpulse(humanoid, direction * force, body: physics);
+        }
+        _audio.PlayPvs(args.Sound, uid);
+        args.Handled = true;
+    }
+    //Corvax-Wega-DragonPushSkill-end
 
     // TODO: just make this a move speed modifier component???
     private void OnDragonMove(EntityUid uid, DragonComponent component, RefreshMovementSpeedModifiersEvent args)
