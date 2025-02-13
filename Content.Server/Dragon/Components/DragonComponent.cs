@@ -46,7 +46,7 @@ namespace Content.Server.Dragon
         [DataField("spawnRiftActionEntity")]
         public EntityUid? SpawnRiftActionEntity;
 
-        [DataField("PushAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] //Corvax-Wega-DragonPushSkill
+        [DataField("pushAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] //Corvax-Wega-DragonPushSkill
         public string PushAction = "ActionPush"; //Corvax-Wega-DragonPushSkill
 
         [ViewVariables(VVAccess.ReadWrite), DataField("riftPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]

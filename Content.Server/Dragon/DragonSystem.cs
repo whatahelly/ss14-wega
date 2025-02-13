@@ -20,6 +20,7 @@ using Robust.Shared.Random; //Corvax-Wega-DragonPushSkill
 using Content.Shared.Body.Components; //Corvax-Wega-DragonPushSkill
 using Robust.Shared.Physics.Components; //Corvax-Wega-DragonPushSkill
 using Robust.Shared.Physics.Systems; //Corvax-Wega-DragonPushSkill
+using Content.Shared.Stunnable; //Corvax-Wega-DragonPushSkill
 
 namespace Content.Server.Dragon;
 
@@ -40,6 +41,7 @@ public sealed partial class DragonSystem : EntitySystem
     [Dependency] private readonly IEntityManager _entityManager = default!; //Corvax-Wega-DragonPushSkill
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!; //Corvax-Wega-DragonPushSkill
     [Dependency] private readonly SharedPhysicsSystem _physics = default!; //Corvax-Wega-DragonPushSkill
+    [Dependency] private readonly SharedStunSystem _stun = default!; //Corvax-Wega-DragonPushSkill
 
     private EntityQuery<CarpRiftsConditionComponent> _objQuery;
 
@@ -212,9 +214,10 @@ public sealed partial class DragonSystem : EntitySystem
                 || !_entityManager.TryGetComponent(humanoid, out TransformComponent? humanoidTransform))
                 continue;
 
+            _stun.TryParalyze(humanoid, TimeSpan.FromSeconds(4f), true);
             var humanoidPosition = _transform.GetWorldPosition(humanoid);
             var direction = (humanoidPosition - dragonPosition).Normalized();
-            var force = 2500f;
+            var force = 750f;
             if (physics.Mass < 80f)
             {
                 force *= 2;

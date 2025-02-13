@@ -161,7 +161,7 @@
   components:
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
-    PushAction: ActionPush # Corvax-Wega-DragonPushSkill
+    pushAction: ActionPush # Corvax-Wega-DragonPushSkill
   - type: ActionGun
     action: ActionDragonsBreath
     gunProto: DragonsBreathGun
