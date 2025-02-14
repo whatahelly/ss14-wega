@@ -103469,6 +103469,29 @@ entities:
     - type: Transform
       pos: -55.5,-24.5
       parent: 2
+- proto: HolyPointMarker
+  entities:
+  - uid: 22544
+    components:
+    - type: Transform
+      pos: -21.5,-36.5
+      parent: 2
+    - type: HolyPoint
+      range: 5
+  - uid: 22545
+    components:
+    - type: Transform
+      pos: -26.5,-37.5
+      parent: 2
+    - type: HolyPoint
+      range: 4
+  - uid: 22546
+    components:
+    - type: Transform
+      pos: -31.5,-37.5
+      parent: 2
+    - type: HolyPoint
+      range: 3
 - proto: HospitalCurtains
   entities:
   - uid: 6884

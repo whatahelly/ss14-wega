@@ -1,7 +1,7 @@
 - type: gameMap
   id: Packed
   mapName: 'Packed'
-  mapPath: /Maps/_Wega/wegapacked.yml #Corvax-Wega 
+  mapPath: /Maps/_Wega/wegapacked.yml #Corvax-Wega-Maps
   # Corvax-start
   minPlayers: 0
   maxPlayers: 25

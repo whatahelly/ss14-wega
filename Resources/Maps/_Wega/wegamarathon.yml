@@ -11559,7 +11559,7 @@ entities:
       pos: 34.5,45.5
       parent: 30
     - type: Door
-      secondsUntilStateChange: -3949.8228
+      secondsUntilStateChange: -4118.151
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -100641,6 +100641,15 @@ entities:
     - type: Transform
       pos: -31.5,23.5
       parent: 30
+- proto: HolyPointMarker
+  entities:
+  - uid: 22556
+    components:
+    - type: Transform
+      pos: -64.5,-51.5
+      parent: 30
+    - type: HolyPoint
+      range: 19
 - proto: HospitalCurtainsOpen
   entities:
   - uid: 7740
