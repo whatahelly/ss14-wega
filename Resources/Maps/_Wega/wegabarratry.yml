@@ -74178,6 +74178,36 @@ entities:
     - type: Transform
       pos: -25.5,10.5
       parent: 1
+- proto: HolyPointMarker
+  entities:
+  - uid: 14369
+    components:
+    - type: Transform
+      pos: 15.5,1.5
+      parent: 1
+    - type: HolyPoint
+      range: 3
+  - uid: 14393
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 1
+    - type: HolyPoint
+      range: 3
+  - uid: 14397
+    components:
+    - type: Transform
+      pos: 20.5,-1.5
+      parent: 1
+    - type: HolyPoint
+      range: 2
+  - uid: 14398
+    components:
+    - type: Transform
+      pos: 20.5,1.5
+      parent: 1
+    - type: HolyPoint
+      range: 2
 - proto: HospitalCurtainsOpen
   entities:
   - uid: 1404

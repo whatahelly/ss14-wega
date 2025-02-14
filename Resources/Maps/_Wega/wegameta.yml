@@ -14948,7 +14948,7 @@ entities:
       pos: -29.5,15.5
       parent: 5350
     - type: Door
-      secondsUntilStateChange: -230392.7
+      secondsUntilStateChange: -230515.67
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15222,7 +15222,7 @@ entities:
       pos: -4.5,53.5
       parent: 5350
     - type: Door
-      secondsUntilStateChange: -85046.47
+      secondsUntilStateChange: -85169.44
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 2
@@ -83475,7 +83475,7 @@ entities:
       pos: 31.5,-33.5
       parent: 5350
     - type: Door
-      secondsUntilStateChange: -7885.493
+      secondsUntilStateChange: -8008.459
       state: Closing
   - uid: 9615
     components:
@@ -128209,6 +128209,43 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: HolyPointMarker
+  entities:
+  - uid: 28361
+    components:
+    - type: Transform
+      pos: -18.5,-67.5
+      parent: 5350
+    - type: HolyPoint
+      range: 5
+  - uid: 28362
+    components:
+    - type: Transform
+      pos: -17.5,-70.5
+      parent: 5350
+    - type: HolyPoint
+      range: 5
+  - uid: 28363
+    components:
+    - type: Transform
+      pos: -27.5,-71.5
+      parent: 5350
+    - type: HolyPoint
+      range: 4
+  - uid: 28364
+    components:
+    - type: Transform
+      pos: -25.5,-65.5
+      parent: 5350
+    - type: HolyPoint
+      range: 4
+  - uid: 28365
+    components:
+    - type: Transform
+      pos: -30.5,-65.5
+      parent: 5350
+    - type: HolyPoint
+      range: 3
 - proto: HospitalCurtainsOpen
   entities:
   - uid: 4105
@@ -181924,7 +181961,7 @@ entities:
       pos: -28.5,-5.5
       parent: 5350
     - type: Door
-      secondsUntilStateChange: -13597.397
+      secondsUntilStateChange: -13720.363
       state: Opening
   - uid: 17570
     components:

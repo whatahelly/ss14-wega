@@ -1,7 +1,7 @@
 - type: gameMap
   id: Bagel
   mapName: 'Bagel Station'
-  mapPath: /Maps/bagel.yml
+  mapPath: /Maps/_Wega/wegabagel.yml # Corvax-Wega-Maps
   minPlayers: 55 # Corvax-Mapping
   stations:
     Bagel:
