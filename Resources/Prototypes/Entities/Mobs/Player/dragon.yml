@@ -161,6 +161,7 @@
   components:
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
+    pushAction: ActionPush # Corvax-Wega-DragonPushSkill
   - type: ActionGun
     action: ActionDragonsBreath
     gunProto: DragonsBreathGun
@@ -227,6 +228,21 @@
     event: !type:DragonSpawnRiftActionEvent
     useDelay: 1
     priority: 3
+
+# Corvax-Wega-DragonPushSkill-start
+- type: entity
+  id: ActionPush
+  name: Push
+  description: Push away nearby creatures
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Wega/Interface/Actions/actions_dragon.rsi
+      state: repulse
+    event: !type:DragonPushActionEvent
+    useDelay: 120
+    priority: 4
+# Corvax-Wega-DragonPushSkill-end
 
 - type: entity
   id: ActionDevour
