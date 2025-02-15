@@ -16,3 +16,5 @@
                 sprite: _Wega/Objects/Misc/soilbag.rsi
                 state: icon
               doAfter: 10
+    - node: soil
+      entity: hydroponicsSoilaaaa

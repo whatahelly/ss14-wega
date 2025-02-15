@@ -14,6 +14,9 @@
   id: Peaceflower
 
 - type: Tag
+  id: Poppyflower
+
+- type: Tag
   id: MagazinePistolSubMachineGunFoam
 
 - type: Tag

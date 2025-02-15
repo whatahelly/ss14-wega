@@ -5,7 +5,7 @@
     variation: 0.125
   sounds:
     Scream:
-      collection: MaleScreams
+      collection: VulpakinScreams # Corvax-Wega-Voice
     Laugh:
       collection: MaleLaugh
     Growl:
@@ -39,7 +39,7 @@
     variation: 0.125
   sounds:
     Scream:
-      collection: FemaleScreams
+      collection: VulpakinScreams # Corvax-Wega-Voice
     Laugh:
       collection: FemaleLaugh
     Growl:

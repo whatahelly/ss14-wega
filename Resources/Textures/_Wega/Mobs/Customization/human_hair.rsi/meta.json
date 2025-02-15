@@ -810,6 +810,286 @@
       {
         "name": "nitori_secondary_alt2",
         "directions": 4
+      },
+      {
+        "name": "africanpigtails_secondary",
+        "directions": 4
+      },
+      {
+        "name": "afropuffdouble_secondary",
+        "directions": 4
+      },
+      {
+        "name": "afropuffleft_secondary",
+        "directions": 4
+      },
+      {
+        "name": "afropuffright_secondary",
+        "directions": 4
+      },
+      {
+        "name": "amazon_secondary",
+        "directions": 4
+      },
+      {
+        "name": "astolfo_secondary",
+        "directions": 4
+      },
+      {
+        "name": "baum_secondary",
+        "directions": 4
+      },
+      {
+        "name": "beachwave_secondary",
+        "directions": 4
+      },
+      {
+        "name": "bluntbangs_secondary",
+        "directions": 4
+      },
+      {
+        "name": "bluntbangs_alt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "bobcutalt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "bunhead4_secondary",
+        "directions": 4
+      },
+      {
+        "name": "combed_secondary",
+        "directions": 4
+      },
+      {
+        "name": "combedbob_secondary",
+        "directions": 4
+      },
+      {
+        "name": "cotton_secondary",
+        "directions": 4
+      },
+      {
+        "name": "curly_secondary",
+        "directions": 4
+      },
+      {
+        "name": "dave_secondary",
+        "directions": 4
+      },
+      {
+        "name": "diagonal_bangs_secondary",
+        "directions": 4
+      },
+      {
+        "name": "emoshort_secondary",
+        "directions": 4
+      },
+      {
+        "name": "fingerwave_secondary",
+        "directions": 4
+      },
+      {
+        "name": "fluffy_short_secondary",
+        "directions": 4
+      },
+      {
+        "name": "fortuneteller_secondary",
+        "directions": 4
+      },
+      {
+        "name": "fortuneteller_alt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "froofylong_secondary",
+        "directions": 4
+      },
+      {
+        "name": "geisha_secondary",
+        "directions": 4
+      },
+      {
+        "name": "gentle21_secondary",
+        "directions": 4
+      },
+      {
+        "name": "glammetal_secondary",
+        "directions": 4
+      },
+      {
+        "name": "gloomy_long_secondary",
+        "directions": 4
+      },
+      {
+        "name": "gloomy_medium_secondary",
+        "directions": 4
+      },
+      {
+        "name": "grande_secondary",
+        "directions": 4
+      },
+      {
+        "name": "halfshave_secondary",
+        "directions": 4
+      },
+      {
+        "name": "halfshave_glamorous_secondary",
+        "directions": 4
+      },
+      {
+        "name": "halfshave_long_secondary",
+        "directions": 4
+      },
+      {
+        "name": "halfshave_messy_secondary",
+        "directions": 4
+      },
+      {
+        "name": "halfshave_messylong_secondary",
+        "directions": 4
+      },
+      {
+        "name": "halfshave_snout_secondary",
+        "directions": 4
+      },
+      {
+        "name": "hightight_secondary",
+        "directions": 4
+      },
+      {
+        "name": "hyenamane_secondary",
+        "directions": 4
+      },
+      {
+        "name": "jessica_secondary",
+        "directions": 4
+      },
+      {
+        "name": "long4_secondary",
+        "directions": 4
+      },
+      {
+        "name": "longdtails_secondary",
+        "directions": 4
+      },
+      {
+        "name": "longeralt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "longovereye_alt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "longsidepartstraight_secondary",
+        "directions": 4
+      },
+      {
+        "name": "loose_slicked_secondary",
+        "directions": 4
+      },
+      {
+        "name": "mediumbraid_secondary",
+        "directions": 4
+      },
+      {
+        "name": "newyou_secondary",
+        "directions": 4
+      },
+      {
+        "name": "ponytailalt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "ponytailf_secondary",
+        "directions": 4
+      },
+      {
+        "name": "poofy2_secondary",
+        "directions": 4
+      },
+      {
+        "name": "quadcurls_secondary",
+        "directions": 4
+      },
+      {
+        "name": "sabitsuki_secondary",
+        "directions": 4
+      },
+      {
+        "name": "scully_secondary",
+        "directions": 4
+      },
+      {
+        "name": "shorthair4_secondary",
+        "directions": 4
+      },
+      {
+        "name": "shy_secondary",
+        "directions": 4
+      },
+      {
+        "name": "simple_ponytail_secondary",
+        "directions": 4
+      },
+      {
+        "name": "sleaze_secondary",
+        "directions": 4
+      },
+      {
+        "name": "slightlymessy_secondary",
+        "directions": 4
+      },
+      {
+        "name": "slimedroplet_secondary",
+        "directions": 4
+      },
+      {
+        "name": "slimedroplet_alt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "slimespikes_secondary",
+        "directions": 4
+      },
+      {
+        "name": "slimetendrils_secondary",
+        "directions": 4
+      },
+      {
+        "name": "slimetendrils_alt_secondary",
+        "directions": 4
+      },
+      {
+        "name": "spicy_secondary",
+        "directions": 4
+      },
+      {
+        "name": "twintail_floor_secondary",
+        "directions": 4
+      },
+      {
+        "name": "veryshortovereye_secondary",
+        "directions": 4
+      },
+      {
+        "name": "victory_secondary",
+        "directions": 4
+      },
+      {
+        "name": "viper_secondary",
+        "directions": 4
+      },
+      {
+        "name": "wife_secondary",
+        "directions": 4
+      },
+      {
+        "name": "ziegler_secondary",
+        "directions": 4
       }
     ]
   }

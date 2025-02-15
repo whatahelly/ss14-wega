@@ -102,27 +102,27 @@
       edges:
         - to: poppybouquet
           steps:
-            - tag: FoodPoppy
+            - tag: Poppyflower
               name: poppy
               icon:
                 sprite: Objects/Specific/Hydroponics/poppy.rsi
                 state: produce
-            - tag: FoodPoppy
+            - tag: Poppyflower
               name: poppy
               icon:
                 sprite: Objects/Specific/Hydroponics/poppy.rsi
                 state: produce
-            - tag: FoodPoppy
+            - tag: Poppyflower
               name: poppy
               icon:
                 sprite: Objects/Specific/Hydroponics/poppy.rsi
                 state: produce
-            - tag: FoodPoppy
+            - tag: Poppyflower
               name: poppy
               icon:
                 sprite: Objects/Specific/Hydroponics/poppy.rsi
                 state: produce
-            - tag: FoodPoppy
+            - tag: Poppyflower
               name: poppy
               icon:
                 sprite: Objects/Specific/Hydroponics/poppy.rsi
