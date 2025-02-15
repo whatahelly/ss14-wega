@@ -1,0 +1,56 @@
+- type: entity
+  name: Donksoft SMG
+  parent: BaseWeaponSubMachineGun
+  id: WeaponSubMachineGunDonksoft
+  description: A toy submachine gun that strongly resembles the C-20R, which is often used by the infamous nuclear operatives. Uses .35 auto.
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/SMGs/donksoft_smg.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/SMGs/donksoft_smg.rsi
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -11
+    maxAngle: -7
+  - type: Gun
+    minAngle: 17
+    maxAngle: 22
+    shotsPerBurst: 5
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/c-20r.ogg
+  - type: ChamberMagazineAmmoProvider
+    autoEject: true
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: Appearance
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSubMachineGunFoam
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolSubMachineGunFoam
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgePistolFoam
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistolFoam
