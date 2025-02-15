@@ -237,11 +237,11 @@
   components:
   - type: InstantAction
     icon:
-      sprite: _Wega/Interface/Actions/actions_vampire.rsi
-      state: seismic_stomp
+      sprite: _Wega/Interface/Actions/actions_dragon.rsi
+      state: repulse
     event: !type:DragonPushActionEvent
     useDelay: 120
-    priority: 4 
+    priority: 4
 # Corvax-Wega-DragonPushSkill-end
 
 - type: entity
