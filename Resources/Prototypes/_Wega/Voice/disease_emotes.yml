@@ -62,7 +62,7 @@
     - мур
 
 - type: emote
-  id: Hisses
+  id: FilinidHisses
   name: chat-emote-name-hisses
   category: Vocal
   available: false
