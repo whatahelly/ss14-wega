@@ -1,0 +1,35 @@
+- type: entity
+  parent: [PersonalAI, ShowSecurityIcons, ShowMedicalIcons]
+  id: ThiefPersonalAI
+  suffix: Thief
+  components:
+  - type: ToggleableGhostRole
+    roleName: pai-system-role-name-thief
+    roleDescription: pai-system-role-description-thief
+    roleRules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
+  - type: ActiveRadio
+    channels:
+    - Common
+    - Command
+    - Engineering
+    - Medical
+    - Science
+    - Security
+    - Service
+    - Supply
+  - type: Appearance
+  - type: Eye
+    drawFov: false
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-thief-pai
+      whitelistMind:
+        mindRoles:
+        - ThiefRole
+    - label: corvax-hidden-desc-thief-pai-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist

@@ -1,0 +1,22 @@
+- type: entity
+  id: MagazinePistolSubMachineGunFoam
+  name: SMG magazine (.35 foam)
+  parent: BaseMagazinePistolSubMachineGun
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 30
+    proto: CartridgePistolFoam
+    whitelist:
+      tags:
+        - CartridgePistolFoam
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/bullet_insert.ogg
+  - type: Sprite
+    layers:
+    - state: practice 
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+      - MagazinePistolSubMachineGunFoam
