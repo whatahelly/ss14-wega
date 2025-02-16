@@ -178,6 +178,8 @@
     - type: HTN
       rootTask:
         task: DragonCarpCompound
+    - type: FriendlyFaction # Corvax-Wega-Friendly
+      faction: Dragon # Corvax-Wega-Friendly
 
 - type: entity
   id: MobCarpDungeon
