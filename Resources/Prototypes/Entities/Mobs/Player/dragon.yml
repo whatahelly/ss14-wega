@@ -154,6 +154,8 @@
     - DoorBumpOpener
   - type: Puller
     needsHands: false
+  - type: FriendlyFaction # Corvax-Wega-Friendly
+    faction: Dragon # Corvax-Wega-Friendly
 
 - type: entity
   parent: BaseMobDragon
