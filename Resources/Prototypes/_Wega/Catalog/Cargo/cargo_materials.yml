@@ -24,6 +24,6 @@
     sprite: Objects/Materials/Sheets/other.rsi
     state: uranium_3
   product: CrateMaterialUranium
-  cost: 10000
+  cost: 12500
   category: cargoproduct-category-name-materials
   group: market
