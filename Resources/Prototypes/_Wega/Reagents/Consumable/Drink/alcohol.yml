@@ -179,6 +179,9 @@
       effects:
       - !type:SatiateThirst
         factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.07
     Poison:
       effects:
       - !type:HealthChange
@@ -224,6 +227,7 @@
         conditions:
         - !type:ReagentThreshold
           min: 20
+  fizziness: 0.4
 
 - type: reagent
   id: RainbowSky
@@ -287,7 +291,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 4.5
+        amount: 1.0
 
 - type: reagent
   id: BlackBlood
@@ -603,6 +607,7 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+  fizziness: 0.5
 
 - type: reagent
   id: BrandyCrusta
