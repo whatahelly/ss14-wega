@@ -52,6 +52,7 @@ public sealed partial class BloodCultSystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
 
+    private const string BloodCultObserver = "MobObserverIfrit";
     private static int _offerings = 3;
     private bool _isRitualRuneUnlocked = false;
 
@@ -121,7 +122,11 @@ public sealed partial class BloodCultSystem
 
             if (isValidSurface)
             {
-                _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(10f), new BloodRuneDoAfterEvent(selectedRune), uid)
+                var ritualRune = _entityManager.SpawnEntity(TrySelectRuneEffect(selectedRune), Transform(uid).Coordinates);
+                _appearance.SetData(ritualRune, RuneColorVisuals.Color, TryFindColor(uid));
+
+                _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(9.75f),
+                    new BloodRuneDoAfterEvent(selectedRune, GetNetEntity(ritualRune)), uid)
                 {
                     BreakOnMove = true,
                     BreakOnDamage = true,
@@ -136,7 +141,11 @@ public sealed partial class BloodCultSystem
             return;
         }
 
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(5f), new BloodRuneDoAfterEvent(selectedRune), uid)
+        var rune = _entityManager.SpawnEntity(TrySelectRuneEffect(selectedRune), Transform(uid).Coordinates);
+        _appearance.SetData(rune, RuneColorVisuals.Color, TryFindColor(uid));
+
+        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(4f),
+            new BloodRuneDoAfterEvent(selectedRune, GetNetEntity(rune)), uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -147,28 +156,14 @@ public sealed partial class BloodCultSystem
 
     private void DoAfterRuneSelect(EntityUid cultist, BloodCultistComponent component, BloodRuneDoAfterEvent args)
     {
-        if (args.Cancelled) return;
-
-        Color bloodColor;
-        if (TryComp<BloodstreamComponent>(cultist, out var bloodStreamComponent))
+        if (args.Cancelled)
         {
-            var bloodReagentPrototypeId = bloodStreamComponent.BloodReagent;
-            if (_prototypeManager.TryIndex(bloodReagentPrototypeId, out ReagentPrototype? reagentPrototype))
-            {
-                bloodColor = reagentPrototype.SubstanceColor;
-            }
-            else
-            {
-                bloodColor = Color.White;
-            }
-        }
-        else
-        {
-            bloodColor = Color.White;
+            _entityManager.DeleteEntity(GetEntity(args.Rune));
+            return;
         }
 
         var rune = _entityManager.SpawnEntity(args.SelectedRune, Transform(cultist).Coordinates);
-        _appearance.SetData(rune, RuneColorVisuals.Color, bloodColor);
+        _appearance.SetData(rune, RuneColorVisuals.Color, TryFindColor(cultist));
 
         if (args.SelectedRune == "BloodRuneRitualDimensionalRending")
         {
@@ -621,7 +616,7 @@ public sealed partial class BloodCultSystem
 
                         var canReturn = mind.CurrentEntity != null
                             && !_entityManager.HasComponent<GhostComponent>(mind.CurrentEntity);
-                        var ghost = _entityManager.SpawnEntity(GameTicker.ObserverPrototypeName, coords);
+                        var ghost = _entityManager.SpawnEntity(BloodCultObserver, coords);
                         transformSystem.AttachToGridOrMap(ghost, _entityManager.GetComponent<TransformComponent>(ghost));
 
                         if (canReturn)
@@ -787,6 +782,24 @@ public sealed partial class BloodCultSystem
         _chat.TrySendInGameICMessage(cultist, message, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: false);
     }
 
+    private string TrySelectRuneEffect(string messageType)
+    {
+        string message = messageType switch
+        {
+            "BloodRuneOffering" => "BloodRuneOfferingEffect",
+            "BloodRuneTeleport" => "BloodRuneTeleportEffect",
+            "BloodRuneEmpowering" => "BloodRuneEmpoweringEffect",
+            "BloodRuneRevive" => "BloodRuneReviveEffect",
+            "BloodRuneBarrier" => "BloodRuneBarrierEffect",
+            "BloodRuneSummoning" => "BloodRuneSummoningEffect",
+            "BloodRuneBloodBoil" => "BloodRuneBloodBoilEffect",
+            "BloodRuneSpiritealm" => "BloodRuneSpiritealmEffect",
+            "BloodRuneRitualDimensionalRending" => "BloodRuneRitualDimensionalRendingEffect",
+            _ => "BloodRuneOfferingEffect"
+        };
+        return message;
+    }
+
     private void OnDaggerInteract(Entity<BloodDaggerComponent> ent, ref UseInHandEvent args)
     {
         var user = args.User;
@@ -813,6 +826,28 @@ public sealed partial class BloodCultSystem
             return true;
 
         return tileRef.Tile.IsEmpty || tileRef.IsSpace(_tileDefManager);
+    }
+
+    private Color TryFindColor(EntityUid cultist)
+    {
+        Color bloodColor;
+        if (TryComp<BloodstreamComponent>(cultist, out var bloodStreamComponent))
+        {
+            var bloodReagentPrototypeId = bloodStreamComponent.BloodReagent;
+            if (_prototypeManager.TryIndex(bloodReagentPrototypeId, out ReagentPrototype? reagentPrototype))
+            {
+                bloodColor = reagentPrototype.SubstanceColor;
+            }
+            else
+            {
+                bloodColor = Color.White;
+            }
+        }
+        else
+        {
+            bloodColor = Color.White;
+        }
+        return bloodColor;
     }
 
     private void DoAfterInteractRune(BloodRuneCleaningDoAfterEvent args)

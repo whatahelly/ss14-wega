@@ -1,3 +1,5 @@
+ent-MobObserverIfrit = ифрит
+    .desc = ???
 ent-MobBanshee = банши
     .desc = Жуткий призрак.
 ent-MobConstructJuggernaut = джаггернаут

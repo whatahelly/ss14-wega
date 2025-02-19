@@ -1,4 +1,26 @@
 - type: entity
+  id: MobObserverIfrit
+  parent:
+  - Incorporeal
+  - BaseMob
+  name: ifrit
+  description: "???"
+  components:
+  - type: Sprite
+    sprite: _Wega/Mobs/Demons/bloodcultmobs.rsi
+    state: ifrit
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: Eye
+    drawFov: false
+  - type: Input
+    context: "ghost"
+  - type: Examiner
+    skipChecks: true
+  - type: Ghost
+  - type: Spectral
+
+- type: entity
   id: MobBanshee
   parent:
   - Incorporeal

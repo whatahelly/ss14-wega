@@ -20,6 +20,7 @@ namespace Content.Client.Blood.Cult
             base.Initialize();
 
             SubscribeLocalEvent<BloodRuneComponent, AppearanceChangeEvent>(OnRuneAppearanceChanged);
+            SubscribeLocalEvent<BloodRitualDimensionalRendingComponent, AppearanceChangeEvent>(OnRuneAppearanceChanged);
             SubscribeLocalEvent<BloodCultistComponent, GetStatusIconsEvent>(GetCultistIcons);
             SubscribeLocalEvent<PentagramDisplayComponent, ComponentStartup>(GetHalo);
             SubscribeLocalEvent<PentagramDisplayComponent, ComponentShutdown>(RemoveHalo);
@@ -27,6 +28,18 @@ namespace Content.Client.Blood.Cult
         }
 
         private void OnRuneAppearanceChanged(Entity<BloodRuneComponent> entity, ref AppearanceChangeEvent args)
+        {
+            if (args.Sprite == null)
+                return;
+
+            var sprite = args.Sprite;
+            if (!_appearance.TryGetData(entity, RuneColorVisuals.Color, out Color color))
+                return;
+
+            sprite.Color = color;
+        }
+
+        private void OnRuneAppearanceChanged(Entity<BloodRitualDimensionalRendingComponent> entity, ref AppearanceChangeEvent args)
         {
             if (args.Sprite == null)
                 return;
