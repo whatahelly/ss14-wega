@@ -86,7 +86,7 @@
   query:
     - !type:NearbyHostilesQuery
   considerations:
-    - !type:TargetIsAliveCon
+    - !type:TargetIsAliveOrPreCriticalCon # Corvax-Wega-PreCritcal
       curve: !type:BoolCurve
     - !type:TargetDistanceCon
       curve: !type:PresetCurve
@@ -104,7 +104,7 @@
   query:
     - !type:NearbyHostilesQuery
   considerations:
-    - !type:TargetIsAliveCon
+    - !type:TargetIsAliveOrPreCriticalCon # Corvax-Wega-PreCritcal
       curve: !type:BoolCurve
     - !type:TargetDistanceCon
       curve: !type:PresetCurve
@@ -186,7 +186,7 @@
   query:
     - !type:NearbyHostilesQuery
   considerations:
-    - !type:TargetIsAliveCon
+    - !type:TargetIsAliveOrPreCriticalCon # Corvax-Wega-PreCritcal
       curve: !type:BoolCurve
     - !type:TargetDistanceCon
       curve: !type:PresetCurve
