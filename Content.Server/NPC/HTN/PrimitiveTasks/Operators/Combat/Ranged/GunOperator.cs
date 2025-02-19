@@ -25,7 +25,7 @@ public sealed partial class GunOperator : HTNOperator, IHtnConditionalShutdown
     /// Minimum damage state that the target has to be in for us to consider attacking.
     /// </summary>
     [DataField("targetState")]
-    public MobState TargetState = MobState.Alive;
+    public MobState TargetState = MobState.PreCritical; // Corvax-Wega-PreCritcal
 
     /// <summary>
     /// Do we require line of sight of the target before failing.
