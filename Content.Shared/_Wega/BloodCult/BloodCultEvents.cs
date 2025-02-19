@@ -135,10 +135,12 @@ public sealed class RuneSelectEvent : EntityEventArgs
 public sealed partial class BloodRuneDoAfterEvent : SimpleDoAfterEvent
 {
     public string SelectedRune { get; }
+    public NetEntity Rune { get; }
 
-    public BloodRuneDoAfterEvent(string selectedRune)
+    public BloodRuneDoAfterEvent(string selectedRune, NetEntity rune)
     {
         SelectedRune = selectedRune;
+        Rune = rune;
     }
 }
 
