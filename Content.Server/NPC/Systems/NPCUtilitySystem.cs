@@ -336,7 +336,7 @@ public sealed class NPCUtilitySystem : EntitySystem
                 return _mobState.IsAlive(targetUid) ? 1f : 0f;
             }
             // Corvax-Wega-PreCritical-start
-            case TargetIsAliveOrPreCritcalCon:
+            case TargetIsAliveOrPreCriticalCon:
             {
                 return _mobState.IsAlive(targetUid) ? 1f : _mobState.IsPreCritical(targetUid) ? 1f : 0f;
             }
