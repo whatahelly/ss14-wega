@@ -1,0 +1,36 @@
+#region Boxing
+- type: entity
+  id: ActionBoxingJab
+  name: Jab
+  description: "Blow-blow."
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: "icon" }
+    itemIconStyle: BigAction
+    event: !type:BoxingJabActionEvent
+    useDelay: 2
+
+- type: entity
+  id: ActionBoxingHook
+  name: Hook
+  description: "A KNOCKOUT!!!"
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: "icon" }
+    itemIconStyle: BigAction
+    event: !type:BoxingHookActionEvent
+    useDelay: 40
+
+- type: entity
+  id: ActionBoxingDodge
+  name: Dodge
+  description: "Dodge the blow."
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon: { sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi, state: "icon" }
+    itemIconStyle: BigAction
+    event: !type:BoxingDodgeActionEvent
+    useDelay: 30

@@ -1,0 +1,6 @@
+- type: martialarts
+  id: Boxing
+  actions:
+    - ActionBoxingJab
+    - ActionBoxingHook
+    - ActionBoxingDodge
