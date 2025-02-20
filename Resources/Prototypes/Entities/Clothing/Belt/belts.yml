@@ -542,22 +542,32 @@
 # Belts without visualizers
 
 - type: entity
-  parent: [ClothingBeltAmmoProviderBase, BaseRestrictedContraband]
+  parent: [ClothingBeltStorageBase, BaseRestrictedContraband]
   id: ClothingBeltBandolier
   name: bandolier
   description: A bandolier for holding shotgun ammunition.
   components:
   - type: Sprite
     sprite: Clothing/Belt/bandolier.rsi
+    layers:
+      - state: base
+      - state: shell-0
+      - map: ["enum.StorageFillLayers.Fill"]
   - type: Clothing
     sprite: Clothing/Belt/bandolier.rsi
+  - type: Appearance
+  - type: StorageFillVisualizer
+    maxFillLevels: 17
+    fillBaseName: shell
   - type: Item
     size: Huge
-  - type: BallisticAmmoProvider
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,7,1
     whitelist:
       tags:
         - ShellShotgun
-    capacity: 14
 
 - type: entity
   parent: ClothingBeltBase

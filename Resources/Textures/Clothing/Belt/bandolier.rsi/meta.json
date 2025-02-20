@@ -11,6 +11,60 @@
       "name": "icon"
     },
     {
+      "name": "base"
+    },
+    {
+      "name": "shell-0"
+    },
+    {
+      "name": "shell-1"
+    },
+    {
+      "name": "shell-2"
+    },
+    {
+      "name": "shell-3"
+    },
+    {
+      "name": "shell-4"
+    },
+    {
+      "name": "shell-5"
+    },
+    {
+      "name": "shell-6"
+    },
+    {
+      "name": "shell-7"
+    },
+    {
+      "name": "shell-8"
+    },
+    {
+      "name": "shell-9"
+    },
+    {
+      "name": "shell-10"
+    },
+    {
+      "name": "shell-11"
+    },
+    {
+      "name": "shell-12"
+    },
+    {
+      "name": "shell-13"
+    },
+    {
+      "name": "shell-14"
+    },
+    {
+      "name": "shell-15"
+    },
+    {
+      "name": "shell-16"
+    },
+    {
       "name": "equipped-BELT",
       "directions": 4
     },
