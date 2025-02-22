@@ -55,14 +55,14 @@ namespace Content.Server.Interaction.Panel
                 return;
 
             if (_entManager.TryGetComponent<MobThresholdsComponent>(userEntity, out var userThresholds) &&
-                (userThresholds.CurrentThresholdState != MobState.Alive &&
-                userThresholds.CurrentThresholdState != MobState.Invalid))
+                userThresholds.CurrentThresholdState != MobState.Alive &&
+                userThresholds.CurrentThresholdState != MobState.Invalid)
                 return;
 
             var targetEntity = _entManager.GetEntity(target.Value);
             if (_entManager.TryGetComponent<MobThresholdsComponent>(targetEntity, out var targetThresholds) &&
-                (targetThresholds.CurrentThresholdState != MobState.Alive &&
-                targetThresholds.CurrentThresholdState != MobState.Invalid))
+                targetThresholds.CurrentThresholdState != MobState.Alive &&
+                targetThresholds.CurrentThresholdState != MobState.Invalid)
             {
                 if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
                 {
@@ -107,7 +107,7 @@ namespace Content.Server.Interaction.Panel
                 {
                     foreach (var slot in interactionPrototype.RequiredClothingSlots)
                     {
-                        if (_inventorySystem.TryGetSlotEntity(userEntity, slot, out var slotEntity, inventory))
+                        if (_inventorySystem.TryGetSlotEntity(userEntity, slot, out _, inventory))
                         {
                             var message = Loc.GetString("interaction-hasclothing-message");
                             if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
@@ -126,7 +126,7 @@ namespace Content.Server.Interaction.Panel
 
                     foreach (var slot in allSlots)
                     {
-                        if (_inventorySystem.TryGetSlotEntity(targetEntity, slot, out var slotEntity, targetInventory))
+                        if (_inventorySystem.TryGetSlotEntity(targetEntity, slot, out _, targetInventory))
                         {
                             var targetEntityValue = _entManager.GetEntity(target.Value);
                             var messageForUser = Loc.GetString("interaction-target-hasclothing-message", ("target", Identity.Entity(targetEntityValue, _entManager)));

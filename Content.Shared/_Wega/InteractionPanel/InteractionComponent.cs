@@ -26,6 +26,24 @@ namespace Content.Shared.Chat.Prototypes
         [DataField]
         public SpriteSpecifier Icon = new SpriteSpecifier.Texture(new("/Textures/_Wega/Interface/InteractionPanel/heart.png"));
 
+        [DataField("delay")]
+        public float DoAfterDelay { get; set; } = 0f;
+
+        [DataField("erp")]
+        public bool ERP { get; set; } = false;
+
+        [DataField("interactSound")]
+        public SoundSpecifier? InteractSound;
+
+        [DataField("params")]
+        public AudioParams? GeneralParams = new AudioParams { Variation = 0.125f };
+
+        [DataField("points")]
+        public int Points { get; set; } = 0;
+
+        [DataField("soundPerceivedByOthers")]
+        public bool SoundPerceivedByOthers = true;
+
         [DataField("useDelay")]
         public TimeSpan UseDelay { get; set; } = TimeSpan.FromSeconds(2);
 
@@ -38,47 +56,29 @@ namespace Content.Shared.Chat.Prototypes
         [DataField("otherMessages")]
         public List<string> OtherMessages = new();
 
-        [DataField("interactSound")]
-        public SoundSpecifier? InteractSound;
-
-        [DataField("soundPerceivedByOthers")]
-        public bool SoundPerceivedByOthers = true;
-
-        [DataField("params")]
-        public AudioParams? GeneralParams = new AudioParams { Variation = 0.125f };
-
-        [DataField("erp")]
-        public bool ERP { get; set; } = false;
-
-        [DataField("points")]
-        public int Points { get; set; } = 0;
-
-        [DataField("delay")]
-        public float DoAfterDelay { get; set; } = 0f;
-
         [DataField]
-        public List<string>? RequiredClothingSlots;
-
-        [DataField]
-        public List<string>? OneRequiredClothingSlots;
-
-        [DataField]
-        public bool RequiresStrapon { get; set; } = false;
+        public List<string>? AllowedGenders = new() { "all" };
 
         [DataField]
         public List<string>? AllowedSpecies = new() { "all" };
 
         [DataField]
-        public List<string>? AllowedGenders = new() { "all" };
-
-        [DataField]
-        public List<string>? NearestAllowedSpecies = new() { "all" };
+        public List<string>? BlackListSpecies;
 
         [DataField]
         public List<string>? NearestAllowedGenders = new() { "all" };
 
         [DataField]
-        public List<string>? BlackListSpecies;
+        public List<string>? NearestAllowedSpecies = new() { "all" };
+
+        [DataField]
+        public List<string>? OneRequiredClothingSlots;
+
+        [DataField]
+        public List<string>? RequiredClothingSlots;
+
+        [DataField]
+        public bool RequiresStrapon { get; set; } = false;
 
         [DataField]
         public List<string>? TargetEntityId;
