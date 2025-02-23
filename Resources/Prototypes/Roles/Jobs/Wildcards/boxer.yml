@@ -9,6 +9,13 @@
   access:
   - Service
   - Maintenance
+  # Corvax-Wega-MartialArts-start
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: MartialArts
+          style: Boxing
+  # Corvax-Wega-MartialArts-end
 
 - type: startingGear
   id: BoxerGear
