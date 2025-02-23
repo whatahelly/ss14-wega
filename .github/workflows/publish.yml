@@ -29,7 +29,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        echo "HOST github.com" > ~/.ssh/config
+        echo "HOST *" > ~/.ssh/config
         echo "  Hostname github.com" >> ~/.ssh/config
         echo "  Port 22" >> ~/.ssh/config
         echo "  StrictHostKeyChecking no" >> ~/.ssh/config
