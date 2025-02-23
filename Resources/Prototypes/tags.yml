@@ -779,6 +779,9 @@
 - type: Tag
   id: MacroBomb
 
+- type: Tag  # Corvax-Wega-Slot_for_scalpel_in_milboots
+  id: Scalpel  # Corvax-Wega-Slot_for_scalpel_in_milboots
+
 # Magazines ordered by slot then caliber
 
 - type: Tag
