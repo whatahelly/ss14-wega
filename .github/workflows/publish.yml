@@ -40,10 +40,8 @@ jobs:
         cp -R Secrets/Resources/Textures Resources/Textures/CorvaxSecrets
     # Corvax-Secrets-End
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3.2.0
-      with:
-        dotnet-version: 9.0.x
+    - name: Check .NET installation
+      run: dotnet --version
 
     - name: Get Engine Tag
       run: |
