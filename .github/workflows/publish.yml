@@ -28,7 +28,8 @@ jobs:
       run: |
         mkdir -Force ~/.ssh
         echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        icacls ~/.ssh/id_rsa /inheritance:r
+        icacls ~/.ssh/id_rsa /grant:r "$env:USERNAME:(R)"
         echo "HOST *" > ~/.ssh/config
         echo "  Hostname github.com" >> ~/.ssh/config
         echo "  Port 22" >> ~/.ssh/config
