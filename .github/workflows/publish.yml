@@ -40,6 +40,17 @@ jobs:
         cp -R Secrets/Resources/Textures Resources/Textures/CorvaxSecrets
     # Corvax-Secrets-End
 
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3.2.0
+      with:
+        dotnet-version: 9.0.x
+        install-dir: /home/runner-0/.dotnet
+
+    - name: Add .NET to PATH
+      run: |
+        echo "##[add-path]/home/runner-0/.dotnet"
+        echo "##[set-env name=DOTNET_ROOT;/home/runner-0/.dotnet"
+
     - name: Check .NET installation
       run: dotnet --version
 
