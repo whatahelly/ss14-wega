@@ -1,0 +1,13 @@
+name: Self-hosted Windows Runner Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: [self-hosted, windows]
+    steps:
+      - name: Check Windows version
+        run: ver
+      - name: Print Hello World
+        run: echo "Hello, World!"
