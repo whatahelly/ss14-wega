@@ -27,13 +27,11 @@ jobs:
       if: ${{ env.SSH_KEY != '' }}
       run: |
         mkdir -Force ~/.ssh
-        echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        icacls ~/.ssh/id_rsa /inheritance:r
-        icacls ~/.ssh/id_rsa /grant:r "$env:USERNAME:(R)"
-        echo "HOST *" > ~/.ssh/config
-        echo "  Hostname github.com" >> ~/.ssh/config
-        echo "  Port 22" >> ~/.ssh/config
-        echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "${{ secrets.SECRETS_PRIVATE_KEY }}" | Out-File -FilePath ~/.ssh/id_rsa -Encoding ASCII
+        echo "Host *" | Out-File -FilePath ~/.ssh/config -Encoding ASCII
+        echo "  Hostname github.com" | Out-File -FilePath ~/.ssh/config -Append -Encoding ASCII
+        echo "  Port 22" | Out-File -FilePath ~/.ssh/config -Append -Encoding ASCII
+        echo "  StrictHostKeyChecking no" | Out-File -FilePath ~/.ssh/config -Append -Encoding ASCII
         git clone git@github.com:corvax-nexus/secrets.git Secrets
         cp -R Secrets/Resources/Prototypes Resources/Prototypes/CorvaxSecrets
         cp -R Secrets/Resources/ServerPrototypes Resources/Prototypes/CorvaxSecretsServer
