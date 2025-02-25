@@ -40,17 +40,18 @@ jobs:
         cp -R Secrets/Resources/Textures Resources/Textures/CorvaxSecrets
     # Corvax-Secrets-End
 
-    - name: Set up .NET environment
-      run: |
-        mkdir -p ~/.dotnet
-        echo "DOTNET_ROOT=~/.dotnet" >> $GITHUB_ENV
-        echo "~/.dotnet" >> $GITHUB_PATH
-
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.3.0
       with:
         dotnet-version: 9.0.x
-        dotnet-root: ~/.dotnet
+
+    - name: Set DOTNET_ROOT and PATH
+      run: |
+        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
+        echo "$HOME/.dotnet" >> $GITHUB_PATH
+
+    - name: Check .NET installation
+      run: dotnet --info
 
     - name: Get Engine Tag
       run: |
