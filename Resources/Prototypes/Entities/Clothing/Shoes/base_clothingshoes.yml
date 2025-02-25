@@ -51,6 +51,7 @@
           tags:
           - Knife
           - Sidearm
+          - Scalpel  # Corvax-Wega-Slot_for_scalpel_in_milboots
 
 - type: entity
   abstract: true
