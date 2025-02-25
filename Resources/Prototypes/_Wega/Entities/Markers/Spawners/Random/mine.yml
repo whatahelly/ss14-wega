@@ -1,0 +1,60 @@
+- type: entity
+  id: RandomMine
+  name: explosion mine spawner
+  suffix: Random, 50%
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Objects/Misc/landmine.rsi
+        state: landmine
+  - type: RandomSpawner
+    prototypes:
+      - LandMineExplosive
+    chance: 0.5
+
+- type: entity
+  id: RandomMineModular
+  name: random modular mine spawner
+  suffix: Random
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Objects/Misc/landmine.rsi
+        state: landmine
+  - type: RandomSpawner
+    prototypes:
+      - LandMineModular
+    chance: 0.95
+    rarePrototypes:
+      - LandMineExplosive
+    rareChance: 0.25
+
+- type: entity
+  id: RandomMineKick
+  name: random mine spawner
+  suffix: Random, 5% kicking
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Objects/Misc/landmine.rsi
+        state: landmine
+  - type: RandomSpawner
+    prototypes:
+      - LandMineExplosive
+      - LandMineModular
+    chance: 0.95
+    rarePrototypes:
+      - LandMineKick
+    rareChance: 0.05
