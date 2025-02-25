@@ -1,0 +1,83 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    x:Class="Content.Client.Interaction.Panel.Ui.InteractionConstructorMenu"
+    Title="{Loc 'interaction-constructor-ui-default-title'}"
+    MinSize="540 600"
+    SetSize="540 600">
+
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <BoxContainer Name="PreviewContainer" Orientation="Horizontal" Margin="2">
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <Label Text="ID" MinWidth="100"/>
+            <Control MinWidth="10" />
+            <LineEdit Name="IdLine" MinWidth="100" HorizontalExpand="True" PlaceHolder="Укажите айди взаимодействия" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <Label Text="Название" MinWidth="100"/>
+            <Control MinWidth="10" />
+            <LineEdit Name="NameLine" MinWidth="100" HorizontalExpand="True" PlaceHolder="Укажите название взаимодействия" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <Label Text="Сообщение" MinWidth="100"/>
+            <Control MinWidth="10" />
+            <LineEdit Name="MessageLine" MinWidth="100" HorizontalExpand="True" PlaceHolder="Укажите сообщение взаимодействия" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <Label Text="Иконка" MinWidth="100"/>
+            <Control MinWidth="10" />
+            <LineEdit Name="SpriteLine" MinWidth="100" HorizontalExpand="True" PlaceHolder="Укажите путь до изображения" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <CheckBox Name="ErpCheckbox" MinWidth="100" Text="ERP?" Pressed="False" />
+        </BoxContainer>
+
+        <Label StyleClasses="LabelBig" Text="Настройка" MinWidth="120"/>
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <Label Text="Пол взаимодействующего:" MinWidth="120"/>
+            <Control HorizontalExpand="True" />
+            <OptionButton Name="SexButton" HorizontalAlignment="Right"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <Label Text="Раса взаимодействующего:" MinWidth="120"/>
+            <Control HorizontalExpand="True" />
+            <OptionButton Name="SpeciesButton" HorizontalAlignment="Right"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <Label Text="Пол цели:" MinWidth="120"/>
+            <Control HorizontalExpand="True" />
+            <OptionButton Name="TargetSexButton" HorizontalAlignment="Right"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <Label Text="Раса цели:" MinWidth="120"/>
+            <Control HorizontalExpand="True" />
+            <OptionButton Name="TargetSpeciesButton" HorizontalAlignment="Right"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <CheckBox Name="BlackCheckbox" Text="Чёрный список:" MinWidth="100" Pressed="False"/>
+            <Control HorizontalExpand="True" />
+            <OptionButton Name="BlackListButton" HorizontalAlignment="Right"/>
+        </BoxContainer>
+
+        <Label StyleClasses="LabelBig" Text="Звуки" MinWidth="120"/>
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <CheckBox Name="PathCheckbox" MinWidth="100" Text="Путь?" Pressed="False"/>
+            <Control MinWidth="20" />
+            <LineEdit Name="PathLine" MinWidth="100" HorizontalExpand="True" PlaceHolder="Укажите путь до необходимого звука"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="2">
+            <CheckBox Name="CollectionCheckbox" MinWidth="100" Text="Коллекция?" Pressed="False"/>
+            <Control MinWidth="20" />
+            <OptionButton Name="CollectionButton" HorizontalAlignment="Right"/>
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal" Margin="4">
+            <Button Name="ExportButton" Text="Экспорт" Disabled="True"/>
+            <Button Name="AddButton" Text="Добавить" Disabled="True"/>
+        </BoxContainer>
+    </BoxContainer>
+
+</DefaultWindow>

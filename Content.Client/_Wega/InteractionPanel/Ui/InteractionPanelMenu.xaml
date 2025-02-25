@@ -8,13 +8,20 @@
     SetSize="512 512">
 
     <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="4">
-
+        <!-- Верхний блок информации -->
         <BoxContainer Name="Names" HorizontalExpand="True">
         </BoxContainer>
         <BoxContainer Name="UpperBlock" HorizontalExpand="True">
             <BoxContainer Name="UserSpriteView" />
             <Control HorizontalExpand="True" />
             <BoxContainer Name="TargetSpriteView" />
+        </BoxContainer>
+
+        <!-- Специальный блок -->
+        <BoxContainer HorizontalExpand="True">
+            <Button Name="ImportButton" MinWidth="320" Text="Импорт"/>
+            <Control HorizontalExpand="True" />
+            <Button Name="ConstructorButton" Text="Конструктор"/>
         </BoxContainer>
 
         <LineEdit Name="SearchBar" Margin="4" PlaceHolder="Search"/>
@@ -27,6 +34,33 @@
 
             <ScrollContainer Name="Scroll" HScrollEnabled="False" VerticalExpand="True">
                 <BoxContainer Name="InteractionContainer" Orientation="Vertical" VerticalExpand="True">
+
+                    <!-- Первая разворачивающаяся панель -->
+                    <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
+                        <CollapsibleHeading Name="Special" Title="Специальные" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True"  />
+                        <CollapsibleBody Margin="0, 5, 0, 0">
+                            <BoxContainer Name="SpecialContainer" Orientation="Vertical" SeparationOverride="5">
+                            </BoxContainer>
+                        </CollapsibleBody>
+                    </Collapsible>
+
+                    <!-- Вторая разворачивающаяся панель -->
+                    <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
+                        <CollapsibleHeading Name="Harmless" Title="Безобидные" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
+                        <CollapsibleBody Margin="0, 5, 0, 0">
+                            <BoxContainer Name="HarmlessContainer" Orientation="Vertical" SeparationOverride="5">
+                            </BoxContainer>
+                        </CollapsibleBody>
+                    </Collapsible>
+
+                    <!-- Третья разворачивающаяся панель -->
+                    <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
+                        <CollapsibleHeading Name="Outspoken" Title="Откровенные" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
+                        <CollapsibleBody Margin="0, 5, 0, 0">
+                            <BoxContainer Name="OutspokenContainer" Orientation="Vertical" SeparationOverride="5">
+                            </BoxContainer>
+                        </CollapsibleBody>
+                    </Collapsible>
                 </BoxContainer>
             </ScrollContainer>
         </PanelContainer>

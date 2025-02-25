@@ -6,10 +6,11 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Chat.Prototypes
 {
     [Prototype("interaction")]
+    [Serializable] //Never add NetSerialization here.
     public sealed partial class InteractionPrototype : IPrototype, IInheritingPrototype
     {
         [IdDataField]
-        public string ID { get; private set; } = default!;
+        public string ID { get; set; } = default!;
 
         /// <inheritdoc />
         [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<InteractionPrototype>))]
@@ -24,7 +25,7 @@ namespace Content.Shared.Chat.Prototypes
         public string Name = default!;
 
         [DataField]
-        public SpriteSpecifier Icon = new SpriteSpecifier.Texture(new("/Textures/_Wega/Interface/InteractionPanel/heart.png"));
+        public string Icon = "/Textures/_Wega/Interface/InteractionPanel/heart.png";
 
         [DataField("delay")]
         public float DoAfterDelay { get; set; } = 0f;
