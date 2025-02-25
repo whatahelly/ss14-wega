@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux]
 
     steps:
 #    - name: Install dependencies
@@ -46,12 +46,12 @@ jobs:
         dotnet-version: 9.0.x
       env:
         DOTNET_INSTALL_DIR: $HOME/.dotnet
-    
+
     - name: Set DOTNET_ROOT and PATH
       run: |
         echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
         echo "$HOME/.dotnet" >> $GITHUB_PATH
-    
+
     - name: Check .NET installation
       run: dotnet --info
 

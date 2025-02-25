@@ -24,9 +24,11 @@ jobs:
           cd RobustToolbox/
           git submodule update --init --recursive
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3.2.0
+        uses: actions/setup-dotnet@v4.3.0
         with:
           dotnet-version: 9.0.x
+        env:
+          DOTNET_INSTALL_DIR: $HOME/.dotnet
       - name: Install dependencies
         run: dotnet restore
       - name: Build
