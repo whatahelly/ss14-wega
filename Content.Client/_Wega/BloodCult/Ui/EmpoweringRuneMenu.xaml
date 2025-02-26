@@ -8,7 +8,7 @@
                HorizontalExpand="True"
                MinSize="450 450">
 
-    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" Radius="64" ReserveSpaceForHiddenChildren="False">
+    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" InitialRadius="64" ReserveSpaceForHiddenChildren="False">
         <!-- Stun -->
         <ui:RadialMenuTextureButton Name="StunButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-spell-stun'}" TargetLayer="Stun">
             <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/stun.png"/>

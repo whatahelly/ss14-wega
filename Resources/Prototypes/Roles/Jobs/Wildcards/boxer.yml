@@ -16,6 +16,9 @@
         - type: MartialArts
           style: Boxing
   # Corvax-Wega-MartialArts-end
+    - !type:GiveItemOnHolidaySpecial
+      holiday: BoxingDay
+      prototype: ClothingHandsGlovesBoxingRigged
 
 - type: startingGear
   id: BoxerGear
