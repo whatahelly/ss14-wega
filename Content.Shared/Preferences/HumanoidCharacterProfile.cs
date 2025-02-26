@@ -32,6 +32,7 @@ namespace Content.Shared.Preferences
 
         public const int MaxNameLength = 32;
         public const int MaxDescLength = 1024; // Corvax-Wega
+        public const int MaxLoadoutNameLength = 32;
         public const int MaxOOCDescLength = 512; // Corvax-Wega-OOCFlavor
 
         /// <summary>

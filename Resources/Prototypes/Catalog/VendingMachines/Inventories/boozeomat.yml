@@ -53,5 +53,8 @@
     DrinkSheridanBottleFull: 5 # Corvax-Wega
     DrinkBeerCan: 5
     DrinkWineCan: 5
+  contrabandInventory:
+    EthanolChemistryBottle: 3
+    DrinkBottleOfNothingFull: 1
   emaggedInventory:
     DrinkPoisonWinebottleFull: 2
