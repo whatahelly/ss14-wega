@@ -10,7 +10,7 @@
                MinSize="450 450">
 
     <!-- Main Radial Menu Container -->
-    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" Radius="64" ReserveSpaceForHiddenChildren="False">
+    <ui:RadialContainer Name="Main" VerticalExpand="True" HorizontalExpand="True" InitialRadius="64" ReserveSpaceForHiddenChildren="False">
         <!-- Button 1: Hemomancer -->
         <ui:RadialMenuTextureButton Name="HemomancerButton" StyleClasses="RadialMenuButton" SetSize="64 64" ToolTip="{Loc 'select-class-hemomancer'}" TargetLayer="Hemomancer">
             <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/_Wega/claws.png"/>
