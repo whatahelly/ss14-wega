@@ -62,7 +62,7 @@
   content:
   - RadioJammer
   - TraitorCodePaper
-  - Emag
+#  - Emag  # Corvax-Wega-Theif-HackerSet
   - AccessBreaker
   - Lighter
   - CigPackSyndicate
