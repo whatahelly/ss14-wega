@@ -8,6 +8,14 @@
   - underwearbottom
 
 - type: interaction
+  id: BaseCheckClothing
+  abstract: true
+  requiredClothingSlots:
+  - jumpsuit
+  - outerClothing
+  - underwearbottom
+
+- type: interaction
   id: BaseCheckClothingAnal
   abstract: true
   requiredClothingSlots:

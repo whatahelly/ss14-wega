@@ -62,6 +62,7 @@ namespace Content.Client.Interaction.Panel.Ui
 
             _transform = _entManager.System<TransformSystem>();
             _lookup = _entManager.System<EntityLookupSystem>();
+            _sawmill = Logger.GetSawmill("interaction_import");
 
             _userSpriteView = CreateSpriteView();
             _targetSpriteView = CreateSpriteView();
@@ -206,7 +207,7 @@ namespace Content.Client.Interaction.Panel.Ui
             try
             {
                 var prototypes = _sharedInteraction.FromStream(file);
-                if (prototypes == null || !prototypes.Any())
+                if (!prototypes.Any())
                     return;
 
                 _importedButtons.Clear();
@@ -228,7 +229,6 @@ namespace Content.Client.Interaction.Panel.Ui
             }
             catch (Exception exc)
             {
-                _sawmill = Logger.GetSawmill("interaction_import");
                 _sawmill.Error($"Error when importing buttons\n{exc.StackTrace}");
             }
         }
@@ -241,6 +241,7 @@ namespace Content.Client.Interaction.Panel.Ui
         public void HandleAddConstructor(InteractionPrototype prototype)
         {
             _importedPrototypes.Add(prototype);
+            PopulateInteractions();
         }
 
         private void UpdateTarget()

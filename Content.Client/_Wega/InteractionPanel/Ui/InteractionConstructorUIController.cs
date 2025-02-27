@@ -14,7 +14,7 @@ public sealed class InteractionConstructorUIController : UIController
             _window = UIManager.CreateWindow<InteractionConstructorMenu>();
             _window.OnClose += OnWindowClosed;
 
-            _window.OpenCenteredRight();
+            _window.OpenCenteredLeft();
         }
         else
         {

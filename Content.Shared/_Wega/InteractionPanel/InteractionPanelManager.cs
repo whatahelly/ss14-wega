@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Content.Shared.Chat.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.Manager;
@@ -19,7 +20,7 @@ public sealed class InteractionPanelManager : IPostInjectInit
 
     public void PostInject()
     {
-        // Empty
+        _sawmill = Logger.GetSawmill("interaction_import");
     }
 
     /// <summary>
@@ -49,7 +50,11 @@ public sealed class InteractionPanelManager : IPostInjectInit
                 throw new InvalidDataException("No valid prototypes found in the file.");
             }
 
-            return prototypes;
+            var validPrototypes = FilterValidPrototypes(prototypes);
+            if (validPrototypes.Count == 0)
+                return new List<InteractionPrototype>();
+
+            return validPrototypes;
         }
         catch (Exception ex)
         {
@@ -59,6 +64,51 @@ public sealed class InteractionPanelManager : IPostInjectInit
         }
     }
 
+    /// <summary>
+    /// List validation
+    /// </summary>
+    /// <param name="prototypes">The prototype sheet itself</param>
+    /// <returns>The corrected list</returns>
+    private List<InteractionPrototype> FilterValidPrototypes(List<InteractionPrototype> prototypes)
+    {
+        var validPrototypes = new List<InteractionPrototype>();
+        var idSet = new HashSet<string>();
+        foreach (var prototype in prototypes)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(prototype.ID))
+                {
+                    _sawmill.Warning($"Prototype ID is null or whitespace. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
+                if (!IsValidId(prototype.ID))
+                {
+                    _sawmill.Warning($"Prototype ID '{prototype.ID}' contains invalid characters. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
+                if (!idSet.Add(prototype.ID))
+                {
+                    _sawmill.Warning($"Duplicate prototype ID found: '{prototype.ID}'. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
+
+                validPrototypes.Add(prototype);
+            }
+            catch (Exception ex)
+            {
+                _sawmill.Error($"Error while validating prototype '{prototype.ID}': {ex.Message}");
+            }
+        }
+
+        return validPrototypes;
+    }
+
+    /// <summary>
+    /// Collects the prototype data into a file with the correct formatting
+    /// </summary>
+    /// <param name="prototype">The resulting prototype</param>
+    /// <returns>Formatted Node</returns>
     public DataNode ToDataNode(InteractionPrototype prototype)
     {
         var sequenceNode = new SequenceDataNode();
@@ -67,7 +117,7 @@ public sealed class InteractionPanelManager : IPostInjectInit
         mapping.Add("type", new ValueDataNode("interaction"));
         mapping.Add("id", new ValueDataNode(prototype.ID));
         mapping.Add("name", new ValueDataNode(prototype.Name));
-        mapping.Add("erp", new ValueDataNode(prototype.ERP.ToString()));
+        mapping.Add("erp", new ValueDataNode(prototype.ERP.ToString().ToLower()));
 
         if (prototype.Icon != null)
         {
@@ -136,22 +186,32 @@ public sealed class InteractionPanelManager : IPostInjectInit
 
         if (prototype.InteractSound != null)
         {
-            var soundNode = new MappingDataNode();
             if (prototype.InteractSound is SoundCollectionSpecifier collectionSpecifier)
             {
-                soundNode.Add("collection", new ValueDataNode(collectionSpecifier.Collection));
+                var soundNode = new MappingDataNode().Add("collection", new ValueDataNode(collectionSpecifier.Collection));
+                mapping.Add("interactSound", soundNode);
             }
             else if (prototype.InteractSound is SoundPathSpecifier pathSpecifier)
             {
-                soundNode.Add("path", new ValueDataNode(pathSpecifier.Path.ToString()));
+                mapping.Add("interactSound", new ValueDataNode(pathSpecifier.Path.ToString()));
             }
-            mapping.Add("interactSound", soundNode);
         }
 
-        mapping.Add("soundPerceivedByOthers", new ValueDataNode(prototype.SoundPerceivedByOthers.ToString()));
+        mapping.Add("soundPerceivedByOthers", new ValueDataNode(prototype.SoundPerceivedByOthers.ToString().ToLower()));
 
         sequenceNode.Add(mapping);
 
         return sequenceNode;
+    }
+
+    /// <summary>
+    /// ID validation
+    /// </summary>
+    /// <param name="id">Id prototype</param>
+    /// <returns>true/false?</returns>
+    private bool IsValidId(string id)
+    {
+        var regex = new Regex(@"^[a-zA-Z0-9]+$");
+        return regex.IsMatch(id);
     }
 }

@@ -19,9 +19,9 @@
 
         <!-- Специальный блок -->
         <BoxContainer HorizontalExpand="True">
-            <Button Name="ImportButton" MinWidth="320" Text="Импорт"/>
+            <Button Name="ImportButton" MinWidth="320" Text="{Loc 'interaction-panel-import-button'}"/>
             <Control HorizontalExpand="True" />
-            <Button Name="ConstructorButton" Text="Конструктор"/>
+            <Button Name="ConstructorButton" Text="{Loc 'interaction-panel-constructor-button'}"/>
         </BoxContainer>
 
         <LineEdit Name="SearchBar" Margin="4" PlaceHolder="Search"/>
@@ -37,7 +37,7 @@
 
                     <!-- Первая разворачивающаяся панель -->
                     <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
-                        <CollapsibleHeading Name="Special" Title="Специальные" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True"  />
+                        <CollapsibleHeading Name="Special" Title="{Loc 'interaction-panel-special-collapsible'}" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True"  />
                         <CollapsibleBody Margin="0, 5, 0, 0">
                             <BoxContainer Name="SpecialContainer" Orientation="Vertical" SeparationOverride="5">
                             </BoxContainer>
@@ -46,7 +46,7 @@
 
                     <!-- Вторая разворачивающаяся панель -->
                     <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
-                        <CollapsibleHeading Name="Harmless" Title="Безобидные" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
+                        <CollapsibleHeading Name="Harmless" Title="{Loc 'interaction-panel-harmless-collapsible'}" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
                         <CollapsibleBody Margin="0, 5, 0, 0">
                             <BoxContainer Name="HarmlessContainer" Orientation="Vertical" SeparationOverride="5">
                             </BoxContainer>
@@ -55,7 +55,7 @@
 
                     <!-- Третья разворачивающаяся панель -->
                     <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
-                        <CollapsibleHeading Name="Outspoken" Title="Откровенные" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
+                        <CollapsibleHeading Name="Outspoken" Title="{Loc 'interaction-panel-outspoken-collapsible'}" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
                         <CollapsibleBody Margin="0, 5, 0, 0">
                             <BoxContainer Name="OutspokenContainer" Orientation="Vertical" SeparationOverride="5">
                             </BoxContainer>

@@ -202,7 +202,14 @@ namespace Content.Server.Interaction.Panel
             }
             else
             {
-                ExecuteInteraction(userEntity, targetEntity, interactionPrototype);
+                if (prototype != null)
+                {
+                    ExecuteInteraction(userEntity, targetEntity, interactionPrototype, true);
+                }
+                else
+                {
+                    ExecuteInteraction(userEntity, targetEntity, interactionPrototype, false);
+                }
             }
         }
 
@@ -211,11 +218,11 @@ namespace Content.Server.Interaction.Panel
             // TODO Доделать делей
         }
 
-        private void ExecuteInteraction(EntityUid user, EntityUid target, InteractionPrototype interactionPrototype)
+        private void ExecuteInteraction(EntityUid user, EntityUid target, InteractionPrototype interactionPrototype, bool prototype)
         {
             int preferredIndex = GetRandomMessageIndex(interactionPrototype);
 
-            if (interactionPrototype.TargetMessages.Count > 0)
+            if (interactionPrototype.TargetMessages.Count > 0 && !prototype)
             {
                 if (preferredIndex < 0 || preferredIndex >= interactionPrototype.TargetMessages.Count)
                     preferredIndex = 0;
@@ -233,16 +240,26 @@ namespace Content.Server.Interaction.Panel
                     .RemoveWhereAttachedEntity(uid => uid == target);
 
                 _popupSystem.PopupEntity(otherMessage, user, filter, false, PopupType.Small);
-
-                PlayInteractionSound(interactionPrototype.InteractSound, target, interactionPrototype.SoundPerceivedByOthers);
             }
 
             if (interactionPrototype.UserMessages.Count > 0)
             {
-                if (preferredIndex < 0 || preferredIndex >= interactionPrototype.UserMessages.Count)
-                    preferredIndex = 0;
+                string emoteCommand;
+                if (!prototype)
+                {
+                    if (preferredIndex < 0 || preferredIndex >= interactionPrototype.UserMessages.Count)
+                        preferredIndex = 0;
 
-                var emoteCommand = Loc.GetString(interactionPrototype.UserMessages[preferredIndex], ("target", Identity.Entity(target, _entManager)));
+                    emoteCommand = Loc.GetString(interactionPrototype.UserMessages[preferredIndex], ("target", Identity.Entity(target, _entManager)));
+                }
+                else
+                {
+                    emoteCommand = interactionPrototype.UserMessages[0];
+                    if (emoteCommand.Contains("$target"))
+                    {
+                        emoteCommand = emoteCommand.Replace("$target", Identity.Entity(target, _entManager).ToString());
+                    }
+                }
 
                 if (_entManager.TryGetComponent<ActorComponent>(user, out var userActor))
                 {
@@ -258,6 +275,8 @@ namespace Content.Server.Interaction.Panel
                     );
                 }
             }
+
+            PlayInteractionSound(interactionPrototype.InteractSound, user, target, interactionPrototype.SoundPerceivedByOthers);
         }
 
         private int GetRandomMessageIndex(InteractionPrototype interactionPrototype)
@@ -347,18 +366,17 @@ namespace Content.Server.Interaction.Panel
             }
         }
 
-        private void PlayInteractionSound(SoundSpecifier? sound, EntityUid target, bool perceivedByOthers)
+        private void PlayInteractionSound(SoundSpecifier? sound, EntityUid user, EntityUid target, bool perceivedByOthers)
         {
             if (sound == null) return;
 
-            /// Пока оставить так, на случай "Возможных" изменений в будущем
             if (perceivedByOthers)
             {
                 _audio.PlayPvs(sound, target);
             }
             else
             {
-                _audio.PlayEntity(sound, Filter.Entities(target), target, false);
+                _audio.PlayEntity(sound, Filter.Entities(user, target), target, false);
             }
         }
     }

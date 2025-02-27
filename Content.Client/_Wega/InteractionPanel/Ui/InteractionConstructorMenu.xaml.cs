@@ -1,23 +1,28 @@
 using System.IO;
 using System.Numerics;
+using System.Text.RegularExpressions;
 using Content.Client.UserInterface.Systems.Interaction;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Interaction.Panel;
+using Content.Shared.Popups;
+using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Audio;
-using Robust.Shared.Utility;
 
 namespace Content.Client.Interaction.Panel.Ui
 {
     public sealed partial class InteractionConstructorMenu : DefaultWindow
     {
         [Dependency] private readonly IFileDialogManager _dialogManager = default!;
+        [Dependency] private readonly EntityManager _entManager = default!;
         [Dependency] private readonly InteractionPanelManager _sharedInteraction = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
         private readonly InteractionUIController _interactionPanelController;
+        private SharedPopupSystem _popup;
 
         public BoxContainer PreviewContainer => this.FindControl<BoxContainer>("PreviewContainer");
         public LineEdit IdLine => this.FindControl<LineEdit>("IdLine");
@@ -32,6 +37,7 @@ namespace Content.Client.Interaction.Panel.Ui
         public OptionButton TargetSexButton => this.FindControl<OptionButton>("TargetSexButton");
         public OptionButton TargetSpeciesButton => this.FindControl<OptionButton>("TargetSpeciesButton");
         public LineEdit PathLine => this.FindControl<LineEdit>("PathLine");
+        public CheckBox SoundCheckbox => this.FindControl<CheckBox>("SoundCheckbox");
         public CheckBox PathCheckbox => this.FindControl<CheckBox>("PathCheckbox");
         public OptionButton CollectionButton => this.FindControl<OptionButton>("CollectionButton");
         public CheckBox CollectionCheckbox => this.FindControl<CheckBox>("CollectionCheckbox");
@@ -47,6 +53,8 @@ namespace Content.Client.Interaction.Panel.Ui
             IoCManager.InjectDependencies(this);
 
             _interactionPanelController = UserInterfaceManager.GetUIController<InteractionUIController>();
+
+            _popup = _entManager.System<SharedPopupSystem>();
 
             UpdatePreview();
 
@@ -64,6 +72,17 @@ namespace Content.Client.Interaction.Panel.Ui
             NameLine.ModulateSelfOverride = Color.Red;
             MessageLine.ModulateSelfOverride = Color.Red;
 
+            InitializedItems();
+
+            PathCheckbox.OnToggled += OnPathCheckboxToggled;
+            CollectionCheckbox.OnToggled += OnCollectionCheckboxToggled;
+
+            ExportButton.OnPressed += OnExportButtonPressed;
+            AddButton.OnPressed += OnAddButtonPressed;
+        }
+
+        private void InitializedItems()
+        {
             SexButton.AddItem(Loc.GetString("interaction-constructor-none"), (int)Sex.None);
             SexButton.AddItem(Loc.GetString("interaction-constructor-male"), (int)Sex.Male);
             SexButton.AddItem(Loc.GetString("interaction-constructor-female"), (int)Sex.Female);
@@ -90,6 +109,7 @@ namespace Content.Client.Interaction.Panel.Ui
                 SpeciesButton.SelectId(args.Id);
             };
 
+            BlackListButton.AddItem(Loc.GetString("interaction-constructor-none"), (int)Species.None);
             BlackListButton.AddItem(Loc.GetString("interaction-constructor-human"), (int)Species.Human);
             BlackListButton.AddItem(Loc.GetString("interaction-constructor-dwarf"), (int)Species.Dwarf);
             BlackListButton.AddItem(Loc.GetString("interaction-constructor-felinid"), (int)Species.Felinid);
@@ -131,11 +151,12 @@ namespace Content.Client.Interaction.Panel.Ui
                 TargetSpeciesButton.SelectId(args.Id);
             };
 
-            PathCheckbox.OnToggled += OnPathCheckboxToggled;
-            CollectionCheckbox.OnToggled += OnCollectionCheckboxToggled;
+            CollectionButton.AddItem(Loc.GetString("interaction-constructor-kisses"), (int)Collection.Kisses);
 
-            ExportButton.OnPressed += OnExportButtonPressed;
-            AddButton.OnPressed += OnAddButtonPressed;
+            CollectionButton.OnItemSelected += args =>
+            {
+                CollectionButton.SelectId(args.Id);
+            };
         }
 
         private void UpdatePreview()
@@ -145,7 +166,7 @@ namespace Content.Client.Interaction.Panel.Ui
             var buttonText = NameLine.Text;
             if (string.IsNullOrWhiteSpace(buttonText))
             {
-                buttonText = "Unnamed Interaction";
+                buttonText = Loc.GetString("interaction-constructor-unnamed");
             }
 
             var button = new Button
@@ -249,10 +270,22 @@ namespace Content.Client.Interaction.Panel.Ui
 
         private async void OnExportButtonPressed(BaseButton.ButtonEventArgs args)
         {
-            if (_errorLevel != ErrorLevel.None)
+            if (_errorLevel != ErrorLevel.None || _exporting)
                 return;
 
+            _exporting = true;
+
             var id = IdLine.Text;
+            if (!IsValidId(id))
+            {
+                var session = _playerManager.LocalSession;
+                if (session?.AttachedEntity.HasValue == true)
+                {
+                    _popup.PopupCursor(Loc.GetString("interaction-constructor-invalid-id"), session.AttachedEntity.Value);
+                    _exporting = false;
+                }
+                return;
+            }
             var name = NameLine.Text;
             var message = MessageLine.Text;
             var spritePath = SpriteLine.Text;
@@ -274,15 +307,17 @@ namespace Content.Client.Interaction.Panel.Ui
             var targetSex = GetSexString(targetSexId);
             var targetSpecies = GetSpeciesString(targetSpeciesId);
             var blackListSpecies = GetSpeciesString(blackListSpeciesId);
+
+            var soundPerceived = SoundCheckbox.Pressed;
             var soundCollection = GetCollectionString(soundCollectionId);
-
             var soundPath = PathLine.Text;
-
-            if (_exporting) return;
 
             var file = await _dialogManager.SaveFile(new FileDialogFilters(new FileDialogFilters.Group("yml")));
             if (file == null)
+            {
+                _exporting = false;
                 return;
+            }
 
             try
             {
@@ -298,6 +333,7 @@ namespace Content.Client.Interaction.Panel.Ui
                     NearestAllowedGenders = new List<string> { targetSex },
                     NearestAllowedSpecies = new List<string> { targetSpecies },
                     BlackListSpecies = null,
+                    SoundPerceivedByOthers = soundPerceived,
                     InteractSound = null
                 };
                 if (BlackCheckbox.Pressed)
@@ -316,11 +352,14 @@ namespace Content.Client.Interaction.Panel.Ui
                 var dataNode = _sharedInteraction.ToDataNode(interactionPrototype);
                 await using var writer = new StreamWriter(file.Value.fileStream);
                 dataNode.Write(writer);
+
+                _exporting = false;
             }
             catch (Exception exc)
             {
                 _sawmill = Logger.GetSawmill("interaction_export");
                 _sawmill.Error($"Error when exporting\n{exc.StackTrace}");
+                _exporting = false;
             }
         }
 
@@ -330,6 +369,13 @@ namespace Content.Client.Interaction.Panel.Ui
                 return;
 
             var id = IdLine.Text;
+            if (!IsValidId(id))
+            {
+                var session = _playerManager.LocalSession;
+                if (session?.AttachedEntity.HasValue == true)
+                    _popup.PopupCursor(Loc.GetString("interaction-constructor-invalid-id"), session.AttachedEntity.Value);
+                return;
+            }
             var name = NameLine.Text;
             var message = MessageLine.Text;
             var spritePath = SpriteLine.Text;
@@ -351,8 +397,9 @@ namespace Content.Client.Interaction.Panel.Ui
             var targetSex = GetSexString(targetSexId);
             var targetSpecies = GetSpeciesString(targetSpeciesId);
             var blackListSpecies = GetSpeciesString(blackListSpeciesId);
-            var soundCollection = GetCollectionString(soundCollectionId);
 
+            var soundPerceived = SoundCheckbox.Pressed;
+            var soundCollection = GetCollectionString(soundCollectionId);
             var soundPath = PathLine.Text;
 
             var interactionPrototype = new InteractionPrototype
@@ -367,6 +414,7 @@ namespace Content.Client.Interaction.Panel.Ui
                 NearestAllowedGenders = new List<string> { targetSex },
                 NearestAllowedSpecies = new List<string> { targetSpecies },
                 BlackListSpecies = null,
+                SoundPerceivedByOthers = soundPerceived,
                 InteractSound = null
             };
             if (BlackCheckbox.Pressed)
@@ -385,58 +433,55 @@ namespace Content.Client.Interaction.Panel.Ui
             _interactionPanelController.AddConstructor(interactionPrototype);
         }
 
+        public bool IsValidId(string id)
+        {
+            var regex = new Regex(@"^[a-zA-Z0-9]+$");
+            return regex.IsMatch(id);
+        }
+
         private int? GetSelectedId(OptionButton optionButton)
         {
             if (optionButton.SelectedId == -1)
-            {
-                Logger.Debug("Ничего не выбрано");
                 return null;
-            }
-
-            if (optionButton.SelectedId < 0 || optionButton.SelectedId >= optionButton.ItemCount)
-            {
-                Logger.Debug($"Не найден: SelectedId = {optionButton.SelectedId}, ItemCount = {optionButton.ItemCount}");
-                return null;
-            }
 
             return optionButton.SelectedId;
         }
 
         private string GetSexString(int sexId)
         {
-            return ((Sex)sexId) switch
+            return sexId switch
             {
-                Sex.None => "all",
-                Sex.Male => "Male",
-                Sex.Female => "Female",
-                Sex.Unsexed => "Unsexed",
+                0 => "all",
+                1 => "Male",
+                2 => "Female",
+                3 => "Unsexed",
                 _ => throw new ArgumentOutOfRangeException(nameof(sexId), sexId, "Unknown sex ID")
             };
         }
 
         private string GetSpeciesString(int speciesId)
         {
-            return ((Species)speciesId) switch
+            return speciesId switch
             {
-                Species.None => "all",
-                Species.Human => "Human",
-                Species.Dwarf => "Dwarf",
-                Species.Felinid => "Felinid",
-                Species.Moth => "Moth",
-                Species.Reptilian => "Reptilian",
-                Species.SlimePerson => "Slimeperson",
-                Species.Vulpkanin => "Vulpkanin",
-                Species.Skrell => "Skrell",
-                Species.Resomi => "Resomi",
+                0 => "all",
+                1 => "Human",
+                2 => "Dwarf",
+                3 => "Felinid",
+                4 => "Moth",
+                5 => "Reptilian",
+                6 => "Slimeperson",
+                7 => "Vulpkanin",
+                8 => "Skrell",
+                9 => "Resomi",
                 _ => throw new ArgumentOutOfRangeException(nameof(speciesId), speciesId, "Unknown species ID")
             };
         }
 
         private string GetCollectionString(int collectionId)
         {
-            return ((Collection)collectionId) switch
+            return collectionId switch
             {
-                Collection.Mew => "mew",
+                0 => "Kisses", // You like kissing boys don't you
                 _ => throw new ArgumentOutOfRangeException(nameof(collectionId), collectionId, "Unknown collection ID")
             };
         }
@@ -474,7 +519,7 @@ namespace Content.Client.Interaction.Panel.Ui
 
         private enum Collection : byte
         {
-            Mew,
+            Kisses,
         }
     }
 }
