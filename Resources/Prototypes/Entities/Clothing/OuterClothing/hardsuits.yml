@@ -160,6 +160,15 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSalvage
+  # Corvax-Wega-Salvage-start
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-hardsuits-jetpack
+        whitelist:
+          tags:
+          - Jetpack
+  # Corvax-Wega-Salvage-end
 
 #Goliath Hardsuit
 - type: entity
@@ -195,6 +204,15 @@
   - type: Construction
     graph: HardsuitGoliath
     node: hardsuitGoliath
+  # Corvax-Wega-Salvage-start
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-hardsuits-jetpack
+        whitelist:
+          tags:
+          - Jetpack
+  # Corvax-Wega-Salvage-end
 
 #Maxim Hardsuit
 - type: entity
@@ -228,6 +246,15 @@
     coolingCoefficient: 0.001
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMaxim
+  # Corvax-Wega-Salvage-start
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-hardsuits-jetpack
+        whitelist:
+          tags:
+          - Jetpack
+  # Corvax-Wega-Salvage-end
 
 #Security Hardsuit
 - type: entity

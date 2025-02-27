@@ -16,6 +16,7 @@
     - id: HandheldGPSBasic
     - id: RadioHandheld
     - id: AppraisalTool
+    - id: JetpackMiningFilled # Corvax-Wega-Salvage
     - id: FireExtinguisher
     - id: Flare
       prob: 0.3

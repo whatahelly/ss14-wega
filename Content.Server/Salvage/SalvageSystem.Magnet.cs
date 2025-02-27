@@ -38,9 +38,10 @@ public sealed partial class SalvageSystem
 
     private void OnMagnetClaim(EntityUid uid, SalvageMagnetComponent component, ref MagnetClaimOfferEvent args)
     {
-        var station = _station.GetOwningStation(uid);
+        // Corvax-Wega-Salvage-edit
+        // var station = _station.GetOwningStation(uid);
 
-        if (!TryComp(station, out SalvageMagnetDataComponent? dataComp) ||
+        if (!TryComp(uid, out SalvageMagnetDataComponent? dataComp) ||
             dataComp.EndTime != null)
         {
             return;
@@ -51,7 +52,7 @@ public sealed partial class SalvageSystem
         {
             try
             {
-                await TakeMagnetOffer((station.Value, dataComp), index, (uid, component));
+                await TakeMagnetOffer((uid, dataComp), index, (uid, component)); // Corvax-Wega-Salvage-edit
             }
             catch (Exception e)
             {
@@ -211,9 +212,10 @@ public sealed partial class SalvageSystem
 
         while (query.MoveNext(out var magnetUid, out var magnet, out var xform))
         {
-            var stationUid = _station.GetOwningStation(magnetUid, xform);
+            // Corvax-Wega-Salvage-edit
+            // var stationUid = _station.GetOwningStation(magnetUid, xform);
 
-            if (stationUid != data.Owner)
+            if (magnetUid != data.Owner)
                 continue;
 
             return (magnetUid, magnet);
@@ -224,9 +226,10 @@ public sealed partial class SalvageSystem
 
     private void UpdateMagnetUI(Entity<SalvageMagnetComponent> entity, TransformComponent xform)
     {
-        var station = _station.GetOwningStation(entity, xform);
+        // Corvax-Wega-Salvage-edit
+        // var station = _station.GetOwningStation(entity, xform);
 
-        if (!TryComp(station, out SalvageMagnetDataComponent? dataComp))
+        if (!TryComp(entity.Owner, out SalvageMagnetDataComponent? dataComp))
             return;
 
         _ui.SetUiState(entity.Owner, SalvageMagnetUiKey.Key,
@@ -246,9 +249,10 @@ public sealed partial class SalvageSystem
 
         while (query.MoveNext(out var magnetUid, out var magnet, out var xform))
         {
-            var station = _station.GetOwningStation(magnetUid, xform);
+            // Corvax-Wega-Salvage-edit
+            // var station = _station.GetOwningStation(magnetUid, xform);
 
-            if (station != data.Owner)
+            if (!TryComp(magnetUid, out SalvageMagnetDataComponent? dataComp))
                 continue;
 
             _ui.SetUiState(magnetUid, SalvageMagnetUiKey.Key,
