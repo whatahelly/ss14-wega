@@ -9,7 +9,7 @@
   - EncryptionKeyBinarySyndicate
   - ThiefimovCircuitBoard
   - ClothingEyesHudDiagnostic
-  - Emag #TODO: Заменить в наборе синдиката емаг на обходчиков доступов полсе апстрима
+  - Emag
 
 - type: thiefBackpackSet
   id: SpySet
