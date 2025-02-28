@@ -192,7 +192,7 @@ public sealed class PaperSystem : EntitySystem
     }
 
     // Corvax-Wega-Bureaucracy-start
-    private void AddSignVerb(EntityUid uid, PenComponent pen, ref GetVerbsEvent<AlternativeVerb> args)
+    private void AddSignVerb(EntityUid uid, PenComponent pen, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !args.Using.HasValue
             || !_tagSystem.HasTag(args.Using.Value, "Write"))
@@ -206,9 +206,20 @@ public sealed class PaperSystem : EntitySystem
             Act = () =>
             {
                 pen.Signature = !pen.Signature;
+                ModeChanged(pen, ref args);
             },
         };
         args.Verbs.Add(verb);
+    }
+
+    private void ModeChanged(PenComponent pen, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        var changeModeSelfMessageWrite = Loc.GetString("paper-component-change-mode-to-write");
+        var changeModeSelfMessageSignature = Loc.GetString("paper-component-change-mode-to-signature");
+        if (pen.Signature)
+            _popupSystem.PopupClient(changeModeSelfMessageSignature, args.User, args.User);
+        else
+            _popupSystem.PopupClient(changeModeSelfMessageWrite, args.User, args.User);
     }
 
     public bool TrySign(Entity<PaperComponent> entity, EntityUid signer, PaperComponent paperComp)
