@@ -64,6 +64,14 @@ public sealed class InteractionUIController : UIController, IOnStateChanged<Game
         _interactionWindow.HandleAddEdit(prototype);
     }
 
+    public void DeleteEditor(InteractionPrototype prototype)
+    {
+        if (_interactionWindow == null)
+            return;
+
+        _interactionWindow.HandleDeleteEdit(prototype);
+    }
+
     private void InteractionButtonOnPressed(ButtonEventArgs obj)
     {
         ToggleInteractionMenu();

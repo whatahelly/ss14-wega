@@ -73,6 +73,8 @@ public sealed class InteractionPanelManager : IPostInjectInit
     {
         var validPrototypes = new List<InteractionPrototype>();
         var idSet = new HashSet<string>();
+
+        var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/).+\.ogg$", RegexOptions.Compiled);
         foreach (var prototype in prototypes)
         {
             try
@@ -87,6 +89,16 @@ public sealed class InteractionPanelManager : IPostInjectInit
                     _sawmill.Warning($"Prototype ID '{prototype.ID}' contains invalid characters. Skipping prototype: {prototype.Name}");
                     continue;
                 }
+                if (prototype.Abstract)
+                {
+                    _sawmill.Warning($"Abstract types are not allowed in prototype ID '{prototype.ID}'. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
+                if (prototype.Parents?.Length > 0)
+                {
+                    _sawmill.Warning($"Prototype ID '{prototype.ID}' has parents. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
                 if (!idSet.Add(prototype.ID))
                 {
                     _sawmill.Warning($"Duplicate prototype ID found: '{prototype.ID}'. Skipping prototype: {prototype.Name}");
@@ -95,6 +107,11 @@ public sealed class InteractionPanelManager : IPostInjectInit
                 if (!prototype.UserMessages.Any())
                 {
                     _sawmill.Warning($"No messages found: '{prototype.ID}'. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
+                if (prototype.InteractSound is SoundPathSpecifier pathSpecifier && !pathRegex.IsMatch(pathSpecifier.Path.ToString()))
+                {
+                    _sawmill.Warning($"Invalid path format for prototype ID '{prototype.ID}'. Path must start with '/Audio/Voice/', '/Audio/Effects/', or '/Audio/_Wega/Voice/' and end with '.ogg'. Skipping prototype: {prototype.Name}");
                     continue;
                 }
 

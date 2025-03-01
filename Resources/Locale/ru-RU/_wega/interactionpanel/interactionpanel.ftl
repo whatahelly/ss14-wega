@@ -1,10 +1,12 @@
 # Ui
 interaction-ui-default-title = Взаимодействия
 interaction-panel-import-button = Импорт
-interaction-panel-clear-button = Очистить
 interaction-panel-editor = ⚙
+interaction-panel-pin = Закр.
+interaction-panel-unpin = Откр.
 interaction-panel-constructor-button = Конструктор
 interaction-panel-special-collapsible = Специальные
+interaction-panel-favourites-collapsible = Избранные
 interaction-panel-harmless-collapsible = Безобидные
 interaction-panel-outspoken-collapsible = Откровенные
 interact-player = Вы

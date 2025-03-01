@@ -104,6 +104,9 @@ namespace Content.Client.Interaction.Panel.Ui
             SpeciesButton.AddItem(Loc.GetString("interaction-constructor-vulpkanin"), (int)Species.Vulpkanin);
             SpeciesButton.AddItem(Loc.GetString("interaction-constructor-skrell"), (int)Species.Skrell);
             SpeciesButton.AddItem(Loc.GetString("interaction-constructor-resomi"), (int)Species.Resomi);
+            SpeciesButton.AddItem(Loc.GetString("interaction-constructor-vox"), (int)Species.Vox);
+            SpeciesButton.AddItem(Loc.GetString("interaction-constructor-arachnid"), (int)Species.Arachnid);
+            SpeciesButton.AddItem(Loc.GetString("interaction-constructor-diona"), (int)Species.Diona);
 
             SpeciesButton.OnItemSelected += args =>
             {
@@ -120,6 +123,9 @@ namespace Content.Client.Interaction.Panel.Ui
             BlackListButton.AddItem(Loc.GetString("interaction-constructor-vulpkanin"), (int)Species.Vulpkanin);
             BlackListButton.AddItem(Loc.GetString("interaction-constructor-skrell"), (int)Species.Skrell);
             BlackListButton.AddItem(Loc.GetString("interaction-constructor-resomi"), (int)Species.Resomi);
+            BlackListButton.AddItem(Loc.GetString("interaction-constructor-vox"), (int)Species.Vox);
+            BlackListButton.AddItem(Loc.GetString("interaction-constructor-arachnid"), (int)Species.Arachnid);
+            BlackListButton.AddItem(Loc.GetString("interaction-constructor-diona"), (int)Species.Diona);
 
             BlackListButton.OnItemSelected += args =>
             {
@@ -146,6 +152,9 @@ namespace Content.Client.Interaction.Panel.Ui
             TargetSpeciesButton.AddItem(Loc.GetString("interaction-constructor-vulpkanin"), (int)Species.Vulpkanin);
             TargetSpeciesButton.AddItem(Loc.GetString("interaction-constructor-skrell"), (int)Species.Skrell);
             TargetSpeciesButton.AddItem(Loc.GetString("interaction-constructor-resomi"), (int)Species.Resomi);
+            TargetSpeciesButton.AddItem(Loc.GetString("interaction-constructor-vox"), (int)Species.Vox);
+            TargetSpeciesButton.AddItem(Loc.GetString("interaction-constructor-arachnid"), (int)Species.Arachnid);
+            TargetSpeciesButton.AddItem(Loc.GetString("interaction-constructor-diona"), (int)Species.Diona);
 
             TargetSpeciesButton.OnItemSelected += args =>
             {
@@ -366,9 +375,17 @@ namespace Content.Client.Interaction.Panel.Ui
 
         private SoundSpecifier? GetInteractSound()
         {
-            if (PathCheckbox.Pressed && !string.IsNullOrWhiteSpace(PathLine.Text))
+            var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/).+\.ogg$", RegexOptions.Compiled);
+            if (PathCheckbox.Pressed && !string.IsNullOrWhiteSpace(PathLine.Text) && pathRegex.IsMatch(PathLine.Text))
             {
                 return new SoundPathSpecifier(PathLine.Text);
+            }
+            else if (PathCheckbox.Pressed && !pathRegex.IsMatch(PathLine.Text))
+            {
+                var session = _playerManager.LocalSession;
+                if (session?.AttachedEntity.HasValue == true)
+                    _popup.PopupCursor(Loc.GetString("interaction-invalid-sound"), session.AttachedEntity.Value);
+                return null;
             }
 
             if (CollectionCheckbox.Pressed)
@@ -415,10 +432,13 @@ namespace Content.Client.Interaction.Panel.Ui
                 3 => "Felinid",
                 4 => "Moth",
                 5 => "Reptilian",
-                6 => "Slimeperson",
+                6 => "SlimePerson",
                 7 => "Vulpkanin",
                 8 => "Skrell",
                 9 => "Resomi",
+                10 => "Vox",
+                11 => "Arachnid",
+                12 => "Diona",
                 _ => throw new ArgumentOutOfRangeException(nameof(speciesId), speciesId, "Unknown species ID")
             };
         }
@@ -463,6 +483,9 @@ namespace Content.Client.Interaction.Panel.Ui
             Vulpkanin,
             Skrell,
             Resomi,
+            Vox,
+            Arachnid,
+            Diona,
         }
 
         private enum Collection : byte

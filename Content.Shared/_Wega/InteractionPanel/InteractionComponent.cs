@@ -1,7 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Chat.Prototypes
 {
@@ -35,9 +34,6 @@ namespace Content.Shared.Chat.Prototypes
 
         [DataField("interactSound")]
         public SoundSpecifier? InteractSound;
-
-        [DataField("params")]
-        public AudioParams? GeneralParams = new AudioParams { Variation = 0.125f };
 
         [DataField("points")]
         public int Points { get; set; } = 0;

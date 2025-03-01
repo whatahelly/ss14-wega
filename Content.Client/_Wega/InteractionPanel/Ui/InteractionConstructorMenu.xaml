@@ -72,8 +72,8 @@
             <Control MinWidth="20" />
             <LineEdit Name="PathLine" MinWidth="100" HorizontalExpand="True" PlaceHolder="{Loc 'interaction-line-edit-path-placeholder'}"/>
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal" Margin="2">
-            <CheckBox Name="CollectionCheckbox" MinWidth="100" Text="{Loc 'interaction-checkbox-collection-name'}" Pressed="False"/>
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <CheckBox Name="CollectionCheckbox" Text="{Loc 'interaction-checkbox-collection-name'}" MinWidth="100" Pressed="False"/>
             <Control MinWidth="20" />
             <OptionButton Name="CollectionButton" HorizontalAlignment="Right"/>
         </BoxContainer>

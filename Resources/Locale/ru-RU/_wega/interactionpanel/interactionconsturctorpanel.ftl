@@ -1,5 +1,5 @@
 # Ui
-interaction-constructor-ui-default-title = Конструктор Взаимодействий
+interaction-constructor-ui-default-title = Конструктор взаимодействий
 interaction-label-big-title-name = Преднастройка
 interaction-line-edit-id-name = ID
 interaction-line-edit-id-placeholder = укажите "уникальный" айди взаимодействия...
@@ -10,7 +10,7 @@ interaction-line-edit-massage-placeholder = укажите сообщение в
 interaction-line-edit-sprite-name = Иконка
 interaction-line-edit-sprite-placeholder = /Texture/...
 interaction-checkbox-erp-name = ERP?
-interaction-label-big-settings-name = Настройка
+interaction-label-big-settings-name = Настройка классификаций
 interaction-option-button-sex-name = Пол взаимодействующего:
 interaction-option-button-species-name = Раса взаимодействующего:
 interaction-option-button-sex-target-name = Пол цели:
@@ -26,6 +26,7 @@ interaction-button-add-name = Добавить
 interaction-constructor-unnamed = Название?
 
 interaction-constructor-invalid-id = Неправильное айди. Айди может содержать только Айнглийские буквы и цифры
+interaction-invalid-sound = Невозможно установить звук с данной директивы
 
 interaction-constructor-none = без классификации
 
@@ -36,11 +37,14 @@ interaction-constructor-unsexed = бесполое
 interaction-constructor-human = человек
 interaction-constructor-dwarf = дворф
 interaction-constructor-felinid = фелинид
-interaction-constructor-moth = моль
+interaction-constructor-moth = ниан
 interaction-constructor-reptilian = унатх
 interaction-constructor-slimeperson = слаймолюд
 interaction-constructor-vulpkanin = вульпакин
 interaction-constructor-skrell = скрелл
 interaction-constructor-resomi = резоми
+interaction-constructor-vox = вокс
+interaction-constructor-arachnid = арахнид
+interaction-constructor-diona = диона
 
 interaction-constructor-kisses = поцелуи

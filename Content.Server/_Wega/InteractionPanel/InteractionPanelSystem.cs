@@ -257,7 +257,7 @@ namespace Content.Server.Interaction.Panel
                     emoteCommand = interactionPrototype.UserMessages[0];
                     if (emoteCommand.Contains("$target"))
                     {
-                        emoteCommand = emoteCommand.Replace("$target", Identity.Entity(target, _entManager).ToString());
+                        emoteCommand = emoteCommand.Replace("$target", Name(Identity.Entity(target, _entManager)));
                     }
                 }
 

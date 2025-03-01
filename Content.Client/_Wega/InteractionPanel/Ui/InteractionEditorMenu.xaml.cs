@@ -1,6 +1,9 @@
 using System.Linq;
+using System.Text.RegularExpressions;
 using Content.Client.UserInterface.Systems.Interaction;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Popups;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
@@ -11,7 +14,10 @@ namespace Content.Client.Interaction.Panel.Ui
 {
     public sealed partial class InteractionEditorMenu : DefaultWindow
     {
+        [Dependency] private readonly EntityManager _entManager = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
         private readonly InteractionUIController _interactionPanelController;
+        private SharedPopupSystem _popup;
 
         private InteractionPrototype? _prototype;
         private LineEdit? _nameLine;
@@ -33,26 +39,31 @@ namespace Content.Client.Interaction.Panel.Ui
 
         public BoxContainer EditorContainer => this.FindControl<BoxContainer>("EditorContainer");
         public Button EditButton => this.FindControl<Button>("EditButton");
+        public Button DeleteButton => this.FindControl<Button>("DeleteButton");
 
         public InteractionEditorMenu()
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
+            _popup = _entManager.System<SharedPopupSystem>();
+
             _interactionPanelController = UserInterfaceManager.GetUIController<InteractionUIController>();
             EditButton.OnPressed += OnEditButtonPressed;
+            DeleteButton.OnPressed += OnDeleteButtonPressed;
         }
 
         public void SetData(InteractionPrototype prototype)
         {
             _prototype = prototype;
-            InitializeMenu();
+            InitilizeMenu();
         }
 
         #region Initializing UI
-        private void InitializeMenu()
+        private void InitilizeMenu()
         {
-            if (_prototype == null) return;
+            if (_prototype == null)
+                return;
 
             EditorContainer.RemoveAllChildren();
 
@@ -62,92 +73,101 @@ namespace Content.Client.Interaction.Panel.Ui
                 HorizontalExpand = true
             };
 
-            AddInputFields(mainContainer);
-            AddCheckBoxes(mainContainer);
-            AddOptionButtons(mainContainer);
-            AddSoundSettings(mainContainer);
-
-            EditorContainer.AddChild(mainContainer);
-            LoadPrototypeData();
-        }
-
-        private void AddInputFields(BoxContainer container)
-        {
-            if (_prototype == null) return;
-            container.AddChild(CreateInputSection(
+            mainContainer.AddChild(CreateInputSection(
                 Loc.GetString("interaction-line-edit-name-name"),
-                _nameLine = CreateLineEdit(_prototype.Name, Loc.GetString("interaction-line-edit-name-placeholder")))
-            );
+                _nameLine = CreateLineEdit(_prototype.Name,
+                Loc.GetString("interaction-line-edit-name-placeholder"))
+            ));
 
-            container.AddChild(CreateInputSection(
+            mainContainer.AddChild(CreateInputSection(
                 Loc.GetString("interaction-line-edit-massage-name"),
-                _messageLine = CreateLineEdit(_prototype.UserMessages.FirstOrDefault(), Loc.GetString("interaction-line-edit-massage-placeholder")))
-            );
+                _messageLine = CreateLineEdit(_prototype.UserMessages.FirstOrDefault(),
+                Loc.GetString("interaction-line-edit-massage-placeholder"))
+            ));
 
             _nameLine.OnTextChanged += OnNameLineChanged;
             _messageLine.OnTextChanged += OnMessageLineChanged;
 
-            container.AddChild(CreateInputSection(
+            mainContainer.AddChild(CreateInputSection(
                 Loc.GetString("interaction-line-edit-sprite-name"),
-                _spriteLine = CreateLineEdit(_prototype.Icon, Loc.GetString("interaction-line-edit-sprite-placeholder")))
-            );
-        }
+                _spriteLine = CreateLineEdit(_prototype.Icon,
+                Loc.GetString("interaction-line-edit-sprite-placeholder"))
+            ));
 
-        private void AddCheckBoxes(BoxContainer container)
-        {
-            if (_prototype == null) return;
-            container.AddChild(CreateCheckBoxSection(
-                _erpCheckbox = CreateCheckBox(Loc.GetString("interaction-checkbox-erp-name"), _prototype.ERP))
-            );
-
-            container.AddChild(CreateCheckBoxSection(
-                _soundCheckbox = CreateCheckBox(Loc.GetString("interaction-checkbox-sound-name"), _prototype.SoundPerceivedByOthers))
-            );
-        }
-
-        private void AddOptionButtons(BoxContainer container)
-        {
-            if (_prototype == null) return;
+            mainContainer.AddChild(CreateCheckBoxSection(
+                _erpCheckbox = CreateCheckBox(
+                    Loc.GetString("interaction-checkbox-erp-name"),
+                    _prototype.ERP
+                )
+            ));
 
             InitializeOptionButtons();
 
-            container.AddChild(CreateOptionButtonSection(
-                Loc.GetString("interaction-option-button-sex-name"), _sexButton, (int)Sex.None)
-            );
-
-            container.AddChild(CreateOptionButtonSection(
-                Loc.GetString("interaction-option-button-species-name"), _speciesButton, (int)Species.None)
-            );
-
-            container.AddChild(CreateOptionButtonSection(
-                Loc.GetString("interaction-option-button-sex-target-name"), _targetSexButton, (int)Sex.None)
-            );
-
-            container.AddChild(CreateOptionButtonSection(
-                Loc.GetString("interaction-option-button-species-target-name"), _targetSpeciesButton, (int)Species.None)
-            );
-
-            container.AddChild(CreateCheckBoxWithOptionButtonSection(
-                _blackCheckbox = CreateCheckBox(Loc.GetString("interaction-checkbox-black-name"), _prototype.BlackListSpecies != null),
-                _blackListButton, (int)Species.None)
-            );
-        }
-
-        private void AddSoundSettings(BoxContainer container)
-        {
-            if (_prototype == null) return;
-            container.AddChild(CreateCheckBoxWithLineEditSection(
-                _pathCheckbox = CreateCheckBox(Loc.GetString("interaction-line-edit-path-name"), _prototype.InteractSound is SoundPathSpecifier),
-                _pathLine = CreateLineEdit((_prototype.InteractSound as SoundPathSpecifier)?.Path.ToString(), Loc.GetString("interaction-line-edit-path-placeholder"))
+            mainContainer.AddChild(CreateOptionButtonSection(
+                Loc.GetString("interaction-option-button-sex-name"),
+                _sexButton,
+                (int)Sex.None
             ));
 
-            container.AddChild(CreateCheckBoxWithOptionButtonSection(
-                _collectionCheckbox = CreateCheckBox(Loc.GetString("interaction-checkbox-collection-name"), _prototype.InteractSound is SoundCollectionSpecifier),
-                _collectionButton, (int)Collection.Kisses)
-            );
+            mainContainer.AddChild(CreateOptionButtonSection(
+                Loc.GetString("interaction-option-button-species-name"),
+                _speciesButton,
+                (int)Species.None
+            ));
+
+            mainContainer.AddChild(CreateOptionButtonSection(
+                Loc.GetString("interaction-option-button-sex-target-name"),
+                _targetSexButton,
+                (int)Sex.None
+            ));
+
+            mainContainer.AddChild(CreateOptionButtonSection(
+                Loc.GetString("interaction-option-button-species-target-name"),
+                _targetSpeciesButton,
+                (int)Species.None
+            ));
+
+            mainContainer.AddChild(CreateCheckBoxWithOptionButtonSection(
+                _blackCheckbox = CreateCheckBox(
+                    Loc.GetString("interaction-checkbox-black-name"),
+                    _prototype.BlackListSpecies != null
+                ),
+                _blackListButton,
+                (int)Species.None
+            ));
+
+            mainContainer.AddChild(CreateCheckBoxSection(
+                _soundCheckbox = CreateCheckBox(
+                    Loc.GetString("interaction-checkbox-sound-name"),
+                    _prototype.SoundPerceivedByOthers
+                )
+            ));
+
+            mainContainer.AddChild(CreateCheckBoxWithLineEditSection(
+                _pathCheckbox = CreateCheckBox(
+                    Loc.GetString("interaction-line-edit-path-name"),
+                    _prototype.InteractSound is SoundPathSpecifier
+                ),
+                _pathLine = CreateLineEdit(
+                    (_prototype.InteractSound as SoundPathSpecifier)?.Path.ToString(),
+                    Loc.GetString("interaction-line-edit-path-placeholder")
+                )
+            ));
+
+            mainContainer.AddChild(CreateCheckBoxWithOptionButtonSection(
+                _collectionCheckbox = CreateCheckBox(
+                    Loc.GetString("interaction-checkbox-collection-name"),
+                    _prototype.InteractSound is SoundCollectionSpecifier
+                ),
+                _collectionButton,
+                (int)Collection.Kisses
+            ));
 
             _pathCheckbox.OnToggled += OnPathCheckboxToggled;
             _collectionCheckbox.OnToggled += OnCollectionCheckboxToggled;
+
+            EditorContainer.AddChild(mainContainer);
+            LoadPrototypeData();
         }
 
         private void InitializeOptionButtons()
@@ -193,6 +213,9 @@ namespace Content.Client.Interaction.Panel.Ui
             button.AddItem(Loc.GetString("interaction-constructor-vulpkanin"), (int)Species.Vulpkanin);
             button.AddItem(Loc.GetString("interaction-constructor-skrell"), (int)Species.Skrell);
             button.AddItem(Loc.GetString("interaction-constructor-resomi"), (int)Species.Resomi);
+            button.AddItem(Loc.GetString("interaction-constructor-vox"), (int)Species.Vox);
+            button.AddItem(Loc.GetString("interaction-constructor-arachnid"), (int)Species.Arachnid);
+            button.AddItem(Loc.GetString("interaction-constructor-diona"), (int)Species.Diona);
 
             button.OnItemSelected += args => button.SelectId(args.Id);
         }
@@ -383,10 +406,13 @@ namespace Content.Client.Interaction.Panel.Ui
             "Felinid" => (int)Species.Felinid,
             "Moth" => (int)Species.Moth,
             "Reptilian" => (int)Species.Reptilian,
-            "Slimeperson" => (int)Species.SlimePerson,
+            "SlimePerson" => (int)Species.SlimePerson,
             "Vulpkanin" => (int)Species.Vulpkanin,
             "Skrell" => (int)Species.Skrell,
             "Resomi" => (int)Species.Resomi,
+            "Vox" => (int)Species.Vox,
+            "Arachnid" => (int)Species.Arachnid,
+            "Diona" => (int)Species.Diona,
             _ => (int)Species.None
         };
 
@@ -453,12 +479,20 @@ namespace Content.Client.Interaction.Panel.Ui
 
         private SoundSpecifier? GetInteractSound()
         {
+            var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/).+\.ogg$", RegexOptions.Compiled);
             if (_pathCheckbox == null || _pathLine == null || _collectionCheckbox == null || _collectionButton == null)
                 return null;
 
-            if (_pathCheckbox.Pressed && !string.IsNullOrWhiteSpace(_pathLine.Text))
+            if (_pathCheckbox.Pressed && !string.IsNullOrWhiteSpace(_pathLine.Text) && pathRegex.IsMatch(_pathLine.Text))
             {
                 return new SoundPathSpecifier(_pathLine.Text);
+            }
+            else if (_pathCheckbox.Pressed && !pathRegex.IsMatch(_pathLine.Text))
+            {
+                var session = _playerManager.LocalSession;
+                if (session?.AttachedEntity.HasValue == true)
+                    _popup.PopupCursor(Loc.GetString("interaction-invalid-sound"), session.AttachedEntity.Value);
+                return null;
             }
 
             if (_collectionCheckbox.Pressed)
@@ -499,10 +533,13 @@ namespace Content.Client.Interaction.Panel.Ui
                 3 => "Felinid",
                 4 => "Moth",
                 5 => "Reptilian",
-                6 => "Slimeperson",
+                6 => "SlimePerson",
                 7 => "Vulpkanin",
                 8 => "Skrell",
                 9 => "Resomi",
+                10 => "Vox",
+                11 => "Arachnid",
+                12 => "Diona",
                 _ => throw new ArgumentOutOfRangeException(nameof(speciesId), speciesId, "Unknown species ID")
             };
         }
@@ -514,6 +551,17 @@ namespace Content.Client.Interaction.Panel.Ui
                 0 => "Kisses", // You like kissing boys don't you
                 _ => throw new ArgumentOutOfRangeException(nameof(collectionId), collectionId, "Unknown collection ID")
             };
+        }
+        #endregion
+
+        #region Delete pressed logic
+        private void OnDeleteButtonPressed(BaseButton.ButtonEventArgs args)
+        {
+            if (_prototype == null)
+                return;
+
+            _interactionPanelController.DeleteEditor(_prototype);
+            Close();
         }
         #endregion
 
@@ -547,6 +595,9 @@ namespace Content.Client.Interaction.Panel.Ui
             Vulpkanin,
             Skrell,
             Resomi,
+            Vox,
+            Arachnid,
+            Diona,
         }
 
         private enum Collection : byte

@@ -8,9 +8,9 @@
   - underwearbottom
 
 - type: interaction
-  id: BaseCheckClothing
+  id: BaseOneCheckClothing
   abstract: true
-  requiredClothingSlots:
+  oneRequiredClothingSlots:
   - jumpsuit
   - outerClothing
   - underwearbottom

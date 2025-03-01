@@ -19,9 +19,8 @@
 
         <!-- Специальный блок -->
         <BoxContainer HorizontalExpand="True">
-            <Button Name="ImportButton" MinWidth="220" Text="{Loc 'interaction-panel-import-button'}"/>
+            <Button Name="ImportButton" MinWidth="320" Text="{Loc 'interaction-panel-import-button'}"/>
             <Control HorizontalExpand="True" />
-            <Button Name="ClearButton" Text="{Loc 'interaction-panel-clear-button'}"/>
             <Button Name="ConstructorButton" Text="{Loc 'interaction-panel-constructor-button'}"/>
         </BoxContainer>
 
@@ -47,6 +46,15 @@
 
                     <!-- Вторая разворачивающаяся панель -->
                     <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
+                        <CollapsibleHeading Name="Favourites" Title="{Loc 'interaction-panel-favourites-collapsible'}" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
+                        <CollapsibleBody Margin="0, 5, 0, 0">
+                            <BoxContainer Name="FavouritesContainer" Orientation="Vertical" SeparationOverride="5">
+                            </BoxContainer>
+                        </CollapsibleBody>
+                    </Collapsible>
+
+                    <!-- Третья разворачивающаяся панель -->
+                    <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
                         <CollapsibleHeading Name="Harmless" Title="{Loc 'interaction-panel-harmless-collapsible'}" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
                         <CollapsibleBody Margin="0, 5, 0, 0">
                             <BoxContainer Name="HarmlessContainer" Orientation="Vertical" SeparationOverride="5">
@@ -54,7 +62,7 @@
                         </CollapsibleBody>
                     </Collapsible>
 
-                    <!-- Третья разворачивающаяся панель -->
+                    <!-- Четвертая разворачивающаяся панель -->
                     <Collapsible Orientation="Vertical" Margin="0, 0, 0, 8">
                         <CollapsibleHeading Name="Outspoken" Title="{Loc 'interaction-panel-outspoken-collapsible'}" MinWidth="480" MinHeight="32" HorizontalAlignment="Stretch" HorizontalExpand="True" />
                         <CollapsibleBody Margin="0, 5, 0, 0">

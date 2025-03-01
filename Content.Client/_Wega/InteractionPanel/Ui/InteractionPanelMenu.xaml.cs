@@ -37,6 +37,8 @@ namespace Content.Client.Interaction.Panel.Ui
         private readonly InteractionEditorUIController _interactionEditorController;
         private static List<InteractionPrototype> _importedPrototypes = new(); // Memory
         private static List<BoxContainer> _importedButtons = new(); // Memory
+        private static List<BoxContainer> _favoriteButtons = new(); // Memory
+        private static List<InteractionPrototype> _favoritePrototypes = new(); // Memory
         private List<BoxContainer> _allButtons = new();
         private TransformSystem _transform;
         private EntityLookupSystem _lookup;
@@ -46,6 +48,7 @@ namespace Content.Client.Interaction.Panel.Ui
         public BoxContainer UserModel => this.FindControl<BoxContainer>("UserSpriteView");
         public BoxContainer TargetModel => this.FindControl<BoxContainer>("TargetSpriteView");
         public CollapsibleHeading SpecialHeading => this.FindControl<CollapsibleHeading>("Special");
+        public CollapsibleHeading FavouritesHeading => this.FindControl<CollapsibleHeading>("Favourites");
         public CollapsibleHeading HarmlessHeading => this.FindControl<CollapsibleHeading>("Harmless");
         public CollapsibleHeading OutspokenHeading => this.FindControl<CollapsibleHeading>("Outspoken");
         private SpriteView _userSpriteView;
@@ -67,20 +70,19 @@ namespace Content.Client.Interaction.Panel.Ui
             _sawmill = Logger.GetSawmill("interaction_import");
 
             _userSpriteView = CreateSpriteView();
-            _targetSpriteView = CreateSpriteView();
-            _targetLabel = CreateLabel("");
-            _userGenderLabel = CreateLabel("");
-            _targetGenderLabel = CreateLabel("");
-
             UserModel.AddChild(_userSpriteView);
+
+            _targetSpriteView = CreateSpriteView();
             TargetModel.AddChild(_targetSpriteView);
 
+            _targetLabel = CreateLabel();
+            _userGenderLabel = CreateLabel();
+            _targetGenderLabel = CreateLabel();
+
             var importButton = FindControl<Button>("ImportButton");
-            var clearButton = FindControl<Button>("ClearButton");
             var constructorButton = FindControl<Button>("ConstructorButton");
 
             importButton.OnButtonUp += _ => HandleImport();
-            clearButton.OnButtonUp += _ => HandleClear();
             constructorButton.OnButtonUp += _ => HandleConstructor();
 
             SearchBar.OnTextChanged += OnSearchTextChanged;
@@ -89,6 +91,7 @@ namespace Content.Client.Interaction.Panel.Ui
             _playerManager.PlayerStatusChanged += OnUserStatusChanged;
 
             SetupHeading(SpecialHeading);
+            SetupHeading(FavouritesHeading);
             SetupHeading(HarmlessHeading);
             SetupHeading(OutspokenHeading);
 
@@ -101,10 +104,10 @@ namespace Content.Client.Interaction.Panel.Ui
             base.FrameUpdate(args);
 
             _updateDif += args.DeltaSeconds;
-            if (_updateDif < 3.0f)
+            if (_updateDif < 1.0f)
                 return;
 
-            _updateDif -= 3.0f;
+            _updateDif -= 1.0f;
 
             // Update panel
             InitializeNamesContainer();
@@ -123,7 +126,8 @@ namespace Content.Client.Interaction.Panel.Ui
                 var user = session.AttachedEntity.Value;
                 var appearanceComponent = _entManager.GetComponentOrNull<HumanoidAppearanceComponent>(user);
 
-                var label = CreateLabel(Loc.GetString("interact-player"));
+                var label = CreateLabel();
+                label.Text = Loc.GetString("interact-player");
                 Names.AddChild(label);
 
                 var userGenderIcon = CreateGenderIconButton(appearanceComponent?.Sex);
@@ -174,9 +178,8 @@ namespace Content.Client.Interaction.Panel.Ui
             SetSize = new Vector2(64, 64)
         };
 
-        private Label CreateLabel(string text) => new()
+        private Label CreateLabel() => new()
         {
-            Text = text,
             Margin = new Thickness(4)
         };
 
@@ -237,14 +240,6 @@ namespace Content.Client.Interaction.Panel.Ui
             }
         }
 
-        private void HandleClear()
-        {
-            _importedButtons.Clear();
-            _importedPrototypes.Clear();
-            SpecialContainer.RemoveAllChildren();
-            PopulateInteractions();
-        }
-
         private void HandleConstructor()
         {
             _interactionConstructorController.ToggleWindow();
@@ -268,6 +263,47 @@ namespace Content.Client.Interaction.Panel.Ui
             PopulateInteractions();
         }
 
+        public void HandleDeleteEdit(InteractionPrototype prototype)
+        {
+            var existingPrototype = _importedPrototypes.FirstOrDefault(p => p.ID == prototype.ID);
+            if (existingPrototype != null)
+            {
+                _importedPrototypes.Remove(existingPrototype);
+            }
+
+            if (!_importedPrototypes.Any())
+            {
+                _importedButtons.Clear();
+                _importedPrototypes.Clear();
+                SpecialContainer.RemoveAllChildren();
+            }
+
+            PopulateInteractions();
+        }
+
+        private void OnPinPressed(InteractionPrototype prototype)
+        {
+            var existingPrototype = _favoritePrototypes.FirstOrDefault(p => p.ID == prototype.ID);
+            if (existingPrototype != null)
+                return;
+
+            _favoritePrototypes.Add(prototype);
+            PopulateInteractions();
+        }
+
+        private void OnUnPinPressed(InteractionPrototype prototype)
+        {
+            _favoritePrototypes.Remove(prototype);
+            if (!_favoritePrototypes.Any())
+            {
+                _favoriteButtons.Clear();
+                _favoritePrototypes.Clear();
+                FavouritesContainer.RemoveAllChildren();
+            }
+
+            PopulateInteractions();
+        }
+
         private void UpdateTarget()
         {
             _targetSpriteView.RemoveAllChildren();
@@ -280,12 +316,12 @@ namespace Content.Client.Interaction.Panel.Ui
 
             if (target.HasValue)
             {
+                _targetSpriteView.SetEntity(target.Value);
+
                 _targetLabel.Text = Identity.Name(target.Value, _entManager, session.AttachedEntity);
 
                 var appearanceComponent = _entManager.GetComponentOrNull<HumanoidAppearanceComponent>(target.Value);
-                UpdateGender(appearanceComponent, _targetGenderLabel);
-
-                _targetSpriteView.SetEntity(target.Value);
+                UpdateGender(user, appearanceComponent, _targetGenderLabel);
             }
             else
             {
@@ -298,13 +334,29 @@ namespace Content.Client.Interaction.Panel.Ui
             }
         }
 
-        private void UpdateGender(HumanoidAppearanceComponent? appearanceComponent, Label genderLabel)
+        private void UpdateGender(EntityUid user, HumanoidAppearanceComponent? appearanceComponent, Label genderLabel)
         {
             genderLabel.Orphan();
 
             if (appearanceComponent == null)
             {
                 genderLabel.Text = Loc.GetString("unknown-nearestplayer");
+                TargetModel.AddChild(genderLabel);
+                return;
+            }
+
+            var targetGenderIcon = CreateGenderIconButton(appearanceComponent.Sex);
+            if (targetGenderIcon != null)
+            {
+                targetGenderIcon.Orphan();
+                Names.AddChild(targetGenderIcon);
+            }
+
+            var appearanceUserComponent = _entManager.GetComponentOrNull<HumanoidAppearanceComponent>(user);
+            if (appearanceUserComponent?.Status == Status.No)
+            {
+                genderLabel.Text = "";
+                genderLabel.Orphan();
                 TargetModel.AddChild(genderLabel);
                 return;
             }
@@ -329,13 +381,6 @@ namespace Content.Client.Interaction.Panel.Ui
 
             genderLabel.Orphan();
             TargetModel.AddChild(genderLabel);
-
-            var targetGenderIcon = CreateGenderIconButton(appearanceComponent.Sex);
-            if (targetGenderIcon != null)
-            {
-                targetGenderIcon.Orphan();
-                Names.AddChild(targetGenderIcon);
-            }
         }
 
         public void UpdateUser(EntityUid user)
@@ -406,11 +451,19 @@ namespace Content.Client.Interaction.Panel.Ui
                 {
                     Text = Loc.GetString(prototype.Name),
                     Name = prototype.ID,
-                    MinWidth = 420,
+                    MinWidth = 360,
+                    MinHeight = 32
+                };
+
+                var pinButton = new Button
+                {
+                    Text = Loc.GetString("interaction-panel-pin"),
+                    MinWidth = 52,
                     MinHeight = 32
                 };
 
                 button.OnButtonDown += args => OnInteractionPressed(prototype.ID);
+                pinButton.OnButtonDown += args => OnPinPressed(prototype);
 
                 if (!string.IsNullOrEmpty(prototype.Icon))
                 {
@@ -428,6 +481,7 @@ namespace Content.Client.Interaction.Panel.Ui
                 }
 
                 buttonContainer.AddChild(button);
+                buttonContainer.AddChild(pinButton);
                 _allButtons.Add(buttonContainer);
 
                 if (prototype.ERP)
@@ -463,14 +517,14 @@ namespace Content.Client.Interaction.Panel.Ui
                     {
                         Text = Loc.GetString(interactionPrototype.Name),
                         Name = interactionPrototype.ID,
-                        MinWidth = 380,
+                        MinWidth = 360,
                         MinHeight = 32
                     };
 
                     var editorButton = new Button
                     {
                         Text = Loc.GetString("interaction-panel-editor"),
-                        MinWidth = 32,
+                        MinWidth = 52,
                         MinHeight = 32
                     };
 
@@ -499,6 +553,65 @@ namespace Content.Client.Interaction.Panel.Ui
                 }
             }
 
+            if (_favoritePrototypes.Any())
+            {
+                _favoriteButtons.Clear();
+
+                foreach (var interactionPrototype in _favoritePrototypes)
+                {
+                    if (target.HasValue && !IsInteractionAllowed(interactionPrototype, appearanceComponent, target.Value))
+                        continue;
+
+                    if (_favoriteButtons.Any(b => b.Children.OfType<Button>().Any(btn => btn.Name == interactionPrototype.ID)))
+                        continue;
+
+                    var buttonContainer = new BoxContainer
+                    {
+                        Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                        HorizontalExpand = false,
+                        Margin = new Thickness(0.1f)
+                    };
+
+                    var button = new Button
+                    {
+                        Text = Loc.GetString(interactionPrototype.Name),
+                        Name = interactionPrototype.ID,
+                        MinWidth = 360,
+                        MinHeight = 32
+                    };
+
+                    var unPinButton = new Button
+                    {
+                        Text = Loc.GetString("interaction-panel-unpin"),
+                        MinWidth = 52,
+                        MinHeight = 32
+                    };
+
+                    button.OnButtonDown += args => OnInteractionPressed(interactionPrototype.ID);
+                    unPinButton.OnButtonDown += args => OnUnPinPressed(interactionPrototype);
+
+                    if (!string.IsNullOrEmpty(interactionPrototype.Icon))
+                    {
+                        var texturePath = new ResPath(interactionPrototype.Icon.StartsWith("/") ? interactionPrototype.Icon : $"/Textures/{interactionPrototype.Icon}");
+                        var textureResource = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(texturePath);
+
+                        var iconButton = new TextureButton
+                        {
+                            TextureNormal = textureResource.Texture,
+                            Margin = new Thickness(4),
+                            Scale = new Vector2(1f, 1f)
+                        };
+
+                        buttonContainer.AddChild(iconButton);
+                    }
+
+                    buttonContainer.AddChild(button);
+                    buttonContainer.AddChild(unPinButton);
+                    _favoriteButtons.Add(buttonContainer);
+                    FavouritesContainer.AddChild(buttonContainer);
+                }
+            }
+
             UpdateButtonsVisibility();
         }
 
@@ -512,6 +625,7 @@ namespace Content.Client.Interaction.Panel.Ui
             var searchText = SearchBar.Text.ToLower();
 
             SpecialContainer.RemoveAllChildren();
+            FavouritesContainer.RemoveAllChildren();
             HarmlessContainer.RemoveAllChildren();
             OutspokenContainer.RemoveAllChildren();
 
@@ -527,14 +641,7 @@ namespace Content.Client.Interaction.Panel.Ui
                     var prototype = _prototypeManager.Index<InteractionPrototype>(button.Name);
                     if (prototype == null) continue;
 
-                    if (prototype.ERP)
-                    {
-                        OutspokenContainer.AddChild(buttonContainer);
-                    }
-                    else
-                    {
-                        HarmlessContainer.AddChild(buttonContainer);
-                    }
+                    (prototype.ERP ? OutspokenContainer : HarmlessContainer).AddChild(buttonContainer);
                 }
             }
 
@@ -550,12 +657,26 @@ namespace Content.Client.Interaction.Panel.Ui
                     SpecialContainer.AddChild(buttonContainer);
                 }
             }
+
+            foreach (var buttonContainer in _favoriteButtons)
+            {
+                var button = buttonContainer.Children.OfType<Button>().FirstOrDefault();
+                if (button == null || string.IsNullOrEmpty(button.Name)) continue;
+
+                bool isVisible = string.IsNullOrEmpty(searchText) || button.Text?.ToLower().Contains(searchText) == true;
+
+                if (isVisible)
+                {
+                    FavouritesContainer.AddChild(buttonContainer);
+                }
+            }
         }
 
         private EntityUid? FindTarget(EntityUid user)
         {
             if (!_entManager.TryGetComponent<TransformComponent>(user, out var sourceTransform)) return null;
 
+            var playerManager = IoCManager.Resolve<IPlayerManager>();
             var sourceWorldPosition = _transform.GetWorldPosition(user);
             var nearbyEntities = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(sourceTransform.Coordinates, 2f);
 
@@ -596,7 +717,11 @@ namespace Content.Client.Interaction.Panel.Ui
                 }
             }
 
-            return target.Entity == default ? null : target.Entity;
+            var sessionForHumanoid = playerManager.Sessions.FirstOrDefault(session => session.AttachedEntity == target.Entity);
+            if (target.Entity == default || sessionForHumanoid == null)
+                return null;
+
+            return target.Entity;
         }
         #endregion
 

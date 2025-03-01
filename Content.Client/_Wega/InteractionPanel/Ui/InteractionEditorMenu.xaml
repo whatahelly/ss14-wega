@@ -8,10 +8,11 @@
     SetSize="540 560">
 
     <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="4">
-        <Label StyleClasses="LabelBig" Text="{Loc 'interaction-label-big-settings-name'}" MinWidth="120"/>
+        <Label StyleClasses="LabelBig" Text="{Loc 'interaction-editor-label-big-settings-name'}" MinWidth="120"/>
         <BoxContainer Name="EditorContainer" Orientation="Vertical" Margin="2"/>
         <BoxContainer Orientation="Horizontal" Margin="4">
             <Button Name="EditButton" Text="{Loc 'interaction-button-edit-name'}" Disabled="False"/>
+            <Button Name="DeleteButton" Text="{Loc 'interaction-button-delete-name'}"/>
         </BoxContainer>
     </BoxContainer>
 
