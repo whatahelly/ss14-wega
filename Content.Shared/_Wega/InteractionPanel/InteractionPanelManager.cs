@@ -77,9 +77,9 @@ public sealed class InteractionPanelManager : IPostInjectInit
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(prototype.ID))
+                if (string.IsNullOrWhiteSpace(prototype.ID) || string.IsNullOrWhiteSpace(prototype.Name))
                 {
-                    _sawmill.Warning($"Prototype ID is null or whitespace. Skipping prototype: {prototype.Name}");
+                    _sawmill.Warning($"Prototype ID or Name is null or whitespace. Skipping prototype");
                     continue;
                 }
                 if (!IsValidId(prototype.ID))
@@ -90,6 +90,11 @@ public sealed class InteractionPanelManager : IPostInjectInit
                 if (!idSet.Add(prototype.ID))
                 {
                     _sawmill.Warning($"Duplicate prototype ID found: '{prototype.ID}'. Skipping prototype: {prototype.Name}");
+                    continue;
+                }
+                if (!prototype.UserMessages.Any())
+                {
+                    _sawmill.Warning($"No messages found: '{prototype.ID}'. Skipping prototype: {prototype.Name}");
                     continue;
                 }
 

@@ -4,8 +4,8 @@
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     x:Class="Content.Client.Interaction.Panel.Ui.InteractionPanelMenu"
     Title="{Loc 'interaction-ui-default-title'}"
-    MinSize="512 512"
-    SetSize="512 512">
+    MinSize="512 540"
+    SetSize="512 540">
 
     <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="4">
         <!-- Верхний блок информации -->
@@ -19,8 +19,9 @@
 
         <!-- Специальный блок -->
         <BoxContainer HorizontalExpand="True">
-            <Button Name="ImportButton" MinWidth="320" Text="{Loc 'interaction-panel-import-button'}"/>
+            <Button Name="ImportButton" MinWidth="220" Text="{Loc 'interaction-panel-import-button'}"/>
             <Control HorizontalExpand="True" />
+            <Button Name="ClearButton" Text="{Loc 'interaction-panel-clear-button'}"/>
             <Button Name="ConstructorButton" Text="{Loc 'interaction-panel-constructor-button'}"/>
         </BoxContainer>
 

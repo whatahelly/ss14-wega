@@ -81,6 +81,7 @@ namespace Content.Client.Interaction.Panel.Ui
             AddButton.OnPressed += OnAddButtonPressed;
         }
 
+        #region Initializing UI
         private void InitializedItems()
         {
             SexButton.AddItem(Loc.GetString("interaction-constructor-none"), (int)Sex.None);
@@ -197,7 +198,9 @@ namespace Content.Client.Interaction.Panel.Ui
 
             PreviewContainer.AddChild(button);
         }
+        #endregion
 
+        #region Event handlers
         private void OnIdLineChanged(LineEdit.LineEditEventArgs args)
         {
             if (string.IsNullOrWhiteSpace(args.Text))
@@ -211,7 +214,7 @@ namespace Content.Client.Interaction.Panel.Ui
                 IdLine.ModulateSelfOverride = null;
             }
 
-            UpdateAddButtonState();
+            UpdateButtonState();
         }
 
         private void OnNameLineChanged(LineEdit.LineEditEventArgs args)
@@ -227,7 +230,7 @@ namespace Content.Client.Interaction.Panel.Ui
                 NameLine.ModulateSelfOverride = null;
             }
 
-            UpdateAddButtonState();
+            UpdateButtonState();
         }
 
         private void OnMessageLineChanged(LineEdit.LineEditEventArgs args)
@@ -243,7 +246,7 @@ namespace Content.Client.Interaction.Panel.Ui
                 MessageLine.ModulateSelfOverride = null;
             }
 
-            UpdateAddButtonState();
+            UpdateButtonState();
         }
 
         private void OnPathCheckboxToggled(BaseButton.ButtonEventArgs args)
@@ -262,12 +265,14 @@ namespace Content.Client.Interaction.Panel.Ui
             }
         }
 
-        private void UpdateAddButtonState()
+        private void UpdateButtonState()
         {
             ExportButton.Disabled = _errorLevel != ErrorLevel.None;
             AddButton.Disabled = _errorLevel != ErrorLevel.None;
         }
+        #endregion
 
+        #region Button processing
         private async void OnExportButtonPressed(BaseButton.ButtonEventArgs args)
         {
             if (_errorLevel != ErrorLevel.None || _exporting)
@@ -275,42 +280,17 @@ namespace Content.Client.Interaction.Panel.Ui
 
             _exporting = true;
 
-            var id = IdLine.Text;
-            if (!IsValidId(id))
+            var interactionPrototype = PrepareInteractionPrototype();
+            if (interactionPrototype == null)
             {
                 var session = _playerManager.LocalSession;
                 if (session?.AttachedEntity.HasValue == true)
                 {
                     _popup.PopupCursor(Loc.GetString("interaction-constructor-invalid-id"), session.AttachedEntity.Value);
-                    _exporting = false;
                 }
+                _exporting = false;
                 return;
             }
-            var name = NameLine.Text;
-            var message = MessageLine.Text;
-            var spritePath = SpriteLine.Text;
-            if (string.IsNullOrWhiteSpace(spritePath))
-            {
-                spritePath = "/Textures/_Wega/Interface/InteractionPanel/heart.png";
-            }
-            var erp = ErpCheckbox.Pressed;
-
-            var sexId = GetSelectedId(SexButton) ?? 0;
-            var speciesId = GetSelectedId(SpeciesButton) ?? 0;
-            var targetSexId = GetSelectedId(TargetSexButton) ?? 0;
-            var targetSpeciesId = GetSelectedId(TargetSpeciesButton) ?? 0;
-            var blackListSpeciesId = GetSelectedId(BlackListButton) ?? 0;
-            var soundCollectionId = GetSelectedId(CollectionButton) ?? 0;
-
-            var sex = GetSexString(sexId);
-            var species = GetSpeciesString(speciesId);
-            var targetSex = GetSexString(targetSexId);
-            var targetSpecies = GetSpeciesString(targetSpeciesId);
-            var blackListSpecies = GetSpeciesString(blackListSpeciesId);
-
-            var soundPerceived = SoundCheckbox.Pressed;
-            var soundCollection = GetCollectionString(soundCollectionId);
-            var soundPath = PathLine.Text;
 
             var file = await _dialogManager.SaveFile(new FileDialogFilters(new FileDialogFilters.Group("yml")));
             if (file == null)
@@ -321,34 +301,6 @@ namespace Content.Client.Interaction.Panel.Ui
 
             try
             {
-                var interactionPrototype = new InteractionPrototype
-                {
-                    ID = id,
-                    Name = name,
-                    UserMessages = new List<string> { message },
-                    Icon = spritePath,
-                    ERP = erp,
-                    AllowedGenders = new List<string> { sex },
-                    AllowedSpecies = new List<string> { species },
-                    NearestAllowedGenders = new List<string> { targetSex },
-                    NearestAllowedSpecies = new List<string> { targetSpecies },
-                    BlackListSpecies = null,
-                    SoundPerceivedByOthers = soundPerceived,
-                    InteractSound = null
-                };
-                if (BlackCheckbox.Pressed)
-                {
-                    interactionPrototype.BlackListSpecies = new List<string> { blackListSpecies };
-                }
-                if (PathCheckbox.Pressed && !string.IsNullOrWhiteSpace(PathLine.Text))
-                {
-                    interactionPrototype.InteractSound = new SoundPathSpecifier(soundPath);
-                }
-                else if (CollectionCheckbox.Pressed)
-                {
-                    interactionPrototype.InteractSound = new SoundCollectionSpecifier(soundCollection);
-                }
-
                 var dataNode = _sharedInteraction.ToDataNode(interactionPrototype);
                 await using var writer = new StreamWriter(file.Value.fileStream);
                 dataNode.Write(writer);
@@ -368,39 +320,28 @@ namespace Content.Client.Interaction.Panel.Ui
             if (_errorLevel != ErrorLevel.None)
                 return;
 
-            var id = IdLine.Text;
-            if (!IsValidId(id))
+            var interactionPrototype = PrepareInteractionPrototype();
+            if (interactionPrototype == null)
             {
                 var session = _playerManager.LocalSession;
                 if (session?.AttachedEntity.HasValue == true)
                     _popup.PopupCursor(Loc.GetString("interaction-constructor-invalid-id"), session.AttachedEntity.Value);
                 return;
             }
+
+            _interactionPanelController.AddConstructor(interactionPrototype);
+        }
+
+        private InteractionPrototype? PrepareInteractionPrototype()
+        {
+            var id = IdLine.Text;
+            if (!IsValidId(id)) return null;
+
             var name = NameLine.Text;
             var message = MessageLine.Text;
-            var spritePath = SpriteLine.Text;
-            if (string.IsNullOrWhiteSpace(spritePath))
-            {
-                spritePath = "/Textures/_Wega/Interface/InteractionPanel/heart.png";
-            }
-            var erp = ErpCheckbox.Pressed;
-
-            var sexId = GetSelectedId(SexButton) ?? 0;
-            var speciesId = GetSelectedId(SpeciesButton) ?? 0;
-            var targetSexId = GetSelectedId(TargetSexButton) ?? 0;
-            var targetSpeciesId = GetSelectedId(TargetSpeciesButton) ?? 0;
-            var blackListSpeciesId = GetSelectedId(BlackListButton) ?? 0;
-            var soundCollectionId = GetSelectedId(CollectionButton) ?? 0;
-
-            var sex = GetSexString(sexId);
-            var species = GetSpeciesString(speciesId);
-            var targetSex = GetSexString(targetSexId);
-            var targetSpecies = GetSpeciesString(targetSpeciesId);
-            var blackListSpecies = GetSpeciesString(blackListSpeciesId);
-
-            var soundPerceived = SoundCheckbox.Pressed;
-            var soundCollection = GetCollectionString(soundCollectionId);
-            var soundPath = PathLine.Text;
+            var spritePath = string.IsNullOrWhiteSpace(SpriteLine.Text)
+                ? "/Textures/_Wega/Interface/InteractionPanel/heart.png"
+                : SpriteLine.Text;
 
             var interactionPrototype = new InteractionPrototype
             {
@@ -408,29 +349,34 @@ namespace Content.Client.Interaction.Panel.Ui
                 Name = name,
                 UserMessages = new List<string> { message },
                 Icon = spritePath,
-                ERP = erp,
-                AllowedGenders = new List<string> { sex },
-                AllowedSpecies = new List<string> { species },
-                NearestAllowedGenders = new List<string> { targetSex },
-                NearestAllowedSpecies = new List<string> { targetSpecies },
-                BlackListSpecies = null,
-                SoundPerceivedByOthers = soundPerceived,
-                InteractSound = null
+                ERP = ErpCheckbox.Pressed,
+                AllowedGenders = new List<string> { GetSexString(GetSelectedId(SexButton) ?? 0) },
+                AllowedSpecies = new List<string> { GetSpeciesString(GetSelectedId(SpeciesButton) ?? 0) },
+                NearestAllowedGenders = new List<string> { GetSexString(GetSelectedId(TargetSexButton) ?? 0) },
+                NearestAllowedSpecies = new List<string> { GetSpeciesString(GetSelectedId(TargetSpeciesButton) ?? 0) },
+                BlackListSpecies = BlackCheckbox.Pressed
+                    ? new List<string> { GetSpeciesString(GetSelectedId(BlackListButton) ?? 0) }
+                    : null,
+                SoundPerceivedByOthers = SoundCheckbox.Pressed,
+                InteractSound = GetInteractSound()
             };
-            if (BlackCheckbox.Pressed)
-            {
-                interactionPrototype.BlackListSpecies = new List<string> { blackListSpecies };
-            }
+
+            return interactionPrototype;
+        }
+
+        private SoundSpecifier? GetInteractSound()
+        {
             if (PathCheckbox.Pressed && !string.IsNullOrWhiteSpace(PathLine.Text))
             {
-                interactionPrototype.InteractSound = new SoundPathSpecifier(soundPath);
-            }
-            else if (CollectionCheckbox.Pressed)
-            {
-                interactionPrototype.InteractSound = new SoundCollectionSpecifier(soundCollection);
+                return new SoundPathSpecifier(PathLine.Text);
             }
 
-            _interactionPanelController.AddConstructor(interactionPrototype);
+            if (CollectionCheckbox.Pressed)
+            {
+                return new SoundCollectionSpecifier(GetCollectionString(GetSelectedId(CollectionButton) ?? 0));
+            }
+
+            return null;
         }
 
         public bool IsValidId(string id)
@@ -485,7 +431,9 @@ namespace Content.Client.Interaction.Panel.Ui
                 _ => throw new ArgumentOutOfRangeException(nameof(collectionId), collectionId, "Unknown collection ID")
             };
         }
+        #endregion
 
+        #region Enums
         [Flags]
         private enum ErrorLevel : byte
         {
@@ -521,5 +469,6 @@ namespace Content.Client.Interaction.Panel.Ui
         {
             Kisses,
         }
+        #endregion
     }
 }

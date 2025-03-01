@@ -34,6 +34,7 @@ namespace Content.Client.Interaction.Panel.Ui
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly InteractionPanelManager _sharedInteraction = default!;
         private readonly InteractionConstructorUIController _interactionConstructorController;
+        private readonly InteractionEditorUIController _interactionEditorController;
         private static List<InteractionPrototype> _importedPrototypes = new(); // Memory
         private static List<BoxContainer> _importedButtons = new(); // Memory
         private List<BoxContainer> _allButtons = new();
@@ -59,6 +60,7 @@ namespace Content.Client.Interaction.Panel.Ui
             IoCManager.InjectDependencies(this);
 
             _interactionConstructorController = UserInterfaceManager.GetUIController<InteractionConstructorUIController>();
+            _interactionEditorController = UserInterfaceManager.GetUIController<InteractionEditorUIController>();
 
             _transform = _entManager.System<TransformSystem>();
             _lookup = _entManager.System<EntityLookupSystem>();
@@ -74,9 +76,11 @@ namespace Content.Client.Interaction.Panel.Ui
             TargetModel.AddChild(_targetSpriteView);
 
             var importButton = FindControl<Button>("ImportButton");
+            var clearButton = FindControl<Button>("ClearButton");
             var constructorButton = FindControl<Button>("ConstructorButton");
 
             importButton.OnButtonUp += _ => HandleImport();
+            clearButton.OnButtonUp += _ => HandleClear();
             constructorButton.OnButtonUp += _ => HandleConstructor();
 
             SearchBar.OnTextChanged += OnSearchTextChanged;
@@ -97,10 +101,10 @@ namespace Content.Client.Interaction.Panel.Ui
             base.FrameUpdate(args);
 
             _updateDif += args.DeltaSeconds;
-            if (_updateDif < 10.0f)
+            if (_updateDif < 3.0f)
                 return;
 
-            _updateDif -= 10.0f;
+            _updateDif -= 3.0f;
 
             // Update panel
             InitializeNamesContainer();
@@ -233,6 +237,14 @@ namespace Content.Client.Interaction.Panel.Ui
             }
         }
 
+        private void HandleClear()
+        {
+            _importedButtons.Clear();
+            _importedPrototypes.Clear();
+            SpecialContainer.RemoveAllChildren();
+            PopulateInteractions();
+        }
+
         private void HandleConstructor()
         {
             _interactionConstructorController.ToggleWindow();
@@ -240,6 +252,18 @@ namespace Content.Client.Interaction.Panel.Ui
 
         public void HandleAddConstructor(InteractionPrototype prototype)
         {
+            _importedPrototypes.Add(prototype);
+            PopulateInteractions();
+        }
+
+        public void HandleAddEdit(InteractionPrototype prototype)
+        {
+            var existingPrototype = _importedPrototypes.FirstOrDefault(p => p.ID == prototype.ID);
+            if (existingPrototype != null)
+            {
+                _importedPrototypes.Remove(existingPrototype);
+            }
+
             _importedPrototypes.Add(prototype);
             PopulateInteractions();
         }
@@ -439,11 +463,19 @@ namespace Content.Client.Interaction.Panel.Ui
                     {
                         Text = Loc.GetString(interactionPrototype.Name),
                         Name = interactionPrototype.ID,
-                        MinWidth = 420,
+                        MinWidth = 380,
+                        MinHeight = 32
+                    };
+
+                    var editorButton = new Button
+                    {
+                        Text = Loc.GetString("interaction-panel-editor"),
+                        MinWidth = 32,
                         MinHeight = 32
                     };
 
                     button.OnButtonDown += args => OnInteractionPressed(interactionPrototype.ID, interactionPrototype);
+                    editorButton.OnButtonDown += args => OnEditorPressed(interactionPrototype);
 
                     if (!string.IsNullOrEmpty(interactionPrototype.Icon))
                     {
@@ -461,6 +493,7 @@ namespace Content.Client.Interaction.Panel.Ui
                     }
 
                     buttonContainer.AddChild(button);
+                    buttonContainer.AddChild(editorButton);
                     _importedButtons.Add(buttonContainer);
                     SpecialContainer.AddChild(buttonContainer);
                 }
@@ -610,6 +643,11 @@ namespace Content.Client.Interaction.Panel.Ui
             if (target == null) return;
 
             _entityNetworkManager.SendSystemNetworkMessage(new InteractionPressedEvent(userEntity.Value, interactionId, _entManager.GetNetEntity(target), prototype));
+        }
+
+        private void OnEditorPressed(InteractionPrototype prototype)
+        {
+            _interactionEditorController.ToggleWindow(prototype);
         }
         #endregion
     }
