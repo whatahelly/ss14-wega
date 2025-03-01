@@ -21,6 +21,9 @@
 
 - type: Tag
   id: CartridgePistolFoam
-  
+
 - type: Tag
   id: Scalpel
+
+- type: Tag
+  id: Jetpack

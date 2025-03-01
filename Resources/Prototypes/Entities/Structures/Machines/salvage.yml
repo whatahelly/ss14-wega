@@ -39,6 +39,7 @@
     channels:
     - Supply
   - type: SalvageMagnet
+  - type: SalvageMagnetData # Corvax-Wega-Salvage
   - type: ApcPowerReceiver
     powerLoad: 2500 # TODO change this to a HV power draw that really hits the grid hard WHEN active
   - type: Machine
