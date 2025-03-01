@@ -74,7 +74,7 @@
         </BoxContainer>
         <BoxContainer Orientation="Horizontal" Margin="0 5">
             <CheckBox Name="CollectionCheckbox" Text="{Loc 'interaction-checkbox-collection-name'}" MinWidth="100" Pressed="False"/>
-            <Control MinWidth="20" />
+            <Control HorizontalExpand="True" />
             <OptionButton Name="CollectionButton" HorizontalAlignment="Right"/>
         </BoxContainer>
 
