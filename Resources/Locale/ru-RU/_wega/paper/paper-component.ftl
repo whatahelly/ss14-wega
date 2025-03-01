@@ -1,7 +1,7 @@
 paper-component-verb-sign-signature = Подписать
 paper-component-verb-sign-write = Писать
-paper-component-change-mode-to-write = Вы собираетесь писать
-paper-component-change-mode-to-signature = Вы собираетесь подписывать 
+paper-component-change-mode-to-write = Вы перешли в режим письма
+paper-component-change-mode-to-signature = Вы перешли в режим подписи 
 paper-component-action-signed-self = Вы подписываете { $target }.
 paper-component-action-signed-other = { CAPITALIZE(THE($user)) } подписывает { $target }.
 paper-component-ticket =
