@@ -8,6 +8,14 @@
   - underwearbottom
 
 - type: interaction
+  id: BaseOneCheckClothing
+  abstract: true
+  oneRequiredClothingSlots:
+  - jumpsuit
+  - outerClothing
+  - underwearbottom
+
+- type: interaction
   id: BaseCheckClothingAnal
   abstract: true
   requiredClothingSlots:
@@ -38,6 +46,10 @@
   nearestAllowedGenders:
   - Male
   - Female
+  # NonSex
+  blackListSpecies:
+  - Skeleton
+  - Gingerbread
 
 - type: interaction
   id: BaseUserHasTail
@@ -68,23 +80,11 @@
   - Resomi
 
 - type: interaction
+  parent: BaseHumanoid
   id: BaseMaleOnly
   abstract: true
-  allowedSpecies:
-  - Human
-  - Dwarf
-  - Felinid
-  - Moth
-  - Reptilian
-  - SlimePerson
-  - Vulpkanin
-  - Skrell
-  - Resomi
   allowedGenders:
   - Male
-  nearestAllowedGenders:
-  - Male
-  - Female
   nearestAllowedSpecies:
   - Human
   - Dwarf
@@ -97,22 +97,10 @@
   - Resomi
 
 - type: interaction
+  parent: BaseHumanoid
   id: BaseFemaleOnly
   abstract: true
-  allowedSpecies:
-  - Human
-  - Dwarf
-  - Felinid
-  - Moth
-  - Reptilian
-  - SlimePerson
-  - Vulpkanin
-  - Skrell
-  - Resomi
   allowedGenders:
-  - Female
-  nearestAllowedGenders:
-  - Male
   - Female
   nearestAllowedSpecies:
   - Human

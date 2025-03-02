@@ -30,7 +30,6 @@ namespace Content.Server.SexToy.System
                 return;
 
             var user = args.User;
-
             if (!args.CanReach || args.Target is not { Valid: true } target)
                 return;
 
@@ -46,7 +45,7 @@ namespace Content.Server.SexToy.System
             {
                 foreach (var slot in requiredClothingSlots)
                 {
-                    if (_inventorySystem.TryGetSlotEntity(target, slot, out var slotEntity, inventory))
+                    if (_inventorySystem.TryGetSlotEntity(target, slot, out _, inventory))
                     {
                         var message = Loc.GetString("interaction-slot-occupied-message");
                         if (_entManager.TryGetComponent<ActorComponent>(user, out var actor))
@@ -78,7 +77,7 @@ namespace Content.Server.SexToy.System
 
         private void UseSexToy(EntityUid toyEntity, EntityUid user, EntityUid? target)
         {
-            if (!_entManager.TryGetComponent<SexToyComponent>(toyEntity, out var sexToyComponent))
+            if (!TryComp<SexToyComponent>(toyEntity, out var sexToyComponent))
                 return;
 
             var noHumanoidMessage = Loc.GetString("interaction-impossible");
@@ -89,7 +88,7 @@ namespace Content.Server.SexToy.System
             if (_entManager.TryGetComponent<MetaDataComponent>(user, out var metaDataComponent))
                 userName = metaDataComponent.EntityName;
 
-            if (target != null && _entManager.TryGetComponent<HumanoidAppearanceComponent>((EntityUid)target, out var targetAppearance))
+            if (target != null && TryComp<HumanoidAppearanceComponent>(target, out var targetAppearance))
             {
                 var isValid = true;
                 string messageUser = "";
@@ -188,7 +187,6 @@ namespace Content.Server.SexToy.System
                 if (isValid)
                 {
                     var species = targetAppearance.Species;
-
                     if (species == "Diona" || species == "Arachnid")
                     {
                         if (_entManager.TryGetComponent<ActorComponent>(user, out var actor))

@@ -30,7 +30,6 @@ namespace Content.Server.Vibrator.System
                 return;
 
             var user = args.User;
-
             if (!args.CanReach || args.Target is not { Valid: true } target)
                 return;
 
@@ -54,12 +53,11 @@ namespace Content.Server.Vibrator.System
         private void StartDoAfter(EntityUid vibratorEntity, EntityUid user, EntityUid target)
         {
             var requiredClothingSlots = new[] { "jumpsuit", "outerClothing", "underwearbottom" };
-
             if (TryComp<InventoryComponent>(target, out var inventory))
             {
                 foreach (var slot in requiredClothingSlots)
                 {
-                    if (_inventorySystem.TryGetSlotEntity(target, slot, out var slotEntity, inventory))
+                    if (_inventorySystem.TryGetSlotEntity(target, slot, out _, inventory))
                     {
                         var message = Loc.GetString("interaction-slot-occupied-message");
                         if (_entManager.TryGetComponent<ActorComponent>(user, out var actor))
@@ -85,7 +83,6 @@ namespace Content.Server.Vibrator.System
                 return;
 
             args.Handled = true;
-
             if (args.Args.Target is { Valid: true } target)
             {
                 UseVibrator(entity.Owner, args.Args.User, target);
@@ -94,7 +91,7 @@ namespace Content.Server.Vibrator.System
 
         private void UseVibrator(EntityUid vibratorEntity, EntityUid user, EntityUid target)
         {
-            if (!_entManager.TryGetComponent<VibratorComponent>(vibratorEntity, out var vibratorComponent))
+            if (!TryComp<VibratorComponent>(vibratorEntity, out _))
                 return;
 
             string userName = "";
