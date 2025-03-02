@@ -481,7 +481,7 @@ namespace Content.Client.Interaction.Panel.Ui
 
         private SoundSpecifier? GetInteractSound()
         {
-            var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/).+\.ogg$", RegexOptions.Compiled);
+            var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/|/Audio/_Wega/Interacrtions/).+\.ogg$", RegexOptions.Compiled);
             if (_pathCheckbox == null || _pathLine == null || _collectionCheckbox == null || _collectionButton == null)
                 return null;
 

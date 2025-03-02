@@ -74,7 +74,7 @@ public sealed class InteractionPanelManager : IPostInjectInit
         var validPrototypes = new List<InteractionPrototype>();
         var idSet = new HashSet<string>();
 
-        var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/).+\.ogg$", RegexOptions.Compiled);
+        var pathRegex = new Regex(@"^(/Audio/Voice/|/Audio/Effects/|/Audio/_Wega/Voice/|/Audio/_Wega/Interacrtions/).+\.ogg$", RegexOptions.Compiled);
         foreach (var prototype in prototypes)
         {
             try
