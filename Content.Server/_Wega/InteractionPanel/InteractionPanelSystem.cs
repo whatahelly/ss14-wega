@@ -42,11 +42,19 @@ namespace Content.Server.Interaction.Panel
 
         private void OnInteractionPressed(InteractionPressedEvent ev)
         {
-            HandleInteraction(ev.User, ev.Target, ev.InteractionId);
-            HandlePoints(ev.User, ev.Target, ev.InteractionId);
+            if (ev.Prototype != null)
+            {
+                HandleInteraction(ev.User, ev.Target, ev.InteractionId, ev.Prototype);
+                // HandlePoints it should not be here, in order to avoid accidents
+            }
+            else
+            {
+                HandleInteraction(ev.User, ev.Target, ev.InteractionId, null);
+                HandlePoints(ev.User, ev.Target, ev.InteractionId);
+            }
         }
 
-        public void HandleInteraction(NetEntity user, NetEntity? target, string interactionId)
+        public void HandleInteraction(NetEntity user, NetEntity? target, string interactionId, InteractionPrototype? prototype)
         {
             if (target == null) return;
 
@@ -55,14 +63,14 @@ namespace Content.Server.Interaction.Panel
                 return;
 
             if (_entManager.TryGetComponent<MobThresholdsComponent>(userEntity, out var userThresholds) &&
-                (userThresholds.CurrentThresholdState != MobState.Alive &&
-                userThresholds.CurrentThresholdState != MobState.Invalid))
+                userThresholds.CurrentThresholdState != MobState.Alive &&
+                userThresholds.CurrentThresholdState != MobState.Invalid)
                 return;
 
             var targetEntity = _entManager.GetEntity(target.Value);
             if (_entManager.TryGetComponent<MobThresholdsComponent>(targetEntity, out var targetThresholds) &&
-                (targetThresholds.CurrentThresholdState != MobState.Alive &&
-                targetThresholds.CurrentThresholdState != MobState.Invalid))
+                targetThresholds.CurrentThresholdState != MobState.Alive &&
+                targetThresholds.CurrentThresholdState != MobState.Invalid)
             {
                 if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
                 {
@@ -87,10 +95,27 @@ namespace Content.Server.Interaction.Panel
                 }
             }
 
-            var interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);
+            InteractionPrototype interactionPrototype;
+            if (prototype != null)
+            {
+                interactionPrototype = prototype;
+            }
+            else
+            {
+                interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);
+            }
+
             if (_lastInteractionTimes.TryGetValue(target.Value, out var lastInteractionTime))
             {
-                if (DateTime.UtcNow - lastInteractionTime < interactionPrototype.UseDelay)
+                if (DateTime.UtcNow - lastInteractionTime < interactionPrototype.UseDelay && prototype == null)
+                {
+                    var message = Loc.GetString("interaction-delay-message");
+
+                    if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
+                        _popupSystem.PopupEntity(message, userEntity, actor.PlayerSession, PopupType.Small);
+                    return;
+                }
+                else if (DateTime.UtcNow - lastInteractionTime < TimeSpan.FromSeconds(2) && prototype != null)
                 {
                     var message = Loc.GetString("interaction-delay-message");
 
@@ -107,7 +132,7 @@ namespace Content.Server.Interaction.Panel
                 {
                     foreach (var slot in interactionPrototype.RequiredClothingSlots)
                     {
-                        if (_inventorySystem.TryGetSlotEntity(userEntity, slot, out var slotEntity, inventory))
+                        if (_inventorySystem.TryGetSlotEntity(userEntity, slot, out _, inventory))
                         {
                             var message = Loc.GetString("interaction-hasclothing-message");
                             if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
@@ -126,7 +151,7 @@ namespace Content.Server.Interaction.Panel
 
                     foreach (var slot in allSlots)
                     {
-                        if (_inventorySystem.TryGetSlotEntity(targetEntity, slot, out var slotEntity, targetInventory))
+                        if (_inventorySystem.TryGetSlotEntity(targetEntity, slot, out _, targetInventory))
                         {
                             var targetEntityValue = _entManager.GetEntity(target.Value);
                             var messageForUser = Loc.GetString("interaction-target-hasclothing-message", ("target", Identity.Entity(targetEntityValue, _entManager)));
@@ -173,61 +198,75 @@ namespace Content.Server.Interaction.Panel
 
             if (interactionPrototype.DoAfterDelay > 0f)
             {
-                TriggerDoAfter(user, target.Value, interactionId, interactionPrototype.DoAfterDelay);
+                TriggerDoAfter(userEntity, targetEntity, interactionId, interactionPrototype.DoAfterDelay);
             }
             else
             {
-                ExecuteInteraction(user, target.Value, interactionPrototype);
+                if (prototype != null)
+                {
+                    ExecuteInteraction(userEntity, targetEntity, interactionPrototype, true);
+                }
+                else
+                {
+                    ExecuteInteraction(userEntity, targetEntity, interactionPrototype, false);
+                }
             }
         }
 
-        private void TriggerDoAfter(NetEntity user, NetEntity target, string interactionId, float delay)
+        private void TriggerDoAfter(EntityUid user, EntityUid target, string interactionId, float delay)
         {
             // TODO Доделать делей
         }
 
-        private void ExecuteInteraction(NetEntity user, NetEntity target, InteractionPrototype interactionPrototype)
+        private void ExecuteInteraction(EntityUid user, EntityUid target, InteractionPrototype interactionPrototype, bool prototype)
         {
             int preferredIndex = GetRandomMessageIndex(interactionPrototype);
 
-            var userEntity = _entManager.GetEntity(user);
-            var targetEntityValue = _entManager.GetEntity(target);
-
-            if (interactionPrototype.TargetMessages.Count > 0)
+            if (interactionPrototype.TargetMessages.Count > 0 && !prototype)
             {
                 if (preferredIndex < 0 || preferredIndex >= interactionPrototype.TargetMessages.Count)
                     preferredIndex = 0;
 
-                var targetMessage = Loc.GetString(interactionPrototype.TargetMessages[preferredIndex], ("user", Identity.Entity(userEntity, _entManager)));
+                var targetMessage = Loc.GetString(interactionPrototype.TargetMessages[preferredIndex], ("user", Identity.Entity(user, _entManager)));
                 var otherMessage = Loc.GetString(interactionPrototype.OtherMessages.Count > 0 ? interactionPrototype.OtherMessages[preferredIndex] : "",
-                    ("user", Identity.Entity(userEntity, _entManager)), ("target", Identity.Entity(targetEntityValue, _entManager)));
+                    ("user", Identity.Entity(user, _entManager)), ("target", Identity.Entity(target, _entManager)));
 
-                if (_entManager.TryGetComponent<ActorComponent>(targetEntityValue, out var actor))
-                    _popupSystem.PopupEntity(targetMessage, targetEntityValue, actor.PlayerSession, PopupType.Small);
+                if (_entManager.TryGetComponent<ActorComponent>(target, out var actor))
+                    _popupSystem.PopupEntity(targetMessage, target, actor.PlayerSession, PopupType.Small);
 
                 var filter = Filter.Local()
                     .AddAllPlayers()
-                    .RemoveWhereAttachedEntity(uid => uid == userEntity)
-                    .RemoveWhereAttachedEntity(uid => uid == targetEntityValue);
+                    .RemoveWhereAttachedEntity(uid => uid == user)
+                    .RemoveWhereAttachedEntity(uid => uid == target);
 
-                _popupSystem.PopupEntity(otherMessage, userEntity, filter, false, PopupType.Small);
-
-                PlayInteractionSound(interactionPrototype.InteractSound, targetEntityValue, interactionPrototype.SoundPerceivedByOthers);
+                _popupSystem.PopupEntity(otherMessage, user, filter, false, PopupType.Small);
             }
 
             if (interactionPrototype.UserMessages.Count > 0)
             {
-                if (preferredIndex < 0 || preferredIndex >= interactionPrototype.UserMessages.Count)
-                    preferredIndex = 0;
+                string emoteCommand;
+                if (!prototype)
+                {
+                    if (preferredIndex < 0 || preferredIndex >= interactionPrototype.UserMessages.Count)
+                        preferredIndex = 0;
 
-                var emoteCommand = Loc.GetString(interactionPrototype.UserMessages[preferredIndex], ("target", Identity.Entity(targetEntityValue, _entManager)));
+                    emoteCommand = Loc.GetString(interactionPrototype.UserMessages[preferredIndex], ("target", Identity.Entity(target, _entManager)));
+                }
+                else
+                {
+                    emoteCommand = interactionPrototype.UserMessages[0];
+                    if (emoteCommand.Contains("$target"))
+                    {
+                        emoteCommand = emoteCommand.Replace("$target", Name(Identity.Entity(target, _entManager)));
+                    }
+                }
 
-                if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var userActor))
+                if (_entManager.TryGetComponent<ActorComponent>(user, out var userActor))
                 {
                     var playerSession = userActor.PlayerSession;
 
                     _chatSystem.TrySendInGameICMessage(
-                        source: userEntity,
+                        source: user,
                         message: emoteCommand,
                         desiredType: InGameICChatType.Emote,
                         range: ChatTransmitRange.Normal,
@@ -236,6 +275,8 @@ namespace Content.Server.Interaction.Panel
                     );
                 }
             }
+
+            PlayInteractionSound(interactionPrototype.InteractSound, user, target, interactionPrototype.SoundPerceivedByOthers);
         }
 
         private int GetRandomMessageIndex(InteractionPrototype interactionPrototype)
@@ -275,7 +316,6 @@ namespace Content.Server.Interaction.Panel
             if (target == null) return;
 
             var userEntity = _entManager.GetEntity(user);
-
             if (!_entManager.TryGetComponent<HumanoidAppearanceComponent>(userEntity, out var appearanceComponent))
                 return;
 
@@ -283,7 +323,6 @@ namespace Content.Server.Interaction.Panel
                 return;
 
             var interactionPrototype = _prototypeManager.Index<InteractionPrototype>(interactionId);
-
             if (_lastInteractionTimes.TryGetValue(user, out var lastInteractionTime) &&
                 DateTime.UtcNow - lastInteractionTime < interactionPrototype.UseDelay)
                 return;
@@ -312,7 +351,6 @@ namespace Content.Server.Interaction.Panel
             _audio.PlayPvs(sound, puddleEnt);
 
             var message = Loc.GetString("interaction-end-message");
-
             if (_entManager.TryGetComponent<ActorComponent>(userEntity, out var actor))
             {
                 var playerSession = actor.PlayerSession;
@@ -328,18 +366,17 @@ namespace Content.Server.Interaction.Panel
             }
         }
 
-        private void PlayInteractionSound(SoundSpecifier? sound, EntityUid target, bool perceivedByOthers)
+        private void PlayInteractionSound(SoundSpecifier? sound, EntityUid user, EntityUid target, bool perceivedByOthers)
         {
             if (sound == null) return;
 
-            /// Пока оставить так, на случай "Возможных" изменений в будущем
             if (perceivedByOthers)
             {
                 _audio.PlayPvs(sound, target);
             }
             else
             {
-                _audio.PlayEntity(sound, Filter.Entities(target), target, false);
+                _audio.PlayEntity(sound, Filter.Entities(user, target), target, false);
             }
         }
     }

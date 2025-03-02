@@ -54,7 +54,7 @@
   - type: Speech
     speechSounds: Bass
   - type: HumanoidAppearance
-    species: Human
+    species: Dwarf # Corvax-Wega-edit
     hideLayersOnEquip:
     - Hair
     - Snout
@@ -73,6 +73,8 @@
   components:
   - type: Sprite
     scale: 1, 0.8
+  - type: HumanoidAppearance # Corvax-Wega
+    species: Dwarf # Corvax-Wega
   - type: Inventory
     femaleDisplacements:
       jumpsuit:

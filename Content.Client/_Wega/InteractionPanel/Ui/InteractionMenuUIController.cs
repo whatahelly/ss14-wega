@@ -1,6 +1,7 @@
 using Content.Client.Gameplay;
 using Content.Client.Interaction.Panel.Ui;
 using Content.Client.UserInterface.Controls;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Input;
 using JetBrains.Annotations;
 using Robust.Client.Player;
@@ -47,6 +48,30 @@ public sealed class InteractionUIController : UIController, IOnStateChanged<Game
         InteractionButton.OnPressed -= InteractionButtonOnPressed;
     }
 
+    public void AddConstructor(InteractionPrototype prototype)
+    {
+        if (_interactionWindow == null)
+            return;
+
+        _interactionWindow.HandleAddConstructor(prototype);
+    }
+
+    public void AddEditor(InteractionPrototype prototype)
+    {
+        if (_interactionWindow == null)
+            return;
+
+        _interactionWindow.HandleAddEdit(prototype);
+    }
+
+    public void DeleteEditor(InteractionPrototype prototype)
+    {
+        if (_interactionWindow == null)
+            return;
+
+        _interactionWindow.HandleDeleteEdit(prototype);
+    }
+
     private void InteractionButtonOnPressed(ButtonEventArgs obj)
     {
         ToggleInteractionMenu();
@@ -67,7 +92,7 @@ public sealed class InteractionUIController : UIController, IOnStateChanged<Game
                 _interactionWindow.UpdateUser(user);
             }
 
-            _interactionWindow.OpenCentered();
+            _interactionWindow.OpenCenteredRight();
         }
         else
         {

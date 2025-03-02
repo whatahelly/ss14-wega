@@ -1,11 +1,21 @@
+# Ui
 interaction-ui-default-title = Взаимодействия
+interaction-panel-import-button = Импорт
+interaction-panel-editor = ⚙
+interaction-panel-pin = Закр.
+interaction-panel-unpin = Откр.
+interaction-panel-constructor-button = Конструктор
+interaction-panel-special-collapsible = Специальные
+interaction-panel-favourites-collapsible = Избранные
+interaction-panel-harmless-collapsible = Безобидные
+interaction-panel-outspoken-collapsible = Откровенные
 interact-player = Вы
 diona-leaves = ...имеет листья
 diona-branches = ...имеет ветки
 arachnid-nearestplayer = ...имеет что?
 vox-nearestplayer = ...имеет клоаку
 male-anal = ...имеет анал
-male-dick = ...имеет член 
+male-dick = ...имеет член
 female-anal = ...имеет анал
 female-vagine = ...имеет вагину
 female-breasts = ...имеет грудь
