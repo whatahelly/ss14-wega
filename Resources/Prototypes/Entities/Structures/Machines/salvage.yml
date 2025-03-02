@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: BaseMachinePowered # Corvax-Wega-Salvage-edit
   id: SalvageMagnet
   name: salvage magnet
   description: Pulls in salvage.
