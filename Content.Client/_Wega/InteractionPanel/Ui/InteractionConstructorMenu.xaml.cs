@@ -162,6 +162,7 @@ namespace Content.Client.Interaction.Panel.Ui
             };
 
             CollectionButton.AddItem(Loc.GetString("interaction-constructor-kisses"), (int)Collection.Kisses);
+            CollectionButton.AddItem(Loc.GetString("interaction-constructor-licks"), (int)Collection.Licks);
 
             CollectionButton.OnItemSelected += args =>
             {
@@ -448,6 +449,7 @@ namespace Content.Client.Interaction.Panel.Ui
             return collectionId switch
             {
                 0 => "Kisses", // You like kissing boys don't you
+                1 => "Licks",
                 _ => throw new ArgumentOutOfRangeException(nameof(collectionId), collectionId, "Unknown collection ID")
             };
         }
@@ -491,6 +493,7 @@ namespace Content.Client.Interaction.Panel.Ui
         private enum Collection : byte
         {
             Kisses,
+            Licks,
         }
         #endregion
     }

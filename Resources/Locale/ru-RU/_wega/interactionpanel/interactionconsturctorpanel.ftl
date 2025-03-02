@@ -48,3 +48,4 @@ interaction-constructor-arachnid = арахнид
 interaction-constructor-diona = диона
 
 interaction-constructor-kisses = поцелуи
+interaction-constructor-licks = лизание

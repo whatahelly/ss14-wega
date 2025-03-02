@@ -223,6 +223,7 @@ namespace Content.Client.Interaction.Panel.Ui
         private void InitializeCollectionButton(OptionButton button)
         {
             button.AddItem(Loc.GetString("interaction-constructor-kisses"), (int)Collection.Kisses);
+            button.AddItem(Loc.GetString("interaction-constructor-licks"), (int)Collection.Licks);
 
             button.OnItemSelected += args => button.SelectId(args.Id);
         }
@@ -419,6 +420,7 @@ namespace Content.Client.Interaction.Panel.Ui
         private int GetCollectionId(string? collection) => collection switch
         {
             "Kisses" => (int)Collection.Kisses,
+            "Licks" => (int)Collection.Licks,
             _ => 0
         };
 
@@ -548,7 +550,8 @@ namespace Content.Client.Interaction.Panel.Ui
         {
             return collectionId switch
             {
-                0 => "Kisses", // You like kissing boys don't you
+                0 => "Kisses",
+                1 => "Licks", // You like kissing boys don't you
                 _ => throw new ArgumentOutOfRangeException(nameof(collectionId), collectionId, "Unknown collection ID")
             };
         }
@@ -570,9 +573,8 @@ namespace Content.Client.Interaction.Panel.Ui
         private enum ErrorLevel : byte
         {
             None = 0,
-            IdLine = 1 << 0,
-            NameLine = 1 << 1,
-            MessageLine = 1 << 2,
+            NameLine = 1 << 0,
+            MessageLine = 1 << 1,
         }
 
         private enum Sex : byte
@@ -603,6 +605,7 @@ namespace Content.Client.Interaction.Panel.Ui
         private enum Collection : byte
         {
             Kisses,
+            Licks,
         }
         #endregion
     }
