@@ -141,7 +141,7 @@
   name: interaction-air-kiss
   userMessages: ["chat-interaction-air-kiss-message"]
   targetMessages: ["chat-interaction-air-kiss-message-target"]
-  interactSound: /Audio/_Wega/Interacrtions/kiss_3.ogg
+  interactSound: /Audio/_Wega/Interacrtions/Kisses/kiss_3.ogg
 
 - type: interaction
   id: InteractionGiveFive
@@ -193,7 +193,7 @@
   name: interaction-slap-face
   userMessages: ["chat-interaction-slap-face-message"]
   targetMessages: ["chat-interaction-slap-face-message-target"]
-  interactSound: /Audio/_Wega/Interacrtions/woman-slap.ogg
+  interactSound: /Audio/_Wega/Interacrtions/Slaps/woman-slap.ogg
 
 - type: interaction
   id: InteractionSqueezeCheeks
@@ -370,7 +370,7 @@
   userMessages: ["chat-interaction-slap-message"]
   targetMessages: ["chat-interaction-slap-message-target"]
   otherMessages: ["chat-interaction-slap-message-others"]
-  interactSound: /Audio/_Wega/Interacrtions/woman-slap.ogg
+  interactSound: /Audio/_Wega/Interacrtions/Slaps/woman-slap.ogg
 
 - type: interaction
   parent: [ BaseCheckErpStatus, BaseHumanoid ]
@@ -502,7 +502,7 @@
   name: interaction-slow-thrust
   userMessages: ["chat-interaction-slow-thrust-message"]
   targetMessages: ["chat-interaction-slow-thrust-message-target"]
-  interactSound: /Audio/_Wega/Interacrtions/slaps.ogg
+  interactSound: /Audio/_Wega/Interacrtions/Slaps/slaps.ogg
   points: 4
   blackListSpecies:
   - Resomi
@@ -513,7 +513,7 @@
   name: interaction-fast-thrust
   userMessages: ["chat-interaction-fast-thrust-message"]
   targetMessages: ["chat-interaction-fast-thrust-message-target"]
-  interactSound: /Audio/_Wega/Interacrtions/slaps.ogg
+  interactSound: /Audio/_Wega/Interacrtions/Slaps/slaps.ogg
   points: 4
   blackListSpecies:
   - Resomi
@@ -524,7 +524,7 @@
   name: interaction-deep-thrust
   userMessages: ["chat-interaction-deep-thrust-message"]
   targetMessages: ["chat-interaction-deep-thrust-message-target"]
-  interactSound: /Audio/_Wega/Interacrtions/slaps.ogg
+  interactSound: /Audio/_Wega/Interacrtions/Slaps/slaps.ogg
   points: 4
   blackListSpecies:
   - Resomi
