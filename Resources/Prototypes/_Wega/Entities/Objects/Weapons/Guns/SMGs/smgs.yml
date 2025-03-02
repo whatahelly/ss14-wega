@@ -12,7 +12,7 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: Objects/Weapons/Guns/SMGs/donksoft_smg.rsi
+    sprite: _Wega/Objects/Weapons/Guns/SMGs/donksoft_smg.rsi
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
