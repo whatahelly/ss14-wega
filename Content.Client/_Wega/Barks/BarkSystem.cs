@@ -74,6 +74,9 @@ public sealed class BarkSystem : EntitySystem
 
         var audioResource = new AudioResource();
         audioResource.Load(IoCManager.Instance!, new ResPath(ev.SoundPath));
+
+        var soundSpecifier = new ResolvedPathSpecifier(ev.SoundPath);
+
         for (int i = 0; i < soundCount; i++)
         {
             Timer.Spawn(TimeSpan.FromSeconds(i * soundInterval), () =>
@@ -81,7 +84,7 @@ public sealed class BarkSystem : EntitySystem
                 if (!_entityManager.EntityExists(sourceEntity) || _entityManager.Deleted(sourceEntity))
                     return;
 
-                _audio.PlayEntity(audioResource.AudioStream, sourceEntity, audioParams);
+                _audio.PlayEntity(audioResource.AudioStream, sourceEntity, soundSpecifier, audioParams);
             });
         }
     }
