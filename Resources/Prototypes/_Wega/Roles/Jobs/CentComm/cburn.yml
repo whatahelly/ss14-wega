@@ -1,10 +1,10 @@
 - type: job
-  id: CBURN
-  name: job-name-cburn
-  description: job-description-cburn
-  playTimeTracker: JobCBURN
+  id: CBURNLeader
+  name: job-name-cburn-leader
+  description: job-description-cburn-leader
+  playTimeTracker: JobCBURNLeader
   setPreference: false
-  startingGear: CBURNGear
+  startingGear: CBURNLeaderGear
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -14,7 +14,7 @@
   - CentralCommand
 
 - type: startingGear
-  id: CBURNGear
+  id: CBURNLeaderGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
     back: ClothingBackpackDuffelCBURN
@@ -22,16 +22,17 @@
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltCentCom
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterHardsuitCBURN
-    shoes: ClothingShoesBootsMagCombat # Corvax-Wega-MagCombat
-    id: CBURNPDA
-    pocket1: RadioHandheld
-    pocket2: WeaponLaserGun
+    outerClothing: ClothingOuterHardsuitCBURNLeader
+    shoes: ClothingShoesBootsMagCombat # Corvax-Wega-ERT
+    id: CBURNLeaderPDA
+    pocket1: TacticalInterfaceCBURN
+    pocket2: WeaponAdvancedLaser
     belt: ClothingBeltBandolier
   storage:
     back:
-    - WeaponShotgunKammerer # Corvax-Wega-ERT
+    - WeaponShotgunKammerer
     - BoxShotgunIncendiary
     - GrenadeFlashBang
     - PillAmbuzolPlus
     - PillAmbuzol
+    - RadioHandheld
