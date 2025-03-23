@@ -18,6 +18,19 @@
     state: pda-barber
 
 - type: entity
+  parent: ERTLeaderPDA
+  id: CBURNLeaderPDA
+  name: CBURN Leader PDA
+  description: Smells like rotten flesh.
+  components:
+  - type: Pda
+    id: CBURNLeaderIDcard
+  - type: PdaBorderColor
+    borderColor: "#A32D26"
+    accentHColor: "#447987"
+    accentVColor: "#f1c232"
+
+- type: entity
   parent: BaseMedicalPDA
   id: GeneticistPDA
   name: geneticist PDA

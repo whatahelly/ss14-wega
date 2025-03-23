@@ -11,6 +11,19 @@
       job: Barber
 
 - type: entity
+  parent: CentcomIDCard
+  id: CBURNLeaderIDcard
+  name: CBURN Leader ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: centcom
+  - type: Item
+    heldPrefix: blue
+  - type: PresetIdCard
+    job: CBURNLeader
+
+- type: entity
   parent: IDCardStandard
   id: GeneticistIDCard
   name: geneticist ID card
