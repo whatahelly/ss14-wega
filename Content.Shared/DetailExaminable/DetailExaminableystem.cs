@@ -27,8 +27,8 @@ public sealed class DetailExaminableSystem : EntitySystem
         var user = args.User;
 
         // Corvax-Wega-start
-        var appearanceComponent = EntityManager.TryGetComponent<HumanoidAppearanceComponent>(user, out var humanoidAppearance)
-            ? humanoidAppearance
+        var appearanceComponent = EntityManager.TryGetComponent<HumanoidAppearanceComponent>(ent, out var humanoid)
+            ? humanoid
             : null;
 
         var statusText = appearanceComponent != null
