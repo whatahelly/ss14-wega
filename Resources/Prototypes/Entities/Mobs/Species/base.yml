@@ -146,7 +146,6 @@
     - Drowsiness
     - Adrenaline
     - Hallucinations # Corvax-Wega-Hallucinations
-    - Dizzy # Corvax-Wega-Dizzy
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -179,7 +178,6 @@
   - type: StandingState
   - type: SpeechSynthesis # Corvax-Wega-Barks
   - type: Dna
-  - type: DnaModifier
   - type: MindContainer
     showExamineInfo: true
   - type: CanEnterCryostorage

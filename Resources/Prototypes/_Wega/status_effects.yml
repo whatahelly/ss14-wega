@@ -1,5 +1,2 @@
 - type: statusEffect
   id: Hallucinations
-
-- type: statusEffect
-  id: Dizzy

@@ -97,7 +97,6 @@
   roles:
   - Chemist
   - ChiefMedicalOfficer
-  - Geneticist # Corvax-Wega-Genetics
   - MedicalDoctor
   - MedicalIntern
   - Psychologist
@@ -150,5 +149,4 @@
   - Psychologist
   - Pilot # Corvax-Pilot
   - Barber # Corvax-Wega-Barber
-  - Geneticist # Corvax-Wega-Genetics
   primary: false

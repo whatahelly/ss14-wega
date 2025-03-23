@@ -6,6 +6,3 @@
 
 - type: playTimeTracker
   id: JobCBURNLeader
-
-- type: playTimeTracker
-  id: JobGeneticist

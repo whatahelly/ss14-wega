@@ -52,10 +52,6 @@ public sealed class BarkSystem : EntitySystem
                 return;
         }
 
-        // Corvax-Wega-Deafness
-        if (HasComp<DeafnessComponent>(sourceEntity))
-            return;
-
         var userVolume = _cfg.GetCVar(WegaCVars.BarksVolume);
         var baseVolume = SharedAudioSystem.GainToVolume(userVolume * ContentAudioSystem.BarksMultiplier);
 

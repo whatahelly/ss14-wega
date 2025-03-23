@@ -302,12 +302,6 @@
   - !type:PlantAdjustMutationLevel
     amount: 1
   metabolisms:
-    Medicine:
-      effects:
-      - !type:ChemMutateDna
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
     Poison:
       effects:
       - !type:HealthChange

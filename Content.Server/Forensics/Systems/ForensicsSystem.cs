@@ -273,12 +273,12 @@ namespace Content.Server.Forensics
 
         public string GenerateDNA()
         {
-            var hexChars = "0123456789ABCDEF";
+            var letters = new[] { "A", "C", "G", "T" };
             var DNA = string.Empty;
 
-            for (var i = 0; i < 32; i++)
+            for (var i = 0; i < 16; i++)
             {
-                DNA += hexChars[_random.Next(hexChars.Length)];
+                DNA += letters[_random.Next(letters.Length)];
             }
 
             return DNA;
