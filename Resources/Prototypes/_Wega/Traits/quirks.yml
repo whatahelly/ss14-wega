@@ -12,6 +12,14 @@
       timeBetweenIncidents: 0.3, 300
 
 - type: trait
+  id: Deafness
+  name: trait-deafness-name
+  description: trait-deafness-desc
+  category: Quirks
+  components:
+  - type: Deafness
+
+- type: trait
   id: Tall
   name: trait-tall-name
   description: trait-tall-desc
