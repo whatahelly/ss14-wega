@@ -109,6 +109,16 @@
   products:
     TrueMilkshake: 5
 
+- type: reaction
+  id: Glace
+  reactants:
+    IcedCoffee:
+      amount: 2
+    IceCream:
+      amount: 1
+  products:
+    Glace: 3
+
 # Alcohol
 - type: reaction
   id: Eggnog
