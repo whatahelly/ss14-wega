@@ -50,6 +50,7 @@ rules_file = "WegaRuleset"
 
 [atmos]
 max_explosion_range = 5
+space_wind = true
 
 [shuttle]
 emergency_early_launch_allowed = true
