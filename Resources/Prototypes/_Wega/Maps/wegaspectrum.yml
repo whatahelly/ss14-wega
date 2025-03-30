@@ -36,6 +36,7 @@
             TechnicalAssistant: [ 3, 3 ]
             #medical
             ChiefMedicalOfficer: [ 1, 1 ]
+            Geneticist: [ 2, 2 ]
             Chemist: [ 3, 3 ]
             MedicalDoctor: [ 4, 4 ]
             Paramedic: [ 1, 1 ]
