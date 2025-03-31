@@ -1,0 +1,18 @@
+- type: entity
+  id: StorePresetGeneralVoid
+  abstract: true
+  components:
+  - type: Store
+    name: GeneralVoid
+    categories:
+    - UplinkVoidSurvival
+    - UplinkVoidEatPoint
+    - UplinkVoidEquipment
+    - UplinkVoidMedical
+    - UplinkVoidWeapon
+    - UplinkVoidShuttle
+    - UplinkVoidSpecial
+    currencyWhitelist:
+    - Credit
+    balance:
+      Telecrystal: 0
