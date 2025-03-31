@@ -2,7 +2,7 @@
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitVoid
   name: void space suit helmet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: "An old battered void suit helmet."
   components:
   - type: BreathMask
@@ -31,7 +31,7 @@
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitVoidAdvanced
   name: advanced void space suit helmet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: "An improved void suit helmet."
   components:
   - type: BreathMask

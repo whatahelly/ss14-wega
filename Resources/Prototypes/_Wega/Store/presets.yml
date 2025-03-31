@@ -19,7 +19,7 @@
   abstract: true
   components:
   - type: Store
-    name: GeneralVoid
+    name: store-preset-name-general-void
     categories:
     - UplinkVoidSurvival
     - UplinkVoidEatPoint

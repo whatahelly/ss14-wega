@@ -24,7 +24,7 @@
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodVoidCap
   categories: [ HideSpawnMenu ]
-  name: flagellant hood
+  name: void cape
   components:
   - type: Sprite
     sprite: _Wega/Clothing/Head/Hoods/Coat/voidcaphood.rsi

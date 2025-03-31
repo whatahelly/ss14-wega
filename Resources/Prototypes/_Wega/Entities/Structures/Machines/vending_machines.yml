@@ -63,8 +63,8 @@
 - type: entity
   parent: [ VendingMachine, StorePresetGeneralVoid ]
   id: BaseUsVoidPat
-  name: П.А.Т.
-  description: Пустотный Автомат Торговли, имеет в себе блюспейс компонент позволяющий торговать с разными галактиками.
+  name: P.A.T.
+  description: The Void Trading Machine has a bluespace component that allows you to trade with different galaxies.
   components:
   - type: Sprite
     sprite: _Wega/Structures/Machines/VendingMachines/pat.rsi
