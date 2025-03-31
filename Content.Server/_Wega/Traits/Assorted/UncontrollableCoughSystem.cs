@@ -35,7 +35,8 @@ public sealed class UncontrollableCoughSystem : EntitySystem
             snough.NextIncidentTime +=
                 _random.NextFloat(snough.TimeBetweenIncidents.X, snough.TimeBetweenIncidents.Y);
 
-            RaiseLocalEvent(ent, new DropHandItemsEvent());
+            var dropEvent = new DropHandItemsEvent();
+            RaiseLocalEvent(ent, ref dropEvent);
             _diseaseSystem.SneezeCough(ent, null, snough.EmoteId, false);
         }
     }
