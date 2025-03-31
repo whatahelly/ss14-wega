@@ -1,4 +1,9 @@
 - type: currency
+  id: TacticalResource
+  displayName: store-currency-display-tactical-resource
+  canWithdraw: false
+
+- type: currency
   id: Credit
   displayName: Космическая Валюта
   cash:
