@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Map
+  engineVersion: 250.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 04/01/2025 23:20:17
+  entityCount: 259
+maps:
+- 185
+grids:
+- 2
+orphans: []
+nullspace: []
 tilemap:
   0: Space
   78: FloorMining
@@ -15,7 +26,7 @@ entities:
       name: Мусорщик CSS-403
     - type: Transform
       pos: -1.1396093,-5.412249
-      parent: invalid
+      parent: 185
     - type: MapGrid
       chunks:
         0,0:
@@ -112,6 +123,18 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+  - uid: 185
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
+    - type: Broadphase
+    - type: OccluderTree
 - proto: AirAlarm
   entities:
   - uid: 14
@@ -154,7 +177,7 @@ entities:
       pos: 4.5,12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2950.0493
+      secondsUntilStateChange: -3068.7878
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -166,7 +189,7 @@ entities:
       pos: 5.5,12.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -2948.5825
+      secondsUntilStateChange: -3067.321
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -1411,7 +1434,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.4939082,11.473913
       parent: 2
-- proto: SignalButton
+- proto: SignalButtonDirectional
   entities:
   - uid: 186
     components:
@@ -1425,21 +1448,17 @@ entities:
         - Pressed: Toggle
         30:
         - Pressed: Toggle
-- proto: SignalButtonDirectional
-  entities:
-  - uid: 185
+  - uid: 225
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.5,8.5
       parent: 2
-    - type: SignalSwitch
-      state: True
     - type: DeviceLinkSource
       linkedPorts:
-        52:
-        - Pressed: Toggle
         51:
+        - Pressed: Toggle
+        52:
         - Pressed: Toggle
 - proto: SMESBasic
   entities:
