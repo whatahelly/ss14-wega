@@ -309,20 +309,18 @@ namespace Content.Server.Voting.Managers
                         Loc.GetString("ui-vote-map-win", ("winner", maps[picked])));
                 }
 
-                // Corvax-Wega-Vote-start
-                _lastPickedMaps.Add(picked.ID);
-                if (_lastPickedMaps.Count > 2)
-                {
-                    _lastPickedMaps.RemoveAt(0);
-                }
-                // Corvax-Wega-Vote-end
-
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Map vote finished: {picked.MapName}");
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
                 if (ticker.CanUpdateMap())
                 {
                     if (_gameMapManager.TrySelectMapIfEligible(picked.ID))
                     {
+                        // Corvax-Wega-Vote-start
+                        _lastPickedMaps.Add(picked.ID);
+                        if (_lastPickedMaps.Count > 2)
+                            _lastPickedMaps.RemoveAt(0);
+                        // Corvax-Wega-Vote-end
+
                         ticker.UpdateInfoText();
                     }
                 }
