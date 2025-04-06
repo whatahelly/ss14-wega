@@ -22,6 +22,9 @@ limit = 25.0
 [admin]
 admins_count_in_playercount = true
 
+[movement]
+mob_pushing = true
+
 [infolinks]
 discord = "https://discord.gg/bJrgSmKf3a"
 wiki = "https://station14.ru"
