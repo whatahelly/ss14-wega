@@ -1095,6 +1095,12 @@
         factor: 3
     Medicine:
       effects:
+      # Corvax-Wega-BloodCult-start
+      - !type:HolyPurification
+        conditions:
+        - !type:ReagentThreshold
+          min: 40
+       # Corvax-Wega-BloodCult-end
       - !type:HealthChange
         conditions:
         - !type:TotalDamage

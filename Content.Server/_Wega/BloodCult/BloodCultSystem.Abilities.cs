@@ -8,7 +8,6 @@ using Content.Server.Emp;
 using Content.Server.Flash;
 using Content.Server.Flash.Components;
 using Content.Server.Hallucinations;
-using Content.Shared.Actions;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Blood.Cult;
 using Content.Shared.Blood.Cult.Components;
@@ -62,7 +61,6 @@ public sealed partial class BloodCultSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedCuffableSystem _cuff = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -87,6 +85,7 @@ public sealed partial class BloodCultSystem
 
         SubscribeLocalEvent<BloodCultistComponent, BloodCultStunActionEvent>(OnStun);
         SubscribeLocalEvent<BloodCultistComponent, BloodCultTeleportActionEvent>(OnTeleport);
+        SubscribeLocalEvent<BloodCultistComponent, TeleportSpellDoAfterEvent>(OnTeleportDoAfter);
         SubscribeLocalEvent<BloodCultistComponent, BloodCultElectromagneticPulseActionEvent>(OnElectromagneticPulse);
         SubscribeLocalEvent<BloodCultistComponent, BloodCultShadowShacklesActionEvent>(OnShadowShackles);
         SubscribeLocalEvent<BloodCultistComponent, BloodCultTwistedConstructionActionEvent>(OnTwistedConstruction);
@@ -620,21 +619,14 @@ public sealed partial class BloodCultSystem
                 break;
             case "teleport":
                 ExtractBlood(user, -7, 5);
-                var runes = EntityQuery<BloodRuneComponent>(true)
-                    .Where(runeEntity =>
-                        TryComp<BloodRuneComponent>(runeEntity.Owner, out var runeComp) && runeComp.Prototype == "teleport")
-                    .ToList();
-
-                if (runes.Count > 0)
+                _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(3f), new TeleportSpellDoAfterEvent(), user, target)
                 {
-                    var randomRune = runes[new Random().Next(runes.Count)];
-                    var runeTransform = _entityManager.GetComponent<TransformComponent>(randomRune.Owner);
-                    var targetCoords = Transform(target).Coordinates;
-                    _entityManager.SpawnEntity("BloodCultOutEffect", targetCoords);
-                    _transform.SetCoordinates(target, runeTransform.Coordinates);
-                    _entityManager.SpawnEntity("BloodCultInEffect", runeTransform.Coordinates);
-                    _entityManager.DeleteEntity(randomRune.Owner);
-                }
+                    BreakOnMove = true,
+                    BreakOnDamage = true,
+                    MovementThreshold = 0.01f,
+                    NeedHand = true
+                });
+
                 _entityManager.DeleteEntity(entity);
                 break;
             case "shadowshackles":
@@ -883,6 +875,28 @@ public sealed partial class BloodCultSystem
         {
             var damage = new DamageSpecifier { DamageDict = { { "Slash", bloodDamage } } };
             _damage.TryChangeDamage(cultist, damage, true);
+        }
+    }
+
+    private void OnTeleportDoAfter(EntityUid cultist, BloodCultistComponent component, TeleportSpellDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Target == null)
+            return;
+
+        var runes = EntityQuery<BloodRuneComponent>(true)
+            .Where(runeEntity =>
+                TryComp<BloodRuneComponent>(runeEntity.Owner, out var runeComp) && runeComp.Prototype == "teleport")
+            .ToList();
+
+        if (runes.Count > 0)
+        {
+            var randomRune = runes[new Random().Next(runes.Count)];
+            var runeTransform = _entityManager.GetComponent<TransformComponent>(randomRune.Owner);
+            var targetCoords = Transform(args.Target.Value).Coordinates;
+            _entityManager.SpawnEntity("BloodCultOutEffect", targetCoords);
+            _transform.SetCoordinates(args.Target.Value, runeTransform.Coordinates);
+            _entityManager.SpawnEntity("BloodCultInEffect", runeTransform.Coordinates);
+            _entityManager.DeleteEntity(randomRune.Owner);
         }
     }
 

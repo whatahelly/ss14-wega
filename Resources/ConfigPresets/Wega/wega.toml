@@ -23,7 +23,7 @@ limit = 25.0
 admins_count_in_playercount = true
 
 [movement]
-mob_pushing = true
+mob_pushing = false
 
 [infolinks]
 discord = "https://discord.gg/bJrgSmKf3a"
@@ -64,5 +64,5 @@ arrivals_map = "/Maps/Corvax/Misc/corvax_terminal.yml"
 auto_call_time = 150
 
 [vote]
-preset_enabled = false
+preset_enabled = true
 map_enabled = true

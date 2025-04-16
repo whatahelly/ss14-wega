@@ -6,6 +6,7 @@ using Content.Server.Body.Systems;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Prayer;
 using Content.Server.RoundEnd;
+using Content.Shared.Actions;
 using Content.Shared.Blood.Cult;
 using Content.Shared.Blood.Cult.Components;
 using Content.Shared.Body.Components;
@@ -17,6 +18,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
@@ -42,6 +44,7 @@ public sealed partial class BloodCultSystem : EntitySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
@@ -55,6 +58,7 @@ public sealed partial class BloodCultSystem : EntitySystem
     private bool _firstTriggered = false;
     private bool _secondTriggered = false;
     private bool _conductedComplete = false;
+    private bool _ritualStage = false;
     private int _curses = 2;
 
     public override void Initialize()
@@ -120,6 +124,12 @@ public sealed partial class BloodCultSystem : EntitySystem
         {
             if (ritualQueryComponent.Activate)
             {
+                if (!_ritualStage)
+                {
+                    _ritualStage = true;
+                    CheckStage();
+                }
+
                 if (ritualQueryComponent.NextTimeTick <= 0)
                 {
                     ritualQueryComponent.NextTimeTick = 1;
@@ -338,7 +348,7 @@ public sealed partial class BloodCultSystem : EntitySystem
         var playerCount = GetPlayerCount();
 
         // Second
-        if (playerCount >= 100 && totalCultEntities >= playerCount * 0.1f || playerCount < 100 && totalCultEntities >= playerCount * 0.2f)
+        if (playerCount >= 100 && totalCultEntities >= playerCount * 0.1f || playerCount < 100 && totalCultEntities >= playerCount * 0.2f || _ritualStage)
         {
             foreach (var cultist in GetAllCultists())
             {
@@ -366,7 +376,7 @@ public sealed partial class BloodCultSystem : EntitySystem
         }
 
         // Third
-        if (playerCount >= 100 && totalCultEntities >= playerCount * 0.2f || playerCount < 100 && totalCultEntities >= playerCount * 0.3f)
+        if (playerCount >= 100 && totalCultEntities >= playerCount * 0.2f || playerCount < 100 && totalCultEntities >= playerCount * 0.3f || _ritualStage)
         {
             foreach (var cultist in GetAllCultists())
             {
@@ -429,6 +439,56 @@ public sealed partial class BloodCultSystem : EntitySystem
             cultists.Add(uid);
         }
         return cultists;
+    }
+    #endregion
+
+    #region Deconvertation
+    public void CultistDeconvertation(EntityUid cultist)
+    {
+        if (!TryComp<BloodCultistComponent>(cultist, out var bloodCultist))
+            return;
+
+        if (TryComp<ActionsContainerComponent>(cultist, out var actionsContainer))
+        {
+            foreach (var actionId in actionsContainer.Container.ContainedEntities.ToArray())
+            {
+                if (!TryComp(actionId, out MetaDataComponent? meta))
+                    continue;
+
+                var protoId = meta.EntityPrototype?.ID;
+                if (protoId == BloodCultistComponent.CultObjective
+                    || protoId == BloodCultistComponent.CultCommunication
+                    || protoId == BloodCultistComponent.BloodMagic
+                    || protoId == BloodCultistComponent.RecallBloodDagger)
+                {
+                    _action.RemoveAction(cultist, actionId);
+                }
+            }
+        }
+
+        if (bloodCultist.RecallSpearActionEntity != null)
+            _action.RemoveAction(cultist, bloodCultist.RecallSpearActionEntity);
+
+        if (bloodCultist.SelectedSpell != null)
+            _action.RemoveAction(cultist, bloodCultist.SelectedSpell.Value);
+
+        foreach (var spell in bloodCultist.SelectedEmpoweringSpells)
+        {
+            if (spell != null)
+            {
+                _action.RemoveAction(cultist, spell.Value);
+            }
+        }
+
+        var stunTime = TimeSpan.FromSeconds(4);
+        var name = Identity.Entity(cultist, EntityManager);
+
+        _stun.TryParalyze(cultist, stunTime, true);
+        _popup.PopupEntity(Loc.GetString("blood-cult-break-control", ("name", name)), cultist);
+
+        RemComp<BloodCultistComponent>(cultist);
+        if (HasComp<CultistEyesComponent>(cultist)) RemComp<CultistEyesComponent>(cultist);
+        if (HasComp<PentagramDisplayComponent>(cultist)) RemComp<PentagramDisplayComponent>(cultist);
     }
     #endregion
 
