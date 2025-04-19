@@ -236,6 +236,7 @@ namespace Content.Server.Voting.Managers
                 filteredPresets = presets;
             }
             // Corvax-Wega-Vote-end
+            var alone = _playerManager.PlayerCount == 1 && initiator != null;
             var options = new VoteOptions
             {
                 Title = Loc.GetString("ui-vote-gamemode-title"),
