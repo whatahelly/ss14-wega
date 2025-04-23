@@ -12,6 +12,7 @@ map_rotation = false
 respawn_enabled = true
 barks_enabled = true
 night_light_enabled = true
+roundend_vote_enabled = true
 
 [net]
 tickrate = 30
@@ -64,5 +65,6 @@ arrivals_map = "/Maps/Corvax/Misc/corvax_terminal.yml"
 auto_call_time = 150
 
 [vote]
-preset_enabled = true
+preset_enabled = false
+timerpreset = 240
 map_enabled = true
