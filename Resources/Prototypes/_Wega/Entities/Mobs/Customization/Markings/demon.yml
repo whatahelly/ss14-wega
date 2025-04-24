@@ -1,7 +1,7 @@
 - type: marking
   id: DemonChestCowSpots
-  bodyPart: Chest
-  markingCategory: Chest
+  bodyPart: Special
+  markingCategory: Special
   speciesRestriction: [Demon]
   sprites:
   - sprite: _Wega/Mobs/Customization/demon.rsi
@@ -9,8 +9,8 @@
 
 - type: marking
   id: DemonChestGuard
-  bodyPart: Chest
-  markingCategory: Chest
+  bodyPart: Special
+  markingCategory: Special
   speciesRestriction: [Demon]
   sprites:
   - sprite: _Wega/Mobs/Customization/demon.rsi
@@ -18,8 +18,8 @@
 
 - type: marking
   id: DemonChestLinesEmperos
-  bodyPart: Chest
-  markingCategory: Chest
+  bodyPart: Special
+  markingCategory: Special
   speciesRestriction: [Demon]
   sprites:
   - sprite: _Wega/Mobs/Customization/demon.rsi
@@ -27,8 +27,8 @@
 
 - type: marking
   id: DemonChestQueenLines
-  bodyPart: Chest
-  markingCategory: Chest
+  bodyPart: Special
+  markingCategory: Special
   speciesRestriction: [Demon]
   sprites:
   - sprite: _Wega/Mobs/Customization/demon.rsi
@@ -36,8 +36,8 @@
 
 - type: marking
   id: DemonChestTreeLines
-  bodyPart: Chest
-  markingCategory: Chest
+  bodyPart: Special
+  markingCategory: Special
   speciesRestriction: [Demon]
   sprites:
   - sprite: _Wega/Mobs/Customization/demon.rsi
@@ -45,8 +45,8 @@
 
 - type: marking
   id: DemonChestTrinitySpots
-  bodyPart: Chest
-  markingCategory: Chest
+  bodyPart: Special
+  markingCategory: Special
   speciesRestriction: [Demon]
   sprites:
   - sprite: _Wega/Mobs/Customization/demon.rsi

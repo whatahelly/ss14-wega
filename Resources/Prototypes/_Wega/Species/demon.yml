@@ -17,6 +17,7 @@
 - type: speciesBaseSprites
   id: MobDemonSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobDemonHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
@@ -38,6 +39,9 @@
 - type: markingPoints
   id: MobDemonMarkingLimits
   points:
+    Special:
+      points: 1
+      required: false
     Hair:
       points: 1
       required: false
