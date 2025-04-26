@@ -2,7 +2,7 @@
   id: WegaCereStation
   mapName: 'Cere Station'
   mapPath: /Maps/_Wega/wegacerestation.yml
-  minPlayers: 50
+  minPlayers: 70
   stations:
     CereStation:
       stationProto: StandardNanotrasenStation
