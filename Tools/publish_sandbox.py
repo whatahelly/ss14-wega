@@ -25,9 +25,10 @@ def main():
     fork_id = args.fork_id
 
     session = requests.Session()
-    session.headers = {
-        "Authorization": f"Bearer {PUBLISH_TOKEN}",
-    }
+    session.auth = (
+        os.environ["PUBLISH_USERNAME"],
+        os.environ["PUBLISH_PASSWORD"]
+    )
 
     print(f"Starting publish on your CDN for version {VERSION}")
 
