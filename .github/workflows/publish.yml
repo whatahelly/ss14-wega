@@ -78,6 +78,13 @@ jobs:
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
         FORK_ID: ${{ vars.FORK_ID }}
 
+    - name: Publish version wega sandbox
+      run: Tools/publish_sandbox.py
+      env:
+        PUBLISH_TOKEN: ${{ secrets.SANDBOX_PUBLISH_TOKEN }}
+        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+        FORK_ID: ${{ vars.FORK_ID }}
+
     #    - name: Publish changelog (Discord)
     #      run: Tools/actions_changelogs_since_last_run.py
     #      env:
