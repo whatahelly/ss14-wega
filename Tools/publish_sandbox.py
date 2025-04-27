@@ -6,9 +6,10 @@ import os
 import subprocess
 from typing import Iterable
 
-PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
+PUBLISH_USERNAME = os.environ["PUBLISH_USERNAME"]
+PUBLISH_PASSWORD = os.environ["PUBLISH_PASSWORD"]
 VERSION = os.environ.get("GITHUB_SHA", "local-build")
-FORK_ID = os.environ.get('FORK_ID', 'wega') 
+FORK_ID = os.environ.get('FORK_ID', 'wega')
 
 RELEASE_DIR = "tools"
 
