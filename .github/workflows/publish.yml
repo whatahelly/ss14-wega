@@ -81,7 +81,8 @@ jobs:
     - name: Publish version wega sandbox
       run: Tools/publish_sandbox.py
       env:
-        PUBLISH_TOKEN: ${{ secrets.SANDBOX_PUBLISH_TOKEN }}
+        PUBLISH_USERNAME: ${{ secrets.PUBLISH_USERNAME }}
+        PUBLISH_PASSWORD: ${{ secrets.PUBLISH_PASSWORD }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
         FORK_ID: ${{ vars.FORK_ID }}
 
