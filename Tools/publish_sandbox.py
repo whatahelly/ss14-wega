@@ -17,7 +17,7 @@ RELEASE_DIR = "tools"
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://cdn.corvax-wega/"
+ROBUST_CDN_URL = "https://cdn.corvax-wega.ru/"
 
 def main():
     parser = argparse.ArgumentParser()
