@@ -79,7 +79,7 @@ jobs:
         FORK_ID: ${{ vars.FORK_ID }}
 
     - name: Publish version wega sandbox
-      run: Tools/publish_sandbox.py
+      run: python3 Tools/publish_sandbox.py
       env:
         PUBLISH_USERNAME: ${{ secrets.PUBLISH_USERNAME }}
         PUBLISH_PASSWORD: ${{ secrets.PUBLISH_PASSWORD }}
