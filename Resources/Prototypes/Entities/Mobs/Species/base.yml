@@ -24,14 +24,14 @@
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
     - map: [ "enum.HumanoidVisualLayers.RFoot" ]
-    - map: [ "enum.HumanoidVisualLayers.LHand" ]
-    - map: [ "enum.HumanoidVisualLayers.RHand" ]
     - map: [ "enum.HumanoidVisualLayers.Special" ]
     - map: [ "socks" ]
     - map: [ "underwearbottom" ]
     - map: [ "underweartop" ]
     - map: [ "jumpsuit" ]
     - map: [ "anal" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
     # Corvax-Wega-end
     - map: [ "gloves" ]
     - map: [ "shoes" ]
@@ -325,8 +325,6 @@
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
     - map: [ "enum.HumanoidVisualLayers.RFoot" ]
-    - map: ["enum.HumanoidVisualLayers.LHand"]
-    - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: ["enum.HumanoidVisualLayers.Special"]
     - map: [ "socks" ]
     - map: [ "underwearbottom" ]
@@ -334,6 +332,8 @@
     - map: [ "jumpsuit" ]
     - map: [ "anal" ]
     # Corvax-Wega-end
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: ["enum.HumanoidVisualLayers.Handcuffs"]
       color: "#ffffff"
       sprite: Objects/Misc/handcuffs.rsi
