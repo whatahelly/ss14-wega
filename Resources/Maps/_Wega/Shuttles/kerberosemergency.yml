@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 250.0.0
   forkId: ""
   forkVersion: ""
-  time: 04/25/2025 07:01:34
-  entityCount: 735
-maps:
-- 6
+  time: 05/01/2025 11:13:44
+  entityCount: 734
+maps: []
 grids:
 - 2
-orphans: []
+orphans:
+- 2
 nullspace: []
 tilemap:
   0: Space
@@ -32,7 +32,7 @@ entities:
       name: NT Evac-DS-09
     - type: Transform
       pos: -0.5073064,-0.47809157
-      parent: 6
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -978,18 +978,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: EmergencyShuttle
-  - uid: 6
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
 - proto: AirAlarm
   entities:
   - uid: 647
@@ -1160,7 +1148,7 @@ entities:
       pos: -4.5,-5.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -823.2538
+      secondsUntilStateChange: -854.62805
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
