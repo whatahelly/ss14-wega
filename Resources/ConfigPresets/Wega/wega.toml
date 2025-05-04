@@ -8,6 +8,9 @@ soft_max_players = 100
 lobbyduration = 360
 map_rotation = false
 
+[events]
+enabled = true
+
 [wega]
 respawn_enabled = true
 barks_enabled = true
