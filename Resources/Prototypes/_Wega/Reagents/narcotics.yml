@@ -1,16 +1,16 @@
 - type: reagent
   id: RelaxingTeaAdust
-  name: tea pulp
+  name: reagent-name-teapulp
   group: Narcotics
-  desc: tea pulp
+  desc: reagent-desc-teapulp
   physicalDesc: reagent-physical-desc-soothing
   color: "#FFD961"
 
 - type: reagent
   id: RelaxingTea
-  name: relaxing tea
+  name: reagent-name-relaxingtea
   group: Narcotics
-  desc: relaxing tea
+  desc: reagent-desc-relaxingtea
   physicalDesc: reagent-physical-desc-soothing
   color: "#C2FFE0"
   flavor: tea
@@ -45,9 +45,9 @@
 
 - type: reagent
   id: GrapeJuiceInvisible
-  name: juice of invisible grapes
+  name: reagent-name-juiceofinvisiblegrapes
   group: Narcotics
-  desc: juice of invisible grapes
+  desc: reagent-desc-juiceofinvisiblegrapes
   physicalDesc: reagent-physical-desc-soothing
   color: "#AAAAAA"
   metabolisms:
