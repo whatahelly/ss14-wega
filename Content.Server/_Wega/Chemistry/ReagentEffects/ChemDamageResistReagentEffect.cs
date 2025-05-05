@@ -24,7 +24,7 @@ namespace Content.Server.EntityEffects.Effects
             var types = string.Join(", ", DamageTypes);
             return Loc.GetString("reagent-effect-guidebook-damage-resist",
                 ("types", types),
-                ("resist", (int)((1 - ResistFactor) * 100)),
+                ("resist", (int)(ResistFactor * 100)),
                 ("duration", Duration));
         }
 
