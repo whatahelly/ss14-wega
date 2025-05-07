@@ -88,4 +88,11 @@ slime-social-join-rebellion-3 = Свободу слаймам!
 slime-social-end-rebellion-1 = Бунт окончен...
 slime-social-end-rebellion-2 = Я устал...
 
+slime-social-mood-very-hungry = ужасно голоден
+slime-social-mood-slightly-hungry = слегка проголодался
+slime-social-mood-full = сыт и доволен
+slime-social-mood-normal = нормально
+slime-social-mood-distrust = и не доверяю тебе
+slime-social-mood-adore = и обожаю тебя!
+
 slime-social-rebellion-leader = Сленин
