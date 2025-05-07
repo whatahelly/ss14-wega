@@ -22,14 +22,14 @@ public sealed class EventManagerSystem : EntitySystem
     [Dependency] public readonly GameTicker GameTicker = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
 
-    public bool EventsEnabled { get; private set; }
-    private void SetEnabled(bool value) => EventsEnabled = value;
-
+    public bool EventsEnabled { get; private set; } = true; // Corvax-Wega-Change
+    private void SetEnabled(bool value) { } // Corvax-Wega-Change
     public override void Initialize()
     {
         base.Initialize();
 
-        Subs.CVar(_configurationManager, CCVars.EventsEnabled, SetEnabled, true);
+        //Subs.CVar(_configurationManager, CCVars.EventsEnabled, SetEnabled, true); // Corvax-Wega-Change
+        EventsEnabled = true; // Corvax-Wega-Change
     }
 
     /// <summary>
