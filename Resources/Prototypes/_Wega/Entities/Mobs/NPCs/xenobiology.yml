@@ -61,8 +61,6 @@
       Azure: MobXenoSlimeAzure
       LightPink: MobXenoSlimeLightPink
       Rainbow: MobXenoSlimeRainbow
-  - type: TTS # Corvax-TTS
-    voice: Chen
 
 - type: entity
   name: gray slime
