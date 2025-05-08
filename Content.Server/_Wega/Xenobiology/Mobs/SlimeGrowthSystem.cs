@@ -104,7 +104,7 @@ public sealed class SlimeGrowthSystem : SharedSlimeGrowthSystem
             growth.MutationChance = Math.Max(newChance, 0.05f);
         }
 
-        if (_random.Prob(parentGrowth.MutationChance))
+        if (_random.Prob(parentGrowth.MutationChance) || parentGrowth.SlimeType == SlimeType.Rainbow)
         {
             growth.SlimeType = GetMutationInternal(parentGrowth.SlimeType, parentGrowth.RainbowChance) ?? parentGrowth.SlimeType;
         }
