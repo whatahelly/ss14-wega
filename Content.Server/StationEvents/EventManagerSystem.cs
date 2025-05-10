@@ -28,13 +28,7 @@ public sealed class EventManagerSystem : EntitySystem
     {
         base.Initialize();
 
-        // Corvax-Wega-Change-start
-        EventsEnabled = _configurationManager.GetCVar(CCVars.EventsEnabled);
-        Subs.CVar(_configurationManager, CCVars.EventsEnabled, value =>
-        {
-            EventsEnabled = value;
-        });
-        // Corvax-Wega-Change-end
+        EventsEnabled = _configurationManager.GetCVar(CCVars.EventsEnabled); // Corvax-Wega-Change
     }
 
     /// <summary>
