@@ -106,4 +106,4 @@
     - type: Seed
       seedId: invisibleGrape
     - type: Sprite
-      sprite: _Wega/Objects/Specific/Hydroponics/invisible_grape.rsi
+      sprite: _Wega/Objects/Specific/Hydroponics/Invisiblgrape.rsi
