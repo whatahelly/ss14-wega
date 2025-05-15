@@ -219,9 +219,9 @@ public sealed partial class MarkingSet
             {
                 if (prototypeManager.TryIndex<MarkingPrototype>(marking.MarkingId, out var proto) && !proto.SponsorOnly)
                 {
-                    return;
+                    continue;
                 }
-                
+
                 var allowedToHave = sponsorMarkings.Contains(marking.MarkingId);
                 if (!allowedToHave)
                 {
