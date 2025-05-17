@@ -213,7 +213,7 @@
       Min: 1
       Max: 9
       PotencyDivisor: 5
-    Vitamin:
+    Licoxide:
       Min: 1
       Max: 15
       PotencyDivisor: 5
@@ -248,7 +248,7 @@
   name: seeds-invisiblegrape-name
   noun: seeds-noun-seeds
   displayName: seeds-invisiblegrape-display-name
-  plantRsi: _Wega/Objects/Specific/Hydroponics/invisible_grape.rsi
+  plantRsi: _Wega/Objects/Specific/Hydroponics/Invisiblgrape.rsi
   packetPrototype: InvisibleGrapeSeeds
   productPrototypes:
     - FoodInvisibleGrape

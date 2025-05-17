@@ -89,6 +89,8 @@
         reagents:
         - ReagentId: Cellulose
           Quantity: 5
+  - type: Item
+    heldPrefix: produce
   - type: Produce
     seedId: moneyCabbage
   - type: SpawnItemsOnUse
@@ -106,6 +108,7 @@
   components:
   - type: Item
     size: Small
+    heldPrefix: produce
   - type: FlavorProfile
     flavors:
       - demonicwatermelon
@@ -201,6 +204,8 @@
   id: FoodBlueSpaceBanana
   description: "Weird blue banana"
   components:
+  - type: Item
+    heldPrefix: produce
   - type: FlavorProfile
     flavors:
       - banana
@@ -355,6 +360,8 @@
   id: FoodEnergyPotato
   description: "Potatoes with a huge amount of nutrients!"
   components:
+  - type: Item
+    heldPrefix: produce
   - type: FlavorProfile
     flavors:
       - Potato
@@ -405,6 +412,8 @@
   id: FoodInvisibleGrape
   description: "Barely noticeable grapes."
   components:
+  - type: Item
+    heldPrefix: produce
   - type: FlavorProfile
     flavors:
       - grape
@@ -418,7 +427,7 @@
         - ReagentId: Nothing
           Quantity: 2
   - type: Sprite
-    sprite: _Wega/Objects/Specific/Hydroponics/invisible_grape.rsi
+    sprite: _Wega/Objects/Specific/Hydroponics/Invisiblgrape.rsi
   - type: Produce
     seedId: invisibleGrape
   - type: Extractable
