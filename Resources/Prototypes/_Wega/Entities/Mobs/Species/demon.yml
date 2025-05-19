@@ -19,6 +19,8 @@
   - type: Body
     prototype: Demon
     requiredLegs: 2
+  - type: Carriable # Corvax-Wega-Carrying
+  - type: DiseaseCarrier # Corvax-Wega-Disease
   - type: Speech
     speechSounds: Lizard
   - type: Vocal
