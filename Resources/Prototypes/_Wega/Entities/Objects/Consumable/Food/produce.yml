@@ -87,16 +87,12 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Cellulose
-          Quantity: 5
+        - ReagentId: Monenium
+          Quantity: 10
   - type: Item
     heldPrefix: produce
   - type: Produce
     seedId: moneyCabbage
-  - type: SpawnItemsOnUse
-    items:
-      - type: entity
-      - id: SpaceCash75
     sound:
       path: /Audio/Effects/unwrap.ogg
 
