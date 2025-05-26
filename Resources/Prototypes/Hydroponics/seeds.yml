@@ -694,7 +694,7 @@
   productPrototypes:
     - FoodCabbage
   mutationPrototypes: # Corvax-Wega-HydroponicsUpdate
-    - MoneyCabbage    # Corvax-Wega-HydroponicsUpdate
+    - moneyCabbage    # Corvax-Wega-HydroponicsUpdate
   lifespan: 50
   maturation: 7
   production: 5

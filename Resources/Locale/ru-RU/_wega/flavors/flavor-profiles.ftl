@@ -47,3 +47,4 @@ flavor-complex-tick-tack = как тиканье часов
 flavor-complex-uragan-shot = как порывы ветра
 flavor-complex-new-yorker = как крах
 flavor-complex-demonic-watermelon = как порченый арбуз
+flavor-base-money = как ваша зарплата
