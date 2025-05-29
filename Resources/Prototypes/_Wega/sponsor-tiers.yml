@@ -7,6 +7,7 @@
 - type: sponsorTier
   id: Spark
   name: Искра в вакууме
+  priorityJoin: true
   extraCharSlots: 5
   oocColor: "#FCD53F"
 
