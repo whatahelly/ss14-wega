@@ -78,6 +78,9 @@ public sealed class HeartSystem : EntitySystem
 
     private void PumpBlood(EntityUid bodyUid, HeartComponent heart)
     {
+        if (!HasComp<BloodstreamComponent>(bodyUid))
+            return;
+
         var pumpAmount = heart.Efficiency * 5.0f;
         _bloodstreamSystem.CirculateBlood(bodyUid, pumpAmount);
 

@@ -180,7 +180,10 @@ public sealed partial class SurgerySystem : EntitySystem
     public void CheckAndRemoveInvalidClothing(Entity<OperatedComponent> ent)
     {
         if (!HasRequiredLimbs(ent, BodyPartType.Leg) || !HasRequiredLimbs(ent, BodyPartType.Foot))
+        {
             _inventory.TryUnequip(ent, "shoes", force: true);
+            _inventory.TryUnequip(ent, "socks", force: true);
+        }
 
         if (!HasRequiredLimbs(ent, BodyPartType.Arm) || !HasRequiredLimbs(ent, BodyPartType.Hand))
             _inventory.TryUnequip(ent, "gloves", force: true);

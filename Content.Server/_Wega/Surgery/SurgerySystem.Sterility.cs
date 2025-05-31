@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.Body.Components;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Surgery.Components;
@@ -43,7 +44,7 @@ public sealed partial class SurgerySystem
         var bystanders = _entityLookup.GetEntitiesInRange<BodyComponent>(
             Transform(patient).Coordinates, 2f)
             .Where(e => e.Owner != patient && e.Owner != operated.Surgeon
-                && !_mobState.IsDead(e.Owner))
+                && !_mobState.IsDead(e.Owner) && !HasComp<GhostComponent>(e.Owner))
             .Count();
 
         float bystanderModifier = bystanders switch
@@ -58,7 +59,7 @@ public sealed partial class SurgerySystem
         var corpses = _entityLookup.GetEntitiesInRange<BodyComponent>(
             Transform(patient).Coordinates, 2f)
             .Where(e => e.Owner != patient && e.Owner != operated.Surgeon
-                && _mobState.IsDead(e.Owner))
+                && _mobState.IsDead(e.Owner) && !HasComp<GhostComponent>(e.Owner))
             .Count();
 
         sterility *= 1f - corpses * 0.05f;
