@@ -65,8 +65,11 @@ public sealed partial class SurgerySystem
             if (damage <= 0)
                 continue;
 
-            var possibleDamage = GetMatchingDamagePrototype(typeId);
-            TryAddInternalDamages(ent, possibleDamage);
+            var possibleDamages = GetMatchingDamagePrototypes(typeId);
+            if (possibleDamages.Count == 0)
+                continue;
+
+            TryAddInternalDamages(ent, _random.Pick(possibleDamages));
         }
     }
 
@@ -216,11 +219,11 @@ public sealed partial class SurgerySystem
         }
     }
 
-    private InternalDamagePrototype GetMatchingDamagePrototype(string id)
+    private List<InternalDamagePrototype> GetMatchingDamagePrototypes(string id)
     {
-        return _random.Pick(_proto.EnumeratePrototypes<InternalDamagePrototype>()
+        return _proto.EnumeratePrototypes<InternalDamagePrototype>()
             .Where(p => p.SupportedTypes.Contains(id))
-            .ToList());
+            .ToList();
     }
 
     private void TryAddInternalDamages(Entity<OperatedComponent> ent, InternalDamagePrototype possibleDamage)

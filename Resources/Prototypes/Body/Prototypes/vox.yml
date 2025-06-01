@@ -18,10 +18,10 @@
       - right_leg
       - left_leg
       organs:
-        heart: OrganHumanHeart
+        heart: OrganVoxHeart
         lungs: OrganVoxLungs
-        stomach: OrganHumanStomach
-        liver: OrganHumanLiver
+        stomach: OrganVoxStomach
+        liver: OrganVoxLiver
         kidneys: OrganHumanKidneys
     right_arm:
       part: RightArmVox

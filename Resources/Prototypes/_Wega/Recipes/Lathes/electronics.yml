@@ -12,3 +12,18 @@
   parent: BaseGoldCircuitboardRecipe
   id: BodyScannerComputerCircuitboard
   result: BodyScannerComputerCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: VaccinatorMachineCircuitboard
+  result: VaccinatorMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: DiagnoserMachineCircuitboard
+  result: DiagnoserMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: MedicalScannerMachineCircuitboard
+  result: MedicalScannerMachineCircuitboard

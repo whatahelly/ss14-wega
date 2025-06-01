@@ -3,8 +3,6 @@ using Content.Shared.Damage;
 using Content.Shared.Revenant;
 using Robust.Shared.Random;
 using Content.Shared.Tag;
-using Content.Server.Disease; // Corvax-Wega-Disease
-using Content.Server.Disease.Components; // Corvax-Wega-Disease
 using Content.Server.Storage.Components;
 using Content.Server.Light.Components;
 using Content.Server.Ghost;
@@ -34,6 +32,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 // Corvax-Wega-Revenant-start
 using Content.Server.Administration;
+using Content.Server.Disease;
 using Content.Server.Hallucinations;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
@@ -47,6 +46,7 @@ using Content.Shared.Weapons.Melee;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared.Disease.Components;
 // Corvax-Wega-Revenant-end
 
 namespace Content.Server.Revenant.EntitySystems;

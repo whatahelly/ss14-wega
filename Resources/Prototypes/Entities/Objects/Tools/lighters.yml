@@ -88,6 +88,7 @@
     radius: 1.1 #smallest possible
     color: orange
   - type: ItemTogglePointLight
+  - type: PhysicalComposition
   # Corvax-Wega-Surgery-start
   - type: Tag
     tags:

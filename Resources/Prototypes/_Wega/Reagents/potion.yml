@@ -75,7 +75,6 @@
     Special:
       methods: [ Touch ]
       effects:
-      - !type:ChemChillProtectionEffect
       - !type:AdjustTemperature
         amount: -5000
   metabolisms:
