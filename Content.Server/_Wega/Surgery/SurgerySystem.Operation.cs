@@ -11,7 +11,6 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Surgery;
 using Content.Shared.Surgery.Components;
-using Content.Shared.Tools;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -22,19 +21,6 @@ public sealed partial class SurgerySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-
-    [ValidatePrototypeId<ToolQualityPrototype>]
-    private readonly List<string> _surgeryTools = new()
-    {
-        "Scalpel",
-        "Hemostat",
-        "Retractor",
-        "Cautery",
-        "Drilling",
-        "FixOVein",
-        "BoneGel",
-        "BoneSetter"
-    };
 
     private void PerformSurgeryEffect(SurgeryActionType action, string? requiredPart, ProtoId<InternalDamagePrototype>? damageType, float successChance, List<SurgeryFailedType> failureEffect, EntityUid patient, EntityUid? item)
     {
@@ -325,7 +311,9 @@ public sealed partial class SurgerySystem
     {
         var item = _hands.GetActiveItemOrSelf(surgeon);
         if (HasComp<SurgicalSkillComponent>(surgeon) && ent.Comp.Sterility == 1f
-            && _surgeryTools.Any(tool => _tool.HasQuality(item, tool)))
+            && _surgeryTools.Any(tool => _tool.HasQuality(item, tool))
+            || _organs.Any(tag => _tag.HasTag(item, tag))
+            || _parts.Any(tag => _tag.HasTag(item, tag)))
         {
             return true;
         }

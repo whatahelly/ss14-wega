@@ -17,7 +17,9 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Surgery.Components;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -46,6 +48,46 @@ public sealed partial class SurgerySystem : EntitySystem
     private const string SlashDamage = "Slash";
     [ValidatePrototypeId<DamageTypePrototype>]
     private const string HeatDamage = "Heat";
+
+    [ValidatePrototypeId<ToolQualityPrototype>]
+    private readonly List<string> _surgeryTools = new()
+    {
+        "Scalpel",
+        "Hemostat",
+        "Retractor",
+        "Cautery",
+        "Drilling",
+        "FixOVein",
+        "BoneGel",
+        "BoneSetter"
+    };
+
+    [ValidatePrototypeId<TagPrototype>]
+    private readonly List<string> _organs = new()
+    {
+        "Brain",
+        "Eyes",
+        "Heart",
+        "Lungs",
+        "Kidneys",
+        "Liver",
+        "Stomach",
+        "SlimeCore"
+    };
+
+    [ValidatePrototypeId<TagPrototype>]
+    private readonly List<string> _parts = new()
+    {
+        "Head",
+        "LeftArm",
+        "RightArm",
+        "LeftHand",
+        "RightHand",
+        "LeftLeg",
+        "RightLeg",
+        "LeftFoot",
+        "RightFoot"
+    };
 
     public override void Initialize()
     {

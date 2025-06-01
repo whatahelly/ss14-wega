@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.Body.Organ;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands.Components;
 using Content.Shared.Surgery;
 using Content.Shared.Surgery.Components;
 using Content.Shared.Tag;
@@ -20,19 +21,6 @@ public sealed partial class SurgerySystem
         SubscribeLocalEvent<OperatedComponent, SurgeryStartMessage>(OnSurgeryStart);
         SubscribeLocalEvent<OperatedComponent, SurgeryStepDoAfterEvent>(OnSurgeryStepDoAfter);
     }
-
-    [ValidatePrototypeId<TagPrototype>]
-    private readonly List<string> _tags = new()
-    {
-        "Brain",
-        "Eyes",
-        "Heart",
-        "Lungs",
-        "Kidneys",
-        "Liver",
-        "Stomach",
-        "SlimeCore"
-    };
 
     /// <summary>
     /// Handles the start of a surgery procedure, setting up the operation state and starting the operation chain.
@@ -349,10 +337,18 @@ public sealed partial class SurgerySystem
         if (user == patient)
             time *= HasComp<SurgicalSkillComponent>(user) ? 3f : 5f;
 
-        var item = _hands.GetActiveItemOrSelf(user);
+        if (!TryComp<HandsComponent>(user, out var hands))
+            return;
 
-        bool toolValid = step.Tool == null || step.Tool.Count == 0 || step.Tool.Any(tool => _tool.HasQuality(item, tool));
-        bool tagValid = step.Tag == null || step.Tag.Count == 0 || step.Tag.Any(tag => _tag.HasTag(item, tag));
+        _hands.TryGetActiveItem((user, hands), out var item);
+        if (item == null)
+        {
+            _popup.PopupEntity(Loc.GetString("surgery-missing-tool"), user, user);
+            return;
+        }
+
+        bool toolValid = step.Tool == null || step.Tool.Count == 0 || step.Tool.Any(tool => _tool.HasQuality(item.Value, tool));
+        bool tagValid = step.Tag == null || step.Tag.Count == 0 || step.Tag.Any(tag => _tag.HasTag(item.Value, tag));
 
         if (!toolValid && !tagValid)
         {
@@ -369,7 +365,7 @@ public sealed partial class SurgerySystem
                 stepIndex = parallelGroup.Steps.IndexOf(step);
         }
 
-        if (!string.IsNullOrEmpty(step.RequiredPart) && !ValidateSurgicalTool(item, step.RequiredPart))
+        if (!string.IsNullOrEmpty(step.RequiredPart) && !ValidateSurgicalTool(item.Value, step.RequiredPart))
         {
             _popup.PopupEntity(Loc.GetString("surgery-incorrect-insert"), user, user);
             return;
@@ -426,7 +422,7 @@ public sealed partial class SurgerySystem
         if (_surgeryTools.Any(tool => _tool.HasQuality(item, tool)))
             return true;
 
-        if (!_tags.Contains(requiredPart) || !HasComp<OrganComponent>(item))
+        if (!_organs.Contains(requiredPart) || !HasComp<OrganComponent>(item))
             return true;
 
         return _tag.HasTag(item, requiredPart);
