@@ -38,7 +38,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Blood.Cult;
 
-public sealed partial class BloodCultSystem : EntitySystem
+public sealed partial class BloodCultSystem : SharedBloodCultSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly BodySystem _body = default!;
@@ -442,56 +442,6 @@ public sealed partial class BloodCultSystem : EntitySystem
     }
     #endregion
 
-    #region Deconvertation
-    public void CultistDeconvertation(EntityUid cultist)
-    {
-        if (!TryComp<BloodCultistComponent>(cultist, out var bloodCultist))
-            return;
-
-        if (TryComp<ActionsContainerComponent>(cultist, out var actionsContainer))
-        {
-            foreach (var actionId in actionsContainer.Container.ContainedEntities.ToArray())
-            {
-                if (!TryComp(actionId, out MetaDataComponent? meta))
-                    continue;
-
-                var protoId = meta.EntityPrototype?.ID;
-                if (protoId == BloodCultistComponent.CultObjective
-                    || protoId == BloodCultistComponent.CultCommunication
-                    || protoId == BloodCultistComponent.BloodMagic
-                    || protoId == BloodCultistComponent.RecallBloodDagger)
-                {
-                    _action.RemoveAction(cultist, actionId);
-                }
-            }
-        }
-
-        if (bloodCultist.RecallSpearActionEntity != null)
-            _action.RemoveAction(cultist, bloodCultist.RecallSpearActionEntity);
-
-        if (bloodCultist.SelectedSpell != null)
-            _action.RemoveAction(cultist, bloodCultist.SelectedSpell.Value);
-
-        foreach (var spell in bloodCultist.SelectedEmpoweringSpells)
-        {
-            if (spell != null)
-            {
-                _action.RemoveAction(cultist, spell.Value);
-            }
-        }
-
-        var stunTime = TimeSpan.FromSeconds(4);
-        var name = Identity.Entity(cultist, EntityManager);
-
-        _stun.TryParalyze(cultist, stunTime, true);
-        _popup.PopupEntity(Loc.GetString("blood-cult-break-control", ("name", name)), cultist);
-
-        RemComp<BloodCultistComponent>(cultist);
-        if (HasComp<CultistEyesComponent>(cultist)) RemComp<CultistEyesComponent>(cultist);
-        if (HasComp<PentagramDisplayComponent>(cultist)) RemComp<PentagramDisplayComponent>(cultist);
-    }
-    #endregion
-
     #region Dagger
     private void OnInteract(EntityUid uid, BloodDaggerComponent component, AfterInteractEvent args)
     {
@@ -667,8 +617,6 @@ public sealed partial class BloodCultSystem : EntitySystem
 
         if (!string.IsNullOrWhiteSpace(mind.CharacterName))
             metaDataSystem.SetEntityName(soul, mind.CharacterName);
-        else if (!string.IsNullOrWhiteSpace(mind.Session?.Name))
-            metaDataSystem.SetEntityName(soul, mind.Session.Name);
 
         _mind.Visit(mindId, soul, mind);
         component.SoulEntity = soul;

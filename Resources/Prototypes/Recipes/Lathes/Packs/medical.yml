@@ -94,6 +94,8 @@
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
+  - LauncherSyringe
+  - MiniSyringe
   - LargeBeaker # Corvax-Wega-Add
 
 - type: latheRecipePack

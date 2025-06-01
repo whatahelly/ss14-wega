@@ -121,20 +121,6 @@
 
 # Alcohol
 - type: reaction
-  id: Eggnog
-  requiredMixerCategories:
-  - Shake
-  reactants:
-    Cream:
-      amount: 1
-    Egg:
-      amount: 1
-    Rum:
-      amount: 1
-  products:
-    Eggnog: 3
-
-- type: reaction
   id: FlamingMoe
   minTemp: 374
   reactants:
@@ -512,20 +498,6 @@
       amount: 2
   products:
     WhiteBear: 5
-
-- type: reaction
-  id: Vampiro
-  requiredMixerCategories:
-  - Shake
-  reactants:
-    Tequila:
-      amount: 2
-    JuiceTomato:
-      amount: 1
-    JuiceBerry:
-      amount: 1
-  products:
-    Vampiro: 4
 
 - type: reaction
   id: QueenMary

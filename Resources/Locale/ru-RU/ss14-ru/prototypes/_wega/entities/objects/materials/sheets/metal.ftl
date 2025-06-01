@@ -4,6 +4,3 @@ ent-SheetRuneMetal = рунический метал
 ent-SheetRuneMetal1 = { ent-SheetRuneMetal }
     .suffix = Один, НЕ МАППИТЬ
     .desc = { ent-SheetSteel.desc }
-ent-SheetPlasteelLingering0 = { ent-SheetPlasteel }
-    .suffix = Не исчезают закончившись, 0
-    .desc = { ent-SheetPlasteel.desc }

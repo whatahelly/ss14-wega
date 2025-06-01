@@ -34,11 +34,6 @@
   description: flavor-complex-sheridan
 
 - type: flavor
-  id: eggnog
-  flavorType: Complex
-  description: flavor-complex-eggnog
-
-- type: flavor
   id: blackblood
   flavorType: Complex
   description: flavor-complex-black-blood
@@ -152,11 +147,6 @@
   id: whitebear
   flavorType: Complex
   description: flavor-complex-white-bear
-
-- type: flavor
-  id: vampiro
-  flavorType: Complex
-  description: flavor-complex-vampiro
 
 - type: flavor
   id: queenmary

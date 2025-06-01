@@ -1,5 +1,5 @@
-using Content.Server.Disease.Components;
 using Content.Shared.Clothing;
+using Content.Shared.Disease.Components;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
