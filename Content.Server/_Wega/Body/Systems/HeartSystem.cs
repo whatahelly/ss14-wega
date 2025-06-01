@@ -81,7 +81,7 @@ public sealed class HeartSystem : EntitySystem
         if (!HasComp<BloodstreamComponent>(bodyUid))
             return;
 
-        var pumpAmount = heart.Efficiency * 5.0f;
+        var pumpAmount = heart.Efficiency * 1.5f;
         _bloodstreamSystem.CirculateBlood(bodyUid, pumpAmount);
 
         var ev = new HeartBeatEvent(heart.Efficiency);

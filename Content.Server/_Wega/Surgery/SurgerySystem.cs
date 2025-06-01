@@ -112,6 +112,7 @@ public sealed partial class SurgerySystem : EntitySystem
     private void OnRejuvenate(Entity<OperatedComponent> ent, ref RejuvenateEvent args)
     {
         ent.Comp.InternalDamages.Clear();
+        ent.Comp.ResetOperationState("Default");
         RestoreMissingLimbs(ent);
     }
 
@@ -219,7 +220,6 @@ public sealed partial class SurgerySystem : EntitySystem
 
     private void OnThrow(Entity<SterileComponent> entity, ref BeforeThrowEvent args)
         => RemCompDeferred<SterileComponent>(entity);
-
 
     private bool TryGetOperatingTable(EntityUid patient, out float tableModifier)
     {

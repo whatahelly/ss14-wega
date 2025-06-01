@@ -1,3 +1,4 @@
+using System.Linq; // Corvax-Wega-Surgery
 using Content.Server.Body.Components;
 using Content.Server.EntityEffects.Effects;
 using Content.Server.Fluids.EntitySystems;
@@ -12,6 +13,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Drunk;
+using Content.Shared.EntityEffects; // Corvax-Wega-Surgery
 using Content.Shared.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
@@ -503,25 +505,89 @@ public sealed class BloodstreamSystem : EntitySystem
 
     // Corvax-Wega-Surgery-start
     /// <summary>
-    /// Circulates blood through the body, distributing chemicals.
+    /// Metabolizes substances from the body's chemical solution.
     /// </summary>
     public void CirculateBlood(EntityUid uid, float efficiency, BloodstreamComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
+        var metabolizers = new List<MetabolizerComponent>();
+        if (TryComp<BodyComponent>(uid, out var body))
+        {
+            foreach (var organ in _body.GetBodyOrgans(uid, body))
+            {
+                if (TryComp<MetabolizerComponent>(organ.Id, out var metabolizer))
+                {
+                    metabolizers.Add(metabolizer);
+                }
+            }
+        }
+
         if (!_solutionContainerSystem.ResolveSolution(uid, component.ChemicalSolutionName,
-            ref component.ChemicalSolution, out var chemSolution) ||
-            !_solutionContainerSystem.ResolveSolution(uid, component.BloodSolutionName,
-            ref component.BloodSolution, out var bloodSolution))
+            ref component.ChemicalSolution, out var chemSolution) || chemSolution.Volume <= 0)
             return;
 
-        if (chemSolution.Volume > 0 && bloodSolution.Volume > 0)
+        var random = new Random();
+        var reagents = chemSolution.Contents.ToArray();
+        random.Shuffle(reagents);
+
+        int processedReagents = 0;
+        foreach (var (reagentId, quantity) in reagents)
         {
-            var transferAmount = chemSolution.Volume * efficiency * 0.1f;
-            var transferSolution = _solutionContainerSystem.SplitSolution(component.ChemicalSolution.Value, transferAmount);
-            _solutionContainerSystem.TryAddSolution(component.BloodSolution.Value, transferSolution);
+            if (processedReagents >= component.MaxReagentsProcessable)
+                break;
+
+            if (!_prototypeManager.TryIndex<ReagentPrototype>(reagentId.Prototype, out var reagentProto) ||
+                reagentProto.Metabolisms == null)
+                continue;
+
+            bool canMetabolize = metabolizers.Any(m =>
+                m.MetabolismGroups?.Any(g => reagentProto.Metabolisms.ContainsKey(g.Id)) ?? false);
+
+            if (!canMetabolize)
+                continue;
+
+            var amountToProcess = quantity * efficiency * component.MetabolismRate;
+            amountToProcess = FixedPoint2.Min(amountToProcess, quantity);
+
+            if (amountToProcess <= 0)
+                continue;
+
+            foreach (var metabolizer in metabolizers)
+            {
+                if (metabolizer.MetabolismGroups == null)
+                    continue;
+
+                foreach (var group in metabolizer.MetabolismGroups)
+                {
+                    if (!reagentProto.Metabolisms.TryGetValue(group.Id, out var entry))
+                        continue;
+
+                    var scaledAmount = amountToProcess * entry.MetabolismRate * group.MetabolismRateModifier;
+                    var args = new EntityEffectReagentArgs(
+                        uid,
+                        EntityManager,
+                        uid,
+                        chemSolution,
+                        scaledAmount,
+                        reagentProto,
+                        null,
+                        (float)scaledAmount / (float)entry.MetabolismRate);
+
+                    foreach (var effect in entry.Effects)
+                    {
+                        if (effect.ShouldApply(args))
+                            effect.Effect(args);
+                    }
+                }
+            }
+
+            _solutionContainerSystem.RemoveReagent(component.ChemicalSolution.Value, reagentId, amountToProcess);
+            processedReagents++;
         }
+
+        _solutionContainerSystem.UpdateChemicals(component.ChemicalSolution.Value);
     }
     // Corvax-Wega-Surgery-end
 

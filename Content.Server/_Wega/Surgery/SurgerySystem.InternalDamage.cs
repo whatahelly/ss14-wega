@@ -224,7 +224,12 @@ public sealed partial class SurgerySystem
                 && damageProto.BlacklistSpecies.Contains(humanoidAppearance.Species))
                 continue;
 
-            if (!_random.Prob(damageProto.Chance))
+            float armorModifier = 1f;
+            if (_inventory.TryGetSlotEntity(ent, "outerClothing", out var clothing)
+                && HasComp<ArmorComponent>(clothing))
+                armorModifier = 0.6f;
+
+            if (!_random.Prob(damageProto.Chance * armorModifier))
                 continue;
 
             var bodyPart = SelectBodyPart(ent.Owner, damageProto);
