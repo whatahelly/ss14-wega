@@ -133,6 +133,10 @@ public sealed partial class SurgerySystem
             return;
 
         damagedParts.Remove(requiredPart);
+        if (damagedParts.Count == 0)
+        {
+            patient.Comp.InternalDamages.Remove(damageType.Value);
+        }
     }
 
     private void PerformRemoveOrgan(Entity<OperatedComponent> patient, string? requiredOrgan, float successChance, List<SurgeryFailedType> failureEffect)
@@ -311,6 +315,7 @@ public sealed partial class SurgerySystem
     {
         var item = _hands.GetActiveItemOrSelf(surgeon);
         if (HasComp<SurgicalSkillComponent>(surgeon) && ent.Comp.Sterility == 1f
+            && HasComp<SterileComponent>(item)
             && _surgeryTools.Any(tool => _tool.HasQuality(item, tool))
             || _organs.Any(tag => _tag.HasTag(item, tag))
             || _parts.Any(tag => _tag.HasTag(item, tag)))

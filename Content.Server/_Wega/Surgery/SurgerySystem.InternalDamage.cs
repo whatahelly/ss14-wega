@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using Content.Server.Administration.Logs;
 using Content.Server.Body.Components;
 using Content.Server.Pain;
 using Content.Shared.Armor;
@@ -9,6 +10,7 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
@@ -26,6 +28,7 @@ namespace Content.Server.Surgery;
 
 public sealed partial class SurgerySystem
 {
+    [Dependency] private readonly IAdminLogManager _admin = default!;
     [Dependency] private readonly PainSystem _pain = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -52,7 +55,7 @@ public sealed partial class SurgerySystem
 
         ProcessDamageTypes(ent, args.DamageDelta);
         if (args.DamageDelta.DamageDict.TryGetValue(SlashDamage, out var slashDamage))
-            TryLoseRandomLimb(ent, slashDamage.Float());
+            TryLoseRandomLimb(ent, args.Origin.Value, slashDamage.Float());
     }
 
     private void ProcessDamageTypes(Entity<OperatedComponent> ent, DamageSpecifier damageDelta)
@@ -62,12 +65,12 @@ public sealed partial class SurgerySystem
             if (damage <= 0)
                 continue;
 
-            var possibleDamages = GetMatchingDamagePrototypes(typeId);
-            TryAddInternalDamages(ent, possibleDamages);
+            var possibleDamage = GetMatchingDamagePrototype(typeId);
+            TryAddInternalDamages(ent, possibleDamage);
         }
     }
 
-    private void TryLoseRandomLimb(Entity<OperatedComponent> patient, float slashDamage)
+    private void TryLoseRandomLimb(Entity<OperatedComponent> patient, EntityUid damager, float slashDamage)
     {
         if (slashDamage < 15f)
             return;
@@ -77,7 +80,7 @@ public sealed partial class SurgerySystem
             _inventory.TryGetSlotEntity(patient, "head", out var headItem);
             if (!headItem.HasValue || !HasComp<ArmorComponent>(headItem))
             {
-                TryDecapitate(patient);
+                TryDecapitate(patient, damager);
                 return;
             }
         }
@@ -127,10 +130,12 @@ public sealed partial class SurgerySystem
             var xform = Transform(patient);
             _transform.SetCoordinates(limbId, xform.Coordinates);
             _physics.ApplyLinearImpulse(limbId, _random.NextVector2() * 20f);
+
+            _admin.Add(LogType.Damaged, LogImpact.High, $"{ToPrettyString(damager):user} cuts off a {Name(limbId)} from {ToPrettyString(patient):target}");
         }
     }
 
-    private void TryDecapitate(EntityUid patient)
+    private void TryDecapitate(EntityUid patient, EntityUid damager)
     {
         var head = _body.GetBodyChildrenOfType(patient, BodyPartType.Head).FirstOrDefault();
         if (head == default)
@@ -157,6 +162,8 @@ public sealed partial class SurgerySystem
 
             _transform.SetCoordinates(head.Id, Transform(patient).Coordinates);
             _physics.ApplyLinearImpulse(head.Id, _random.NextVector2() * 40f);
+
+            _admin.Add(LogType.Damaged, LogImpact.High, $"{ToPrettyString(damager):user} cuts off a HEAD from {ToPrettyString(patient):target}");
         }
     }
 
@@ -209,34 +216,31 @@ public sealed partial class SurgerySystem
         }
     }
 
-    private List<InternalDamagePrototype> GetMatchingDamagePrototypes(string id)
+    private InternalDamagePrototype GetMatchingDamagePrototype(string id)
     {
-        return _proto.EnumeratePrototypes<InternalDamagePrototype>()
+        return _random.Pick(_proto.EnumeratePrototypes<InternalDamagePrototype>()
             .Where(p => p.SupportedTypes.Contains(id))
-            .ToList();
+            .ToList());
     }
 
-    private void TryAddInternalDamages(Entity<OperatedComponent> ent, List<InternalDamagePrototype> possibleDamages)
+    private void TryAddInternalDamages(Entity<OperatedComponent> ent, InternalDamagePrototype possibleDamage)
     {
-        foreach (var damageProto in possibleDamages)
+        if (TryComp<HumanoidAppearanceComponent>(ent, out var humanoidAppearance) && possibleDamage.BlacklistSpecies != null
+            && possibleDamage.BlacklistSpecies.Contains(humanoidAppearance.Species))
+            return;
+
+        float armorModifier = 1f;
+        if (_inventory.TryGetSlotEntity(ent, "outerClothing", out var clothing)
+            && HasComp<ArmorComponent>(clothing))
+            armorModifier = 0.6f;
+
+        if (!_random.Prob(possibleDamage.Chance * armorModifier))
+            return;
+
+        var bodyPart = SelectBodyPart(ent.Owner, possibleDamage);
+        if (bodyPart != null)
         {
-            if (TryComp<HumanoidAppearanceComponent>(ent, out var humanoidAppearance) && damageProto.BlacklistSpecies != null
-                && damageProto.BlacklistSpecies.Contains(humanoidAppearance.Species))
-                continue;
-
-            float armorModifier = 1f;
-            if (_inventory.TryGetSlotEntity(ent, "outerClothing", out var clothing)
-                && HasComp<ArmorComponent>(clothing))
-                armorModifier = 0.6f;
-
-            if (!_random.Prob(damageProto.Chance * armorModifier))
-                continue;
-
-            var bodyPart = SelectBodyPart(ent.Owner, damageProto);
-            if (bodyPart != null)
-            {
-                AddInternalDamage(ent.Comp, damageProto.ID, bodyPart);
-            }
+            AddInternalDamage(ent.Comp, possibleDamage.ID, bodyPart);
         }
     }
 

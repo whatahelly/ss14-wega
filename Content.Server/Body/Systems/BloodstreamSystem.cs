@@ -542,16 +542,32 @@ public sealed class BloodstreamSystem : EntitySystem
                 reagentProto.Metabolisms == null)
                 continue;
 
-            bool canMetabolize = metabolizers.Any(m =>
-                m.MetabolismGroups?.Any(g => reagentProto.Metabolisms.ContainsKey(g.Id)) ?? false);
+            FixedPoint2 maxMetabolismRate = FixedPoint2.Zero;
+            foreach (var metabolizer in metabolizers)
+            {
+                if (metabolizer.MetabolismGroups == null)
+                    continue;
 
-            if (!canMetabolize)
+                foreach (var group in metabolizer.MetabolismGroups)
+                {
+                    if (reagentProto.Metabolisms.TryGetValue(group.Id, out var entry))
+                    {
+                        var effectiveRate = entry.MetabolismRate * group.MetabolismRateModifier;
+                        if (effectiveRate > maxMetabolismRate)
+                        {
+                            maxMetabolismRate = effectiveRate;
+                        }
+                    }
+                }
+            }
+
+            if (maxMetabolismRate <= FixedPoint2.Zero)
                 continue;
 
-            var amountToProcess = quantity * efficiency * component.MetabolismRate;
+            var amountToProcess = quantity * efficiency * (float)maxMetabolismRate * component.MetabolismRate;
             amountToProcess = FixedPoint2.Min(amountToProcess, quantity);
 
-            if (amountToProcess <= 0)
+            if (amountToProcess <= FixedPoint2.Zero)
                 continue;
 
             foreach (var metabolizer in metabolizers)
@@ -564,7 +580,7 @@ public sealed class BloodstreamSystem : EntitySystem
                     if (!reagentProto.Metabolisms.TryGetValue(group.Id, out var entry))
                         continue;
 
-                    var scaledAmount = amountToProcess * entry.MetabolismRate * group.MetabolismRateModifier;
+                    var scaledAmount = amountToProcess * (entry.MetabolismRate * group.MetabolismRateModifier / maxMetabolismRate);
                     var args = new EntityEffectReagentArgs(
                         uid,
                         EntityManager,

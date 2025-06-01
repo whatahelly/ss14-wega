@@ -56,6 +56,7 @@ public sealed partial class SurgerySystem : EntitySystem
         "Hemostat",
         "Retractor",
         "Cautery",
+        "Sawing",
         "Drilling",
         "FixOVein",
         "BoneGel",

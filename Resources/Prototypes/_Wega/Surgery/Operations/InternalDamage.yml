@@ -8,7 +8,7 @@
   supportedTypes:
     - Blunt
     - Slash
-  chance: 0.12
+  chance: 0.06
 
 ### Ожоги 1-2 степени ###
 - type: internalDamage
@@ -20,7 +20,7 @@
   supportedTypes:
     - Heat
     - Shock
-  chance: 0.18
+  chance: 0.06
 
 ### Закрытые переломы ###
 - type: internalDamage
@@ -33,7 +33,7 @@
     - SlimePerson
   supportedTypes:
     - Blunt
-  chance: 0.08
+  chance: 0.02
 
 ### Открытые переломы ###
 - type: internalDamage
@@ -47,7 +47,7 @@
   supportedTypes:
     - Blunt
   bodyVisuals: surgery-open-fracture-visuals
-  chance: 0.04
+  chance: 0.01
 
 ### Внутренние кровотечения ###
 - type: internalDamage
@@ -60,17 +60,19 @@
     - SlimePerson
   supportedTypes:
     - Piercing
-  chance: 0.1
+  chance: 0.05
 
 ### Глубокие ожоги 3-4 степени ###
 - type: internalDamage
   id: DeepBurns
   name: surgery-deep-burns
   category: CriticalBurns
+  blacklistPart:
+    - head
   supportedTypes:
     - Heat
     - Shock
-  chance: 0.025
+  chance: 0.0025
 
 ### Пулевые ранения ###
 - type: internalDamage
@@ -81,4 +83,4 @@
     - head
   supportedTypes:
     - Piercing
-  chance: 0.15
+  chance: 0.05

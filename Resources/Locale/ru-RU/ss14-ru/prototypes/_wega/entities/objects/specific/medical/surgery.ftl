@@ -20,5 +20,5 @@ ent-SuperSurgerykit = большой хирургический набор
     .desc = Большой набор для переноса всего необходимого для хирургического вмешательства. Возможно ношение на поясе.
     .suffix = Пустой
 ent-SuperSurgerykitFilled = { ent-SuperSurgerykit }
-    .desc = { ent-SuperSurgerykitFilled.desc }
+    .desc = { ent-SuperSurgerykit.desc }
     .suffix = Полный
