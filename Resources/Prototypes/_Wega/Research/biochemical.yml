@@ -36,19 +36,6 @@
   - Hemostat
   - BodyScannerComputerCircuitboard
 
-# - type: technology
-#   id: MechanizedTreatment
-#   name: research-technology-mechanized-treatment
-#   icon:
-#     sprite: Mobs/Silicon/chassis.rsi
-#     state: medical
-#   discipline: Biochemical
-#   tier: 1
-#   cost: 7500
-#   recipeUnlocks:
-#   - BorgModuleAdvancedTreatment
-#   - BorgModuleDefibrillator
-
 - type: technology
   id: Virology
   name: research-technology-virology
@@ -78,6 +65,18 @@
   - CryoPodMachineCircuitboard
   - CryostasisBeaker
   - SyringeCryostasis
+
+- type: technology
+  id: MechanizedTreatment
+  name: research-technology-mechanized-treatment
+  icon:
+    sprite: Mobs/Silicon/chassis.rsi
+    state: medical
+  discipline: Biochemical
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - BorgModuleAdvancedChemical
 
 - type: technology
   id: ChemicalDispensary
