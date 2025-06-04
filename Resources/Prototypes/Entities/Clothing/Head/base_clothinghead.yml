@@ -27,7 +27,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: [ ClothingHeadBase, ClothingHeadDamageableBase ] # Corvax-Wega-Edit
   id: ClothingHeadBaseButcherable
   components:
   - type: Butcherable

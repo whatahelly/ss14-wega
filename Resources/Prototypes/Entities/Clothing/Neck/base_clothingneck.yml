@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: Clothing
+  parent: [ Clothing, ClothingNeckDamageableBase ] # Corvax-Wega-Edit
   id: ClothingNeckBase
   components:
   - type: Item
