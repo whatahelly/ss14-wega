@@ -31,7 +31,7 @@
 
 - type: entity
   id: ClothingMaskBaseButcherable
-  parent: ClothingMaskBase
+  parent: [ ClothingMaskBase, ClothingMasksDamageableBase ] # Corvax-Wega-Edit
   abstract: true
   components:
   - type: Butcherable
