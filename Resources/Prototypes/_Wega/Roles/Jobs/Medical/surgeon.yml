@@ -14,6 +14,11 @@
   - Medical
   - Maintenance
   - Cryogenics
+  special:
+  - !type:AddComponentSpecial
+    components:
+      - type: SurgicalSkill
+        modifier: 0.4
 
 - type: startingGear
   id: SurgeonGear
