@@ -5,6 +5,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Bed.Sleep;
+using Content.Shared.Crawling; // Corvax-Wega-Crawling
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands;
@@ -32,6 +33,7 @@ public abstract class SharedStunSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
+    [Dependency] private readonly SharedCrawlingSystem _crawling = default!; // Corvax-Wega-Crawling
 
     /// <summary>
     /// Friction modifier for knocked down players.
@@ -129,12 +131,16 @@ public abstract class SharedStunSystem : EntitySystem
 
     private void OnKnockInit(EntityUid uid, KnockedDownComponent component, ComponentInit args)
     {
-        _standingState.Down(uid);
+        // Corvax-Wega-Crawling-Edit
+        if (!_crawling.TryCrawl(uid))
+            _standingState.Down(uid);
     }
 
     private void OnKnockShutdown(EntityUid uid, KnockedDownComponent component, ComponentShutdown args)
     {
-        _standingState.Stand(uid);
+        // Corvax-Wega-Crawling-Edit
+        if (!TryComp<CrawlingComponent>(uid, out var crawling) || !crawling.IsCrawling)
+            _standingState.Stand(uid);
     }
 
     private void OnStandAttempt(EntityUid uid, KnockedDownComponent component, StandAttemptEvent args)

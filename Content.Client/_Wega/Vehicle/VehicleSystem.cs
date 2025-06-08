@@ -6,33 +6,11 @@ namespace Content.Client.Vehicle;
 
 public sealed class VehicleSystem : SharedVehicleSystem
 {
-    [Dependency] private EyeSystem _eye = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RiderComponent, ComponentStartup>(OnRiderStartup);
-        SubscribeLocalEvent<RiderComponent, ComponentShutdown>(OnRiderShutdown);
         SubscribeLocalEvent<VehicleComponent, AppearanceChangeEvent>(OnVehicleAppearanceChange);
-    }
-
-    private void OnRiderStartup(EntityUid uid, RiderComponent component, ComponentStartup args)
-    {
-        // Center the player's eye on the vehicle
-        if (TryComp(uid, out EyeComponent? eyeComp))
-        {
-            _eye.SetTarget(uid, eyeComp.Target ?? component.Vehicle, eyeComp);
-        }
-    }
-
-    private void OnRiderShutdown(EntityUid uid, RiderComponent component, ComponentShutdown args)
-    {
-        // reset the riders eye centering.
-        if (TryComp(uid, out EyeComponent? eyeComp))
-        {
-            _eye.SetTarget(uid, null, eyeComp);
-        }
     }
 
     private void OnVehicleAppearanceChange(EntityUid uid, VehicleComponent component, ref AppearanceChangeEvent args)

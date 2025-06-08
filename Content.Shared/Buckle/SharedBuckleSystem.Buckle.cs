@@ -112,6 +112,9 @@ public abstract partial class SharedBuckleSystem
 
     private void OnBuckleMove(Entity<BuckleComponent> ent, ref MoveEvent ev)
     {
+        if (HasComp<VehicleComponent>(ent.Comp.BuckledTo)) // Corvax-Wega-Vehicles
+            return; // Corvax-Wega-Vehicles
+
         BuckleTransformCheck(ent, ev.Component);
     }
 
