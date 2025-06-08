@@ -134,6 +134,8 @@ public abstract class SharedStunSystem : EntitySystem
         // Corvax-Wega-Crawling-Edit
         if (!_crawling.TryCrawl(uid))
             _standingState.Down(uid);
+        else
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
     }
 
     private void OnKnockShutdown(EntityUid uid, KnockedDownComponent component, ComponentShutdown args)
