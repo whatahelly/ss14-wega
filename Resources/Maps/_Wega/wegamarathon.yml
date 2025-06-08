@@ -4,8 +4,8 @@ meta:
   engineVersion: 260.2.0
   forkId: ""
   forkVersion: ""
-  time: 06/02/2025 00:23:25
-  entityCount: 23261
+  time: 06/07/2025 21:08:18
+  entityCount: 23267
 maps:
 - 5350
 grids:
@@ -11612,7 +11612,7 @@ entities:
       pos: 34.5,45.5
       parent: 30
     - type: Door
-      secondsUntilStateChange: -11712.637
+      secondsUntilStateChange: -11822.452
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15507,7 +15507,7 @@ entities:
   - uid: 2245
     components:
     - type: Transform
-      pos: -52.567253,52.64174
+      pos: -51.89737,53.555794
       parent: 30
   - uid: 7499
     components:
@@ -15536,7 +15536,7 @@ entities:
   - uid: 2110
     components:
     - type: Transform
-      pos: -28.454596,60.628906
+      pos: -27.425364,58.556747
       parent: 30
 - proto: BoxFolderBlack
   entities:
@@ -50746,12 +50746,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -66.47906,-63.39059
       parent: 30
-  - uid: 2111
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -28.5,59.5
-      parent: 30
   - uid: 2247
     components:
     - type: Transform
@@ -53034,12 +53028,12 @@ entities:
   - uid: 2161
     components:
     - type: Transform
-      pos: -27.597134,60.645412
+      pos: -27.487864,56.978622
       parent: 30
   - uid: 2162
     components:
     - type: Transform
-      pos: -27.565884,60.520412
+      pos: -27.487864,57.150497
       parent: 30
 - proto: ClothingHandsGlovesBoxingBlue
   entities:
@@ -108639,6 +108633,11 @@ entities:
     - type: Transform
       pos: 6.5,21.5
       parent: 30
+  - uid: 23267
+    components:
+    - type: Transform
+      pos: -24.5,-13.5
+      parent: 30
 - proto: PowerCellSmall
   entities:
   - uid: 2119
@@ -117553,7 +117552,7 @@ entities:
       pos: 33.5,15.5
       parent: 30
     - type: DnaServer
-      serverId: 4
+      serverId: 5
 - proto: RiotBulletShield
   entities:
   - uid: 23152
@@ -123052,6 +123051,49 @@ entities:
     - type: Transform
       pos: -43.5,47.5
       parent: 30
+- proto: SpawnVehicleSecway
+  entities:
+  - uid: 2103
+    components:
+    - type: Transform
+      pos: -37.5,48.5
+      parent: 30
+  - uid: 2111
+    components:
+    - type: Transform
+      pos: -28.5,60.5
+      parent: 30
+  - uid: 2116
+    components:
+    - type: Transform
+      pos: -27.5,60.5
+      parent: 30
+- proto: SpawnVehicleWheelchair
+  entities:
+  - uid: 23263
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -12.5,-19.5
+      parent: 30
+  - uid: 23264
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -12.5,-21.5
+      parent: 30
+- proto: SpawnVehicleWheelchairFolded
+  entities:
+  - uid: 23265
+    components:
+    - type: Transform
+      pos: -25.5,-11.5
+      parent: 30
+  - uid: 23266
+    components:
+    - type: Transform
+      pos: -25.5,-12.5
+      parent: 30
 - proto: SpawnVendingMachineRestockFood
   entities:
   - uid: 22423
@@ -126072,11 +126114,6 @@ entities:
     - type: Transform
       pos: -30.5,33.5
       parent: 30
-  - uid: 2020
-    components:
-    - type: Transform
-      pos: -37.5,48.5
-      parent: 30
   - uid: 2021
     components:
     - type: Transform
@@ -126086,21 +126123,6 @@ entities:
     components:
     - type: Transform
       pos: -38.5,60.5
-      parent: 30
-  - uid: 2103
-    components:
-    - type: Transform
-      pos: -28.5,60.5
-      parent: 30
-  - uid: 2104
-    components:
-    - type: Transform
-      pos: -27.5,60.5
-      parent: 30
-  - uid: 2105
-    components:
-    - type: Transform
-      pos: -27.5,59.5
       parent: 30
   - uid: 2106
     components:
@@ -129324,6 +129346,23 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 11.5,61.5
+      parent: 30
+- proto: VehicleKeySecway
+  entities:
+  - uid: 2020
+    components:
+    - type: Transform
+      pos: -44.71575,46.43561
+      parent: 30
+  - uid: 2104
+    components:
+    - type: Transform
+      pos: -44.27825,46.40436
+      parent: 30
+  - uid: 2105
+    components:
+    - type: Transform
+      pos: -44.497,46.40436
       parent: 30
 - proto: VendingBarDrobe
   entities:
@@ -145012,13 +145051,6 @@ entities:
       parent: 30
     - type: Physics
       canCollide: False
-  - uid: 2116
-    components:
-    - type: Transform
-      pos: -27.5,59.5
-      parent: 30
-    - type: Physics
-      canCollide: False
   - uid: 2117
     components:
     - type: Transform
@@ -145068,6 +145100,11 @@ entities:
       parent: 30
     - type: Physics
       canCollide: False
+  - uid: 23262
+    components:
+    - type: Transform
+      pos: -49.5,50.5
+      parent: 30
 - proto: WeaponDisablerPractice
   entities:
   - uid: 19811

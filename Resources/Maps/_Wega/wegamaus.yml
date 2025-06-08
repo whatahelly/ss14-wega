@@ -4,8 +4,8 @@ meta:
   engineVersion: 260.2.0
   forkId: ""
   forkVersion: ""
-  time: 06/02/2025 00:32:14
-  entityCount: 19554
+  time: 06/07/2025 21:10:44
+  entityCount: 19558
 maps:
 - 1
 grids:
@@ -17114,7 +17114,7 @@ entities:
       pos: -43.5,-45.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -46002.637
+      secondsUntilStateChange: -46132.543
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -49113,21 +49113,6 @@ entities:
       parent: 2
 - proto: ChairFoldingSpawnFolded
   entities:
-  - uid: 6287
-    components:
-    - type: Transform
-      pos: -66.30197,-34.174698
-      parent: 2
-  - uid: 6288
-    components:
-    - type: Transform
-      pos: -66.25737,-34.353092
-      parent: 2
-  - uid: 6289
-    components:
-    - type: Transform
-      pos: -66.40602,-34.144962
-      parent: 2
   - uid: 6290
     components:
     - type: Transform
@@ -53074,14 +53059,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingUniformJumpsuitNanotrasen
-  entities:
-  - uid: 6864
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -35.4633,-14.5562935
-      parent: 2
 - proto: ClothingUniformJumpsuitPirate
   entities:
   - uid: 6686
@@ -54073,10 +54050,10 @@ entities:
       parent: 2
 - proto: ComputerStationRecords
   entities:
-  - uid: 7004
+  - uid: 6864
     components:
     - type: Transform
-      pos: -18.5,-6.5
+      pos: -30.5,-16.5
       parent: 2
   - uid: 7005
     components:
@@ -65025,11 +65002,6 @@ entities:
     components:
     - type: Transform
       pos: -77.5,-48.5
-      parent: 2
-  - uid: 8520
-    components:
-    - type: Transform
-      pos: -30.5,-16.5
       parent: 2
   - uid: 8521
     components:
@@ -103291,7 +103263,7 @@ entities:
       pos: -45.5,-85.5
       parent: 2
     - type: DnaServer
-      serverId: 2
+      serverId: 3
 - proto: ResearchAndDevelopmentServerMachineCircuitboard
   entities:
   - uid: 19256
@@ -109489,6 +109461,43 @@ entities:
     - type: Transform
       pos: -21.5,4.5
       parent: 2
+- proto: SpawnVehicleSecway
+  entities:
+  - uid: 6289
+    components:
+    - type: Transform
+      pos: -18.5,-6.5
+      parent: 2
+  - uid: 7004
+    components:
+    - type: Transform
+      pos: -19.5,-6.5
+      parent: 2
+  - uid: 12051
+    components:
+    - type: Transform
+      pos: -20.5,-6.5
+      parent: 2
+- proto: SpawnVehicleWheelchair
+  entities:
+  - uid: 6288
+    components:
+    - type: Transform
+      pos: -55.5,-25.5
+      parent: 2
+  - uid: 12792
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -55.5,-27.5
+      parent: 2
+- proto: SpawnVehicleWheelchairFolded
+  entities:
+  - uid: 6287
+    components:
+    - type: Transform
+      pos: -66.5,-36.5
+      parent: 2
 - proto: SpearBone
   entities:
   - uid: 14507
@@ -114396,6 +114405,23 @@ entities:
     components:
     - type: Transform
       pos: -36.536545,-31.344757
+      parent: 2
+- proto: VehicleKeySecway
+  entities:
+  - uid: 7977
+    components:
+    - type: Transform
+      pos: -23.704521,3.7781687
+      parent: 2
+  - uid: 8520
+    components:
+    - type: Transform
+      pos: -23.532646,3.7625437
+      parent: 2
+  - uid: 11975
+    components:
+    - type: Transform
+      pos: -23.360771,3.7625437
       parent: 2
 - proto: VendingBarDrobe
   entities:

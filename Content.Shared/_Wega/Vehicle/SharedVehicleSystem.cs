@@ -108,7 +108,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             // Add a virtual item to rider's hand, unbuckle if we can't.
             if (!_virtualItemSystem.TrySpawnVirtualItemInHand(ent, args.Buckle))
             {
-                _buckle.TryUnbuckle(args.Buckle, ent);
+                _buckle.Unbuckle(args.Buckle.Owner, null);
                 return;
             }
         }

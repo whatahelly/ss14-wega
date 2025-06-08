@@ -4,8 +4,8 @@ meta:
   engineVersion: 260.2.0
   forkId: ""
   forkVersion: ""
-  time: 06/02/2025 00:24:40
-  entityCount: 15489
+  time: 06/07/2025 21:16:23
+  entityCount: 15493
 maps:
 - 126
 grids:
@@ -9636,7 +9636,7 @@ entities:
       pos: 44.5,30.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4226.9736
+      secondsUntilStateChange: -4260.6675
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -77032,7 +77032,7 @@ entities:
       pos: 49.5,25.5
       parent: 2
     - type: DnaServer
-      serverId: 3
+      serverId: 4
 - proto: Retractor
   entities:
   - uid: 6808
@@ -80699,6 +80699,27 @@ entities:
     components:
     - type: Transform
       pos: 38.5,18.5
+      parent: 2
+- proto: SpawnVehicleSecway
+  entities:
+  - uid: 15490
+    components:
+    - type: Transform
+      pos: 35.5,17.5
+      parent: 2
+- proto: SpawnVehicleWheelchair
+  entities:
+  - uid: 15492
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 62.5,-7.5
+      parent: 2
+  - uid: 15493
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 62.5,-6.5
       parent: 2
 - proto: SprayBottle
   entities:
@@ -84857,6 +84878,13 @@ entities:
     components:
     - type: Transform
       pos: 81.5,-7.5
+      parent: 2
+- proto: VehicleKeySecway
+  entities:
+  - uid: 15491
+    components:
+    - type: Transform
+      pos: 39.47116,21.609491
       parent: 2
 - proto: VendingBarDrobe
   entities:

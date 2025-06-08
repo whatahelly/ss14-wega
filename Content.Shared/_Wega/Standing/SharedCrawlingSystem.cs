@@ -126,8 +126,7 @@ public sealed class SharedCrawlingSystem : EntitySystem
 
     public bool TryCrawl(EntityUid uid, CrawlingComponent? crawling = null, StandingStateComponent? standing = null)
     {
-        if (!Resolve(uid, ref standing, false) || !Resolve(uid, ref crawling, false)
-            || _standing.IsDown(uid, standing))
+        if (!Resolve(uid, ref standing, false) || !Resolve(uid, ref crawling, false) || _standing.IsDown(uid, standing))
             return false;
 
         crawling.IsCrawling = true;
@@ -141,6 +140,9 @@ public sealed class SharedCrawlingSystem : EntitySystem
             return;
 
         if (!_mobState.IsAlive(uid) && !_mobState.IsPreCritical(uid) || HasComp<BeingCarriedComponent>(uid))
+            return;
+
+        if (TryComp<BuckleComponent>(uid, out var buckle) && buckle.BuckledTo != null)
             return;
 
         if (_standing.IsDown(uid, standing))
