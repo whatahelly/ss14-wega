@@ -23,7 +23,7 @@
       - id: ClothingOuterCoatWardenAlt # Corvax-SecFashion
       - id: ClothingBackpackWarden # Corvax-SecFashion
       - id: ClothingBackpackElectropack
-        amount: 2
+      - id: ClothingNeckShockCollar # Corvax-Wega-Add
       - id: RemoteSignaller
         amount: 2
 
@@ -50,8 +50,8 @@
       - id: HoloprojectorSecurity
       - id: BookSpaceLaw
       - id: ClothingBackpackWarden # Corvax-SecFashion
-      - id: ClothingBackpackElectropack
-        amount: 2
+      - id: ClothingBackpackElectropack 
+      - id: ClothingNeckShockCollar # Corvax-Wega-Add
       - id: RemoteSignaller
         amount: 2
       - id: Binoculars

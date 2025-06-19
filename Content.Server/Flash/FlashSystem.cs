@@ -22,6 +22,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Random;
 using InventoryComponent = Content.Shared.Inventory.InventoryComponent;
 using Robust.Shared.Prototypes;
+using Content.Shared.Clothing; // Corvax-Wega-Wielder
 
 namespace Content.Server.Flash
 {
@@ -50,6 +51,7 @@ namespace Content.Server.Flash
             // ran before toggling light for extra-bright lantern
             SubscribeLocalEvent<FlashComponent, UseInHandEvent>(OnFlashUseInHand, before: new[] { typeof(HandheldLightSystem) });
             SubscribeLocalEvent<InventoryComponent, FlashAttemptEvent>(OnInventoryFlashAttempt);
+            SubscribeLocalEvent<FlashImmunityComponent, ItemMaskToggledEvent>(OnMaskToggled); // Corvax-Wega-Wielder
             SubscribeLocalEvent<FlashImmunityComponent, FlashAttemptEvent>(OnFlashImmunityFlashAttempt);
             SubscribeLocalEvent<PermanentBlindnessComponent, FlashAttemptEvent>(OnPermanentBlindnessFlashAttempt);
             SubscribeLocalEvent<TemporaryBlindnessComponent, FlashAttemptEvent>(OnTemporaryBlindnessFlashAttempt);
@@ -199,6 +201,13 @@ namespace Content.Server.Flash
                     RaiseLocalEvent(item.Value, args, true);
             }
         }
+
+        // Corvax-Wega-Wielder-start
+        private void OnMaskToggled(EntityUid uid, FlashImmunityComponent component, ItemMaskToggledEvent args)
+        {
+            component.Enabled = !args.Mask.Comp.IsToggled;
+        }
+        // Corvax-Wega-Wielder-end
 
         private void OnFlashImmunityFlashAttempt(EntityUid uid, FlashImmunityComponent component, FlashAttemptEvent args)
         {
