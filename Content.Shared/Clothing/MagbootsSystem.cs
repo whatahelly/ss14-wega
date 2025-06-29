@@ -120,5 +120,28 @@ public sealed class SharedMagbootsSystem : EntitySystem
         if (_toggle.IsActivated(worn.Value) != shouldBeActive)
             _toggle.Toggle(worn.Value, ent);
     }
+
+    public bool IsWearingMagboots(EntityUid uid)
+    {
+        return _inventory.TryGetSlotEntity(uid, "shoes", out var boots)
+            && HasComp<MagbootsComponent>(boots);
+    }
+
+    public bool IsMagbootsActive(EntityUid uid)
+    {
+        if (!_inventory.TryGetSlotEntity(uid, "shoes", out var boots))
+            return false;
+
+        return _toggle.IsActivated(boots.Value);
+    }
+
+    public void ToggleMagboots(EntityUid uid, EntityUid? user = null)
+    {
+        if (!_inventory.TryGetSlotEntity(uid, "shoes", out var boots)
+            || !HasComp<MagbootsComponent>(boots))
+            return;
+
+        _toggle.Toggle(boots.Value, user ?? uid);
+    }
     // Corvax-Wega-AdvMagboots-end
 }

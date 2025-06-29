@@ -1,6 +1,7 @@
 using Content.Server.Atmos.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Clothing; // Corvax-Wega-AdvMagboots
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Robust.Shared.Audio;
@@ -14,6 +15,8 @@ namespace Content.Server.Atmos.EntitySystems
 {
     public sealed partial class AtmosphereSystem
     {
+        [Dependency] private readonly SharedMagbootsSystem _magboots = default!; // Corvax-Wega-AdvMagboots
+
         private const int SpaceWindSoundCooldownCycles = 75;
 
         private int _spaceWindSoundCooldown = 0;
@@ -207,6 +210,16 @@ namespace Content.Server.Atmos.EntitySystems
 
             if (!Resolve(uid, ref xform))
                 return;
+
+            // Corvax-Wega-AdvMagboots-start
+            if (_magboots.IsWearingMagboots(uid))
+            {
+                if (!_magboots.IsMagbootsActive(uid))
+                    _magboots.ToggleMagboots(uid, user: uid);
+
+                return;
+            }
+            // Corvax-Wega-AdvMagboots-end
 
             // TODO ATMOS stuns?
 
