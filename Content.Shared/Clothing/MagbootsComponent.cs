@@ -23,3 +23,9 @@ public sealed partial class MagbootsComponent : Component
     [DataField]
     public string Slot = "shoes";
 }
+
+// Corvax-Wega-AdvMagboots-start
+[RegisterComponent, NetworkedComponent]
+[Access(typeof(SharedMagbootsSystem))]
+public sealed partial class MagbootsUserComponent : Component;
+// Corvax-Wega-AdvMagboots-end
