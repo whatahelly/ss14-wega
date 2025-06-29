@@ -7,6 +7,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Popups; // Corvax-Wega-AdvMagboots
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Clothing;
@@ -18,6 +19,7 @@ public sealed class SharedMagbootsSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!; // Corvax-Wega-AdvMagboots
 
     public override void Initialize()
     {
@@ -102,7 +104,14 @@ public sealed class SharedMagbootsSystem : EntitySystem
 
             var shouldBeActive = !args.HasGravity;
             if (_toggle.IsActivated(uid) != shouldBeActive)
+            {
                 _toggle.Toggle(uid, container.Owner);
+
+                if (shouldBeActive)
+                    _popup.PopupClient(Loc.GetString("magboots-auto-on"), container.Owner, container.Owner);
+                else
+                    _popup.PopupClient(Loc.GetString("magboots-auto-off"), container.Owner, container.Owner);
+            }
         }
     }
 
@@ -118,7 +127,14 @@ public sealed class SharedMagbootsSystem : EntitySystem
 
         var shouldBeActive = !hasGravity;
         if (_toggle.IsActivated(worn.Value) != shouldBeActive)
+        {
             _toggle.Toggle(worn.Value, ent);
+
+            if (shouldBeActive)
+                _popup.PopupClient(Loc.GetString("magboots-auto-on"), ent, ent);
+            else
+                _popup.PopupClient(Loc.GetString("magboots-auto-off"), ent, ent);
+        }
     }
 
     public bool IsWearingMagboots(EntityUid uid)

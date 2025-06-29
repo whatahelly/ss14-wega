@@ -4,6 +4,7 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Clothing; // Corvax-Wega-AdvMagboots
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Shared.Popups; // Corvax-Wega-AdvMagboots
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -16,6 +17,7 @@ namespace Content.Server.Atmos.EntitySystems
     public sealed partial class AtmosphereSystem
     {
         [Dependency] private readonly SharedMagbootsSystem _magboots = default!; // Corvax-Wega-AdvMagboots
+        [Dependency] private readonly SharedPopupSystem _popup = default!; // Corvax-Wega-AdvMagboots
 
         private const int SpaceWindSoundCooldownCycles = 75;
 
@@ -211,16 +213,6 @@ namespace Content.Server.Atmos.EntitySystems
             if (!Resolve(uid, ref xform))
                 return;
 
-            // Corvax-Wega-AdvMagboots-start
-            if (_magboots.IsWearingMagboots(uid))
-            {
-                if (!_magboots.IsMagbootsActive(uid))
-                    _magboots.ToggleMagboots(uid, user: uid);
-
-                return;
-            }
-            // Corvax-Wega-AdvMagboots-end
-
             // TODO ATMOS stuns?
 
             var maxForce = MathF.Sqrt(pressureDifference) * 2.25f;
@@ -229,6 +221,19 @@ namespace Content.Server.Atmos.EntitySystems
             if (component.PressureResistance > 0)
                 moveProb = MathF.Abs((pressureDifference / component.PressureResistance * MovedByPressureComponent.ProbabilityBasePercent) -
                                      MovedByPressureComponent.ProbabilityOffset);
+
+            // Corvax-Wega-AdvMagboots-start
+            if (_magboots.IsWearingMagboots(uid))
+            {
+                if (!_magboots.IsMagbootsActive(uid) &&
+                    maxForce >= component.MoveResist * MovedByPressureComponent.MoveForcePushRatio)
+                {
+                    _magboots.ToggleMagboots(uid, user: uid);
+                    _popup.PopupEntity(Loc.GetString("magboots-auto-engaged-wind"), uid, uid);
+                    return;
+                }
+            }
+            // Corvax-Wega-AdvMagboots-end
 
             // Can we yeet the thing (due to probability, strength, etc.)
             if (moveProb > MovedByPressureComponent.ProbabilityOffset && _random.Prob(MathF.Min(moveProb / 100f, 1f))
