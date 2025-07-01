@@ -43,3 +43,15 @@
     back:
     - Flash
     - MedkitAdvancedFilled
+
+- type: chameleonOutfit
+  id: BrigmedicChameleonOutfit
+  job: Brigmedic
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretSecurityMedic
+    eyes: ClothingEyesHudMedSec
+    mask: ClothingMaskBreathMedicalSecurity
+    outerClothing: ClothingUniformJumpsuitBrigmedic
+    neck: ClothingNeckScarfStripedRed
+    gloves: ClothingHandsGlovesLatex

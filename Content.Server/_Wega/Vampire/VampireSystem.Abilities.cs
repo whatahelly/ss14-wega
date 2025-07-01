@@ -54,6 +54,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Actions.Components;
 
 namespace Content.Server.Vampire;
 
@@ -286,7 +287,7 @@ public sealed partial class VampireSystem
 
     private void OnBloodTendrils(EntityUid uid, VampireComponent component, VampireBloodTentacleAction args)
     {
-        if (args.Handled || args.Coords is not { } coords)
+        if (args.Handled)
             return;
 
         if (!CheckBloodEssence(uid, 10))
@@ -295,6 +296,7 @@ public sealed partial class VampireSystem
             return;
         }
 
+        var coords = args.Target;
         List<EntityCoordinates> spawnPos = new();
         spawnPos.Add(coords);
 
@@ -328,16 +330,13 @@ public sealed partial class VampireSystem
 
     private void OnBloodBarrierAction(EntityUid uid, VampireComponent component, VampireBloodBarrierActionEvent args)
     {
-        if (args.Coords is null)
-            return;
-
         if (!CheckBloodEssence(uid, 20))
         {
             _popup.PopupEntity(Loc.GetString("vampire-blood-sacrifice-insufficient-blood"), uid, uid, PopupType.SmallCaution);
             return;
         }
 
-        var targetCoords = args.Coords.Value;
+        var targetCoords = args.Target;
         if (args.UseCasterDirection)
         {
             var transform = Transform(uid);
@@ -633,16 +632,13 @@ public sealed partial class VampireSystem
 
     private void OnShadowSnare(EntityUid uid, VampireComponent component, VampireShadowSnareActionEvent args)
     {
-        if (args.Coords is null)
-            return;
-
         if (!CheckBloodEssence(uid, 20))
         {
             _popup.PopupEntity(Loc.GetString("vampire-blood-sacrifice-insufficient-blood"), uid, uid, PopupType.SmallCaution);
             return;
         }
 
-        var targetCoords = args.Coords.Value;
+        var targetCoords = args.Target;
         if (TrySpawnObjectAtPosition(targetCoords, args.EntityId, uid))
         {
             SubtractBloodEssence(uid, 20);
@@ -1126,8 +1122,7 @@ public sealed partial class VampireSystem
             return;
         }
 
-        if (args.Coords is not { } coords) return;
-
+        var coords = args.Target;
         var transformSystem = _entityManager.System<SharedTransformSystem>();
         var vampirePosition = _transform.GetWorldPosition(uid);
         var targetPosition = transformSystem.ToMapCoordinates(coords, true).Position;
@@ -1172,7 +1167,7 @@ public sealed partial class VampireSystem
     {
         component.MaxThrallCount++;
 
-        _action.RemoveAction(uid, args.Action);
+        _action.RemoveAction(uid, args.Action!);
     }
 
     private void OnAfterEnthrall(EntityUid uid, VampireComponent component, VampireEnthrallActionEvent args)
@@ -1314,7 +1309,7 @@ public sealed partial class VampireSystem
             return;
         }
 
-        var target = args.Entity;
+        var target = args.Target;
         if (!TryComp(target, out HumanoidAppearanceComponent? humanoid))
         {
             _popup.PopupEntity(Loc.GetString("vampire-teleport-failed"), uid, uid, PopupType.Small);
@@ -1322,11 +1317,11 @@ public sealed partial class VampireSystem
         }
 
         var currentCoords = Transform(uid).Coordinates;
-        var targetCoords = Transform(target.Value).Coordinates;
+        var targetCoords = Transform(target).Coordinates;
         _transform.SetCoordinates(uid, targetCoords);
-        _transform.SetCoordinates(target.Value, currentCoords);
-        _stun.TrySlowdown(target.Value, TimeSpan.FromSeconds(4f), true, 0.5f, 0.5f);
-        _hallucinations.StartHallucinations(target.Value, "Hallucinations", TimeSpan.FromSeconds(15f), true, "MindBreaker");
+        _transform.SetCoordinates(target, currentCoords);
+        _stun.TrySlowdown(target, TimeSpan.FromSeconds(4f), true, 0.5f, 0.5f);
+        _hallucinations.StartHallucinations(target, "Hallucinations", TimeSpan.FromSeconds(15f), true, "MindBreaker");
 
         SubtractBloodEssence(uid, 15);
         args.Handled = true;

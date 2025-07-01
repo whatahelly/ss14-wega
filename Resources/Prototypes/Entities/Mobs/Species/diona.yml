@@ -115,6 +115,7 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  - type: Rootable
   # Corvax-Wega-Genetics-start
   - type: DnaModifier
     upper: MobDiona

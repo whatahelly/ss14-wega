@@ -477,7 +477,7 @@ public sealed partial class BloodCultSystem
                     EnsureComp<BloodOrbComponent>(bloodOrb, out var orb);
                     orb.Blood = inputValue;
 
-                    _action.RemoveAction(cultist, args.Action);
+                    _action.RemoveAction(cultist, args.Action!);
                     _popup.PopupEntity(Loc.GetString("blood-orb-success", ("amount", inputValue)), cultist, cultist, PopupType.Medium);
                 }
             });
@@ -507,7 +507,7 @@ public sealed partial class BloodCultSystem
             veilShifterComponent.ActivationsCount = Math.Min(totalActivations + 4, 4);
         }
 
-        _action.RemoveAction(cultist, args.Action);
+        _action.RemoveAction(cultist, args.Action!);
     }
 
     private void OnBloodSpear(EntityUid cultist, BloodCultistComponent component, BloodCultBloodSpearActionEvent args)
@@ -537,7 +537,7 @@ public sealed partial class BloodCultSystem
 
         totalBlood -= 150;
         component.BloodCount = totalBlood;
-        _action.RemoveAction(cultist, args.Action);
+        _action.RemoveAction(cultist, args.Action!);
         args.Handled = true;
     }
 
@@ -585,7 +585,7 @@ public sealed partial class BloodCultSystem
 
         totalBlood -= 300;
         component.BloodCount = totalBlood;
-        _action.RemoveAction(cultist, args.Action);
+        _action.RemoveAction(cultist, args.Action!);
         args.Handled = true;
     }
     #endregion Blood Rites

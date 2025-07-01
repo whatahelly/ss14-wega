@@ -7,7 +7,6 @@ using Content.Server.Bible.Components;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
-using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Polymorph.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
@@ -39,6 +38,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Genetics;
+using Content.Shared.Nutrition.EntitySystems;
 
 namespace Content.Server.Vampire;
 
