@@ -430,6 +430,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         _stunSystem.UpdateStunModifiers(ent, ent.Comp.StunModifierThresholds[closest]);
     }
 
+    // Corvax-Wega-Add-start
     public void RemoveStaminaDamage(Entity<StaminaComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp))
@@ -444,4 +445,5 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         SetStaminaAlert(ent);
         Dirty(ent.Owner, ent.Comp);
     }
+    // Corvax-Wega-Add-end
 }
