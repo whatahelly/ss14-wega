@@ -1444,9 +1444,6 @@ public sealed partial class VampireSystem
         _statusEffect.TryRemoveStatusEffect(uid, "KnockedDown", status);
         _statusEffect.TryRemoveStatusEffect(uid, "Stun", status);
 
-        var ev = new KnockedDownEvent();
-        RaiseLocalEvent(uid, ref ev);
-
         return true;
     }
 

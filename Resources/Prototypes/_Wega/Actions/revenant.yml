@@ -8,6 +8,7 @@
     icon: { sprite: _Wega/Interface/Actions, state: transmit }
     itemIconStyle: BigAction
     useDelay: 5
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:RevenantTransmitActionEvent
 

@@ -22,6 +22,7 @@
     icon: { sprite: Clothing/Neck/Cloaks/void.rsi, state: "icon" }
     itemIconStyle: BigAction
     useDelay: 300
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:PolymorphismActionEvent
 

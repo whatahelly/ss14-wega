@@ -230,6 +230,7 @@
     icon: { sprite: _Wega/Interface/Actions/actions_bloodcult.rsi, state: "recharge" }
     itemIconStyle: BigAction
     useDelay: 5
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:BloodCultBloodRechargeActionEvent
 

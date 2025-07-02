@@ -24,6 +24,7 @@
     iconOn: { sprite: _Wega/Interface/Actions/actions_vampire.rsi, state: "bite-on" }
     backgroundOn: { sprite: _Wega/Interface/Actions/actions_vampire.rsi, state: "bg_vampire" }
     priority: -2
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:VampireDrinkingBloodActionEvent
 
@@ -56,6 +57,7 @@
       path: /Audio/_Wega/Effects/Vampire/glare.ogg
     useDelay: 30
     priority: 1
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:VampireGlareActionEvent
 
@@ -437,6 +439,7 @@
     icon: { sprite: _Wega/Interface/Actions/actions_vampire.rsi, state: "enthrall" }
     itemIconStyle: BigAction
     useDelay: 2
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:VampireEnthrallActionEvent
 
@@ -465,6 +468,7 @@
     icon: { sprite: _Wega/Interface/Actions/actions_vampire.rsi, state: "pacify" }
     itemIconStyle: BigAction
     useDelay: 10
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:VampirePacifyActionEvent
 
