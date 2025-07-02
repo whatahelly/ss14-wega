@@ -9,7 +9,7 @@ using Content.Server.Flash.Components;
 using Content.Server.Hallucinations;
 using Content.Server.Prayer;
 using Content.Server.Pinpointer;
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Chemistry.Components;
@@ -37,7 +37,6 @@ using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Standing;
-using Content.Shared.Stunnable;
 using Content.Shared.Vampire;
 using Content.Shared.Vampire.Components;
 using Content.Shared.Weapons.Melee;
@@ -53,8 +52,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using Content.Shared.Actions.Components;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.Vampire;
 
@@ -76,6 +74,7 @@ public sealed partial class VampireSystem
     [Dependency] private readonly HallucinationsSystem _hallucinations = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
 
     private void InitializePowers()
@@ -213,11 +212,10 @@ public sealed partial class VampireSystem
             return;
         }
 
-        if (TryComp<StaminaComponent>(uid, out var staminaComponent))
+        if (HasComp<StaminaComponent>(uid))
         {
-            staminaComponent.StaminaDamage = 0f;
-            staminaComponent.Critical = false;
-            TryRemoveKnockdown(uid);
+            RemoveKnockdown(uid);
+            _stamina.RemoveStaminaDamage(uid);
         }
 
         if (component.CurrentBlood >= 200)
@@ -852,11 +850,10 @@ public sealed partial class VampireSystem
             return;
         }
 
-        if (TryComp<StaminaComponent>(uid, out var staminaComponent))
+        if (HasComp<StaminaComponent>(uid))
         {
-            staminaComponent.StaminaDamage = 0f;
-            staminaComponent.Critical = false;
-            TryRemoveKnockdown(uid);
+            RemoveKnockdown(uid);
+            _stamina.RemoveStaminaDamage(uid);
         }
 
         if (component.CurrentBlood >= 200 && TryComp<DamageableComponent>(uid, out var damageableComponent))
@@ -1353,11 +1350,10 @@ public sealed partial class VampireSystem
         var thrallsInRange = _entityLookup.GetEntitiesInRange<ThrallComponent>(Transform(uid).Coordinates, 7f);
         foreach (var thrallEntity in thrallsInRange)
         {
-            if (TryComp<StaminaComponent>(thrallEntity.Owner, out var staminaComponent))
+            if (HasComp<StaminaComponent>(thrallEntity))
             {
-                staminaComponent.StaminaDamage = 0f;
-                staminaComponent.Critical = false;
-                TryRemoveKnockdown(thrallEntity.Owner);
+                RemoveKnockdown(thrallEntity);
+                _stamina.RemoveStaminaDamage(thrallEntity.Owner);
             }
         }
 
@@ -1436,15 +1432,13 @@ public sealed partial class VampireSystem
     #endregion
 
     #region Other Methods
-    public bool TryRemoveKnockdown(EntityUid uid, StatusEffectsComponent? status = null)
+    public void RemoveKnockdown(EntityUid uid, StatusEffectsComponent? status = null)
     {
         if (!Resolve(uid, ref status, false))
-            return false;
+            return;
 
         _statusEffect.TryRemoveStatusEffect(uid, "KnockedDown", status);
         _statusEffect.TryRemoveStatusEffect(uid, "Stun", status);
-
-        return true;
     }
 
     private void CoolSurroundingAtmosphere(EntityUid uid)
