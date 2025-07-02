@@ -91,7 +91,7 @@ public sealed partial class BloodCultSystem
     private void AfterRuneSelect(RuneSelectEvent args, EntitySessionEventArgs eventArgs)
     {
         var uid = _entityManager.GetEntity(args.Uid);
-        if (!TryComp<BloodCultistComponent>(uid, out _) || IsInSpace(uid))
+        if (!HasComp<BloodCultistComponent>(uid) || IsInSpace(uid))
             return;
 
         var selectedRune = args.RuneProto;
@@ -188,7 +188,7 @@ public sealed partial class BloodCultSystem
 
     private void OnRuneInteract(EntityUid rune, BloodRuneComponent component, InteractHandEvent args)
     {
-        if (args.Handled || !TryComp<BloodCultistComponent>(args.User, out _))
+        if (args.Handled || !HasComp<BloodCultistComponent>(args.User))
             return;
 
         if (rune is not { Valid: true } target)
@@ -203,7 +203,7 @@ public sealed partial class BloodCultSystem
 
     private void OnRitualInteract(EntityUid rune, BloodRitualDimensionalRendingComponent component, InteractHandEvent args)
     {
-        if (args.Handled || !TryComp<BloodCultistComponent>(args.User, out _))
+        if (args.Handled || !HasComp<BloodCultistComponent>(args.User))
             return;
 
         var currentTime = _gameTiming.RealTime;
@@ -248,7 +248,7 @@ public sealed partial class BloodCultSystem
                 foreach (var targetEntity in targets)
                 {
                     var target = targetEntity.Owner;
-                    if (TryComp<BloodCultistComponent>(target, out _) || TryComp<BloodCultConstructComponent>(target, out _))
+                    if (HasComp<BloodCultistComponent>(target) || HasComp<BloodCultConstructComponent>(target))
                         continue;
 
                     if (!_entityManager.TryGetComponent<MobThresholdsComponent>(target, out var targetThresholds))
@@ -389,7 +389,7 @@ public sealed partial class BloodCultSystem
                             continue;
 
                         var currentState = targetThresholds.CurrentThresholdState;
-                        if (TryComp<BloodCultistComponent>(target, out _) && TryComp<HumanoidAppearanceComponent>(target, out _)
+                        if (HasComp<BloodCultistComponent>(target) && HasComp<HumanoidAppearanceComponent>(target)
                             && currentState is MobState.Dead)
                         {
                             if (GetOfferingsCount() >= 3)
@@ -417,7 +417,7 @@ public sealed partial class BloodCultSystem
                             }
                             break;
                         }
-                        else if (TryComp<BloodCultistComponent>(target, out _) && TryComp<HumanoidAppearanceComponent>(target, out _)
+                        else if (HasComp<BloodCultistComponent>(target) && HasComp<HumanoidAppearanceComponent>(target)
                             && TryComp<MindContainerComponent>(target, out var mind) && mind.Mind is null && !HasComp<GhostRoleComponent>(target))
                         {
                             SendCultistMessage(cultist, "revive");
@@ -430,12 +430,12 @@ public sealed partial class BloodCultSystem
                                 );
                             _consoleHost.ExecuteCommand(formattedCommand);
                         }
-                        else if (TryComp<BodyComponent>(target, out _) && !TryComp<BloodCultistComponent>(target, out _)
+                        else if (HasComp<BodyComponent>(target) && !HasComp<BloodCultistComponent>(target)
                             && currentState is MobState.Dead && !HasComp<BorgChassisComponent>(target) && !HasComp<BloodCultObjectComponent>(target))
                         {
                             SendCultistMessage(cultist, "revive");
 
-                            if (TryComp<HumanoidAppearanceComponent>(target, out _))
+                            if (HasComp<HumanoidAppearanceComponent>(target))
                             {
                                 var soulStone = _entityManager.SpawnEntity("BloodCultSoulStone", Transform(target).Coordinates);
                                 if (TryComp<MindContainerComponent>(target, out var mindContainer) && mindContainer.Mind != null)
@@ -564,7 +564,7 @@ public sealed partial class BloodCultSystem
                         {
                             var targetsFlammable = _entityLookup.GetEntitiesInRange<FlammableComponent>(coords, 10f)
                                 .Where(flammableEntity =>
-                                    !TryComp<BloodCultistComponent>(flammableEntity.Owner, out _))
+                                    !HasComp<BloodCultistComponent>(flammableEntity.Owner))
                                 .ToList();
 
                             foreach (var targetFlammable in targetsFlammable)
@@ -706,7 +706,7 @@ public sealed partial class BloodCultSystem
     private void OnEmpoweringSelected(EmpoweringRuneMenuClosedEvent args)
     {
         var cultist = _entityManager.GetEntity(args.Uid);
-        if (!TryComp<BloodCultistComponent>(cultist, out _))
+        if (!HasComp<BloodCultistComponent>(cultist))
             return;
 
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, cultist, TimeSpan.FromSeconds(4f), new EmpoweringDoAfterEvent(args.SelectedSpell), cultist)
@@ -801,7 +801,7 @@ public sealed partial class BloodCultSystem
     private void OnDaggerInteract(Entity<BloodDaggerComponent> ent, ref UseInHandEvent args)
     {
         var user = args.User;
-        if (!TryComp<BloodCultistComponent>(user, out _))
+        if (!HasComp<BloodCultistComponent>(user))
         {
             var dropEvent = new DropHandItemsEvent();
             RaiseLocalEvent(user, ref dropEvent);

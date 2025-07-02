@@ -99,38 +99,29 @@ public sealed class HulkGenSystem : EntitySystem
 
     private void OnHulkCharge(Entity<HulkComponent> entity, ref HulkChargeActionEvent args)
     {
-        if (args.Coords is not { } coords)
-            return;
-
+        var target = args.Target;
         var vampirePosition = _transform.GetWorldPosition(entity);
-        var targetPosition = _transform.ToMapCoordinates(coords, true).Position;
+        var targetPosition = _transform.ToMapCoordinates(Transform(target).Coordinates, true).Position;
         var direction = (targetPosition - vampirePosition).Normalized();
 
         if (TryComp(entity, out PhysicsComponent? vampirePhysics))
             _physics.ApplyLinearImpulse(entity, direction * 20000f, body: vampirePhysics);
 
-        if (args.Entity is not { } targetEntity)
-        {
-            _audio.PlayPvs(args.Sound, entity);
-            args.Handled = true;
-            return;
-        }
-
-        if (TryComp(targetEntity, out DestructibleComponent? _))
+        if (TryComp(target, out DestructibleComponent? _))
         {
             var damage = new DamageSpecifier { DamageDict = { { "Structural", 300 } } };
-            _damage.TryChangeDamage(targetEntity, damage, origin: entity);
+            _damage.TryChangeDamage(target, damage, origin: entity);
         }
 
-        if (TryComp(targetEntity, out BodyComponent? _))
+        if (TryComp(target, out BodyComponent? _))
         {
             var damage = new DamageSpecifier { DamageDict = { { "Blunt", 60 } } };
-            _damage.TryChangeDamage(targetEntity, damage, ignoreResistances: false, origin: entity);
+            _damage.TryChangeDamage(target, damage, ignoreResistances: false, origin: entity);
 
-            if (TryComp(targetEntity, out PhysicsComponent? physics))
-                _physics.ApplyLinearImpulse(targetEntity, direction * 1000f, body: physics);
+            if (TryComp(target, out PhysicsComponent? physics))
+                _physics.ApplyLinearImpulse(target, direction * 1000f, body: physics);
 
-            _stun.TryParalyze(targetEntity, TimeSpan.FromSeconds(10f), true);
+            _stun.TryParalyze(target, TimeSpan.FromSeconds(10f), true);
         }
 
         _audio.PlayPvs(args.Sound, entity);
