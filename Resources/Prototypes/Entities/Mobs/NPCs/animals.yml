@@ -2522,6 +2522,7 @@
   - type: Puller
     needsHands: false
   # Corvax-Wega-end
+  - type: NightVision # Corvax-Wega-NightVision
 
 - type: entity
   parent: MobSpiderBase
