@@ -254,13 +254,14 @@
   name: Push
   description: Push away nearby creatures
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _Wega/Interface/Actions/actions_dragon.rsi
       state: repulse
-    event: !type:DragonPushActionEvent
     useDelay: 120
     priority: 4
+  - type: InstantAction
+    event: !type:DragonPushActionEvent
 # Corvax-Wega-DragonPushSkill-end
 
 - type: entity
