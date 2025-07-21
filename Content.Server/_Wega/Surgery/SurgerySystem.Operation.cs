@@ -112,7 +112,7 @@ public sealed partial class SurgerySystem
         if (!TryComp<BloodstreamComponent>(patient, out _))
             return;
 
-        _bloodstream.TryModifyBleedAmount(patient, 2f);
+        _bloodstream.TryModifyBleedAmount(patient.Owner, 2f);
     }
 
     private void PerformRetract(Entity<OperatedComponent> patient, float successChance, List<SurgeryFailedType>? failureEffect)
@@ -141,7 +141,7 @@ public sealed partial class SurgerySystem
         if (!HasComp<BloodstreamComponent>(patient))
             return;
 
-        _bloodstream.TryModifyBleedAmount(patient, -10f);
+        _bloodstream.TryModifyBleedAmount(patient.Owner, -10f);
     }
 
     private void PerformDrill(Entity<OperatedComponent> patient, float successChance, List<SurgeryFailedType>? failureEffect)
@@ -196,7 +196,7 @@ public sealed partial class SurgerySystem
         }
 
         if (HasComp<BloodstreamComponent>(patient))
-            _bloodstream.TryModifyBleedAmount(patient, 2f);
+            _bloodstream.TryModifyBleedAmount(patient.Owner, 2f);
     }
 
     private void PerformInsertOrgan(Entity<OperatedComponent> patient, EntityUid? item, string? requiredOrgan, float successChance, List<SurgeryFailedType>? failureEffect)
@@ -295,7 +295,7 @@ public sealed partial class SurgerySystem
         }
 
         if (HasComp<BloodstreamComponent>(patient))
-            _bloodstream.TryModifyBleedAmount(patient, 2f);
+            _bloodstream.TryModifyBleedAmount(patient.Owner, 2f);
     }
 
     private void PerformAttachPart(Entity<OperatedComponent> patient, EntityUid? item, string? requiredPart, float successChance, List<SurgeryFailedType>? failureEffect)

@@ -20,6 +20,7 @@ using Content.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Server.Strangulation
 {
@@ -30,6 +31,7 @@ namespace Content.Server.Strangulation
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
         [Dependency] private readonly VirtualItemSystem _virtualItemSystem = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly SharedHandsSystem _hands = default!;
         [Dependency] private readonly PullingSystem _pulling = default!;
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly SharedStutteringSystem _stutteringSystem = default!;
@@ -196,10 +198,10 @@ namespace Content.Server.Strangulation
             if (!TryComp<HandsComponent>(strangler, out var hands))
                 return false;
 
-            if (hands.CountFreeHands() == 0)
+            if (_hands.CanPickupAnyHand(strangler, target))
                 return false;
 
-            if (!CheckGarrotte(strangler, out var garrotteComp) && hands.CountFreeHands() == 1)
+            if (!CheckGarrotte(strangler, out _) && _hands.CountFreeHands(strangler) >= 1)
                 return false;
 
             return true;
@@ -314,20 +316,13 @@ namespace Content.Server.Strangulation
 
         private bool CheckGarrotte(EntityUid strangler, out GarrotteComponent? garrotteComp)
         {
-            if (TryComp<HandsComponent>(strangler, out var hands))
+            var heldEntity = _hands.GetActiveItem(strangler);
+            if (TryComp<GarrotteComponent>(heldEntity, out var comp))
             {
-                foreach (var hand in hands.Hands.Values)
-                {
-                    if (hand.HeldEntity is not EntityUid heldEntity)
-                        continue;
-
-                    if (TryComp<GarrotteComponent>(heldEntity, out var comp))
-                    {
-                        garrotteComp = comp;
-                        return true;
-                    }
-                }
+                garrotteComp = comp;
+                return true;
             }
+
             garrotteComp = null;
             return false;
         }
