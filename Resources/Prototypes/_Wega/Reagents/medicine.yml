@@ -88,8 +88,8 @@
               Caustic: 0.5
     Medicine:
       effects:
-        - !type:ReduceRotting
-          seconds: 30
+        - !type:ApplyRotSlowdown
+          factor: 0.3
           conditions:
             - !type:MobStateCondition
               mobstate: Dead
