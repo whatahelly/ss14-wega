@@ -110,15 +110,9 @@ public sealed partial class BloodCultSystem
             }
 
             bool isValidSurface = true;
-            var worldPos = _transform.GetWorldPosition(xform);
-            foreach (var tile in _map.GetTilesIntersecting(xform.GridUid.Value, grid, new Circle(worldPos, 6f), false))
-            {
-                if (tile.IsSpace(_tileDefManager))
-                {
-                    isValidSurface = false;
-                    break;
-                }
-            }
+            var cultistPosition = _transform.GetMapCoordinates(Transform(uid));
+            if (!_mapMan.TryFindGridAt(cultistPosition, out _, out _))
+                isValidSurface = false;
 
             if (isValidSurface)
             {
@@ -175,8 +169,8 @@ public sealed partial class BloodCultSystem
             _isRitualRuneUnlocked = false;
         }
 
-        if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist, blood) > 0)
-            _blood.TryModifyBloodLevel(cultist, -5, blood);
+        if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist) > 0)
+            _blood.TryModifyBloodLevel(cultist, -5);
         else
         {
             var damage = new DamageSpecifier { DamageDict = { { "Slash", 5 } } };
@@ -726,8 +720,8 @@ public sealed partial class BloodCultSystem
         component.SelectedEmpoweringSpells.Add(actionEntityUid);
         component.Empowering++;
 
-        if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist, blood) > 0)
-            _blood.TryModifyBloodLevel(cultist, -5, blood);
+        if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist) > 0)
+            _blood.TryModifyBloodLevel(cultist, -5);
         else
         {
             var damage = new DamageSpecifier { DamageDict = { { "Slash", 2 } } };
@@ -818,13 +812,11 @@ public sealed partial class BloodCultSystem
 
     private bool IsInSpace(EntityUid cultist)
     {
-        var cultistTransform = Transform(cultist);
-        var cultistPosition = _transform.GetMapCoordinates(cultistTransform);
-        if (!_mapMan.TryFindGridAt(cultistPosition, out _, out var grid)
-            || !_map.TryGetTileRef(cultist, grid, cultistTransform.Coordinates, out var tileRef))
+        var cultistPosition = _transform.GetMapCoordinates(Transform(cultist));
+        if (!_mapMan.TryFindGridAt(cultistPosition, out _, out _))
             return true;
 
-        return tileRef.Tile.IsEmpty || tileRef.IsSpace(_tileDefManager);
+        return false;
     }
 
     private Color TryFindColor(EntityUid cultist)

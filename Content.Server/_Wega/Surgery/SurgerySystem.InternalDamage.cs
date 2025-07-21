@@ -128,7 +128,7 @@ public sealed partial class SurgerySystem
 
             _pain.AdjustPain(patient, "Physical", 250f);
             if (HasComp<BloodstreamComponent>(patient))
-                _bloodstream.TryModifyBleedAmount(patient, 5f);
+                _bloodstream.TryModifyBleedAmount(patient.Owner, 5f);
 
             var xform = Transform(patient);
             _transform.SetCoordinates(limbId, xform.Coordinates);
@@ -207,7 +207,7 @@ public sealed partial class SurgerySystem
                 _popup.PopupEntity(Loc.GetString("surgery-explosion-limb-torn-off", ("limb", Name(limbId).ToUpper())), entity, PopupType.MediumCaution);
 
                 if (HasComp<BloodstreamComponent>(entity))
-                    _bloodstream.TryModifyBleedAmount(entity, 5f);
+                    _bloodstream.TryModifyBleedAmount(entity.Owner, 5f);
 
                 _audio.PlayPvs(GibSound, entity);
                 if (!_mobState.IsDead(entity) && !HasComp<PainNumbnessComponent>(entity))

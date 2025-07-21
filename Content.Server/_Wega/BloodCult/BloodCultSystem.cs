@@ -113,7 +113,7 @@ public sealed partial class BloodCultSystem : SharedBloodCultSystem
                     _damage.TryChangeDamage(target, heal, true);
 
                     if (TryComp<BloodstreamComponent>(target, out var blood))
-                        _blood.TryModifyBloodLevel(target, +1, blood);
+                        _blood.TryModifyBloodLevel(target.Owner, +1);
                 }
             }
             pylonQueryComponent.NextTimeTick -= frameTime;

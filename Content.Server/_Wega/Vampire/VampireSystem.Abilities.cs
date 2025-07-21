@@ -5,7 +5,6 @@ using Content.Server.Antag;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Bible.Components;
 using Content.Server.Destructible;
-using Content.Server.Flash.Components;
 using Content.Server.Hallucinations;
 using Content.Server.Prayer;
 using Content.Server.Pinpointer;
@@ -53,6 +52,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Flash.Components;
 
 namespace Content.Server.Vampire;
 
@@ -314,7 +314,6 @@ public sealed partial class VampireSystem
         foreach (var pos in spawnPos)
         {
             if (!_map.TryGetTileRef(grid, gridComp, pos, out var tileRef) ||
-                tileRef.IsSpace() ||
                 _turf.IsTileBlocked(tileRef, CollisionGroup.Impassable))
                 continue;
 
@@ -1486,7 +1485,7 @@ public sealed partial class VampireSystem
 
         var position = coords.Position;
         var gridPosition = new Vector2i((int)position.X, (int)position.Y);
-        if (!_map.TryGetTileRef(gridEntityUid, gridComp, gridPosition, out var tileRef) || tileRef.IsSpace()
+        if (!_map.TryGetTileRef(gridEntityUid, gridComp, gridPosition, out var tileRef)
             || _turf.IsTileBlocked(tileRef, CollisionGroup.Impassable))
             return false;
 

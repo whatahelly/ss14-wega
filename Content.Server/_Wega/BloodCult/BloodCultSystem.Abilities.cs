@@ -6,7 +6,6 @@ using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Emp;
 using Content.Server.Flash;
-using Content.Server.Flash.Components;
 using Content.Server.Hallucinations;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Blood.Cult;
@@ -43,6 +42,8 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared.Flash.Components;
+using Content.Shared.Body.Components;
 
 namespace Content.Server.Blood.Cult;
 
@@ -613,7 +614,7 @@ public sealed partial class BloodCultSystem
 
                     _stun.TryParalyze(target, TimeSpan.FromSeconds(4f), true);
                     if (!TryComp<FlashImmunityComponent>(target, out var flash))
-                        _flash.Flash(target, user, entity, 2f, 1f);
+                        _flash.Flash(target, user, entity, TimeSpan.FromSeconds(2f), 1f);
                     _entityManager.DeleteEntity(entity);
                 }
                 break;
@@ -800,9 +801,9 @@ public sealed partial class BloodCultSystem
                     if (!TryComp<BloodstreamComponent>(target, out var blood) || HasComp<BloodCultistComponent>(target))
                         return;
 
-                    if (_blood.GetBloodLevelPercentage(target, blood) > 0.6)
+                    if (_blood.GetBloodLevelPercentage(target) > 0.6)
                     {
-                        _blood.TryModifyBloodLevel(target, -50, blood);
+                        _blood.TryModifyBloodLevel(target, -50);
                         cultist.BloodCount += 50;
                     }
                     else
@@ -867,8 +868,8 @@ public sealed partial class BloodCultSystem
 
     private void ExtractBlood(EntityUid cultist, int extractBlood, FixedPoint2 bloodDamage)
     {
-        if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist, blood) > 0)
-            _blood.TryModifyBloodLevel(cultist, extractBlood, blood);
+        if (TryComp<BloodstreamComponent>(cultist, out var blood) && _blood.GetBloodLevelPercentage(cultist) > 0)
+            _blood.TryModifyBloodLevel(cultist, extractBlood);
         else
         {
             var damage = new DamageSpecifier { DamageDict = { { "Slash", bloodDamage } } };
