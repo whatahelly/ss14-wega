@@ -23,3 +23,19 @@
           MaterialCloth1:
             min: 3
             max: 3
+
+- type: entity
+  abstract: true
+  parent: ClothingUniformBase
+  id: ClothingUniformToggleableBase
+  components:
+  - type: ToggleableSpriteClothing
+    defaultSuffix: "-down"
+
+- type: entity
+  abstract: true
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformSkirtToggleableBase
+  components:
+  - type: ToggleableSpriteClothing
+    defaultSuffix: "-down"
