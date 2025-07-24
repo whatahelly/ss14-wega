@@ -14,6 +14,7 @@ using Content.Shared.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
+using Robust.Shared.GameStates; // Corvax-Wega-ToggleClothing
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
@@ -67,6 +68,8 @@ public sealed class ClientClothingSystem : ClothingSystem
         SubscribeLocalEvent<ClothingComponent, GetEquipmentVisualsEvent>(OnGetVisuals);
         SubscribeLocalEvent<ClothingComponent, InventoryTemplateUpdated>(OnInventoryTemplateUpdated);
 
+        SubscribeLocalEvent<ToggleableSpriteClothingComponent, ComponentHandleState>(OnHandleState); // Corvax-Wega-ToggleClothing
+
         SubscribeLocalEvent<InventoryComponent, VisualsChangedEvent>(OnVisualsChanged);
         SubscribeLocalEvent<SpriteComponent, DidUnequipEvent>(OnDidUnequip);
         SubscribeLocalEvent<InventoryComponent, AppearanceChangeEvent>(OnAppearanceUpdate);
@@ -111,6 +114,11 @@ public sealed class ClientClothingSystem : ClothingSystem
             return;
 
         List<PrototypeLayerData>? layers = null;
+        // Corvax-Wega-ToggleClothing-start
+        var suffix = TryComp<ToggleableSpriteClothingComponent>(uid, out var toggleable)
+            ? toggleable.ActiveSuffix
+            : string.Empty;
+        // Corvax-Wega-ToggleClothing-end
 
         // first attempt to get species specific data.
         if (inventory.SpeciesId != null)
@@ -128,16 +136,33 @@ public sealed class ClientClothingSystem : ClothingSystem
         var i = 0;
         foreach (var layer in layers)
         {
-            var key = layer.MapKeys?.FirstOrDefault();
-            if (key == null)
+            // Corvax-Wega-ToggleClothing-Edit-start
+            var originalState = layer.State;
+            if (string.IsNullOrEmpty(originalState))
+                continue;
+
+            var newState = originalState;
+            if (!string.IsNullOrEmpty(suffix))
             {
-                // using the $"{args.Slot}" layer key as the "bookmark" for layer ordering until layer draw depths get added
-                key = $"{args.Slot}-{i}";
-                i++;
+
+                var suffixedState = $"{originalState}{suffix}";
+                if (StateExists(uid, suffixedState, inventory.SpeciesId))
+                    newState = suffixedState;
+                else if (!originalState.StartsWith("equipped-"))
+                    continue;
             }
 
-            item.MappedLayer = key;
-            args.Layers.Add((key, layer));
+            var key = layer.MapKeys?.FirstOrDefault() ?? $"{args.Slot}-{i++}";
+            args.Layers.Add((key, new PrototypeLayerData
+            {
+                MapKeys = layer.MapKeys,
+                RsiPath = layer.RsiPath,
+                State = newState,
+                Color = layer.Color,
+                Scale = layer.Scale,
+                Shader = layer.Shader
+            }));
+            // Corvax-Wega-ToggleClothing-Edit-end
         }
     }
 
@@ -165,15 +190,21 @@ public sealed class ClientClothingSystem : ClothingSystem
         var correctedSlot = slot;
         TemporarySlotMap.TryGetValue(correctedSlot, out correctedSlot);
 
+        // Corvax-Wega-ToggleClothing-Edit-start
+        var suffix = string.Empty;
+        if (TryComp<ToggleableSpriteClothingComponent>(uid, out var toggleable))
+        {
+            suffix = toggleable.ActiveSuffix;
+        }
 
-
-        var state = $"equipped-{correctedSlot}";
+        var state = $"equipped-{correctedSlot}{suffix}";
 
         if (!string.IsNullOrEmpty(clothing.EquippedPrefix))
-            state = $"{clothing.EquippedPrefix}-equipped-{correctedSlot}";
+            state = $"{clothing.EquippedPrefix}-equipped-{correctedSlot}{suffix}";
 
         if (clothing.EquippedState != null)
-            state = $"{clothing.EquippedState}";
+            state = $"{clothing.EquippedState}{suffix}";
+        // Corvax-Wega-ToggleClothing-Edit-end
 
         // species specific
         if (speciesId != null && rsi.TryGetState($"{state}-{speciesId}", out _))
@@ -351,4 +382,44 @@ public sealed class ClientClothingSystem : ClothingSystem
 
         RaiseLocalEvent(equipment, new EquipmentVisualsUpdatedEvent(equipee, slot, revealedLayers), true);
     }
+
+    // Corvax-Wega-ToggleClothing-start
+    private bool StateExists(EntityUid uid, string state, string? speciesId)
+    {
+        if (TryComp<SpriteComponent>(uid, out var sprite) && sprite.BaseRSI != null)
+        {
+            if (!string.IsNullOrEmpty(speciesId))
+            {
+                var speciesState = $"{state}-{speciesId}";
+                if (sprite.BaseRSI.TryGetState(speciesState, out _))
+                    return true;
+            }
+
+            return sprite.BaseRSI.TryGetState(state, out _);
+        }
+        return false;
+    }
+
+    private void OnHandleState(EntityUid uid, ToggleableSpriteClothingComponent component, ref ComponentHandleState args)
+    {
+        if (args.Current is not ToggleableSpriteClothingComponentState state)
+            return;
+
+        component.ActiveSuffix = state.ActiveSuffix;
+        UpdateClothingVisuals(uid);
+    }
+
+    private void UpdateClothingVisuals(EntityUid uid)
+    {
+        if (!TryComp<ClothingComponent>(uid, out var clothing)
+            || clothing.InSlot == null)
+            return;
+
+        var parent = Transform(uid).ParentUid;
+        if (!HasComp<SpriteComponent>(parent) || !TryComp<InventoryComponent>(parent, out var inventory))
+            return;
+
+        RenderEquipment(parent, uid, clothing.InSlot, inventory, clothingComponent: clothing);
+    }
+    // Corvax-Wega-ToggleClothing-end
 }
