@@ -612,7 +612,7 @@ public sealed partial class BloodCultSystem
                         Timer.Spawn(10000, () => { RemComp<MutedComponent>(target); });
                     }
 
-                    _stun.TryParalyze(target, TimeSpan.FromSeconds(4f), true);
+                    _stun.TryUpdateParalyzeDuration(target, TimeSpan.FromSeconds(4f));
                     if (!TryComp<FlashImmunityComponent>(target, out var flash))
                         _flash.Flash(target, user, entity, TimeSpan.FromSeconds(2f), 1f);
                     _entityManager.DeleteEntity(entity);
