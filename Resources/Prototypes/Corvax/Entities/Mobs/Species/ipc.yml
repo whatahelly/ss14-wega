@@ -15,6 +15,7 @@
     requiredLegs: 2
   - type: Inventory
     templateId: Ipc
+  - type: Carriable # Corvax-Wega-Carrying
   - type: ContentEye
   - type: Speech
   - type: BodyEmotes
