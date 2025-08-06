@@ -1,7 +1,6 @@
 using System.Numerics;
 using System.Threading;
 using Content.Server.DoAfter;
-using Content.Server.Body.Systems;
 using Content.Server.Resist;
 using Content.Server.Popups;
 using Content.Server.Inventory;
@@ -45,7 +44,6 @@ namespace Content.Server.Carrying
         [Dependency] private readonly EscapeInventorySystem _escapeInventorySystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-        [Dependency] private readonly RespiratorSystem _respirator = default!;
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly SharedHandsSystem _hands = default!;
 
@@ -339,9 +337,6 @@ namespace Content.Server.Carrying
 
             if (HasComp<BeingCarriedComponent>(carrier) || HasComp<BeingCarriedComponent>(carried))
                 return false;
-
-            //if (_respirator.IsReceivingCPR(carried))
-            //  return false;
 
             if (_hands.CountFreeHands(carrier) < carriedComp.FreeHandsRequired)
                 return false;
