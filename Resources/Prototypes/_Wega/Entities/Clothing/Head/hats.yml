@@ -46,3 +46,45 @@
       Hair: HEAD
       HeadTop : HEAD
       HeadSide : HEAD
+
+- type: entity
+  parent: ClothingHeadHelmetBasic
+  id: ClothingHeadHelmetFlash
+  name: flash halmet
+  description: A high-tech helmet equipped with an on-the-go flash device.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Head/Hats/flash_halmet.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Head/Hats/flash_halmet.rsi
+  - type: ImpulseFlash
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+  
+
+- type: entity
+  parent: BaseAction
+  id: ActionToggleFlashHelm
+  name: Turn flash
+  description: Turn flash
+  components:
+  - type: Action
+    useDelay: 15
+    icon:
+      sprite: Objects/Weapons/Melee/flash.rsi
+      state: flash
+    sound:
+      path: /Audio/Weapons/flash.ogg
+      params:
+        volume: 5
+    itemIconStyle: BigItem
+  - type: InstantAction
+    event: !type:MaskFlashActionEvent
