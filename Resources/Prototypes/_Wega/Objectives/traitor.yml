@@ -1,7 +1,7 @@
 # krav maga
 - type: entity
   parent: BaseTraitorStealObjective
-  id: KravMagaStealObjective
+  id: GlovesKravMagaStealObjective
   components:
   - type: Objective
     # WARDEN WILL KILL FOR THOSE
