@@ -101,6 +101,7 @@
   - EmergencyNitrogen
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
+  - EmergencyAndroid # Corvax-Wega-Android
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -532,6 +533,7 @@
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
+  - EmergencyAndroid # Corvax-Wega-Android
 
 - type: loadoutGroup
   id: MimeHead
@@ -875,6 +877,7 @@
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
+  - EmergencyAndroidExtended # Corvax-Wega-Android
 
 # Science
 - type: loadoutGroup
@@ -1167,6 +1170,7 @@
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
+  - EmergencyAndroidSecurity # Corvax-Wega-Android
 
 - type: loadoutGroup
   id: SecurityStar
@@ -1372,6 +1376,7 @@
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
+  - EmergencyAndroidMedical # Corvax-Wega-Android
 
 # Wildcards
 - type: loadoutGroup

@@ -204,6 +204,7 @@
   - type: Healing
     damageContainers:
       - SiliconIpc
+      - Android # Corvax-Wega-Android
     damage:
       types:
         Shock: -6
