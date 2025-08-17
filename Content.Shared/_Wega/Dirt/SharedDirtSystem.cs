@@ -213,9 +213,9 @@ public sealed class SharedDirtSystem : EntitySystem
         float gCurrent = currentColor.G / 255f;
         float bCurrent = currentColor.B / 255f;
 
-        float r = rCurrent * 0.6f + rNew * 0.4f;
-        float g = gCurrent * 0.6f + gNew * 0.4f;
-        float b = bCurrent * 0.6f + bNew * 0.4f;
+        float r = rCurrent * 0.85f + rNew * 0.15f;
+        float g = gCurrent * 0.85f + gNew * 0.15f;
+        float b = bCurrent * 0.85f + bNew * 0.15f;
 
         r = Math.Clamp(r, 0f, 1f) * 255f;
         g = Math.Clamp(g, 0f, 1f) * 255f;
