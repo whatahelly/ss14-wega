@@ -20,6 +20,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Surgery;
 using Content.Shared.Surgery.Components;
 using Content.Shared.Traits.Assorted;
+using Content.Shared.Zombies;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -44,9 +45,20 @@ public sealed partial class SurgerySystem
 
     #region Process damage
 
+    private void OnBodyPartRemoved(Entity<OperatedComponent> ent, BodyPartType type)
+    {
+        if (type == BodyPartType.Leg)
+        {
+            if (!HasComp<BodyComponent>(ent))
+                return;
+
+            _stun.TryKnockdown(ent.Owner, TimeSpan.FromSeconds(2f), true, false);
+        }
+    }
+
     private void OnDamage(Entity<OperatedComponent> ent, ref DamageChangedEvent args)
     {
-        if (HasComp<GodmodeComponent>(ent))
+        if (HasComp<GodmodeComponent>(ent) || HasComp<ZombieComponent>(ent))
             return;
 
         if (args.DamageDelta == null || args.DamageDelta.Empty || !args.DamageIncreased
@@ -159,8 +171,12 @@ public sealed partial class SurgerySystem
 
             _audio.PlayPvs(GibSound, patient);
 
-            var damage = new DamageSpecifier { DamageDict = { { SlashDamage, 200 } } };
-            _damage.TryChangeDamage(patient, damage, true);
+            // Synthetics ignore head loss.
+            if (!HasComp<SyntheticOperatedComponent>(patient))
+            {
+                var damage = new DamageSpecifier { DamageDict = { { SlashDamage, 200 } } };
+                _damage.TryChangeDamage(patient, damage, true);
+            }
 
             if (HasComp<BloodstreamComponent>(patient))
                 _bloodstream.TryModifyBleedAmount(patient, 10f);
