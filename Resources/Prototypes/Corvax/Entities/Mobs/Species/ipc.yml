@@ -90,6 +90,7 @@
     containers:
       cell_slot: !type:ContainerSlot { }
   - type: Ipc
+  - type: SyntheticOperated
   - type: ZombieImmune
   - type: Repairable
     fuelCost: 30

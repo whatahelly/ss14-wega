@@ -15,7 +15,7 @@ public sealed partial class SurgerySystem
 
     private void UpdateOperationSterility(EntityUid patient, OperatedComponent operated)
     {
-        if (operated.Surgeon == null)
+        if (operated.Surgeon == null || HasComp<SyntheticOperatedComponent>(patient))
             return;
 
         float sterility = 1f;

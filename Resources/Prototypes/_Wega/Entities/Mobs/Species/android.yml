@@ -181,7 +181,8 @@
   - type: LockedWiresPanel
   - type: Lock
   - type: Bloodstream
-    bloodReagent: Tyrium 
+    bloodReagent: Tyrium
+    bleedReductionAmount: 0
     bloodRefreshAmount: 0
   - type: Android
   - type: UserInterface
@@ -210,8 +211,8 @@
   - type: Operated
     raceGraph: AndroidSurgery
     limbLossChance: 1.75
+    specialTool: Screwing
   - type: SyntheticOperated
-  - type: InternalStorage
   - type: Pain
     profile: AndroidPainProfile
   - type: Tag
