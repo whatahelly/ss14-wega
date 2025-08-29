@@ -175,6 +175,7 @@
   - type: SSDIndicator
   - type: StandingState
   - type: SpeechSynthesis # Corvax-Wega-Barks
+  - type: OfferGiver # Corvax-Wega-Offer
   # - type: Dna # Corvax-Wega
   - type: MindContainer
     showExamineInfo: true
