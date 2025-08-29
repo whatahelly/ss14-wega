@@ -27,15 +27,15 @@
 
         <customControls:VSeparator StyleClasses="LowDivider" Margin="0 0 0 0"/>
 
-        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="10,0,0,0">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="10,0,10,0">
             <TabContainer Name="PreviewTabs" HorizontalExpand="True" VerticalExpand="True" MinSize="0 150">
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                     <PanelContainer StyleClasses="Inset" HorizontalExpand="True" VerticalExpand="True">
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#1A1A1A" />
                         </PanelContainer.PanelOverride>
-                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                            <RichTextLabel Name="PreviewAppearanceText" Access="Public" HorizontalExpand="True" VerticalExpand="True" Margin="10" />
+                        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                            <RichTextLabel Name="PreviewAppearanceText" Access="Public" VerticalExpand="True" Margin="10" />
                         </ScrollContainer>
                     </PanelContainer>
                 </BoxContainer>
@@ -45,8 +45,8 @@
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#1A1A1A" />
                         </PanelContainer.PanelOverride>
-                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                            <RichTextLabel Name="PreviewTraitsText" Access="Public" HorizontalExpand="True" VerticalExpand="True" Margin="10" />
+                        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                            <RichTextLabel Name="PreviewTraitsText" Access="Public" VerticalExpand="True" Margin="10" />
                         </ScrollContainer>
                     </PanelContainer>
                 </BoxContainer>
@@ -56,7 +56,7 @@
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#1A1A1A" />
                         </PanelContainer.PanelOverride>
-                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
                             <BoxContainer Name="PreviewGYRContainer" Access="Public" Orientation="Vertical" VerticalExpand="True" />
                         </ScrollContainer>
                     </PanelContainer>
@@ -67,8 +67,8 @@
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#1A1A1A" />
                         </PanelContainer.PanelOverride>
-                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                            <RichTextLabel Name="PreviewNSFWText" Access="Public" HorizontalExpand="True" VerticalExpand="True" Margin="10" />
+                        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                            <RichTextLabel Name="PreviewNSFWText" Access="Public" VerticalExpand="True" Margin="10" />
                         </ScrollContainer>
                     </PanelContainer>
                 </BoxContainer>
@@ -81,8 +81,8 @@
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#1A1A1A" />
                         </PanelContainer.PanelOverride>
-                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                            <RichTextLabel Name="PreviewOOCText" Access="Public" HorizontalExpand="True" VerticalExpand="True" Margin="5" />
+                        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                            <RichTextLabel Name="PreviewOOCText" Access="Public" VerticalExpand="True" Margin="5" />
                         </ScrollContainer>
                     </PanelContainer>
                 </BoxContainer>
@@ -93,8 +93,8 @@
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BackgroundColor="#1A1A1A" />
                         </PanelContainer.PanelOverride>
-                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                            <BoxContainer Name="PreviewLinksContainer" Access="Public" HorizontalExpand="True" Orientation="Vertical" />
+                        <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                            <BoxContainer Name="PreviewLinksContainer" Access="Public" Orientation="Vertical" />
                         </ScrollContainer>
                     </PanelContainer>
                 </BoxContainer>

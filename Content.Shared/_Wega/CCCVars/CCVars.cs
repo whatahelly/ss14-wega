@@ -66,13 +66,13 @@ public sealed class WegaCVars
     ///     Sets the maximum length for OOC flavor text.
     /// </summary>
     public static readonly CVarDef<int> OOCMaxFlavorTextLength =
-        CVarDef.Create("ic.oocflavor_text_length", 1024, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("ic.oocflavor_text_length", 2048, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Sets the maximum length for character description text.
     /// </summary>
     public static readonly CVarDef<int> CharacterDescriptionLength =
-        CVarDef.Create("ic.character_description_length", 1024, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("ic.character_description_length", 2048, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Sets the maximum length for green preferences text.
@@ -108,5 +108,5 @@ public sealed class WegaCVars
     ///     Sets the maximum length for NSFW preferences text.
     /// </summary>
     public static readonly CVarDef<int> NSFWPreferencesLength =
-        CVarDef.Create("ic.nsfw_preferences_length", 512, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("ic.nsfw_preferences_length", 1024, CVar.SERVER | CVar.REPLICATED);
 }
