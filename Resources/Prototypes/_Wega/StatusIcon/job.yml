@@ -29,3 +29,11 @@
     sprite: /Textures/_Wega/Interface/Misc/job_icons.rsi
     state: BlueShield
   jobName: job-name-bso
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconPostman
+  icon:
+    sprite: /Textures/_Wega/Interface/Misc/job_icons.rsi
+    state: Postman
+  jobName: job-name-postman

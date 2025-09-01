@@ -22,6 +22,9 @@ loadout-group-barber-outerclothing = Барбер, верхняя одежда
 loadout-group-quartermaster-top = Квартирмейстер, верхнее белье
 loadout-group-quartermaster-bottom = Квартирмейстер, нижнее белье
 loadout-group-quartermaster-socks = Квартирмейстер, носки
+loadout-group-postman-head = Почтальон, голова
+loadout-group-postman-jumpsuit = Почтальон, комбинезон
+loadout-group-postman-backpack = Почтальон, рюкзак
 # Engineering
 loadout-group-chief-engineer-top = Старший инженер, верхнее белье
 loadout-group-chief-engineer-bottom = Старший инженер, нижнее белье

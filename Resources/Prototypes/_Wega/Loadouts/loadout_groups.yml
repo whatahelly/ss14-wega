@@ -912,6 +912,30 @@
   - ClothingUnderSocksFishnetThigh
   - ClothingUnderSocksPantyhose
 
+# Cargo
+- type: loadoutGroup
+  id: PostmanHead
+  name: loadout-group-postman-head
+  minLimit: 0
+  loadouts:
+  - HatPostmansoft
+  - HatPostmansoftFlipped
+
+- type: loadoutGroup
+  id: PostmanJumpsuit
+  name: loadout-group-postman-jumpsuit
+  loadouts:
+  - PostmanJumpsuit
+  - PostmanJumpskirt
+
+- type: loadoutGroup
+  id: PostmanBackpack
+  name: loadout-group-postman-backpack
+  loadouts:
+  - BackpackPostman
+  - BackpackSatchelPostman
+  - BackpackDuffelPostman
+
 # Civilian
 - type: loadoutGroup
   id: BarberOuterClothing

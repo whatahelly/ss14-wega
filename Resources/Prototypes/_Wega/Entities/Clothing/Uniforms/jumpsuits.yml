@@ -44,3 +44,14 @@
       sprite: _Wega/Clothing/Uniforms/Jumpsuit/alt_blueshield.rsi
     - type: Clothing
       sprite: _Wega/Clothing/Uniforms/Jumpsuit/alt_blueshield.rsi
+
+- type: entity
+  parent: ClothingUniformToggleableBase
+  id: ClothingUniformJumpsuitPostman
+  name: postman jumpsuit
+  description: "A comfortable, loose-fitting jumpsuit that allows for easy movement during long walks."
+  components:
+    - type: Sprite
+      sprite: _Wega/Clothing/Uniforms/Jumpsuit/postman.rsi
+    - type: Clothing
+      sprite: _Wega/Clothing/Uniforms/Jumpsuit/postman.rsi

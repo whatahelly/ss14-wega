@@ -6,3 +6,5 @@ ent-ClothingHeadHatHoodVoidCap = копюшон пустотной накидк�
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
 ent-ClothingHeadHatHoodWinterBlueShield = зимний копюшон офицера "Синий щит"
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodPostman = копюшон почтальона
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
