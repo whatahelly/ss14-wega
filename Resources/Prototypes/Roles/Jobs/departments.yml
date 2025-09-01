@@ -7,6 +7,7 @@
   - CargoTechnician
   - Quartermaster
   - SalvageSpecialist
+  - Postman # Corvax-Wega-Postman
 
 - type: department
   id: Civilian
@@ -158,4 +159,5 @@
   - Pilot # Corvax-Pilot
   - Barber # Corvax-Wega-Barber
   - Geneticist # Corvax-Wega-Genetics
+  - Postman # Corvax-Wega-Postman
   primary: false

@@ -104,4 +104,22 @@
     borderColor: "#B7B7B6"
   - type: Icon
     state: pda-blueshield
-  
+
+- type: entity
+  parent: BasePDA
+  id: PostmanPDA
+  name: postman PDA
+  description: "A small and reliable mail carrier's companion that stores all routes and addresses."
+  components:
+  - type: Pda
+    id: PostmanIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-postman
+  - type: PdaBorderColor
+    borderColor: "#e39751"
+    accentVColor: "#3c4d9b"
+  - type: Icon
+    state: pda-postman

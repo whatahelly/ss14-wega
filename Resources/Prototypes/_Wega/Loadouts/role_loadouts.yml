@@ -95,3 +95,19 @@
   - BlueShieldTop
   - BlueShieldBottom
   - BlueShieldSocks
+
+- type: roleLoadout
+  id: JobPostman
+  groups:
+  - Inventory # Corvax-Loadouts
+  - GroupTankHarness
+  - PostmanHead
+  - PostmanJumpsuit
+  - PostmanBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Top
+  - Bottom
+  - Socks

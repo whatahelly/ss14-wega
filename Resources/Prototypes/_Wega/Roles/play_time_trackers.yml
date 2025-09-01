@@ -15,3 +15,6 @@
 
 - type: playTimeTracker
   id: JobBlueShield
+
+- type: playTimeTracker
+  id: JobPostman

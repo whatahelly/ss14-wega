@@ -6,3 +6,12 @@
   components:
   - type: Sprite
     sprite: _Wega/Clothing/Back/Duffels/blueshield.rsi
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingDuffelPostman
+  name: postman duffel bag
+  description: "A large canvas bag keeps all your parcels safe on the road."
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Back/Duffels/postman.rsi
