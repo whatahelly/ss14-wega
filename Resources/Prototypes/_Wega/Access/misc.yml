@@ -1,4 +1,32 @@
 - type: accessGroup
+  id: ExtendedAccess
+  name: extended-access-group
+  consoleAvaible: true
+  tags:
+  - Bar
+  - Brig
+  - Detective
+  - Cargo
+  - Chapel
+  - Chemistry
+  - Command
+  - Cryogenics
+  - Engineering
+  - External
+  - Hydroponics
+  - Janitor
+  - Kitchen
+  - Maintenance
+  - Medical
+  - Research
+  - Salvage
+  - Security
+  - Service
+  - Theatre
+  - GenpopEnter
+  - GenpopLeave
+
+- type: accessGroup
   id: BlueShieldAccess
   tags:
   - EmergencyShuttleRepealAll
@@ -18,7 +46,6 @@
   - Kitchen
   - Maintenance
   - Medical
-  - Quartermaster
   - Research
   - Salvage
   - Security
