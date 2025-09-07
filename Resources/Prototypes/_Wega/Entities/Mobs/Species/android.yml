@@ -177,7 +177,7 @@
     onUse: false
   - type: WiresPanel
   - type: ActivatableUIRequiresPanel
-  - type: ActivatableUIRequiresLock
+  - type: UIRequiresLock
   - type: LockedWiresPanel
   - type: Lock
   - type: Bloodstream
