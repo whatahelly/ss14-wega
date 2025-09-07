@@ -1,0 +1,65 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Made by github user @Morb0, modified by @svarshiksatanist",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "dark_line_e"
+        },
+        {
+            "name": "dark_line_w"
+        },
+        {
+            "name": "grey_line_e"
+        },
+        {
+            "name": "grey_line_w"
+        },
+        {
+            "name": "white_line_e"
+        },
+        {
+            "name": "white_line_w"
+        },
+        {
+            "name": "quartertile_dark"
+        },
+        {
+            "name": "quartertile_dark_90"
+        },
+        {
+            "name": "quartertile_dark_180"
+        },
+        {
+            "name": "quartertile_dark_270"
+        },
+        {
+            "name": "quartertile_white"
+        },
+        {
+            "name": "quartertile_white_90"
+        },
+        {
+            "name": "quartertile_white_180"
+        },
+        {
+            "name": "quartertile_white_270"
+        },
+        {
+            "name": "quartertile_grey"
+        },
+        {
+            "name": "quartertile_grey_90"
+        },
+        {
+            "name": "quartertile_grey_180"
+        },
+        {
+            "name": "quartertile_grey_270"
+        }
+    ]
+}
