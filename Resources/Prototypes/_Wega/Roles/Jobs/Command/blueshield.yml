@@ -18,7 +18,10 @@
   supervisors: job-supervisors-centcom
   canBeAntag: false
   accessGroups:
-  - BlueShieldAccess
+  - ExtendedAccess
+  access:
+  - EmergencyShuttleRepealAll
+  - Armory
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

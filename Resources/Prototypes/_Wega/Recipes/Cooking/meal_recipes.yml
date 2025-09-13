@@ -1,37 +1,3 @@
-- type: reaction
-  id: CreateDangoDough
-  impact: Low
-  quantized: true
-  conserveEnergy: false
-  reactants:
-    Rice:
-      amount: 5
-    Water:
-      amount: 2
-    Sugar:
-      amount: 2
-  effects:
-    - !type:CreateEntityReactionEffect
-      entity: DoughDangoBall
-
-- type: reaction
-  id: CreateRawRamen
-  impact: Low
-  quantized: true
-  conserveEnergy: false
-  reactants:
-    Flour:
-      amount: 10
-    TableSalt:
-      amount: 1
-    OilOlive:
-      amount: 1
-    Egg:
-      amount: 6
-  effects:
-    - !type:CreateEntityReactionEffect
-      entity: RawNoodles
-
 - type: microwaveMealRecipe
   id: Recipeporkramen
   name: pork ramen recipe
@@ -44,10 +10,10 @@
     RawNoodles: 1
   reagents:
     Water: 15
-    Egg: 6
+    Egg: 6	
 
 - type: microwaveMealRecipe
-  id: Recipehanamidango
+  id: RecipeHanamiDango
   name: dango hanami recipe
   result: HanamiDango
   time: 10
@@ -55,10 +21,10 @@
     GreenTea: 5
     JuiceWatermelon: 5
   solids:
-    DoughDangoBall: 3
+    DoughDangoBall: 3	
 
 - type: microwaveMealRecipe
-  id: Recipemitarashidango
+  id: RecipeMitarashiDango
   name: dango mitarashi recipe
   result: MitarashiDango
   time: 10
@@ -69,7 +35,7 @@
     DoughDangoBall: 3
 
 - type: microwaveMealRecipe
-  id: Recipeonigiri
+  id: RecipeOnigiri
   name: onigiri recipe
   result: Onigiri
   time: 20

@@ -47,6 +47,11 @@
     tags:
     - ClownShoes
     - WhitelistChameleon
+  # Corvax-Wega-Dirtable-start
+  - type: Dirtable
+    dirtState: clownshoes
+    equippedDirtState: equipped-clownshoes
+  # Corvax-Wega-Dirtable-end
 
 - type: entity
   parent: ClothingShoesClown
@@ -92,6 +97,11 @@
     energy: 2
     color: "#FFD800"
     netsync: false
+  # Corvax-Wega-Dirtable-start
+  - type: Dirtable
+    dirtState: clownshoes
+    equippedDirtState: equipped-clownshoes
+  # Corvax-Wega-Dirtable-end
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -320,6 +330,11 @@
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
+  # Corvax-Wega-Dirtable-start
+  - type: Dirtable
+    dirtState: clownshoes-big
+    equippedDirtState: equipped-clownshoes-big
+  # Corvax-Wega-Dirtable-end
 
 - type: entity
   parent: ClothingShoesBaseButcherable
