@@ -41,6 +41,10 @@ public sealed partial class InjectorFabticatorWindow : FancyWindow
         AddReagentButton.OnPressed += OnAddReagentPressed;
         ProduceButton.OnPressed += OnProducePressed;
         ReagentAmount.OnValueChanged += OnSpinBoxValueChanged;
+
+        BeakerReagentSelector.OnItemSelected += OnBeakerReagentSelected;
+        BufferReagentSelector.OnItemSelected += OnBufferReagentSelected;
+        ReagentSelector.OnItemSelected += OnReagentSelected;
     }
 
     private void OnTransferToBufferPressed(BaseButton.ButtonEventArgs args)
@@ -85,6 +89,21 @@ public sealed partial class InjectorFabticatorWindow : FancyWindow
         var customName = string.IsNullOrWhiteSpace(CustomNameInput.Text) ? null : CustomNameInput.Text;
 
         ProduceButtonPressed?.Invoke((int)amount, customName);
+    }
+
+    private void OnBeakerReagentSelected(OptionButton.ItemSelectedEventArgs args)
+    {
+        BeakerReagentSelector.SelectId(args.Id);
+    }
+
+    private void OnBufferReagentSelected(OptionButton.ItemSelectedEventArgs args)
+    {
+        BufferReagentSelector.SelectId(args.Id);
+    }
+
+    private void OnReagentSelected(OptionButton.ItemSelectedEventArgs args)
+    {
+        ReagentSelector.SelectId(args.Id);
     }
 
     public void UpdateState(InjectorFabticatorBoundUserInterfaceState state)
