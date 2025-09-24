@@ -12,6 +12,16 @@
     - SlimePerson
     - Vulpkanin # Corvax
     - Vox
+    # Corvax-Wega-Species-start
+    - Android
+    - Ariral
+    - Demon
+    - Felinid
+    - Harpy
+    - Phantom
+    - Resomi
+    - Skrell
+    # Corvax-Wega-Species-end
 
 - type: guideEntry
   id: Arachnid
