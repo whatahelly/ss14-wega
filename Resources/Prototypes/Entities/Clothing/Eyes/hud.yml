@@ -30,6 +30,7 @@
     damageContainers:
     - Inorganic
     - Silicon
+    - Android
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
