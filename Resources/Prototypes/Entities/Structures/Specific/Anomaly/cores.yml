@@ -272,7 +272,6 @@
 - type: entity
   parent: [ BaseAnomalyCore, BaseShadow ]
   id: AnomalyCoreShadow
-  abstract: true
   suffix: Shadow
   components:
   - type: SpawnOnTrigger
