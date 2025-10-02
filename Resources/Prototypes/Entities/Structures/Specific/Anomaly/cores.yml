@@ -270,7 +270,7 @@
 
 # Corvax-Wega-Anomaly-start
 - type: entity
-  parent: BaseShadow
+  parent: [ BaseAnomalyCore, BaseShadow ]
   id: AnomalyCoreShadow
   abstract: true
   suffix: Shadow
