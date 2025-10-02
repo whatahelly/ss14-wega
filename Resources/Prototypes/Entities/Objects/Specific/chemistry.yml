@@ -507,7 +507,15 @@
     # Corvax-Wega-bs-start
   - type: Injector
     delay: 0.5
-    maxTransferAmount: 50
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 20
+    - 30
+    - 40
+    - 50
+    currentTransferAmount: 15
     delayPerVolume: 0
     injectOnly: false
     # Corvax-Wega-bs-end
