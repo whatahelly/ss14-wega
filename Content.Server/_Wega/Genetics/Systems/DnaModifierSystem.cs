@@ -1067,11 +1067,16 @@ public sealed partial class DnaModifierSystem : SharedDnaModifierSystem
 
     private void OnDamageChanged(EntityUid uid, DnaModifierComponent component, DamageChangedEvent args)
     {
-        if (args.DamageDelta == null || !args.DamageIncreased || args.DamageDelta.GetTotal() < 0.1f || !args.DamageDelta.DamageDict.ContainsKey("Radiation"))
+        if (args.DamageDelta == null || !args.DamageIncreased || !args.DamageDelta.DamageDict.ContainsKey("Radiation"))
+            return;
+
+        var radiationDamage = args.DamageDelta.DamageDict["Radiation"];
+        if (radiationDamage < 1f)
             return;
 
         if (component.EnzymesPrototypes == null)
             return;
+
         if (_random.Prob(0.05f))
         {
             int countToModify = 1;
