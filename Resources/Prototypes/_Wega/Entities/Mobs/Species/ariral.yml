@@ -64,6 +64,8 @@
     - HeadSide
   - type: Carriable
   - type: DiseaseCarrier
+  - type: Hunger
+  - type: Thirst
   - type: Body
     prototype: Ariral
     requiredLegs: 2
