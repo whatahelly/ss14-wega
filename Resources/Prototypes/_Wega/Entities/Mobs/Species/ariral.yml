@@ -136,6 +136,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: shoes
+      socks:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: socks
     displacements:
       jumpsuit:
         sizeMaps:
@@ -147,6 +152,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: shoes
+      socks:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: socks
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: petting-success-generic
@@ -231,6 +241,11 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: shoes
+      socks:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: socks
     displacements:
       jumpsuit:
         sizeMaps:
@@ -242,3 +257,8 @@
           32:
             sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
             state: shoes
+      socks:
+        sizeMaps:
+          32:
+            sprite: _Wega/Mobs/Species/Ariral/displacement.rsi
+            state: socks
