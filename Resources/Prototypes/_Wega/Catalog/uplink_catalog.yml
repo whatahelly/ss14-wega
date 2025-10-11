@@ -171,7 +171,7 @@
   name: uplink-xc67ammo-name
   description: uplink-xc67ammo-desc
   icon: { sprite: /Textures/_ADT/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/ext_rifle_mag.rsi, state: base }
-  productEntity: ADTWeaponRifleXC67
+  productEntity: ADTExtMagazineRifle
   cost:
     Telecrystal: 3
   categories:
