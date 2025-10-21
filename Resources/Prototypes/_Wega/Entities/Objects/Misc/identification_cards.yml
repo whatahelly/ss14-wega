@@ -82,3 +82,15 @@
         - state: idpostman
     - type: PresetIdCard
       job: Postman
+
+- type: entity
+  parent: IDCardStandard
+  id: WardenHelperIDCard
+  name: warden assistant ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: idwardenhelper
+    - type: PresetIdCard
+      job: WardenHelper
