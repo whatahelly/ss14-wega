@@ -79,6 +79,7 @@
   showInVote: true # Corvax-Wega-Edit 
   description: extended-description
   rules:
+  - SubGamemodesRuleExtended # Corvax-Wega-Edit 
   - LightStationEventScheduler # Corvax-Wega-Edit 
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler

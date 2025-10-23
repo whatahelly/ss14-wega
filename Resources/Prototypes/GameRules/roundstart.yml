@@ -36,6 +36,15 @@
 
 - type: entity
   parent: BaseGameRule
+  id: SubGamemodesRuleExtended
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.6 #for an experiment
+
+- type: entity
+  parent: BaseGameRule
   id: DummyNonAntagChance
   components:
   - type: SubGamemodes
