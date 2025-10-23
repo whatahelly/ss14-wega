@@ -14,6 +14,7 @@ public sealed partial class MiningConsoleWindow : FancyWindow
     public Action? ToggleWithdrawPressed;
     public Action<NetEntity>? ToggleServerActivationPressed;
     public Action<NetEntity, int>? ServerStageChangePressed;
+    public Action<int>? AllSetStagePressed;
 
     public MiningConsoleWindow()
     {
@@ -24,6 +25,9 @@ public sealed partial class MiningConsoleWindow : FancyWindow
         ToggleActivation.OnPressed += _ => ToggleActivationPressed?.Invoke();
         RefreshButton.OnPressed += _ => ToggleUpdateRequested?.Invoke();
         WithdrawButton.OnPressed += _ => ToggleWithdrawPressed?.Invoke();
+        AllStage1Button.OnPressed += _ => AllSetStagePressed?.Invoke(1);
+        AllStage2Button.OnPressed += _ => AllSetStagePressed?.Invoke(2);
+        AllStage3Button.OnPressed += _ => AllSetStagePressed?.Invoke(3);
     }
 
     public void UpdateState(MiningConsoleBoundInterfaceState state)

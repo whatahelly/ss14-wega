@@ -85,3 +85,14 @@ public sealed record MiningServerData(
     bool IsBroken,
     bool IsActive
 );
+
+[Serializable, NetSerializable]
+public sealed class MiningConsoleSetAllStagesMessage : BoundUserInterfaceMessage
+{
+    public readonly int Stage;
+
+    public MiningConsoleSetAllStagesMessage(int stage)
+    {
+        Stage = stage;
+    }
+}

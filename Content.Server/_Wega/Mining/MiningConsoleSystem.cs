@@ -34,6 +34,7 @@ public sealed class MiningConsoleSystem : EntitySystem
         SubscribeLocalEvent<MiningConsoleComponent, MiningConsoleToggleModeMessage>(OnToggleMode);
         SubscribeLocalEvent<MiningConsoleComponent, MiningConsoleToggleUpdateMessage>(OnUpdate);
         SubscribeLocalEvent<MiningConsoleComponent, MiningConsoleWithdrawMessage>(OnWithdraw);
+        SubscribeLocalEvent<MiningConsoleComponent, MiningConsoleSetAllStagesMessage>(OnSetAllStages);
     }
 
     private void OnInit(EntityUid uid, MiningConsoleComponent comp, MapInitEvent args)
@@ -80,6 +81,20 @@ public sealed class MiningConsoleSystem : EntitySystem
             SetServerStage(serverUid, newStage);
             UpdateUi(entity);
         }
+    }
+
+    private void OnSetAllStages(Entity<MiningConsoleComponent> entity, ref MiningConsoleSetAllStagesMessage args)
+    {
+        var target = Math.Clamp(args.Stage, 1, 3);
+
+        var query = EntityQueryEnumerator<MiningServerComponent>();
+        while (query.MoveNext(out var serverUid, out var server))
+        {
+            if (server.MiningStage != target)
+                SetServerStage(serverUid, target, server);
+        }
+
+        UpdateUi(entity);
     }
 
     private void OnUpdate(Entity<MiningConsoleComponent> entity, ref MiningConsoleToggleUpdateMessage arg)

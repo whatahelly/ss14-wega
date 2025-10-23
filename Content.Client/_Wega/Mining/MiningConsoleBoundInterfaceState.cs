@@ -16,6 +16,9 @@ public sealed class MiningConsoleBoundInterface : BoundUserInterface
 
         _window = this.CreateWindow<MiningConsoleWindow>();
 
+        _window.AllSetStagePressed += stage =>
+            SendMessage(new MiningConsoleSetAllStagesMessage(stage));
+
         _window.ToggleModePressed += () =>
             SendMessage(new MiningConsoleToggleModeMessage());
 

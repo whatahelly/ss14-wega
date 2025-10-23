@@ -20,3 +20,8 @@ mining-server-power-on = Вкл
 mining-server-power-off = Выкл
 
 mining-server-examined = Заряд запитан на [color=green]{$percent}%[/color].
+
+mining-console-all-stage-title = Стадия для всех серверов
+mining-console-all-stage-1 = 1
+mining-console-all-stage-2 = 2
+mining-console-all-stage-3 = 3
