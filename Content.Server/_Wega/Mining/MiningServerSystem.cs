@@ -32,7 +32,20 @@ public sealed class MiningServerSystem : EntitySystem
         while (query.MoveNext(out var uid, out var server, out var consumer))
         {
             if (server.IsBroken || consumer.ReceivedPower < server.ActualPowerConsumption)
-            {
+            {   
+                if (server.IsBroken)
+                {
+                    if (consumer.DrawRate != 0f)
+                        consumer.DrawRate = 0f;
+
+                    if (server.IsActive)
+                    {
+                        server.IsActive = false;
+                        UpdateAppearance(uid, server);
+                        _ambient.SetAmbience(uid, false);
+                    }
+                }
+
                 server.CurrentTemperature = Math.Max(server.CurrentTemperature - 0.145f * frameTime, 293f);
                 continue;
             }
@@ -81,9 +94,14 @@ public sealed class MiningServerSystem : EntitySystem
 
             if (server.CurrentTemperature >= server.BreakdownTemperature && !server.IsBroken)
             {
+                server.IsBroken = true;
+                server.IsActive = false;
+
+                if (consumer.DrawRate != 0f)
+                    consumer.DrawRate = 0f;
+
                 UpdateAppearance(uid, server);
                 _ambient.SetAmbience(uid, false);
-                server.IsBroken = true;
             }
         }
     }
